@@ -26,11 +26,11 @@ public class Item {
     }
 
     public boolean addStock(Item item, int amountToAdd) {
-        if (Item.stock + amountToAdd > 10)
+        if (this.stock + amountToAdd > 10)
             return false;
         else
         {
-            this.Item.stock += amountToAdd;
+            this.stock += amountToAdd;
             return true;
         }
     }
