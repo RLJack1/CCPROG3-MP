@@ -23,11 +23,15 @@ public class Item {
         return stock;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPrice(double newPrice) {
+        this.price = newPrice;   
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void addStock(Item item, int amountToAdd) {
+        this.Item.stock += amountToAdd;
+    }
+
+    public void minusStock(Item item, int amountToAdd) {
+        this.Item.stock -= amountToAdd;
     }
 }
