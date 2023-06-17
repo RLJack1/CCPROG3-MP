@@ -4,8 +4,8 @@ public class Item {
     private String name;
     private double calories;
     private boolean standalone = false;
-    public double price;
-    public int stock;
+    private double price;
+    private int stock;
 
     public String getName() {
         return name;
