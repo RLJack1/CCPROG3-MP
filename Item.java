@@ -1,5 +1,3 @@
-import java.lang.String;
-
 public class Item {
     private String name;
     private double calories;
@@ -38,11 +36,11 @@ public class Item {
     }
 
     public boolean minusStock(Item item, int amountToMinus) {
-        if (Item.stock - amountToMinus < 0)
+        if (this.stock - amountToMinus < 0)
             return false;
         else
         {
-            this.Item.stock -= amountToAdd;
+            this.stock -= amountToMinus;
             return true;
         }
     }
