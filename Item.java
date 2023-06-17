@@ -27,11 +27,23 @@ public class Item {
         this.price = newPrice;   
     }
 
-    public void addStock(Item item, int amountToAdd) {
-        this.Item.stock += amountToAdd;
+    public boolean addStock(Item item, int amountToAdd) {
+        if (Item.stock + amountToAdd > 10)
+            return false;
+        else
+        {
+            this.Item.stock += amountToAdd;
+            return true;
+        }
     }
 
-    public void minusStock(Item item, int amountToAdd) {
-        this.Item.stock -= amountToAdd;
+    public boolean minusStock(Item item, int amountToMinus) {
+        if (Item.stock - amountToMinus < 0)
+            return false;
+        else
+        {
+            this.Item.stock -= amountToAdd;
+            return true;
+        }
     }
 }
