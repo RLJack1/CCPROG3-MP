@@ -3,7 +3,7 @@ public class MoneyHandler {
 
     public MoneyHandler()
     {
-        // constructor
+        // constructor.
     }
     
     public int getTotal(int[] denomList)
