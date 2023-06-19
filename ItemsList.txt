@@ -1,0 +1,56 @@
+Items:
+1) 
+Name: Brioche Buns
+Calories: 346.0
+Standalone: True
+Price: 24.0 // originally 23.5
+Stock: 8
+
+2) 
+Name: Sesame Buns
+Calories: 140.0
+Standalone: True
+Price: 9.0 // originally 9.1667
+Stock: 8
+
+3) 
+Name: Angus Beef
+Calories: 164
+Standalone? True
+Price: 144.0 // originally 144.3, $2.56 
+Stock: 8
+
+4) 
+Name: Wagyu Beef
+Calories: 250.0
+Standalone? True
+Price: 795.0 // originally 794.93 
+Stock: 8
+
+5) 
+Name: White Onions
+Calories: 40.0
+Standalone? False
+Price: 30.0 // originally 29.0
+Stock: 8
+
+6) 
+Name: Melted Butter
+Calories: 717.0
+Standalone? False
+Price: 86 // originally 
+Stock: 8
+
+7) 
+Name: Beefsteak Tomato
+Calories: 18.0
+Standalone? False
+Price: 50.0 // i couldnt fine a price huhuhuh
+Stock: 8
+
+8) 
+Name: Iceberg Lettuce
+Calories: 3.0 // originally 2.97
+Standalone? False
+Price: 44.0 // 43.8 originally 
+Stock: 8
