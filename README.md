@@ -15,15 +15,14 @@ COMMITTING TO OWN BRANCH
 PUSH OWN BRANCH EDITS TO MEGAN BRANCH IN GITHUB
 - git remote -v (optional)
 - git log (optional)
-- 
+- git pull origin megan
+- git push origin megan
 
 COMMITTING TO MASTER BRANCH
 - git checkout master
 - git checkout master -- filename.java
 - git status
 - git commit -m "insert message"
-- git remote -v (optional)
-- git log (optional)
 - git push origin master
 
 AFTERWARDS
