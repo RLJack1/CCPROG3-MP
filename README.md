@@ -15,7 +15,7 @@ COMMITTING TO OWN BRANCH
 PUSH OWN BRANCH EDITS TO GITHUB
 - git remote -v (optional)
 - git log (optional)
-- git remote set-url origin 
+- git remote set-url origin https://github.com/RLJack1/CCPROG3-MP/tree/megan
 - git push origin master
 
 COMMITTING TO MASTER BRANCH
@@ -23,6 +23,9 @@ COMMITTING TO MASTER BRANCH
 - git checkout master -- filename.java
 - git status
 - git commit -m "insert message"
+- git remote -v (optional)
+- git log (optional)
+- git remote set-url origin 
 - git push origin master
 
 AFTERWARDS
