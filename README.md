@@ -23,6 +23,7 @@ COMMITTING TO MASTER BRANCH
 - git checkout master -- filename.java
 - git status
 - git commit -m "insert message"
+- git pull origin master
 - git push origin master
 
 AFTERWARDS
