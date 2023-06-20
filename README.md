@@ -14,6 +14,8 @@ COMMITTING TO OWN BRANCH
 
 PUSH OWN BRANCH EDITS TO GITHUB
 - git remote -v (optional)
+- git log (optional)
+- git remote set-url origin 
 - git push origin master
 
 COMMITTING TO MASTER BRANCH
