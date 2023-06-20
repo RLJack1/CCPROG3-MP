@@ -12,11 +12,10 @@ COMMITTING TO OWN BRANCH
 - git add filename.java
 - git commit -m "insert message"
 
-PUSH OWN BRANCH EDITS TO GITHUB
+PUSH OWN BRANCH EDITS TO MEGAN BRANCH IN GITHUB
 - git remote -v (optional)
 - git log (optional)
-- git remote set-url origin https://github.com/RLJack1/CCPROG3-MP/tree/megan
-- git push origin master
+- 
 
 COMMITTING TO MASTER BRANCH
 - git checkout master
@@ -25,7 +24,6 @@ COMMITTING TO MASTER BRANCH
 - git commit -m "insert message"
 - git remote -v (optional)
 - git log (optional)
-- git remote set-url origin 
 - git push origin master
 
 AFTERWARDS
