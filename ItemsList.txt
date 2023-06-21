@@ -10,12 +10,12 @@ Stock: 8
 Name: Sesame Buns
 Calories: 140.0
 Standalone: True
-Price: 9.0 // originally 9.1667
+Price: 9 // originally 9.1667
 Stock: 8
 
 3) 
 Name: Angus Beef
-Calories: 164
+Calories: 164.0
 Standalone? True
 Price: 144.0 // originally 144.3, $2.56 
 Stock: 8
@@ -37,7 +37,7 @@ Stock: 8
 6) 
 Name: Melted Butter
 Calories: 717.0
-Standalone? False
+Standalone? false
 Price: 86 // originally 
 Stock: 8
 
@@ -51,6 +51,6 @@ Stock: 8
 8) 
 Name: Iceberg Lettuce
 Calories: 3.0 // originally 2.97
-Standalone? False
+Standalone? false
 Price: 44.0 // 43.8 originally 
 Stock: 8

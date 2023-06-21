@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 
 public class VendingMachine {
@@ -31,9 +32,15 @@ public class VendingMachine {
 							 "Select: ");
 			userChoice = input.nextInt();
 			
+			//@megan VSC prompted me to add the following code after implementing the file solution, still not sure if valid.
 			//Create VM
 			if(userChoice == 1) {
-				createMenu();
+				try {
+					createMenu();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			//Test or Maintain
@@ -92,7 +99,8 @@ public class VendingMachine {
 		input.close();
 	}
 
-    public void createMenu(){
+	//@megan VSC prompted me to add the throw below for using the clearFile solution, still not familiar with the repurcussions.
+    public void createMenu() throws FileNotFoundException{
         System.out.println("Do you want to obliterate this Vending Machine and create a new one?\n" + "Y/N");
 		Scanner s = new Scanner(System.in);
 		char c = s.next().charAt(0);
@@ -102,7 +110,10 @@ public class VendingMachine {
 		if(c == 'y') {
 			//clear all vmHistory.txt data
 			//@renzo I need help :">
-			
+
+			//re:@megan possible solution to clear file using printwriter:
+			clearFile("vmHistory.txt");
+
 			this.clearItemList();
 			this.setCashIn(0);
 			this.setSelectedItem(null);
@@ -121,6 +132,17 @@ public class VendingMachine {
 				
 			this.setMachineName(name);
 			this.setIsSpecial(isSpecial);
+
+			//@megan initialization of initial items could go like this:
+			this.itemList.add(new Item("Brioche Buns", 346.0, true, 24, 8));
+			this.itemList.add(new Item("Sesame Buns", 140.0, true, 9, 8));
+			this.itemList.add(new Item("Angus Beef", 164.0, true, 144, 8));
+			this.itemList.add(new Item("Wagyu Beef", 250.0, true, 795, 8));
+
+			this.itemList.add(new Item("White Onions", 40.0, false, 86, 8));
+			this.itemList.add(new Item("Melted Butter", 717.0, false, 86, 8));
+			this.itemList.add(new Item("Beefsteak Tomato", 18.0, false, 50, 8));
+			this.itemList.add(new Item("Iceberg Lettuce", 3.0, false, 44, 8));
 		}
 		
 		s.close();
@@ -144,6 +166,39 @@ public class VendingMachine {
 		*/
 		
     }
+
+	/*  Method to save current vending machine's attributes in a text file. Attributes include:
+	 *  VM name, Regular or Not, items in itemList along with their attributes*/
+	public void saveToFile(String filename){ 
+		try {
+			File file = new File(filename);
+			PrintWriter writer = new PrintWriter(file);
+
+			writer.println(machineName);
+			writer.println(isSpecial);
+
+			for (Item item : itemList) {
+				writer.println(item.getName());
+				writer.println(item.getCalories());
+				writer.println(item.getStandalone());
+				writer.println(item.getPrice());
+				writer.println(item.getStock());
+			}
+
+			writer.close();
+			System.out.println("Vending Machine saved to file: " + filename);
+		} catch (FileNotFoundException e) {
+			System.out.println("Error saving Vending Machine to file: " + filename);
+		}
+	}
+
+	// Method essentially takes the file (vmHistory.txt), creates another a new file with no content, and replaces that
+	// with the original.
+	public void clearFile(String filename) throws FileNotFoundException {
+        PrintWriter writer = new PrintWriter(filename);
+        writer.close();
+        System.out.println("File cleared: " + filename);
+	}
 
 	public String getMachineName() {
 		return this.machineName;

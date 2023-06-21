@@ -2,30 +2,42 @@ public class Item {
     private String name;
     private double calories;
     private boolean standalone = false;
-    private double price;
+    private int price;
     private int stock;
 
-    public String getName() {
+    public Item(String name, double calories, boolean standalone, int price, int stock){ // Constructor for Item.
+        this.name = name;
+        this.calories = calories;
+        this.standalone = standalone;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public String getName(){
         return name;
     }
 
-    public double getCalories() {
+    public double getCalories(){
         return calories;
     }
 
-    public double getPrice() {
+    public boolean getStandalone(){
+        return standalone;
+    }
+
+    public int getPrice(){
         return price;
     }
 
-    public int getStock() {
+    public int getStock(){
         return stock;
     }
 
-    public void setPrice(double newPrice) {
+    public void setPrice(int newPrice){
         this.price = newPrice;   
     }
 
-    public boolean addStock(Item item, int amountToAdd) {
+    public boolean addStock(Item item, int amountToAdd){
         if (this.stock + amountToAdd > 10)
             return false;
         else
