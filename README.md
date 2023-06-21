@@ -1,8 +1,7 @@
 # CCPROG3-MP
 ### MEGAN STATUS CHECK
-- Laid foundations for VendingMachine
-- Prepped menu navigation
-- Uploaded ItemsList.txt file sent by renzo in messenger
+- Added code for VM initialization 
+- Uploaded base files for ProductDisplay and ProductDispenser
 
 ### RENZO STATUS CHECK
 - MoneyHandler foundation.

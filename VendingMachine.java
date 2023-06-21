@@ -36,6 +36,7 @@ public class VendingMachine {
 							 "Select: ");
 			userChoice = input.nextInt();
 			
+			//@megan VSC prompted me to add the following code after implementing the file solution, still not sure if valid.
 			//Create VM
 			if(userChoice == 1) {
 				try {
@@ -320,8 +321,9 @@ public class VendingMachine {
 		
     }
 
-	//Method to save current vending machine's attributes in a text file. Attributes include: VM name, Regular or Not, items in itemList along with their attributes
-	public void saveToFile(String filename) { 
+	/*  Method to save current vending machine's attributes in a text file. Attributes include:
+	 *  VM name, Regular or Not, items in itemList along with their attributes*/
+	public void saveToFile(String filename){ 
 		try {
 			File file = new File(filename);
 			PrintWriter writer = new PrintWriter(file);
@@ -341,7 +343,7 @@ public class VendingMachine {
 
 			writer.close();
 			System.out.println("Vending Machine saved to file: " + filename);
-			
+
 		} catch (FileNotFoundException e) {
 			System.out.println("Error saving Vending Machine to file: " + filename);
 		}
