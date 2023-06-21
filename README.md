@@ -1,7 +1,8 @@
 # GIT HOW-TOs
 
 STARTING
-- download zip file of newest code from master branch (if you need the other person's files)
+- download zip file of newest code from master branch (if you need the other person's files) OR
+- git pull origin master
 - make local edits
 
 COMMITTING TO OWN BRANCH
