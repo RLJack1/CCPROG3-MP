@@ -1,5 +1,12 @@
 # GIT HOW-TOs
 
+TLDR WORKFLOW
+- git status (optional)
+- git pull origin master
+- git add .
+- git commit -m "insert message"
+- git push origin master
+
 STARTING
 - download zip file of newest code from master branch (if you need the other person's files) OR
 - git pull origin master
