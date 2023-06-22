@@ -1,0 +1,57 @@
+Flaking Fritters Vending Machine
+false
+378 -> this is total sales, implement accumulator in code
+
+name
+calories
+isSpecial
+price
+qty
+
+Brioche Buns
+346.0
+true
+24
+8
+
+Sesame Buns
+140.0
+true
+9
+8
+
+Angus Beef
+164.0
+true
+144
+8
+
+Wagyu Beef
+250.0
+true
+795
+8
+
+White Onions
+40.0
+false
+30
+8
+
+Melted Butter
+717.0
+false
+86 
+8
+
+Beefsteak Tomato
+18.0
+false
+50
+8
+
+Iceberg Lettuce
+3.0
+false
+44
+8

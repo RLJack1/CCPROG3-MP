@@ -23,6 +23,18 @@ public class VendingMachine {
 		ProductDisplay pDisplay = new ProductDisplay();
 		ProductDispenser pDispenser = new ProductDispenser();
 	}
+	
+	public void populateVMHistory() {
+		
+	}
+	
+	public void populateTransacHistory() {
+		
+	}
+	
+	public void populateRestockHistory() {
+		
+	}
     
 	public void displayMenu(VendingMachine vm) {
 		int userChoice = 0;
@@ -171,6 +183,7 @@ public class VendingMachine {
 			if(enough) {
 				mh.change(this.cashIn, price);
 				pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
+				/*include date*/
 			}
 			
 			else {
