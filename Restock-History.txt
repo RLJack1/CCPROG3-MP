@@ -1,0 +1,118 @@
+// 1 block of restock includes:
+
+restock number
+inventory (item name, qty before restock, qty after restock, amt sold amt added) x8
+total sales of VM
+total sales compared to last restock
+
+
+001
+
+Brioche Buns
+0
+5
+0
+8
+
+Sesame Buns
+0
+8
+0
+8
+
+Angus Beef
+0
+8
+0
+8
+
+Wagyu Beef
+0
+8
+0
+8
+
+White Onions
+0
+8
+0
+8
+
+Melted Butter
+0
+8
+0
+8
+
+Beefsteak Tomato
+0
+8
+0
+8
+
+Iceberg Lettuce
+0
+8
+0
+8
+
+125
+125
+
+---
+
+002
+
+Brioche Buns
+3
+8
+2
+5
+
+Sesame Buns
+1
+8
+7
+7
+
+Angus Beef
+3
+8
+5
+5
+
+Wagyu Beef
+0
+8
+8
+8
+
+White Onions
+1
+8
+7
+7
+
+Melted Butter
+8
+8
+0
+0
+
+Beefsteak Tomato
+4
+8
+4
+4
+
+Iceberg Lettuce
+2
+8
+6
+6
+
+378
+253
+
+---
+

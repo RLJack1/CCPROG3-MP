@@ -1,0 +1,17 @@
+item name
+calories
+price
+cash in
+change
+
+Angus Beef
+164.0
+144
+200
+56
+
+Brioche Buns
+346.0
+24
+500
+476

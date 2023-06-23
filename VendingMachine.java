@@ -29,7 +29,7 @@ public class VendingMachine {
 		// ProductDisplay pDisplay = new ProductDisplay();
 		// ProductDispenser pDispenser = new ProductDispenser();
 	}
-
+	
 	public void populateVMHistory() {
 		
 	}

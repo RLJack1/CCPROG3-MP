@@ -17,6 +17,8 @@ public class ProductDispenser {
 		
 		public void printReceipt(Item selectedItem, int cashIn, int change) {
 			//display receipt and calories
+			/*include date*/
+			/*should clear transactions when we make a new vm*/
 		}
 		
 		public void printTransacHistory() {
