@@ -57,40 +57,42 @@ public class VendingMachine {
 		transacList = new ArrayList<Transaction>();
 	}
 	
-	public void populateVMHistory() {
+	public void populateVMHistory() throws FileNotFoundException { // @megan VSC prompted to add throw.
 		File f = new File("VM-History.txt");
 		Scanner s = new Scanner(f);
 		
+		//@megan changed the nextVar lines to their corresponding data types.
 		this.machineName = s.nextLine();
-		this.isSpecial = (boolean) s.nextLine();
-		this.lastTotalSales = (int) s.nextLine();
-		this.totalSales = (int) s.nextLine();
+		this.isSpecial = s.nextBoolean();
+		this.lastTotalSales = s.nextInt();
+		this.totalSales = s.nextInt();
 		s.nextLine();
 		
 		while(s.hasNextLine()) {
 			String name = s.nextLine();
-			double calories = (double) s.nextLine();
-			boolean standalone = (boolean) s.nextLine();
-			int price = (int) s.nextLine();
-			int stock = (int) s.nextLine();
+			double calories = s.nextDouble();
+			boolean standalone = s.nextBoolean();
+			int price = s.nextInt();
+			int stock = s.nextInt();
+			int sold = s.nextInt();
 			s.nextLine();
 			
-			itemList.add(new Item(name, calories, isSpecial, standalone, price, stock));
+			itemList.add(new Item(name, calories, standalone, price, stock, sold));
 		}
 		
 		s.close();
 		/*close file*/
 	}
 	
-	public void populateTransacHistory() {
+	public void populateTransacHistory() throws FileNotFoundException { // @megan VSC prompted to add throw.
 		File f = new File("Transac-History.txt");
 		Scanner s = new Scanner(f);
 		
 		while(s.hasNextLine()) {
 			String name = s.nextLine();
-			double calories = (double) s.nextLine();
-			int price = (int) s.nextLine();
-			int cashIn = (int) s.nextLine();
+			double calories = s.nextDouble();
+			int price = s.nextInt();
+			int cashIn = s.nextInt();
 			int change = cashIn - price;
 			s.nextLine();
 			
@@ -101,7 +103,7 @@ public class VendingMachine {
 		/*close file*/
 	}
 	
-	public void populateRestockHistory() {
+	public void populateRestockHistory() throws FileNotFoundException { // @megan VSC prompted to add throw.
 		File f = new File("Restock-History.txt");
 		Scanner s = new Scanner(f);
 		
@@ -127,7 +129,7 @@ public class VendingMachine {
 		/*close file*/
 	}
 	
-	public void writeVMHistory() {
+	public void writeVMHistory() throws FileNotFoundException {  // @megan VSC prompted to add throw.
 		PrintWriter p = new PrintWriter("VM-History.txt");
 		
 		p.println(this.machineName);
@@ -149,8 +151,8 @@ public class VendingMachine {
 		p.close();
 	}
 	
-	public void writeTransacHistory(Item item, int cashIn, int change) {
-		PrintWriter p = new PrintWriter("Transac-History.txt");
+	public void writeTransacHistory(Item item, int cashIn, int change) throws FileNotFoundException {  // @megan VSC prompted to add throw.
+		PrintWriter p = new PrintWriter("Transac-History.txt"); 
 
 		p.println(item.getName());
 		p.println(item.getCalories());
@@ -163,7 +165,7 @@ public class VendingMachine {
 		p.close();
 	}
 	
-	public void writeRestockHistory(ArrayList<Item> restockList, ArrayList<Item> itemList) {
+	public void writeRestockHistory(ArrayList<Item> restockList, ArrayList<Item> itemList) throws FileNotFoundException {  // @megan VSC prompted to add throw.
 		/*implement way to know restock# */
 		int restockNum = 0;
 		
@@ -516,6 +518,7 @@ public class VendingMachine {
 				writer.println(item.getStandalone());
 				writer.println(item.getPrice());
 				writer.println(item.getStock());
+				writer.println(item.getSold()); // @megan added getSold to the saveFile
 				writer.println("\n");
 			}
 
@@ -619,7 +622,7 @@ public class VendingMachine {
 				
 				s.close();
 			
-				VendingMachine vm = new VendingMachine();
+///				VendingMachine vm = new VendingMachine(); @megan VSC said this was a duplicate variable.
 				MoneyHandler mh = new MoneyHandler();
 				ProductDisplay pDisplay = new ProductDisplay();
 				ProductDispenser pDispenser = new ProductDispenser();
