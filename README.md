@@ -1,7 +1,16 @@
 # CCPROG3-MP
 ### MEGAN STATUS CHECK
-- filled txt files
-- todo: call txt files in code, finish productDispenser, address comments
+- almost done with populate and writer methods
+- todo:
+ * make class initialization more cohesive
+ * address comments
+ * fill out ProductDispenser
+ * fill out Transaction
+ * create and fill out Restock
+ * recheck scanner printwriter file closing
+ * double check getters and setters
+ * double check functionality w renzos code
+ * rigorously test and debug
 
 ### RENZO STATUS CHECK
 - MoneyHandler progress
