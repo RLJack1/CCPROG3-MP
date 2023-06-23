@@ -18,16 +18,16 @@ public class MoneyHandler {
     // TODO: checkEnoughChange(cashIn, itemPrice) logic checks if there is enough change in the VM to dispense change. DONE
     public boolean checkEnoughChange(int cashIn, int itemPrice){
         int totalChange = 0;
-        boolean enoughChange = false;
+        boolean isEnoughChange = false;
 
         for (int i = 0; i < denomStore.length; i++){
             totalChange += denomList[i] * denomStore[i];
         }
        
         if (totalChange >= cashIn)
-            enoughChange = true;
+            isEnoughChange = true;
 
-        return enoughChange;
+        return isEnoughChange;
     }
 
     // TODO: cashOut(totalDenom) to take out all money from the vending machine. (presumably also store and return how much money was collected, so return int) DONE

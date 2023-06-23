@@ -1,16 +1,21 @@
 public class Item {
-    private String name;
-    private double calories;
-    private boolean standalone = false;
+    private final String name;
+    private final double calories;
+    private final boolean standalone = false;
     private int price;
     private int stock;
+    private int sold;
+    // create optionsList, arrayList that defines all of the items.
 
-    public Item(String name, double calories, boolean standalone, int price, int stock){ // Constructor for Item.
+    // create populateOptionsList(), decide whether if its thru code or text file. 
+    // create checkStock(stock) to see if there is enough stock to be sold (stock < 0). might be in productdisp
+
+    public Item(String name, double calories, boolean standalone, int price, int stock, int sold){ // Constructor for Item.
         this.name = name;
         this.calories = calories;
-        this.standalone = standalone;
         this.price = price;
         this.stock = stock;
+        this.sold = sold;
     }
 
     public String getName(){
@@ -33,12 +38,20 @@ public class Item {
         return stock;
     }
 
+    public int getSold(){
+        return sold;
+    }
+
+    public void setSold(int newSold)
+    {
+        this.sold = newSold;
+    }
     public void setPrice(int newPrice){
         this.price = newPrice;   
     }
 
     public boolean addStock(Item item, int amountToAdd){
-        if (this.stock + amountToAdd > 10)
+        if (this.stock + amountToAdd >= 10)
             return false;
         else
         {

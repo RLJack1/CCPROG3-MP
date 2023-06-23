@@ -155,15 +155,15 @@ public class VendingMachine {
 			this.setIsSpecial(isSpecial);
 
 			/*Initialization of items, call pDisplay.methods()*/
-			this.itemList.add(new Item("Brioche Buns", 346.0, true, 24, 8));
-			this.itemList.add(new Item("Sesame Buns", 140.0, true, 9, 8));
-			this.itemList.add(new Item("Angus Beef", 164.0, true, 144, 8));
-			this.itemList.add(new Item("Wagyu Beef", 250.0, true, 795, 8));
+			this.itemList.add(new Item("Brioche Buns", 346.0, true, 24, 8, 0));
+			this.itemList.add(new Item("Sesame Buns", 140.0, true, 9, 8, 0));
+			this.itemList.add(new Item("Angus Beef", 164.0, true, 144, 8, 0));
+			this.itemList.add(new Item("Wagyu Beef", 250.0, true, 795, 8, 0));
 
-			this.itemList.add(new Item("White Onions", 40.0, false, 86, 8));
-			this.itemList.add(new Item("Melted Butter", 717.0, false, 86, 8));
-			this.itemList.add(new Item("Beefsteak Tomato", 18.0, false, 50, 8));
-			this.itemList.add(new Item("Iceberg Lettuce", 3.0, false, 44, 8));
+			this.itemList.add(new Item("White Onions", 40.0, false, 86, 8, 0));
+			this.itemList.add(new Item("Melted Butter", 717.0, false, 86, 8, 0));
+			this.itemList.add(new Item("Beefsteak Tomato", 18.0, false, 50, 8, 0));
+			this.itemList.add(new Item("Iceberg Lettuce", 3.0, false, 44, 8, 0));
 		}
 		
 		s.close();
