@@ -40,6 +40,11 @@ public class VendingMachine {
 		transacList = new ArrayList<Transaction>();
 	}
 	
+	//@megan added the following as part of the machine because the constructor below doesn't recognize the assigning of classes without it.
+	MoneyHandler mh;
+	ProductDisplay pDisplay;
+	ProductDispenser pDispenser;
+	
 	public VendingMachine(String machineName, boolean isSpecial) {
 		this.machineName = machineName;
 		this.isSpecial = isSpecial;
@@ -49,6 +54,7 @@ public class VendingMachine {
 		this.selectedItem = null;
 		itemList = new ArrayList<Item>();
 		restockList = new ArrayList<Item>();
+		transacList = new ArrayList<Transaction>();
 	}
 	
 	public void populateVMHistory() {
@@ -200,6 +206,8 @@ public class VendingMachine {
 			
 			//@megan VSC prompted me to add the following code after implementing the file solution, still not sure if valid.
 			//Create VM
+
+			//@megan, if else could be switch case instead.
 			if(userChoice == 1) {
 				try {
 					createMenu();
@@ -299,15 +307,15 @@ public class VendingMachine {
 			this.setIsSpecial(isSpecial);
 
 			/*Initialization of items, call pDisplay.methods()*/
-			this.itemList.add(new Item("Brioche Buns", 346.0, true, 24, 8));
-			this.itemList.add(new Item("Sesame Buns", 140.0, true, 9, 8));
-			this.itemList.add(new Item("Angus Beef", 164.0, true, 144, 8));
-			this.itemList.add(new Item("Wagyu Beef", 250.0, true, 795, 8));
+			this.itemList.add(new Item("Brioche Buns", 346.0, true, 24, 8, 0));
+			this.itemList.add(new Item("Sesame Buns", 140.0, true, 9, 8, 0));
+			this.itemList.add(new Item("Angus Beef", 164.0, true, 144, 8, 0));
+			this.itemList.add(new Item("Wagyu Beef", 250.0, true, 795, 8, 0));
 
-			this.itemList.add(new Item("White Onions", 40.0, false, 86, 8));
-			this.itemList.add(new Item("Melted Butter", 717.0, false, 86, 8));
-			this.itemList.add(new Item("Beefsteak Tomato", 18.0, false, 50, 8));
-			this.itemList.add(new Item("Iceberg Lettuce", 3.0, false, 44, 8));
+			this.itemList.add(new Item("White Onions", 40.0, false, 86, 8, 0));
+			this.itemList.add(new Item("Melted Butter", 717.0, false, 86, 8, 0));
+			this.itemList.add(new Item("Beefsteak Tomato", 18.0, false, 50, 8, 0));
+			this.itemList.add(new Item("Iceberg Lettuce", 3.0, false, 44, 8, 0));
 		}
 		
 		s.close();
@@ -330,24 +338,26 @@ public class VendingMachine {
 		if(c == 'y') {
 			pDispenser.releaseItem(this.isSpecial, this.selectedItem);
 			System.out.println("Calculating change...");
-			int price = selectedItem.getPrice();
-			boolean enough = mh.checkEnoughChange(this.cashIn, price);
+		 	int price = selectedItem.getPrice();
+		// 	boolean enough = mh.checkEnoughChange(this.cashIn, price);
 			
-			if(enough) {
-				mh.change(this.cashIn, price);
-				pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
-				/*include date*/
-			}
+		// 	if(enough) {
+		// 		mh.change(this.cashIn, price);
+		// 		pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
+		// 	}
 			
-			else {
-				System.out.println("Sorry! This Vending Machine doesn't have enough change to dispense :((");
-			}
-		}
+		// 	else {
+		// 		System.out.println("Sorry! This Vending Machine doesn't have enough change to dispense :((");
+		// 	}
+		// }
 		
-		else {
-			System.out.println("Canceling order...");
-			System.out.println("Returning money...");
-			mh.change(this.cashIn, 0);
+		// else {
+		// 	System.out.println("Canceling order...");
+		// 	System.out.println("Returning money...");
+		// 	mh.change(this.cashIn, 0);
+
+		//@megan i believe i've created a method that does all of the above processes, but I'm still not sure how the printReciept would add up.
+			mh.checkChange(this.cashIn, price);
 		}
 		
 		s.close();
@@ -402,7 +412,7 @@ public class VendingMachine {
 				  contemplating having a minimalist productdisplay for this part idk*/
 				
 				System.out.println("Input new price for " + this.selectedItem.getName() + ":");
-				String newPrice = s.nextLine();
+				int newPrice = s.nextInt(); // @megan set newPrice and the scanner into int.
 				this.selectedItem.setPrice(newPrice);
 				System.out.println("New price successfully set!");
 			}
@@ -423,7 +433,7 @@ public class VendingMachine {
 				}
 				
 				else {
-					mh.displayDenomList();
+					mh.displayDenomList(); //@megan I assume this function will print the denominations and how much are stored
 					
 					System.out.println("Which bill would you like to cash out?\n" +
 									   "Bill value: ");
@@ -433,7 +443,7 @@ public class VendingMachine {
 									   "Amount: ");
 					int amount = s.nextInt();
 					
-					boolean success = mh.cashOne(index, amount);
+					boolean success = mh.cashOne(index, amount) == 0; // added the boolean check (== 0)
 					
 					if(success) {
 						System.out.println("Cashing out " + amount + " " + bill + "bills...");
@@ -447,7 +457,7 @@ public class VendingMachine {
 			}
 			
 			else if(userChoice == 4) {
-				mh.displayDenomList();
+				mh.displayDenomList(); //@megan I assume this function will print the denominations and how much are stored
 					
 				System.out.println("Which bill would you like to replenish?\n" +
 								   "Bill value: ");
@@ -648,7 +658,7 @@ public class VendingMachine {
 		
 		vm.displayMenu(vm); 
 		/*to investigate*/
-		vm.clearFile("VM-History.txt");
+		vm.clearFile("VM-History.txt"); // "Unhandled exception type FileNotFoundException" message according to VSC.
 		vm.saveToFile("VM-History.txt");
 	}
 }
