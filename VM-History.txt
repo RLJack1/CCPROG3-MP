@@ -1,12 +1,7 @@
 Flaking Fritters Vending Machine
 false
-378 -> this is total sales, implement accumulator in code
-
-name
-calories
-isSpecial
-price
-qty
+125
+378
 
 Brioche Buns
 346.0
