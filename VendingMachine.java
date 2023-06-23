@@ -29,6 +29,18 @@ public class VendingMachine {
 		// ProductDisplay pDisplay = new ProductDisplay();
 		// ProductDispenser pDispenser = new ProductDispenser();
 	}
+
+	public void populateVMHistory() {
+		
+	}
+	
+	public void populateTransacHistory() {
+		
+	}
+	
+	public void populateRestockHistory() {
+		
+	}
     
 	public void displayMenu(VendingMachine vm) {
 		int userChoice = 0;
@@ -44,6 +56,8 @@ public class VendingMachine {
 			
 			//@megan VSC prompted me to add the following code after implementing the file solution, still not sure if valid.
 			//Create VM
+
+			//@megan, if else could be switch case instead.
 			if(userChoice == 1) {
 				try {
 					createMenu();
