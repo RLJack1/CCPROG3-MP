@@ -5,12 +5,12 @@
  * make class initialization more cohesive
  * address comments
  * fill out ProductDispenser
- * fill out Transaction
- * create and fill out Restock
+ * integrate Transaction and Restock
  * recheck scanner printwriter file closing
  * double check getters and setters
  * double check functionality w renzos code
  * rigorously test and debug
+ * run with renzo's code
 
 ### RENZO STATUS CHECK
 - MoneyHandler progress
