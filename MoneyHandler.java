@@ -1,13 +1,33 @@
 public class MoneyHandler {
-    private int[] denomList = {1000, 500, 200, 100, 50, 20, 10, 5, 1};
-    private int[] denomStore = {0, 0, 0, 0, 0, 0, 0, 0, 0}; // to hold amount of denom
-    private int totalDenom; // Don't know if we still need this/
-
-    // create method checkEnoughChange(change) to check if enough change from the totalParallel. (We probably don't need this anymore)
+    private int[] denomList = {1000, 500, 200, 100, 50, 20, 10, 5, 1}; // int array to hold denomination values.
+    private int[] denomStore = {0, 0, 0, 0, 0, 0, 0, 0, 0}; // int array to hold how many denominations are stored.
+    //private int totalDenom;
 
     public MoneyHandler()
     {
         // constructor.
+    }
+
+    // TODO: displayDenomList() to print the contents of denomList. DONE
+    public void displayDenomList(){
+        for (int i = 0; i < denomStore.length; i++){
+            System.out.println("P" + denomList[i] + ": " + denomStore[i] + "instances.");
+        }
+    }
+
+    // TODO: checkEnoughChange(cashIn, itemPrice) logic checks if there is enough change in the VM to dispense change. DONE
+    public boolean checkEnoughChange(int cashIn, int itemPrice){
+        int totalChange = 0;
+        boolean enoughChange = false;
+
+        for (int i = 0; i < denomStore.length; i++){
+            totalChange += denomList[i] * denomStore[i];
+        }
+       
+        if (totalChange >= cashIn)
+            enoughChange = true;
+
+        return enoughChange;
     }
 
     // TODO: cashOut(totalDenom) to take out all money from the vending machine. (presumably also store and return how much money was collected, so return int) DONE
@@ -26,9 +46,9 @@ public class MoneyHandler {
     public int cashOne(int index, int numOfDenom){
         int totalCollect = 0;
 
-        if (denomStore[index + 1] - numOfDenom < 0){
-            totalCollect += denomStore[index + 1] * numOfDenom;
-            denomStore[index + 1] -= numOfDenom;
+        if (denomStore[index] - numOfDenom < 0){
+            totalCollect += denomStore[index] * numOfDenom;
+            denomStore[index] -= numOfDenom;
         }
 
         return totalCollect;
@@ -74,14 +94,19 @@ public class MoneyHandler {
                 for(i = 0; i < denomStore.length; i++){
                     denomStore[i] -= countDenom[i];
                 }
+
                 return changeOut;
             }
-            else
+            else{
+                System.out.println("Sorry! This Vending Machine doesn't have enough change to dispense :((");
                 return cashIn;
-            
+            }
         }
-        else
+        else{
+            System.out.println("Canceling order...");
+		    System.out.println("Returning money...");
             return cashIn;
+        }
 
     }
     
@@ -95,8 +120,14 @@ public class MoneyHandler {
         return finalTotal;
     }
 
-    public int getDenom(int denom){
-        return denom;
+    public int getIndex(int denomValue){
+        int index = 0;
+        for (int i = 0; i < denomList.length; i++){
+            if (denomValue == denomList[i]){
+                index = i;
+            }
+        }
+        return index;
     }
 
     public int[] getChange(int[] availDenom){
