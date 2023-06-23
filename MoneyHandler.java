@@ -107,7 +107,6 @@ public class MoneyHandler {
 		    System.out.println("Returning money...");
             return cashIn;
         }
-
     }
     
     public int getTotal()
