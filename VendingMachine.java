@@ -12,6 +12,11 @@ public class VendingMachine {
 	private int cashIn;
 	private Item selectedItem;
 	
+	//@megan added the following as part of the machine because the constructor below doesn't recognize the assigning of classes without it.
+	MoneyHandler mh;
+	ProductDisplay pDisplay;
+	ProductDispenser pDispenser;
+	
 	public VendingMachine(String machineName, boolean isSpecial) {
 		this.machineName = machineName;
 		this.isSpecial = isSpecial;
@@ -19,9 +24,10 @@ public class VendingMachine {
 		this.selectedItem = null;
 		itemList = new ArrayList<Item>();
 		
-		MoneyHandler mh = new MoneyHandler();
-		ProductDisplay pDisplay = new ProductDisplay();
-		ProductDispenser pDispenser = new ProductDispenser();
+		// @megan according to VSC, these aren't used by the program (???) so i just commented them out.
+		// MoneyHandler mh = new MoneyHandler();
+		// ProductDisplay pDisplay = new ProductDisplay();
+		// ProductDispenser pDispenser = new ProductDispenser();
 	}
     
 	public void displayMenu(VendingMachine vm) {
@@ -165,23 +171,26 @@ public class VendingMachine {
 		if(c == 'y') {
 			pDispenser.releaseItem(this.isSpecial, this.selectedItem);
 			System.out.println("Calculating change...");
-			int price = selectedItem.getPrice();
-			boolean enough = mh.checkEnoughChange(this.cashIn, price);
+		 	int price = selectedItem.getPrice();
+		// 	boolean enough = mh.checkEnoughChange(this.cashIn, price);
 			
-			if(enough) {
-				mh.change(this.cashIn, price);
-				pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
-			}
+		// 	if(enough) {
+		// 		mh.change(this.cashIn, price);
+		// 		pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
+		// 	}
 			
-			else {
-				System.out.println("Sorry! This Vending Machine doesn't have enough change to dispense :((");
-			}
-		}
+		// 	else {
+		// 		System.out.println("Sorry! This Vending Machine doesn't have enough change to dispense :((");
+		// 	}
+		// }
 		
-		else {
-			System.out.println("Canceling order...");
-			System.out.println("Returning money...");
-			mh.change(this.cashIn, 0);
+		// else {
+		// 	System.out.println("Canceling order...");
+		// 	System.out.println("Returning money...");
+		// 	mh.change(this.cashIn, 0);
+
+		//@megan i believe i've created a method that does all of the above processes, but I'm still not sure how the printReciept would add up.
+			mh.checkChange(this.cashIn, price);
 		}
 		
 		s.close();
@@ -197,6 +206,7 @@ public class VendingMachine {
 
     public void maintainMenu() {
 		Scanner s = new Scanner(System.in);
+		int userChoice = 0; // @megan initialized userChoice since it wasn't previously done so.
 		
 		do {
 			System.out.print("==============================" +
@@ -208,7 +218,7 @@ public class VendingMachine {
 							 "(5) Print Transaction History\n" +
 							 "(6) Exit Maintenance Menu\n" +
 							 "Select: ");
-			int userChoice = s.nextInt();
+			userChoice = s.nextInt(); // removed the duplicate initialization of userChoice here.
 			
 			if(userChoice == 1) {
 				System.out.println("Please select the item you would like to restock!");
@@ -235,7 +245,7 @@ public class VendingMachine {
 				  contemplating having a minimalist productdisplay for this part idk*/
 				
 				System.out.println("Input new price for " + this.selectedItem.getName() + ":");
-				String newPrice = s.nextLine();
+				int newPrice = s.nextInt(); // @megan set newPrice and the scanner into int.
 				this.selectedItem.setPrice(newPrice);
 				System.out.println("New price successfully set!");
 			}
@@ -255,7 +265,7 @@ public class VendingMachine {
 				}
 				
 				else {
-					mh.displayDenomList();
+					mh.displayDenomList(); //@megan I assume this function will print the denominations and how much are stored
 					
 					System.out.println("Which bill would you like to cash out?\n" +
 									   "Bill value: ");
@@ -265,7 +275,7 @@ public class VendingMachine {
 									   "Amount: ");
 					int amount = s.nextInt();
 					
-					boolean success = mh.cashOne(index, amount);
+					boolean success = mh.cashOne(index, amount) == 0; // added the boolean check (== 0)
 					
 					if(success) {
 						System.out.println("Cashing out " + amount + " " + bill + "bills...");
@@ -279,7 +289,7 @@ public class VendingMachine {
 			}
 			
 			else if(userChoice == 4) {
-				mh.displayDenomList();
+				mh.displayDenomList(); //@megan I assume this function will print the denominations and how much are stored
 					
 				System.out.println("Which bill would you like to replenish?\n" +
 								   "Bill value: ");
@@ -471,7 +481,7 @@ public class VendingMachine {
 		
 		vm.displayMenu(vm); 
 		/*to investigate*/
-		vm.clearFile("VM-History.txt");
+		vm.clearFile("VM-History.txt"); // "Unhandled exception type FileNotFoundException" message according to VSC.
 		vm.saveToFile("VM-History.txt");
 	}
 }
