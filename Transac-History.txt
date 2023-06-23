@@ -1,9 +1,3 @@
-item name
-calories
-price
-cash in
-change
-
 Angus Beef
 164.0
 144

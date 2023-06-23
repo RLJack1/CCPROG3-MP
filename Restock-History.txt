@@ -1,12 +1,12 @@
 // 1 block of restock includes:
 
 restock number
-inventory (item name, qty before restock, qty after restock, amt sold amt added) x8
+inventory (item name, qty before restock, qty after restock, amt sold, amt added) x8
 total sales of VM
 total sales compared to last restock
 
 
-001
+1
 
 Brioche Buns
 0
@@ -61,7 +61,7 @@ Iceberg Lettuce
 
 ---
 
-002
+2
 
 Brioche Buns
 3
