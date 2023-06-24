@@ -179,7 +179,6 @@ public class VendingMachine {
 					p.println(item.getName());
 					p.println(item.getStock());
 					p.println(refilled.getStock());
-					//p.println(item.getSold());
 					p.println(refilled.getStock() - item.getStock());
 					p.println();
 			}
@@ -518,7 +517,6 @@ public class VendingMachine {
 				writer.println(item.getStandalone());
 				writer.println(item.getPrice());
 				writer.println(item.getStock());
-				writer.println(item.getSold()); // @megan added getSold to the saveFile
 				writer.println("\n");
 			}
 
