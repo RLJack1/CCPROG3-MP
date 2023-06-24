@@ -4,7 +4,6 @@ public class Item {
     private final boolean standalone = false;
     private int price;
     private int stock;
-    private int sold;
     // create optionsList, arrayList that defines all of the items.
 
     // create populateOptionsList(), decide whether if its thru code or text file. 
@@ -15,7 +14,6 @@ public class Item {
         this.calories = calories;
         this.price = price;
         this.stock = stock;
-        this.sold = sold;
     }
 
     public String getName(){
@@ -38,14 +36,6 @@ public class Item {
         return stock;
     }
 
-    public int getSold(){
-        return sold;
-    }
-
-    public void setSold(int newSold)
-    {
-        this.sold = newSold;
-    }
     public void setPrice(int newPrice){
         this.price = newPrice;   
     }
