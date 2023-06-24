@@ -26,7 +26,7 @@ public class VendingMachine {
 	private Item selectedItem;
 	private ArrayList<Item> itemList;
 	private ArrayList<Item> restockList;
-	private ArrayList<Transaction> transacList;
+	//private ArrayList<Transaction> transacList;
 	
 	public VendingMachine() {
 		this.machineName = null;
@@ -37,7 +37,7 @@ public class VendingMachine {
 		this.selectedItem = null;
 		itemList = new ArrayList<Item>();
 		restockList = new ArrayList<Item>();
-		transacList = new ArrayList<Transaction>();
+		// transacList = new ArrayList<Transaction>(); @megan commented this out since it's no longer needed(?)
 	}
 	
 	//@megan added the following as part of the machine because the constructor below doesn't recognize the assigning of classes without it.
@@ -54,7 +54,7 @@ public class VendingMachine {
 		this.selectedItem = null;
 		itemList = new ArrayList<Item>();
 		restockList = new ArrayList<Item>();
-		transacList = new ArrayList<Transaction>();
+		//transacList = new ArrayList<Transaction>(); @megan commented this out since it's no longer needed(?)
 	}
 	
 	public void populateVMHistory() throws FileNotFoundException { // @megan VSC prompted to add throw.
@@ -96,7 +96,7 @@ public class VendingMachine {
 			int change = cashIn - price;
 			s.nextLine();
 			
-			transacList.add(new Transaction(name, calories, price, cashIn, change));
+			// transacList.add(new Transaction(name, calories, price, cashIn, change)); @megan commented this out since it's no longer needed(?)
 		}
 		
 		s.close();
@@ -309,15 +309,15 @@ public class VendingMachine {
 			this.setIsSpecial(isSpecial);
 
 			/*Initialization of items, call pDisplay.methods()*/
-			this.itemList.add(new Item("Brioche Buns", 346.0, true, 24, 8, 0));
-			this.itemList.add(new Item("Sesame Buns", 140.0, true, 9, 8, 0));
-			this.itemList.add(new Item("Angus Beef", 164.0, true, 144, 8, 0));
-			this.itemList.add(new Item("Wagyu Beef", 250.0, true, 795, 8, 0));
+			this.itemList.add(new Item("BriocheBread", 346.0, true, 24, 8, 0));
+			this.itemList.add(new Item("SesameBread", 140.0, true, 9, 8, 0));
+			this.itemList.add(new Item("AngusBeef", 164.0, true, 144, 8, 0));
+			this.itemList.add(new Item("WagyuBeef", 250.0, true, 795, 8, 0));
 
-			this.itemList.add(new Item("White Onions", 40.0, false, 86, 8, 0));
-			this.itemList.add(new Item("Melted Butter", 717.0, false, 86, 8, 0));
-			this.itemList.add(new Item("Beefsteak Tomato", 18.0, false, 50, 8, 0));
-			this.itemList.add(new Item("Iceberg Lettuce", 3.0, false, 44, 8, 0));
+			this.itemList.add(new Item("WhiteOnions", 40.0, false, 86, 8, 0));
+			this.itemList.add(new Item("MeltedButter", 717.0, false, 86, 8, 0));
+			this.itemList.add(new Item("BeefsteakTomato", 18.0, false, 50, 8, 0));
+			this.itemList.add(new Item("IcebergLettuce", 3.0, false, 44, 8, 0));
 		}
 		
 		s.close();

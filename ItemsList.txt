@@ -1,56 +1,180 @@
 Items:
-1) 
-Name: Brioche Buns
+Name: BriocheBread
 Calories: 346.0
 Standalone: True
-Price: 24.0 // originally 23.5
+Price: 34
 Stock: 8
 
-2) 
-Name: Sesame Buns
+Name: SesameBread
 Calories: 140.0
 Standalone: True
-Price: 9 // originally 9.1667
+Price: 20
 Stock: 8
 
-3) 
-Name: Angus Beef
+Name: RyeBread
+Calories: 259.0
+Standalone: True
+Price: 48 
+Stock: 8
+
+Name: WholewheatBread
+Calories: 265.0
+Standalone: True
+Price: 40
+Stock: 8
+
+Name: PotatoBread
+Calories: 266.0
+Standalone: True
+Price: 33
+Stock: 8
+
+Name: JackBread
+Calories: 100.0
+Standalone: True
+Price: 100
+Stock: 8
+
+Name: AngusBeef
 Calories: 164.0
 Standalone? True
-Price: 144.0 // originally 144.3, $2.56 
+Price: 144
 Stock: 8
 
-4) 
-Name: Wagyu Beef
+Name: WagyuBeef
 Calories: 250.0
 Standalone? True
-Price: 795.0 // originally 794.93 
+Price: 795
 Stock: 8
 
-5) 
-Name: White Onions
+Name: TapaBeef
+Calories: 187.75
+Standalone? True
+Price: 56
+Stock: 8
+
+Name: CheesedBeef
+Calories: 373.0
+Standalone? True
+Price: 214.0 
+Stock: 8
+
+Name: CanadianBacon
+Calories: 185.0
+Standalone? True
+Price: 140
+Stock: 8
+
+Name: ChickenSchnitzel
+Calories: 297.0
+Standalone? True
+Price: 175
+Stock: 8
+
+Name: SalmonPatty
+Calories: 208.0
+Standalone? True
+Price: 300
+Stock: 8
+
+Name: BronzeTurkey
+Calories: 189.0
+Standalone? True
+Price: 185
+Stock: 8
+
+Name: BeyondBeef
+Calories: 210.0
+Standalone? True
+Price: 330
+Stock: 8
+
+Name: JackBeef
+Calories: 100.0
+Standalone? True
+Price: 100
+Stock: 8
+
+Name: WhiteOnions
 Calories: 40.0
 Standalone? False
-Price: 30.0 // originally 29.0
+Price: 30
 Stock: 8
 
-6) 
-Name: Melted Butter
-Calories: 717.0
+Name: OnionRings
+Calories: 205.5
+Standalone? False
+Price: 85
+Stock: 8
+
+Name: TrappistCheese
+Calories: 355.0
+Standalone? False
+Price: 140
+Stock: 8
+
+Name: MozzarelaCheese
+Calories: 140.0
+Standalone? False
+Price: 75
+Stock: 8
+
+Name: BlueCheese
+Calories: 177.0
+Standalone? False
+Price: 105
+Stock: 8
+
+Name: AmericanCheese
+Calories: 177.0
+Standalone? False
+Price: 40
+Stock: 8
+
+Name: MeltedButter
+Calories: 307.5
 Standalone? false
-Price: 86 // originally 
+Price: 60
 Stock: 8
 
-7) 
-Name: Beefsteak Tomato
+Name: BeefsteakTomato
 Calories: 18.0
 Standalone? False
-Price: 50.0 // i couldnt fine a price huhuhuh
+Price: 50
 Stock: 8
 
-8) 
-Name: Iceberg Lettuce
-Calories: 3.0 // originally 2.97
+Name: IcebergLettuce
+Calories: 3.0 
 Standalone? false
-Price: 44.0 // 43.8 originally 
+Price: 45
+Stock: 8
+
+Name: DillPickles
+Calories: 11.0 
+Standalone? false
+Price: 45
+Stock: 8
+
+Name: HotSauce
+Calories: 11.0 
+Standalone? false
+Price: 50
+Stock: 8
+
+Name: BarbequeSauce
+Calories: 172.0 
+Standalone? false
+Price: 70
+Stock: 8
+
+Name: CaviarSauce
+Calories: 252.0 
+Standalone? false
+Price: 330
+Stock: 8
+
+Name: JackSauce
+Calories: 10.0 
+Standalone? false
+Price: 10
 Stock: 8
