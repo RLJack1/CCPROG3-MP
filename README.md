@@ -5,6 +5,7 @@
 - run with renzo's code
 
 ### RENZO STATUS CHECK
-- MoneyHandler progress
-- Finished editing MoneyHandler based on comments.
-- todo: finish 30 items and finalize item.java and productDisplay.java
+- Finished Item, MoneyHandler, and ProductDisplay. (Double check with megan for confirmation)
+- Added throw declarations for errors in Vending Machine.
+- Finished 30 items
+- TODO: Make test Script
