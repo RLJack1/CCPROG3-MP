@@ -56,7 +56,7 @@ public class VendingMachine {
 			int sold = s.nextInt();
 			s.nextLine();
 			
-			itemList.add(new Item(name, calories, standalone, price, stock, sold));
+			itemList.add(new Item(name, calories, standalone, price, stock));
 		}
 		
 		s.close();
@@ -197,7 +197,7 @@ public class VendingMachine {
 		}
 	}
     
-	public void displayMenu(VendingMachine vm) {	
+	public void displayMenu(VendingMachine vm) throws FileNotFoundException { //@megan added throw fix based from VSC advisement.	 
 		int userChoice = 0;
 		Scanner input = new Scanner(System.in);
 		
@@ -232,13 +232,13 @@ public class VendingMachine {
 					
 					//Test
 					if(userChoice == 1) {
-						testMenu();
+						testMenu(); //@megan added throw fix based from VSC advisement.
 						System.out.println("Transaction complete. Returning to Features Menu...");
 					}
 					
 					//Maintain
 					else if(userChoice == 2) {
-						maintainMenu();
+						maintainMenu(); //@megan added throw fix based from VSC advisement.
 						System.out.println("Maintenance complete. Returning to Features Menu...");
 					}
 					
@@ -316,9 +316,9 @@ public class VendingMachine {
 		s.close();
     }
 
-    public void testMenu() {
-		/*@renzo call pDisplay.displayOnSale()
-		  @renzo this.selectedItem = pDisplay.userChoice(); */
+    public void testMenu() throws FileNotFoundException {
+		pDisplay.displayOnSale(itemList); //@megan did the display
+		this.selectedItem = pDisplay.userChoice(itemList); //@megan did the display
 		
 		Scanner s = new Scanner(System.in);
 		
@@ -352,7 +352,7 @@ public class VendingMachine {
 		s.close();
     }
 
-    public void maintainMenu() {
+    public void maintainMenu() throws FileNotFoundException {
 		Scanner s = new Scanner(System.in);
 		int userChoice = 0;
 		
@@ -371,8 +371,8 @@ public class VendingMachine {
 			
 			if(userChoice == 1) {
 				System.out.println("Please select the item you would like to restock!");
-				/*@renzo this.selectedItem = pDisplay.userChoice();
-				  contemplating having a minimalist productdisplay for this part idk*/
+				this.selectedItem = pDisplay.userChoice(itemList); //@megan implemented the pDisplay.
+				/*@renzo  contemplating having a minimalist productdisplay for this part idk*/
 				
 				System.out.println("Input amount of stock to add: ");
 				int amountToAdd = s.nextInt();
@@ -391,8 +391,8 @@ public class VendingMachine {
 			
 			else if(userChoice == 2) {
 				System.out.println("Please select the item you would like to re-price!");
-				/*@renzo this.selectedItem = pDisplay.userChoice();
-				  contemplating having a minimalist productdisplay for this part idk*/
+				this.selectedItem = pDisplay.userChoice(itemList);
+				/*@renzo   contemplating having a minimalist productdisplay for this part idk*/
 				
 				System.out.println("Input new price for " + this.selectedItem.getName() + ":");
 				int newPrice = s.nextInt();
