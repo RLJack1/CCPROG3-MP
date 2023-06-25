@@ -10,12 +10,12 @@ public class ProductDisplay {
 
     // String name, double calories, boolean standalone = false, price, int stock;
 
-    public Item userChoice(ArrayList<Item> itemList){
+    public Item userChoice(ArrayList<Item> itemList) {
         Item userItem = null;
-        for(Item item : itemList)
-        {
-            if(item.getName().equals(userItem)){
+        for (Item item : itemList) {
+            if (userItem != null && item.getName().toLowerCase().equals(userItem.getName().toLowerCase())) {
                 userItem = item;
+                break;
             }
         }
         return userItem;

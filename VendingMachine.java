@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
@@ -38,29 +39,52 @@ public class VendingMachine {
 	}
 	
 	public void populateVMHistory() throws FileNotFoundException {
-		File f = new File("VM-History.txt");
-		Scanner s = new Scanner(f);
-		
-		this.machineName = s.nextLine();
-		this.isSpecial = s.nextBoolean();
-		this.lastTotalSales = s.nextInt();
-		this.totalSales = s.nextInt();
-		s.nextLine();
-		
-		while(s.hasNextLine()) {
-			String name = s.nextLine();
-			double calories = s.nextDouble();
-			boolean standalone = s.nextBoolean();
-			int price = s.nextInt();
-			int stock = s.nextInt();
-			int sold = s.nextInt();
-			s.nextLine();
-			
-			itemList.add(new Item(name, calories, standalone, price, stock));
-		}
-		
-		s.close();
-	}
+    try {
+        File f = new File("VM-History.txt");
+        Scanner s = new Scanner(f);
+		double calories = 0;
+		boolean standalone = false;
+		int price = 0;
+		int stock = 0;
+
+        if (s.hasNextLine()) {
+            this.machineName = s.nextLine();
+        }
+        if (s.hasNextBoolean()) {
+            this.isSpecial = s.nextBoolean();
+        }
+        if (s.hasNextInt()) {
+            this.lastTotalSales = s.nextInt();
+        }
+        if (s.hasNextInt()) {
+            this.totalSales = s.nextInt();
+        }
+        s.nextLine();
+
+        while (s.hasNextLine()) {
+            String name = s.nextLine();
+            if (s.hasNextDouble()) {
+                calories = s.nextDouble();
+            }
+            if (s.hasNextBoolean()) {
+                standalone = s.nextBoolean();
+            }
+            if (s.hasNextInt()) {
+            	price = s.nextInt();
+            }
+            if (s.hasNextInt()) {
+                stock = s.nextInt();
+            }
+            //s.nextLine();
+
+            itemList.add(new Item(name, calories, standalone, price, stock));
+        }
+
+        s.close();
+    } catch (NoSuchElementException e) {
+        e.printStackTrace();
+    }
+}
 	
 	public void writeVMHistory() throws FileNotFoundException {
 		PrintWriter p = new PrintWriter("VM-History.txt");
@@ -308,11 +332,14 @@ public class VendingMachine {
 			
 			if(c == 'y')
 				isSpecial = true;
-				
+
 			this.setMachineName(name);
 			this.setIsSpecial(isSpecial);
 		}
 		
+		populateOptionsList(itemList);
+		//pDisplay.displayOnSale(itemList); test to see if it goes into the machien
+
 		s.close();
     }
 
@@ -354,7 +381,7 @@ public class VendingMachine {
 
     public void maintainMenu() throws FileNotFoundException {
 		Scanner s = new Scanner(System.in);
-		int userChoice = 0;
+		int userChoice;
 		
 		do {
 			System.out.print("==============================" +
@@ -476,6 +503,40 @@ public class VendingMachine {
 					
 		userChoice = 0;
 		s.close();
+    }
+
+	public ArrayList<Item> populateOptionsList(ArrayList<Item> itemList){
+        itemList.add(new Item("BriocheBread", 346.0, true, 34, 8));
+        itemList.add(new Item("SesameBread", 140.0, true, 20, 8));
+        itemList.add(new Item("RyeBread", 259.0, true, 48, 8));
+        itemList.add(new Item("WholewheatBread", 265.0, true, 40, 8));
+        itemList.add(new Item("PotatoBread", 266.0, true, 33, 8));
+        itemList.add(new Item("JackBread", 100.0, true, 100, 8));
+        itemList.add(new Item("AngusBeef", 164.0, true, 144, 8));
+        itemList.add(new Item("WagyuBeef", 250.0, true, 795, 8));
+        itemList.add(new Item("TapaBeef", 187.75, true, 56, 8));
+        itemList.add(new Item("CheesedBeef", 373.0, true, 214, 8));
+        itemList.add(new Item("CanadianBacon", 185.0, true, 140, 8));
+        itemList.add(new Item("ChickenSchnitzel", 297.0, true, 175, 8));
+        itemList.add(new Item("SalmonPatty", 208.0, true, 300, 8));
+        itemList.add(new Item("BronzeTurkey", 189.0, true, 185, 8));
+        itemList.add(new Item("BeyondBeef", 210.0, true, 330, 8));
+        itemList.add(new Item("JackBeef", 100.0, true, 100, 8));
+        itemList.add(new Item("WhiteOnions", 40.0, false, 30, 8));
+        itemList.add(new Item("OnionRings", 205.5, false, 85, 8));
+        itemList.add(new Item("TrappistCheese", 355.0, false, 140, 8));
+        itemList.add(new Item("MozzarelaCheese", 140.0, false, 75, 8));
+        itemList.add(new Item("BlueCheese", 177.0, false, 105, 8));
+        itemList.add(new Item("AmericanCheese", 177.0, false, 40, 8));
+        itemList.add(new Item("MeltedButter", 307.5, false, 60, 8));
+        itemList.add(new Item("BeefsteakTomato", 18.0, false, 50, 8));
+        itemList.add(new Item("IcebergLettuce", 3.0, false, 45, 8));
+        itemList.add(new Item("DillPickles", 11.0, false, 45, 8));
+        itemList.add(new Item("HotSauce", 11.0, false, 50, 8));
+        itemList.add(new Item("BarbequeSauce", 172.0, false, 70, 8));
+        itemList.add(new Item("CaviarSauce", 252.0, false, 330, 8));
+        itemList.add(new Item("JackSauce", 10.0, false, 10, 8));
+		return itemList;
     }
 
 	public String getMachineName() {
