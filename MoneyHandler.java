@@ -74,8 +74,15 @@ public class MoneyHandler {
     }
     
     // TODO: create method cashOne(index, numOfDenom) to take out and return a specified denom and number from the vending machine. DONE
-    public int cashOne(int index, int numOfDenom){
+    public int cashOne(int denomination, int numOfDenom){
         int totalCollect = 0;
+        int index = 0;
+
+        for(int i = 0; i < denomList.length; i++){ 
+            if (denomList[i] == denomination){
+                index = i;
+            }
+        }
 
         if (denomStore[index] - numOfDenom >= 0){
             totalCollect += denomStore[index] * numOfDenom;
