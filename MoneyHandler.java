@@ -1,25 +1,31 @@
 import java.util.Scanner;
 
+/** 
+  * Stores and operates on all money inside the vending machine.
+  */
 public class MoneyHandler {
     private int[] denomList = {1000, 500, 200, 100, 50, 20, 10, 5, 1}; // int array to hold denomination values.
     private int[] denomStore = {0, 0, 0, 0, 0, 0, 0, 0, 0}; // int array to hold how many denominations are stored.
 
+	/** 
+      * A constructor that creates an instance of the MoneyHandler object.
+      */
     public MoneyHandler() {
     }
 
     // TODO: displayDenomList() to print the contents of denomList. DONE
     public void displayDenomList(){
         for (int i = 0; i < denomStore.length; i++){
-            System.out.println("P" + denomList[i] + ": " + denomStore[i] + "instances.");
+            System.out.println("P" + denomList[i] + ": " + denomStore[i] + " stored.");
         }
     }
 
     //TODO: inputDenominations() to store user input denominations into the machine. DONE
-    public void inputDenominations() {
-        try (Scanner scanner = new Scanner(System.in)) { 
+    public void inputDenominations(Scanner s) {
+        try { 
             System.out.println("Enter the denominations separated by spaces:");
 
-            String inputLine = scanner.nextLine();
+            String inputLine = s.nextLine();
             String[] denominations = inputLine.split(" ");
 
             for (int i = 0; i < denominations.length; i++) {
@@ -58,34 +64,37 @@ public class MoneyHandler {
     }
 
     // TODO: cashOut(totalDenom) to take out all money from the vending machine. (presumably also store and return how much money was collected, so return int) DONE
-    public int cashOut(){
+    public boolean cashOut(){
         int totalCollect = 0;
+		boolean result = false;
 
+		/*@renzo I didn't implement anything here yet*/
         for (int i = 0; i < denomStore.length; i++){
             totalCollect += denomList[i] * denomStore[i];
             denomStore[i] -= denomStore[i];
         }
 
-        return totalCollect;
+        return result;
     }
     
     // TODO: create method cashOne(index, numOfDenom) to take out and return a specified denom and number from the vending machine. DONE
-    public int cashOne(int denomination, int numOfDenom){
+    public boolean cashOne(int denomination, int numOfDenom){
         int totalCollect = 0;
         int index = 0;
+		boolean result = false;
 
+		/*@renzo also didnt touch this*/
         for(int i = 0; i < denomList.length; i++){ 
             if (denomList[i] == denomination){
                 index = i;
             }
         }
-
         if (denomStore[index] - numOfDenom >= 0){
             totalCollect += denomStore[index] * numOfDenom;
             denomStore[index] -= numOfDenom;
         }
 
-        return totalCollect;
+        return result;
     }
 
     // TODO: create method splitDenom(cashIn) to split inputted cash into denominations and store them into the vending machine. DONE

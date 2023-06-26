@@ -1,14 +1,27 @@
+import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/** 
+  * Makes the initial function calls to start the co-interaction of classes.
+  */
 public class Driver {
 	private VendingMachine vm;
 	
-	public Driver() {}
+	/** 
+      * A constructor that creates an instance of the Driver object.
+      */
+	public Driver() {
+	}
 	
+	/** 
+      * The main method of the program
+	  * @param args Stores Java command-line arguments
+      */
 	public static void main(String[] args) {
 		Driver driver = new Driver ();
 		VendingMachine vm = new VendingMachine();
+		Scanner s = new Scanner(System.in);
 		
 		System.out.println("Loading Vending Machine...");
 			
@@ -21,12 +34,14 @@ public class Driver {
 		}
 		
 		try {
-			vm.displayMenu(vm); 
+			vm.displayMenu(vm, s); 
 			vm.clearFile("VM-History.txt");
 			vm.saveToFile("VM-History.txt");
 		} catch (IOException e) {
 			System.out.println("Oops! An error occurred.");
             e.printStackTrace();
         }
+		
+		s.close();
 	}
 }

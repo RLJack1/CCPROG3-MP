@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 
+/** 
+  * Contains all menu-calling and file management methods.
+  * Is central to the operations and functionality of the whole vending machine program.
+  */
 public class VendingMachine {
     private String machineName;
     private boolean isSpecial;
@@ -101,6 +105,7 @@ public class VendingMachine {
         itemList.add(new Item("TapaBeef", 187.75, true, 56, 8));
         itemList.add(new Item("CheesedBeef", 373.0, true, 214, 8));
         itemList.add(new Item("CanadianBacon", 185.0, true, 140, 8));
+		/*@renzo ChickenSchnitzel is 1-2 characters too long :")*/
         itemList.add(new Item("ChickenSchnitzel", 297.0, true, 175, 8));
         itemList.add(new Item("SalmonPatty", 208.0, true, 300, 8));
         itemList.add(new Item("BronzeTurkey", 189.0, true, 185, 8));
@@ -231,6 +236,7 @@ public class VendingMachine {
 			}
 			
 			s.close();
+			
 		} catch (IOException e) {
 			System.out.println("Oops! An error occurred.");
             e.printStackTrace();
@@ -258,107 +264,90 @@ public class VendingMachine {
 		}
 	}
     
-	public void displayMenu(VendingMachine vm) throws FileNotFoundException {
-		Scanner s = new Scanner(System.in);
-		
-		while(true) {
+	public void displayMenu(VendingMachine vm, Scanner s) throws FileNotFoundException {
+		do {		
 			System.out.print("==============================\n" +
-							 "Welcome to The Founding Fathers' Vending Pantry!\n" + 
-							 "(1) Build a Vending Machine\n" +
-							 "(2) Test a Vending Machine\n" +
-							 "(3) Leave and Exit\n" +
-							 "Select: ");
-							 
-			//s.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-			//input = s.nextLine().trim();
-			//userChoice = Integer.parseInt(input);
-			//s.nextLine();
+						 "Welcome to The Founding Fathers' Vending Pantry!\n" + 
+						 "(1) Build a Vending Machine\n" +
+						 "(2) Test a Vending Machine\n" +
+						 "(3) Leave and Exit\n" +
+						 "Select: ");
+			userChoice = s.nextInt();
 			
-			try {
-				userChoice = s.nextInt();
-			} catch (NumberFormatException e) {
-				userChoice = 3;
-			}
-		
-			switch(userChoice) {
 			//Create VM
-				case 1:
-					try {
-						createMenu();
-					} catch (FileNotFoundException e) {
-						System.out.println("Oops! An error occurred.");
-						e.printStackTrace();
-					}
-					break;
-				
-				//Test or Maintain
-				case 2:
-					do {
-						System.out.print("==============================\n" +
-									 "Vending Machine Features:\n" + 
-									 "(1) Test Current Vending Machine Features\n" +
-									 "(2) Perform Maintenance Features\n" +
-									 "(3) Return to Main Menu\n" +
-									 "Select: ");
-						if(s.hasNextInt()) {
-							userChoice = s.nextInt();
-							s.nextLine();
-						}
-						
-						//Test
-						if(userChoice == 1) {
-							testMenu();
-							System.out.println("Transaction complete. Returning to Features Menu...");
-						}
-						
-						//Maintain
-						else if(userChoice == 2) {
-							maintainMenu();
-							System.out.println("Maintenance complete. Returning to Features Menu...");
-						}
-						
-						//Return to main menu
-						else if(userChoice == 3) {
-							System.out.println("Returning to Main Menu...");
-						}
-						
-						//Error catch
-						else {
-							System.out.println("Invalid input. Please try again.");
-							userChoice = 0;
-						}
-						
-					} while (userChoice != 3);
-					
-					userChoice = 0;
-					break;
-				
-				//Exit
-				case 3:
-					System.out.println("Thank you for coming!\n" + "Exiting program...");
-					setLastTotalSales(getTotalSales());
-					s.close();
-					break;
-				
-				//Error catch
-				default:
-					System.out.println("Invalid input. Please try again.");
-					System.out.println("==============================");
-					userChoice = 0;
+			if(userChoice == 1) {
+				createMenu(s);
+				System.out.println("Returning to Main Menu...");
 			}
-		}
+			
+			//Test or Maintain
+			else if(userChoice == 2) {
+				do {
+					System.out.print("==============================\n" +
+								 "Vending Machine Features:\n" + 
+								 "(1) Test Current Vending Machine Features\n" +
+								 "(2) Perform Maintenance Features\n" +
+								 "(3) Return to Main Menu\n" +
+								 "Select: ");
+					userChoice = s.nextInt();
+					s.nextLine();
+					
+					//Test
+					if(userChoice == 1) {
+						testMenu(s);
+						System.out.println("Transaction complete. Returning to Features Menu...");
+					}
+					
+					//Maintain
+					else if(userChoice == 2) {
+						maintainMenu(s);
+						System.out.println("Maintenance complete. Returning to Features Menu...");
+					}
+					
+					//Return to main menu
+					else if(userChoice == 3) {
+						System.out.println("Returning to Main Menu...");
+					}
+					
+					//Error catch
+					else {
+						System.out.println("Invalid input. Please try again.");
+						userChoice = 0;
+					}
+					
+				} while (userChoice != 3);
+				
+				userChoice = 0;
+			}
+			
+			//Exit
+			else if(userChoice == 3) {
+				System.out.println("Thank you for coming!\n" + "Exiting program...");
+				setLastTotalSales(getTotalSales());
+			}
+			
+			//Error catch
+			else {
+				System.out.println("Invalid input. Please try again.");
+				System.out.println("==============================");
+				userChoice = 0;
+			}
+			
+		} while(userChoice != 3);
 	}
 
-    public void createMenu() throws FileNotFoundException {
+    public void createMenu(Scanner s) throws FileNotFoundException {
         System.out.print("Do you want to obliterate this Vending Machine and create a new one? Y/N\n" + "Input: ");
-		Scanner s = new Scanner(System.in);
-		char c = '\0';
+		//userChoice = s.nextInt();
+		//char c = 'n';
 		
-		if(s.hasNextLine()) {
-			c = s.nextLine().charAt(0);
-			c = Character.toLowerCase(c);
-		}
+		String input = s.nextLine();
+		char c = 'n';
+		
+		if (!input.isEmpty())
+			c = Character.toLowerCase(input.charAt(0));
+		
+		s.nextLine();
 		
 		//For clearing
 		if(c == 'y') {
@@ -370,15 +359,10 @@ public class VendingMachine {
 			this.setCashIn(0);
 			this.setSelectedItem(null);
 			
-			System.out.println("Name your Vending Machine: ");
-			String name = "Vending Machine";
-			
-			if(s.hasNextLine()) {
-				name = s.nextLine();
-				s.nextLine();
-			}
-			
-			System.out.print("Great! Do you want " + name + " to be a Special Vending Machine? Y/N\n" + "Input: ");
+			System.out.println("Name your Vending Machine!\n" + "Input: ");
+			String name = s.nextLine();
+				
+			System.out.print("\nGreat! Do you want " + name + " to be a Special Vending Machine? Y/N\n" + "Input: ");
 			if(s.hasNextLine()) {
 				c = s.next().charAt(0);
 				c = Character.toLowerCase(c);
@@ -387,62 +371,67 @@ public class VendingMachine {
 			
 			boolean isSpecial = false;
 			
-			if(c == 'y')
+			if(c == 'y') {
 				isSpecial = true;
+			}
 
 			this.setMachineName(name);
 			this.setIsSpecial(isSpecial);
+			System.out.println("Alright! " + name + " is all set up!");
+			
+			/*@renzo we need to add a bit here that lets the user set up the items of the vm*/
 		}
 		
-		populateOptionsList(itemList);
-
-		s.close();
+		else if(c == 'n')
+			System.out.println("Canceling vending machine set up...");
     }
 
-    public void testMenu() throws FileNotFoundException {
-		this.selectedItem = pDisplay.displayOnSale(itemList); 
-		Scanner s = new Scanner(System.in);
+    public void testMenu(Scanner s) throws FileNotFoundException {
+		this.selectedItem = pDisplay.displayOnSale(itemList, s); 
 		
-		System.out.println("Please put money into the Vending Machine: ");
-		if(s.hasNextLine()) {
-			this.cashIn = s.nextInt();
-			s.nextLine();
-		}
-		
-		System.out.print("Proceed with transaction? Type Y to proceed and N to cancel. Y/N\n" + "Input: ");
-		char c = '\0';
-		
-		if(s.hasNextLine()) {
-			c = s.next().charAt(0);
-			c = Character.toLowerCase(c);
-			s.nextLine();
-		}
-		
-		
-		if(c == 'y') {
-			pDispenser.releaseItem(this.isSpecial, this.selectedItem);
-			System.out.println("Calculating change...");
-		 	int price = 0;
-			price = selectedItem.getPrice();
-			mh.checkChange(this.cashIn, price);
+		if(!(this.selectedItem == null)) {
+			/*@renzo you can change this to your method!*/
+			System.out.println("Please put money into the Vending Machine: ");
+			if(s.hasNextLine()) {
+				this.cashIn = s.nextInt();
+				s.nextLine();
+			}
 			
-			pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
-			this.writeTransacHistory(this.selectedItem, this.cashIn);
-			this.totalSales = setTotalSales(price);
-			this.cashIn = 0;
+			System.out.print("Proceed with transaction? Type Y to proceed and N to cancel. Y/N\n" + "Input: ");
+			char c = '\0';
+			
+			if(s.hasNextLine()) {
+				c = s.next().charAt(0);
+				c = Character.toLowerCase(c);
+				s.nextLine();
+			}
+			
+			if(c == 'y') {
+				pDispenser.releaseItem(this.isSpecial, this.selectedItem);
+				System.out.println("Calculating change...");
+				int price = 0;
+				price = selectedItem.getPrice();
+				mh.checkChange(this.cashIn, price);
+				
+				pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
+				this.writeTransacHistory(this.selectedItem, this.cashIn);
+				this.totalSales = setTotalSales(price);
+				this.cashIn = 0;
+			}
+			
+			else {
+				System.out.println("Canceling transaction...");
+				System.out.println("Releasing full change...");
+				this.cashIn = 0;
+			}
 		}
 		
 		else {
-			System.out.println("Canceling transaction...");
-			System.out.println("Releasing full change...");
-			this.cashIn = 0;
+			System.out.println("Oops! An error occured.");
 		}
-		
-		s.close();
     }
 
-    public void maintainMenu() throws FileNotFoundException {
-		Scanner s = new Scanner(System.in);
+    public void maintainMenu(Scanner s) throws FileNotFoundException {
 		
 		do {
 			System.out.print("==============================\n" +
@@ -463,7 +452,7 @@ public class VendingMachine {
 			
 			if(userChoice == 1) {
 				System.out.println("Please select the item you would like to restock!");
-				this.selectedItem = pDisplay.userChoice(itemList); 
+				this.selectedItem = pDisplay.displayOnSale(itemList, s); 
 				
 				System.out.println("Input amount of stock to add: ");
 				int amountToAdd = s.nextInt();
@@ -482,7 +471,7 @@ public class VendingMachine {
 			
 			else if(userChoice == 2) {
 				System.out.println("Please select the item you would like to re-price!");
-				this.selectedItem = pDisplay.userChoice(itemList);
+				this.selectedItem = pDisplay.userChoice(itemList, s);
 				
 				System.out.println("Input new price for " + this.selectedItem.getName() + ":");
 				int newPrice = this.selectedItem.getPrice();
@@ -500,6 +489,7 @@ public class VendingMachine {
 								   "Type N for cash out specific bills.\n" +
 								   "Select: ");
 				char c = '\0';
+				boolean success = false;
 				
 				if(s.hasNextLine()) {
 					c = s.next().charAt(0);
@@ -509,15 +499,19 @@ public class VendingMachine {
 				
 				if(c == 'y') {
 					int moneyTotal = mh.getTotal();
-					mh.cashOut();
+					success = mh.cashOut();
+					
+					if(success)
 					System.out.println("Successfully cashed out " + moneyTotal + " pesos." + this.getMachineName() + " is now cash-empty.");
+				
+					else
+						System.out.println("Oops! An error occurred.");
 				}
 				
 				else {
 					mh.displayDenomList();
 					
-					System.out.print("Which bill would you like to cash out?\n" +
-									   "Bill value: ");
+					System.out.print("Which bill would you like to cash out?\n" + "Bill value: ");
 					
 					int bill = 0;
 					int amount = 0;
@@ -529,15 +523,14 @@ public class VendingMachine {
 					
 					int index = mh.getIndex(bill);
 					
-					System.out.print("How many " + bill + " bills would you like to take?\n" +
-									   "Amount: ");
+					System.out.print("How many " + bill + " bills would you like to take?\n" + "Amount: ");
 					
 					if(s.hasNextInt()) {
 						amount = s.nextInt();
 						s.nextLine();
 					}
 					
-					boolean success = mh.cashOne(index, amount) == 0;
+					success = mh.cashOne(index, amount);
 					
 					if(success) {
 						System.out.println("Cashing out " + amount + " " + bill + " bills...");
@@ -553,8 +546,7 @@ public class VendingMachine {
 			else if(userChoice == 4) {
 				mh.displayDenomList();
 					
-				System.out.print("Which bill would you like to replenish?\n" +
-								   "Bill value: ");
+				System.out.print("Which bill would you like to replenish?\n" + "Bill value: ");
 				
 				int bill = 0;
 				int amount = 0;
@@ -566,8 +558,7 @@ public class VendingMachine {
 				
 				int index = mh.getIndex(bill);
 				
-				System.out.print("How many " + bill + " bills would you like to add?\n" +
-								   "Amount: ");
+				System.out.print("How many " + bill + " bills would you like to add?\n" + "Amount: ");
 				
 				if(s.hasNextInt()) {
 					amount = s.nextInt();
@@ -600,7 +591,6 @@ public class VendingMachine {
 		} while(userChoice != 7);
 					
 		userChoice = 0;
-		s.close();
     }
 
 	public String getMachineName() {
