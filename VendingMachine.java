@@ -619,12 +619,12 @@ public class VendingMachine {
 		return this.cashIn;
 	}
 	
-	public int getLastTotalSales() {
-		return this.lastTotalSales;
-	}
-	
 	public int getTotalSales() {
 		return this.totalSales;
+	}
+	
+	public int getLastTotalSales() {
+		return this.lastTotalSales;
 	}
 	
 	public Item getSelectedItem() {
