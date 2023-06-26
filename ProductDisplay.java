@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class ProductDisplay {
-    
+
     public Item userChoice(ArrayList<Item> itemList) {
         Item userItem = null;
         for (Item item : itemList) {
@@ -17,9 +17,12 @@ public class ProductDisplay {
         System.out.println("Items on Sale:\tName\t Calories\tPrice\tstock");
         Item toBuy = new Item(null, 0, false, 0, 0);
         
-        for(Item item : itemList)
+        for(Item item : itemList) 
         {
-            System.out.println("\t\t\t" + item.getName() + "\t"  + item.getCalories() + "\t" + item.getPrice()  + "\t" + item.getStock());
+            if(item.getStock() != 0)
+                System.out.println("\t\t\t" + item.getName() + "\t"  + item.getCalories() + "\t" + item.getPrice()  + "\t" + item.getStock());
+            else
+                System.out.println("\t\t\t " + item.getName() + "is SOLD OUT.");
         }
 
         toBuy = userChoice(itemList);
