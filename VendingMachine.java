@@ -229,7 +229,7 @@ public class VendingMachine {
 			System.out.print("Welcome to The Founding Fathers' Vending Pantry!\n" + 
 							 "(1) Build a Vending Machine\n" +
 							 "(2) Test a Vending Machine\n" +
-							 "(3) Leave and Exit" +
+							 "(3) Leave and Exit\n" +
 							 "Select: ");
 			userChoice = Integer.parseInt(input.nextLine());
 
@@ -246,11 +246,11 @@ public class VendingMachine {
 			//Test or Maintain
 			else if(userChoice == 2) {
 				do {
-					System.out.print("==============================" +
+					System.out.print("==============================\n" +
 								 "Vending Machine Features:\n" + 
 								 "(1) Test Current Vending Machine Features\n" +
 								 "(2) Perform Maintenance Features\n" +
-								 "(3) Return to Main Menu" +
+								 "(3) Return to Main Menu\n" +
 								 "Select: ");
 					userChoice = input.nextInt();
 					
@@ -384,7 +384,7 @@ public class VendingMachine {
 		int userChoice;
 		
 		do {
-			System.out.print("==============================" +
+			System.out.print("==============================\n" +
 							 "Maintenance Menu:\n" + 
 							 "(1) Restock Items\n" +
 							 "(2) Change Item Price\n" +
