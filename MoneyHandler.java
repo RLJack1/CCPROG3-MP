@@ -1,7 +1,9 @@
+import java.util.Scanner;
+
 public class MoneyHandler {
     private int[] denomList = {1000, 500, 200, 100, 50, 20, 10, 5, 1}; // int array to hold denomination values.
     private int[] denomStore = {0, 0, 0, 0, 0, 0, 0, 0, 0}; // int array to hold how many denominations are stored.
-    //private int totalDenom;
+    //private int totalDenom; @megan what's this for again huhuhuh
 
     public MoneyHandler()
     {
@@ -14,6 +16,35 @@ public class MoneyHandler {
             System.out.println("P" + denomList[i] + ": " + denomStore[i] + "instances.");
         }
     }
+
+    //TODO: inputDenominations() to store user input denominations into the machine. DONE
+    public void inputDenominations() {
+        try (Scanner scanner = new Scanner(System.in)) { //@megan inputted try-catch based on VSC prompt
+            System.out.println("Enter the denominations separated by spaces:");
+
+            String inputLine = scanner.nextLine();
+            String[] denominations = inputLine.split(" ");
+
+            for (int i = 0; i < denominations.length; i++) {
+                switch(Integer.parseInt(denominations[i])){
+                    case 1000 -> denomStore[0]++;
+                    case 500 -> denomStore[1]++;
+                    case 200 -> denomStore[2]++;
+                    case 100 -> denomStore[3]++;
+                    case 50 -> denomStore[4]++;
+                    case 20 -> denomStore[5]++;
+                    case 10 -> denomStore[6]++;
+                    case 5 -> denomStore[7]++;
+                    case 1 -> denomStore[8]++;
+                }
+            }
+        } catch (NumberFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println("Denominations inputted successfully!");
+    }
+
 
     // TODO: checkEnoughChange(cashIn, itemPrice) logic checks if there is enough change in the VM to dispense change. DONE
     public boolean checkEnoughChange(int cashIn, int itemPrice){
@@ -46,7 +77,7 @@ public class MoneyHandler {
     public int cashOne(int index, int numOfDenom){
         int totalCollect = 0;
 
-        if (denomStore[index] - numOfDenom < 0){
+        if (denomStore[index] - numOfDenom >= 0){
             totalCollect += denomStore[index] * numOfDenom;
             denomStore[index] -= numOfDenom;
         }
@@ -132,7 +163,7 @@ public class MoneyHandler {
     public int[] getChange(int[] availDenom){
         return availDenom;
     }
-
+}
     // I removed the following methods because their processes can be done by the new methods.
 
     // public boolean addDenom(int denom, int amountToAdd) {
@@ -154,4 +185,3 @@ public class MoneyHandler {
     //         return true;
     //     }
     // }
-}
