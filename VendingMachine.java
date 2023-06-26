@@ -277,7 +277,6 @@ public class VendingMachine {
 			
 			try {
 				userChoice = s.nextInt();
-				run++;
 			} catch (NumberFormatException e) {
 				userChoice = 3;
 			}

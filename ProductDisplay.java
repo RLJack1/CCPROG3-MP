@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 public class ProductDisplay {
 
+	public ProductDisplay() {
+	}
+
     public Item userChoice(ArrayList<Item> itemList) {
         Item userItem = null;
         Scanner s = new Scanner(System.in);
