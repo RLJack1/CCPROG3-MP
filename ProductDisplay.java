@@ -1,15 +1,23 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ProductDisplay {
 
     public Item userChoice(ArrayList<Item> itemList) {
         Item userItem = null;
+        Scanner s = new Scanner(System.in);
+        String itemInput = s.nextLine();
+        itemInput.toLowerCase();
+
         for (Item item : itemList) {
-            if (userItem != null && item.getName().toLowerCase().equals(userItem.getName().toLowerCase())) {
+            if (itemInput != null && item.getName().toLowerCase().equals(itemInput)) {
                 userItem = item;
                 break;
             }
         }
+
+        s.close();
+
         return userItem;
     }
 
