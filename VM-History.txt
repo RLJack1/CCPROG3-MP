@@ -1,29 +1,83 @@
 Flaking Fritters Vending Machine
 false
-125
 378
+378
+
+
+0.0
+false
+0
+0
 
 Brioche Buns
 346.0
-true
+false
+24
+8
+
+
+346.0
+false
+24
+8
+
+
+346.0
+false
 24
 8
 
 Sesame Buns
 140.0
-true
+false
+9
+8
+
+
+140.0
+false
+9
+8
+
+
+140.0
+false
 9
 8
 
 Angus Beef
 164.0
-true
+false
+144
+8
+
+
+164.0
+false
+144
+8
+
+
+164.0
+false
 144
 8
 
 Wagyu Beef
 250.0
-true
+false
+795
+8
+
+
+250.0
+false
+795
+8
+
+
+250.0
+false
 795
 8
 
@@ -33,13 +87,49 @@ false
 30
 8
 
+
+40.0
+false
+30
+8
+
+
+40.0
+false
+30
+8
+
 Melted Butter
 717.0
 false
-86 
+86
+8
+
+
+717.0
+false
+86
+8
+
+
+717.0
+false
+86
 8
 
 Beefsteak Tomato
+18.0
+false
+50
+8
+
+
+18.0
+false
+50
+8
+
+
 18.0
 false
 50
@@ -50,3 +140,4 @@ Iceberg Lettuce
 false
 44
 8
+
