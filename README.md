@@ -5,7 +5,4 @@
 - run with renzo's code
 
 ### RENZO STATUS CHECK
-- Finished Item, MoneyHandler, and ProductDisplay. (Double check with megan for confirmation)
-- Added throw declarations for errors in Vending Machine.
-- Finished 30 items
-- TODO: Make test Script
+- TODO: Make test Script and debug based on megan's findings
