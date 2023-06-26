@@ -10,6 +10,7 @@ public class VendingMachine {
     private String machineName;
     private boolean isSpecial;
 	private int cashIn;
+	private int userChoice;
 	private int totalSales;
 	private int lastTotalSales;
 	private Item selectedItem;
@@ -22,6 +23,7 @@ public class VendingMachine {
 		this.machineName = null;
 		this.isSpecial = false;
 		this.cashIn = 0;
+		this.userChoice = 0;
 		this.totalSales = 0;
 		this.lastTotalSales = 0;
 		this.selectedItem = null;
@@ -32,6 +34,7 @@ public class VendingMachine {
 		this.machineName = machineName;
 		this.isSpecial = isSpecial;
 		this.cashIn = 0;
+		this.userChoice = 0;
 		this.totalSales = 0;
 		this.lastTotalSales = 0;
 		this.selectedItem = null;
@@ -39,52 +42,86 @@ public class VendingMachine {
 	}
 	
 	public void populateVMHistory() throws FileNotFoundException {
-    try {
-        File f = new File("VM-History.txt");
-        Scanner s = new Scanner(f);
-		double calories = 0;
-		boolean standalone = false;
-		int price = 0;
-		int stock = 0;
+		try {
+			File f = new File("VM-History.txt");
+			Scanner s = new Scanner(f);
+			double calories = 0;
+			boolean standalone = false;
+			int price = 0;
+			int stock = 0;
 
-        if (s.hasNextLine()) {
-            this.machineName = s.nextLine();
-        }
-        if (s.hasNextBoolean()) {
-            this.isSpecial = s.nextBoolean();
-        }
-        if (s.hasNextInt()) {
-            this.lastTotalSales = s.nextInt();
-        }
-        if (s.hasNextInt()) {
-            this.totalSales = s.nextInt();
-        }
-        s.nextLine();
+			if (s.hasNextLine()) {
+				this.machineName = s.nextLine();
+			}
+			if (s.hasNextBoolean()) {
+				this.isSpecial = s.nextBoolean();
+			}
+			if (s.hasNextInt()) {
+				this.lastTotalSales = s.nextInt();
+			}
+			if (s.hasNextInt()) {
+				this.totalSales = s.nextInt();
+			}
+			s.nextLine();
 
-        while (s.hasNextLine()) {
-            String name = s.nextLine();
-            if (s.hasNextDouble()) {
-                calories = s.nextDouble();
-            }
-            if (s.hasNextBoolean()) {
-                standalone = s.nextBoolean();
-            }
-            if (s.hasNextInt()) {
-            	price = s.nextInt();
-            }
-            if (s.hasNextInt()) {
-                stock = s.nextInt();
-            }
-            //s.nextLine();
+			while (s.hasNextLine()) {
+				String name = s.nextLine();
+				if (s.hasNextDouble()) {
+					calories = s.nextDouble();
+				}
+				if (s.hasNextBoolean()) {
+					standalone = s.nextBoolean();
+				}
+				if (s.hasNextInt()) {
+					price = s.nextInt();
+				}
+				if (s.hasNextInt()) {
+					stock = s.nextInt();
+				}
+				//s.nextLine();
 
-            itemList.add(new Item(name, calories, standalone, price, stock));
-        }
+				itemList.add(new Item(name, calories, standalone, price, stock));
+			}
 
-        s.close();
-    } catch (NoSuchElementException e) {
-        e.printStackTrace();
+			s.close();
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public ArrayList<Item> populateOptionsList(ArrayList<Item> itemList){
+        itemList.add(new Item("BriocheBread", 346.0, true, 34, 8));
+        itemList.add(new Item("SesameBread", 140.0, true, 20, 8));
+        itemList.add(new Item("RyeBread", 259.0, true, 48, 8));
+        itemList.add(new Item("WholewheatBread", 265.0, true, 40, 8));
+        itemList.add(new Item("PotatoBread", 266.0, true, 33, 8));
+        itemList.add(new Item("JackBread", 100.0, true, 100, 8));
+        itemList.add(new Item("AngusBeef", 164.0, true, 144, 8));
+        itemList.add(new Item("WagyuBeef", 250.0, true, 795, 8));
+        itemList.add(new Item("TapaBeef", 187.75, true, 56, 8));
+        itemList.add(new Item("CheesedBeef", 373.0, true, 214, 8));
+        itemList.add(new Item("CanadianBacon", 185.0, true, 140, 8));
+        itemList.add(new Item("ChickenSchnitzel", 297.0, true, 175, 8));
+        itemList.add(new Item("SalmonPatty", 208.0, true, 300, 8));
+        itemList.add(new Item("BronzeTurkey", 189.0, true, 185, 8));
+        itemList.add(new Item("BeyondBeef", 210.0, true, 330, 8));
+        itemList.add(new Item("JackBeef", 100.0, true, 100, 8));
+        itemList.add(new Item("WhiteOnions", 40.0, false, 30, 8));
+        itemList.add(new Item("OnionRings", 205.5, false, 85, 8));
+        itemList.add(new Item("TrappistCheese", 355.0, false, 140, 8));
+        itemList.add(new Item("MozzarelaCheese", 140.0, false, 75, 8));
+        itemList.add(new Item("BlueCheese", 177.0, false, 105, 8));
+        itemList.add(new Item("AmericanCheese", 177.0, false, 40, 8));
+        itemList.add(new Item("MeltedButter", 307.5, false, 60, 8));
+        itemList.add(new Item("BeefsteakTomato", 18.0, false, 50, 8));
+        itemList.add(new Item("IcebergLettuce", 3.0, false, 45, 8));
+        itemList.add(new Item("DillPickles", 11.0, false, 45, 8));
+        itemList.add(new Item("HotSauce", 11.0, false, 50, 8));
+        itemList.add(new Item("BarbequeSauce", 172.0, false, 70, 8));
+        itemList.add(new Item("CaviarSauce", 252.0, false, 330, 8));
+        itemList.add(new Item("JackSauce", 10.0, false, 10, 8));
+		return itemList;
     }
-}
 	
 	public void writeVMHistory() throws FileNotFoundException {
 		PrintWriter p = new PrintWriter("VM-History.txt");
@@ -167,9 +204,9 @@ public class VendingMachine {
 			int numItems = 0;
 			
 			while(s.hasNextLine()) {
-					for(Item item : itemList) {
-						numItems++;
-					}
+				for(Item item : itemList) {
+					numItems++;
+				}
 				
 				System.out.println("=======RESTOCK#" + count + "========");
 					
@@ -222,93 +259,107 @@ public class VendingMachine {
 	}
     
 	public void displayMenu(VendingMachine vm) throws FileNotFoundException {
-		int userChoice = 0;
-		Scanner input = new Scanner(System.in);
+		Scanner s = new Scanner(System.in);
 		
-		do {
-			System.out.print("Welcome to The Founding Fathers' Vending Pantry!\n" + 
+		while(true) {
+			System.out.print("==============================\n" +
+							 "Welcome to The Founding Fathers' Vending Pantry!\n" + 
 							 "(1) Build a Vending Machine\n" +
 							 "(2) Test a Vending Machine\n" +
 							 "(3) Leave and Exit\n" +
 							 "Select: ");
-			userChoice = Integer.parseInt(input.nextLine());
+							 
+			//s.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
+			//input = s.nextLine().trim();
+			//userChoice = Integer.parseInt(input);
+			//s.nextLine();
+			
+			try {
+				userChoice = s.nextInt();
+				run++;
+			} catch (NumberFormatException e) {
+				userChoice = 3;
+			}
+		
+			switch(userChoice) {
 			//Create VM
-			if(userChoice == 1) {
-				try {
-					createMenu();
-				} catch (FileNotFoundException e) {
-					System.out.println("Oops! An error occurred.");
-					e.printStackTrace();
-				}
-			}
-			
-			//Test or Maintain
-			else if(userChoice == 2) {
-				do {
-					System.out.print("==============================\n" +
-								 "Vending Machine Features:\n" + 
-								 "(1) Test Current Vending Machine Features\n" +
-								 "(2) Perform Maintenance Features\n" +
-								 "(3) Return to Main Menu\n" +
-								 "Select: ");
-					userChoice = input.nextInt();
-					
-					//Test
-					if(userChoice == 1) {
-						testMenu();
-						System.out.println("Transaction complete. Returning to Features Menu...");
+				case 1:
+					try {
+						createMenu();
+					} catch (FileNotFoundException e) {
+						System.out.println("Oops! An error occurred.");
+						e.printStackTrace();
 					}
-					
-					//Maintain
-					else if(userChoice == 2) {
-						maintainMenu();
-						System.out.println("Maintenance complete. Returning to Features Menu...");
-					}
-					
-					//Return to main menu
-					else if(userChoice == 3) {
-						System.out.println("Returning to Main Menu...");
-						System.out.println("==============================");
-					}
-					
-					//Error catch
-					else {
-						System.out.println("Invalid input. Please try again.");
-						userChoice = 0;
-					}
-					
-				} while (userChoice != 3);
+					break;
 				
-				userChoice = 0;
+				//Test or Maintain
+				case 2:
+					do {
+						System.out.print("==============================\n" +
+									 "Vending Machine Features:\n" + 
+									 "(1) Test Current Vending Machine Features\n" +
+									 "(2) Perform Maintenance Features\n" +
+									 "(3) Return to Main Menu\n" +
+									 "Select: ");
+						if(s.hasNextInt()) {
+							userChoice = s.nextInt();
+							s.nextLine();
+						}
+						
+						//Test
+						if(userChoice == 1) {
+							testMenu();
+							System.out.println("Transaction complete. Returning to Features Menu...");
+						}
+						
+						//Maintain
+						else if(userChoice == 2) {
+							maintainMenu();
+							System.out.println("Maintenance complete. Returning to Features Menu...");
+						}
+						
+						//Return to main menu
+						else if(userChoice == 3) {
+							System.out.println("Returning to Main Menu...");
+						}
+						
+						//Error catch
+						else {
+							System.out.println("Invalid input. Please try again.");
+							userChoice = 0;
+						}
+						
+					} while (userChoice != 3);
+					
+					userChoice = 0;
+					break;
+				
+				//Exit
+				case 3:
+					System.out.println("Thank you for coming!\n" + "Exiting program...");
+					setLastTotalSales(getTotalSales());
+					s.close();
+					break;
+				
+				//Error catch
+				default:
+					System.out.println("Invalid input. Please try again.");
+					System.out.println("==============================");
+					userChoice = 0;
 			}
-			
-			//Exit
-			else if(userChoice == 3) {
-				System.out.println("Thank you for coming!\n" +
-								   "Exiting program...");
-			}
-			
-			//Error catch
-			else {
-				System.out.println("Invalid input. Please try again.");
-				System.out.println("==============================");
-				userChoice = 0;
-			}
-			
-		} while(userChoice != 3);
-		
-		setLastTotalSales(getTotalSales());
-		
-		input.close();
+		}
 	}
 
     public void createMenu() throws FileNotFoundException {
-        System.out.println("Do you want to obliterate this Vending Machine and create a new one?\n" + "Y/N");
+        System.out.print("Do you want to obliterate this Vending Machine and create a new one? Y/N\n" + "Input: ");
 		Scanner s = new Scanner(System.in);
-		char c = s.next().charAt(0);
-		c = Character.toLowerCase(c);
-		s.nextLine();
+		char c = '\0';
+		
+		if(s.hasNextLine()) {
+			c = s.nextLine().charAt(0);
+			c = Character.toLowerCase(c);
+		}
 		
 		//For clearing
 		if(c == 'y') {
@@ -321,12 +372,19 @@ public class VendingMachine {
 			this.setSelectedItem(null);
 			
 			System.out.println("Name your Vending Machine: ");
-			String name = s.nextLine();
-			System.out.println("Great! Do you want " + name + " to be a Special Vending Machine?" +
-							   "Y/N: ");
-			c = s.next().charAt(0);
-			c = Character.toLowerCase(c);
-			s.nextLine();
+			String name = "Vending Machine";
+			
+			if(s.hasNextLine()) {
+				name = s.nextLine();
+				s.nextLine();
+			}
+			
+			System.out.print("Great! Do you want " + name + " to be a Special Vending Machine? Y/N\n" + "Input: ");
+			if(s.hasNextLine()) {
+				c = s.next().charAt(0);
+				c = Character.toLowerCase(c);
+				s.nextLine();
+			}
 			
 			boolean isSpecial = false;
 			
@@ -338,24 +396,29 @@ public class VendingMachine {
 		}
 		
 		populateOptionsList(itemList);
-		//pDisplay.displayOnSale(itemList); test to see if it goes into the machien
 
 		s.close();
     }
 
     public void testMenu() throws FileNotFoundException {
-		pDisplay.displayOnSale(itemList);
-		this.selectedItem = pDisplay.userChoice(itemList); 
-		
+		this.selectedItem = pDisplay.displayOnSale(itemList); 
 		Scanner s = new Scanner(System.in);
 		
 		System.out.println("Please put money into the Vending Machine: ");
-		this.cashIn = s.nextInt();
+		if(s.hasNextLine()) {
+			this.cashIn = s.nextInt();
+			s.nextLine();
+		}
 		
-		System.out.println("Proceed with transaction? Type Y to proceed and N to cancel.\n" + "Y/N: ");
-		char c = s.next().charAt(0);
-		c = Character.toLowerCase(c);
-		s.nextLine();
+		System.out.print("Proceed with transaction? Type Y to proceed and N to cancel. Y/N\n" + "Input: ");
+		char c = '\0';
+		
+		if(s.hasNextLine()) {
+			c = s.next().charAt(0);
+			c = Character.toLowerCase(c);
+			s.nextLine();
+		}
+		
 		
 		if(c == 'y') {
 			pDispenser.releaseItem(this.isSpecial, this.selectedItem);
@@ -381,7 +444,6 @@ public class VendingMachine {
 
     public void maintainMenu() throws FileNotFoundException {
 		Scanner s = new Scanner(System.in);
-		int userChoice;
 		
 		do {
 			System.out.print("==============================\n" +
@@ -394,7 +456,11 @@ public class VendingMachine {
 							 "(6) Print Restock History\n" +
 							 "(7) Exit Maintenance Menu\n" +
 							 "Select: ");
-			userChoice = s.nextInt();
+			
+			if(s.hasNextInt()) {
+				userChoice = s.nextInt();
+				s.nextLine();
+			}			
 			
 			if(userChoice == 1) {
 				System.out.println("Please select the item you would like to restock!");
@@ -420,41 +486,62 @@ public class VendingMachine {
 				this.selectedItem = pDisplay.userChoice(itemList);
 				
 				System.out.println("Input new price for " + this.selectedItem.getName() + ":");
-				int newPrice = s.nextInt();
+				int newPrice = this.selectedItem.getPrice();
+				
+				if(s.hasNextInt())
+					newPrice = s.nextInt();
+				
 				this.selectedItem.setPrice(newPrice);
 				System.out.println("New price successfully set!");
 			}
 			
 			else if(userChoice == 3) {
-				System.out.println("Cash out all money? Or only specific bills?\n" +
+				System.out.print("Cash out all money? Or only specific bills?\n" +
 								   "Type Y for cash out all money and\n" +
 								   "Type N for cash out specific bills.\n" +
 								   "Select: ");
-				char c = s.next().charAt(0);
-				c = Character.toLowerCase(c);
-				s.nextLine();
+				char c = '\0';
+				
+				if(s.hasNextLine()) {
+					c = s.next().charAt(0);
+					c = Character.toLowerCase(c);
+					s.nextLine();
+				}
 				
 				if(c == 'y') {
 					int moneyTotal = mh.getTotal();
 					mh.cashOut();
-					System.out.println("Successfully cashed out " + moneyTotal + "pesos." + this.getMachineName() + " is now cash-empty.");
+					System.out.println("Successfully cashed out " + moneyTotal + " pesos." + this.getMachineName() + " is now cash-empty.");
 				}
 				
 				else {
 					mh.displayDenomList();
 					
-					System.out.println("Which bill would you like to cash out?\n" +
+					System.out.print("Which bill would you like to cash out?\n" +
 									   "Bill value: ");
-					int bill = s.nextInt();
+					
+					int bill = 0;
+					int amount = 0;
+					
+					if(s.hasNextInt()) {
+						bill = s.nextInt();
+						s.nextLine();
+					}
+					
 					int index = mh.getIndex(bill);
-					System.out.println("How many " + bill + "bills would you like to take?\n" +
+					
+					System.out.print("How many " + bill + " bills would you like to take?\n" +
 									   "Amount: ");
-					int amount = s.nextInt();
+					
+					if(s.hasNextInt()) {
+						amount = s.nextInt();
+						s.nextLine();
+					}
 					
 					boolean success = mh.cashOne(index, amount) == 0;
 					
 					if(success) {
-						System.out.println("Cashing out " + amount + " " + bill + "bills...");
+						System.out.println("Cashing out " + amount + " " + bill + " bills...");
 						System.out.println("Cash out success!");
 					}
 					
@@ -467,16 +554,29 @@ public class VendingMachine {
 			else if(userChoice == 4) {
 				mh.displayDenomList();
 					
-				System.out.println("Which bill would you like to replenish?\n" +
+				System.out.print("Which bill would you like to replenish?\n" +
 								   "Bill value: ");
-				int bill = s.nextInt();
+				
+				int bill = 0;
+				int amount = 0;
+				
+				if(s.hasNextInt()) {
+					bill = s.nextInt();
+					s.nextLine();
+				}
+				
 				int index = mh.getIndex(bill);
-				System.out.println("How many " + bill + "bills would you like to add?\n" +
+				
+				System.out.print("How many " + bill + " bills would you like to add?\n" +
 								   "Amount: ");
-				int amount = s.nextInt();
+				
+				if(s.hasNextInt()) {
+					amount = s.nextInt();
+					s.nextLine();
+				}
 				
 				mh.refillOne(index, amount);
-				System.out.println("Replenishing " + amount + " " + bill + "bills...");
+				System.out.println("Replenishing " + amount + " " + bill + " bills...");
 				System.out.println("Replenish success!");
 			}
 			
@@ -490,7 +590,6 @@ public class VendingMachine {
 			
 			else if(userChoice == 7) {
 				System.out.println("Returning to Features Menu...");
-				System.out.println("==============================");
 			}
 			
 			else {
@@ -503,40 +602,6 @@ public class VendingMachine {
 					
 		userChoice = 0;
 		s.close();
-    }
-
-	public ArrayList<Item> populateOptionsList(ArrayList<Item> itemList){
-        itemList.add(new Item("BriocheBread", 346.0, true, 34, 8));
-        itemList.add(new Item("SesameBread", 140.0, true, 20, 8));
-        itemList.add(new Item("RyeBread", 259.0, true, 48, 8));
-        itemList.add(new Item("WholewheatBread", 265.0, true, 40, 8));
-        itemList.add(new Item("PotatoBread", 266.0, true, 33, 8));
-        itemList.add(new Item("JackBread", 100.0, true, 100, 8));
-        itemList.add(new Item("AngusBeef", 164.0, true, 144, 8));
-        itemList.add(new Item("WagyuBeef", 250.0, true, 795, 8));
-        itemList.add(new Item("TapaBeef", 187.75, true, 56, 8));
-        itemList.add(new Item("CheesedBeef", 373.0, true, 214, 8));
-        itemList.add(new Item("CanadianBacon", 185.0, true, 140, 8));
-        itemList.add(new Item("ChickenSchnitzel", 297.0, true, 175, 8));
-        itemList.add(new Item("SalmonPatty", 208.0, true, 300, 8));
-        itemList.add(new Item("BronzeTurkey", 189.0, true, 185, 8));
-        itemList.add(new Item("BeyondBeef", 210.0, true, 330, 8));
-        itemList.add(new Item("JackBeef", 100.0, true, 100, 8));
-        itemList.add(new Item("WhiteOnions", 40.0, false, 30, 8));
-        itemList.add(new Item("OnionRings", 205.5, false, 85, 8));
-        itemList.add(new Item("TrappistCheese", 355.0, false, 140, 8));
-        itemList.add(new Item("MozzarelaCheese", 140.0, false, 75, 8));
-        itemList.add(new Item("BlueCheese", 177.0, false, 105, 8));
-        itemList.add(new Item("AmericanCheese", 177.0, false, 40, 8));
-        itemList.add(new Item("MeltedButter", 307.5, false, 60, 8));
-        itemList.add(new Item("BeefsteakTomato", 18.0, false, 50, 8));
-        itemList.add(new Item("IcebergLettuce", 3.0, false, 45, 8));
-        itemList.add(new Item("DillPickles", 11.0, false, 45, 8));
-        itemList.add(new Item("HotSauce", 11.0, false, 50, 8));
-        itemList.add(new Item("BarbequeSauce", 172.0, false, 70, 8));
-        itemList.add(new Item("CaviarSauce", 252.0, false, 330, 8));
-        itemList.add(new Item("JackSauce", 10.0, false, 10, 8));
-		return itemList;
     }
 
 	public String getMachineName() {

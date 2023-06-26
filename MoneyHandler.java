@@ -3,11 +3,8 @@ import java.util.Scanner;
 public class MoneyHandler {
     private int[] denomList = {1000, 500, 200, 100, 50, 20, 10, 5, 1}; // int array to hold denomination values.
     private int[] denomStore = {0, 0, 0, 0, 0, 0, 0, 0, 0}; // int array to hold how many denominations are stored.
-    //private int totalDenom; @megan what's this for again huhuhuh
 
-    public MoneyHandler()
-    {
-        // constructor.
+    public MoneyHandler() {
     }
 
     // TODO: displayDenomList() to print the contents of denomList. DONE
@@ -19,7 +16,7 @@ public class MoneyHandler {
 
     //TODO: inputDenominations() to store user input denominations into the machine. DONE
     public void inputDenominations() {
-        try (Scanner scanner = new Scanner(System.in)) { //@megan inputted try-catch based on VSC prompt
+        try (Scanner scanner = new Scanner(System.in)) { 
             System.out.println("Enter the denominations separated by spaces:");
 
             String inputLine = scanner.nextLine();
@@ -39,7 +36,6 @@ public class MoneyHandler {
                 }
             }
         } catch (NumberFormatException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         System.out.println("Denominations inputted successfully!");
@@ -171,24 +167,3 @@ public class MoneyHandler {
         return availDenom;
     }
 }
-    // I removed the following methods because their processes can be done by the new methods.
-
-    // public boolean addDenom(int denom, int amountToAdd) {
-    //     if (denom + amountToAdd > 30)
-    //         return false;
-    //     else
-    //     {
-    //         denom += amountToAdd;
-    //         return true;
-    //     }
-    // }
-
-    // public boolean minusDenom(int denom, int amountToMinus) {
-    //     if (denom - amountToMinus < 0)
-    //         return false;
-    //     else
-    //     {
-    //         denom -= amountToMinus;
-    //         return true;
-    //     }
-    // }

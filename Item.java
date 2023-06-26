@@ -1,5 +1,3 @@
-//import java.util.ArrayList; @megan probably don't need this here anymore.
-
 public class Item {
     private final String name;
     private final double calories;
@@ -7,9 +5,7 @@ public class Item {
     private int price;
     private int stock;
 
-    // private ArrayList<Item> optionsList = new ArrayList<Item>();  @megan probably don't need this here anymore.
-
-    public Item(String name, double calories, boolean standalone, int price, int stock){ // Constructor for Item.
+    public Item(String name, double calories, boolean standalone, int price, int stock){ 
         this.name = name;
         this.calories = calories;
         this.price = price;
