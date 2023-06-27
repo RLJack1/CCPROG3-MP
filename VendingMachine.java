@@ -23,6 +23,9 @@ public class VendingMachine {
 	ProductDisplay pDisplay = new ProductDisplay();
 	ProductDispenser pDispenser = new ProductDispenser();
 	
+	/** 
+	  * A constructor that creates a vending machine instance with null parameters
+	  */
 	public VendingMachine() {
 		this.machineName = null;
 		this.isSpecial = false;
@@ -34,6 +37,9 @@ public class VendingMachine {
 		itemList = new ArrayList<Item>();
 	}
 	
+	/** 
+	  * A constructor that creates a vending machine instance given its name and special status
+	  */
 	public VendingMachine(String machineName, boolean isSpecial) {
 		this.machineName = machineName;
 		this.isSpecial = isSpecial;
@@ -45,6 +51,9 @@ public class VendingMachine {
 		itemList = new ArrayList<Item>();
 	}
 	
+	/** 
+	  * Loads the previously saved vending machine data into the current program 
+	  */
 	public void populateVMHistory() throws FileNotFoundException {
 		try {
 			File f = new File("VM-History.txt");
@@ -93,6 +102,11 @@ public class VendingMachine {
 		}
 	}
 
+	/** 
+	  * Loads item presets into the list of items passed in
+	  * @param itemList	The destination of loaded items
+	  * @return The fully loaded list of items
+	  */
 	public ArrayList<Item> populateOptionsList(ArrayList<Item> itemList){
         itemList.add(new Item("BriocheBread", 346.0, true, 34, 8));
         itemList.add(new Item("SesameBread", 140.0, true, 20, 8));
@@ -128,6 +142,9 @@ public class VendingMachine {
 		return itemList;
     }
 	
+	/** 
+	  * Saves all vending machine data into a file
+	  */
 	public void writeVMHistory() throws FileNotFoundException {
 		PrintWriter p = new PrintWriter("VM-History.txt");
 		
@@ -150,6 +167,11 @@ public class VendingMachine {
 		p.close();
 	}
 	
+	/** 
+	  * Saves the details of one transaction into a file
+	  * @param item		The item dispensed during the transaction
+	  * @param cashIn	The amount of money the user paid during the transaction
+	  */
 	public void writeTransacHistory(Item item, int cashIn) throws FileNotFoundException {
 		try {
 			PrintWriter p = new PrintWriter("Transac-History.txt"); 
@@ -170,6 +192,11 @@ public class VendingMachine {
         }	
 	}
 
+	/** 
+	  * Saves the details of a restock into a file
+	  * @param amountToAdd 	The amount of stock added to the item
+	  * @param newStock 	The new total stock of the item for sale
+	  */
 	public void saveRestock(int amountToAdd, int newStock) throws FileNotFoundException {
 		try {
 			PrintWriter p = new PrintWriter("Restock-History.txt"); 
@@ -195,6 +222,9 @@ public class VendingMachine {
         }
 	}
 	
+	/** 
+	  * Displays all restock history details from the savefile
+	  */
 	public void printRestockHistory() throws FileNotFoundException {
 		try {
 			File f = new File("Restock-History.txt");
@@ -243,6 +273,10 @@ public class VendingMachine {
         }
 	}
 	
+	/** 
+	  * Clears all data of a file, given its filename
+	  * @param filename 	The name of the file to be cleared
+	  */
 	public void clearFile(String filename) throws FileNotFoundException {
         try {
 			PrintWriter p = new PrintWriter(filename);
@@ -254,6 +288,9 @@ public class VendingMachine {
         }
 	}
 	
+	/** 
+	  * Saves vending machine history to a file
+	  */
 	public void saveToFile(String filename) throws FileNotFoundException { 
 		try {
 			this.writeVMHistory();
