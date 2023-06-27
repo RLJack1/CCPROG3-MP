@@ -19,6 +19,7 @@ public class VendingMachine {
 	private int lastTotalSales;
 	private Item selectedItem;
 	private ArrayList<Item> itemList;
+	private ArrayList<Item> predefinedList;
 	MoneyHandler mh = new MoneyHandler();
 	ProductDisplay pDisplay = new ProductDisplay();
 	ProductDispenser pDispenser = new ProductDispenser();
@@ -35,6 +36,7 @@ public class VendingMachine {
 		this.lastTotalSales = 0;
 		this.selectedItem = null;
 		itemList = new ArrayList<Item>();
+		predefinedList = new ArrayList<Item>();
 	}
 	
 	/** 
@@ -49,6 +51,7 @@ public class VendingMachine {
 		this.lastTotalSales = 0;
 		this.selectedItem = null;
 		itemList = new ArrayList<Item>();
+		predefinedList = new ArrayList<Item>();
 	}
 	
 	/** 
@@ -104,42 +107,43 @@ public class VendingMachine {
 
 	/** 
 	  * Loads item presets into the list of items passed in
-	  * @param itemList	The destination of loaded items
+	  * @param predefinedList	The destination of loaded items 
 	  * @return The fully loaded list of items
 	  */
-	public ArrayList<Item> populateOptionsList(ArrayList<Item> itemList){
-        itemList.add(new Item("BriocheBread", 346.0, true, 34, 8));
-        itemList.add(new Item("SesameBread", 140.0, true, 20, 8));
-        itemList.add(new Item("RyeBread", 259.0, true, 48, 8));
-        itemList.add(new Item("WholewheatBread", 265.0, true, 40, 8));
-        itemList.add(new Item("PotatoBread", 266.0, true, 33, 8));
-        itemList.add(new Item("JackBread", 100.0, true, 100, 8));
-        itemList.add(new Item("AngusBeef", 164.0, true, 144, 8));
-        itemList.add(new Item("WagyuBeef", 250.0, true, 795, 8));
-        itemList.add(new Item("TapaBeef", 187.75, true, 56, 8));
-        itemList.add(new Item("CheesedBeef", 373.0, true, 214, 8));
-        itemList.add(new Item("CanadianBacon", 185.0, true, 140, 8));
-		/*@renzo ChickenSchnitzel is 1-2 characters too long :")*/
-        itemList.add(new Item("ChickenSchnitzel", 297.0, true, 175, 8));
-        itemList.add(new Item("SalmonPatty", 208.0, true, 300, 8));
-        itemList.add(new Item("BronzeTurkey", 189.0, true, 185, 8));
-        itemList.add(new Item("BeyondBeef", 210.0, true, 330, 8));
-        itemList.add(new Item("JackBeef", 100.0, true, 100, 8));
-        itemList.add(new Item("WhiteOnions", 40.0, false, 30, 8));
-        itemList.add(new Item("OnionRings", 205.5, false, 85, 8));
-        itemList.add(new Item("TrappistCheese", 355.0, false, 140, 8));
-        itemList.add(new Item("MozzarelaCheese", 140.0, false, 75, 8));
-        itemList.add(new Item("BlueCheese", 177.0, false, 105, 8));
-        itemList.add(new Item("AmericanCheese", 177.0, false, 40, 8));
-        itemList.add(new Item("MeltedButter", 307.5, false, 60, 8));
-        itemList.add(new Item("BeefsteakTomato", 18.0, false, 50, 8));
-        itemList.add(new Item("IcebergLettuce", 3.0, false, 45, 8));
-        itemList.add(new Item("DillPickles", 11.0, false, 45, 8));
-        itemList.add(new Item("HotSauce", 11.0, false, 50, 8));
-        itemList.add(new Item("BarbequeSauce", 172.0, false, 70, 8));
-        itemList.add(new Item("CaviarSauce", 252.0, false, 330, 8));
-        itemList.add(new Item("JackSauce", 10.0, false, 10, 8));
-		return itemList;
+	  //@megan changed predefinedList to predefinedList
+	public ArrayList<Item> populateOptionsList(ArrayList<Item> predefinedList){
+        predefinedList.add(new Item("BriocheBread", 346.0, true, 34, 8));
+        predefinedList.add(new Item("SesameBread", 140.0, true, 20, 8));
+        predefinedList.add(new Item("RyeBread", 259.0, true, 48, 8));
+        predefinedList.add(new Item("WholewheatBread", 265.0, true, 40, 8));
+        predefinedList.add(new Item("PotatoBread", 266.0, true, 33, 8));
+        predefinedList.add(new Item("JackBread", 100.0, true, 100, 8));
+        predefinedList.add(new Item("AngusBeef", 164.0, true, 144, 8));
+        predefinedList.add(new Item("WagyuBeef", 250.0, true, 795, 8));
+        predefinedList.add(new Item("TapaBeef", 187.75, true, 56, 8));
+        predefinedList.add(new Item("CheesedBeef", 373.0, true, 214, 8));
+        predefinedList.add(new Item("CanadianBacon", 185.0, true, 140, 8));
+		/*@renzo ChickenSchnitzel is 1-2 characters too long :") @megan DONE*/
+        predefinedList.add(new Item("WienerSchnitzel", 297.0, true, 175, 8));
+        predefinedList.add(new Item("SalmonPatty", 208.0, true, 300, 8));
+        predefinedList.add(new Item("BronzeTurkey", 189.0, true, 185, 8));
+        predefinedList.add(new Item("BeyondBeef", 210.0, true, 330, 8));
+        predefinedList.add(new Item("JackBeef", 100.0, true, 100, 8));
+        predefinedList.add(new Item("WhiteOnions", 40.0, false, 30, 8));
+        predefinedList.add(new Item("OnionRings", 205.5, false, 85, 8));
+        predefinedList.add(new Item("TrappistCheese", 355.0, false, 140, 8));
+        predefinedList.add(new Item("MozzarelaCheese", 140.0, false, 75, 8));
+        predefinedList.add(new Item("BlueCheese", 177.0, false, 105, 8));
+        predefinedList.add(new Item("AmericanCheese", 177.0, false, 40, 8));
+        predefinedList.add(new Item("MeltedButter", 307.5, false, 60, 8));
+        predefinedList.add(new Item("BeefsteakTomato", 18.0, false, 50, 8));
+        predefinedList.add(new Item("IcebergLettuce", 3.0, false, 45, 8));
+        predefinedList.add(new Item("DillPickles", 11.0, false, 45, 8));
+        predefinedList.add(new Item("HotSauce", 11.0, false, 50, 8));
+        predefinedList.add(new Item("BarbequeSauce", 172.0, false, 70, 8));
+        predefinedList.add(new Item("CaviarSauce", 252.0, false, 330, 8));
+        predefinedList.add(new Item("JackSauce", 10.0, false, 10, 8));
+		return predefinedList;
     }
 	
 	/** 
@@ -379,7 +383,7 @@ public class VendingMachine {
 		//char c = 'n';
 		
 		String input = s.nextLine();
-		char c = 'n';
+		char c = '\0';
 		
 		if (!input.isEmpty())
 			c = Character.toLowerCase(input.charAt(0));
@@ -387,7 +391,7 @@ public class VendingMachine {
 		s.nextLine();
 		
 		//For clearing
-		if(c == 'y') {
+		if(c == 'n') {
 			this.clearFile("VM-History.txt");
 			this.clearFile("Transac-History.txt");
 			this.clearFile("Restock-History.txt");
@@ -414,12 +418,17 @@ public class VendingMachine {
 
 			this.setMachineName(name);
 			this.setIsSpecial(isSpecial);
+
+			pDisplay.populateItemList(predefinedList, s);
+			//@megan already done ^^^
+
 			System.out.println("Alright! " + name + " is all set up!");
 			
 			/*@renzo we need to add a bit here that lets the user set up the items of the vm*/
 		}
 		
 		else if(c == 'n')
+			System.out.println("@megan dk why but even if i enter \'y\' it still cancels"); //@megan error here
 			System.out.println("Canceling vending machine set up...");
     }
 
