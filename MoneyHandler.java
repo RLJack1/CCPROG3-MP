@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class MoneyHandler {
     private int[] denomList = {1000, 500, 200, 100, 50, 20, 10, 5, 1}; // int array to hold denomination values.
     private int[] denomStore, userDenom = {0, 0, 0, 0, 0, 0, 0, 0, 0}; // int array to hold how many denominations are stored.
-    //@megan made a third array userDenom to temporarily store the user's inputs.
+	
 	/** 
       * A constructor that creates an instance of the MoneyHandler object.
       */
@@ -68,9 +68,8 @@ public class MoneyHandler {
 		boolean result = false;
 
         for (int i = 0; i < denomStore.length; i++){
- //         int totalCollect = denomList[i] * denomStore[i]; @megan i feel like this isn't needed anymore
             denomStore[i] -= denomStore[i];
-            result = true; //@ megan method will return true if cashOut was successful.
+            result = true;
         }
 
         return result;
@@ -78,7 +77,6 @@ public class MoneyHandler {
     
     // TODO: create method cashOne(index, numOfDenom) to take out and return a specified denom and number from the vending machine. DONE
     public boolean cashOne(int denomination, int numOfDenom){
- //      int totalCollect = 0; @megan i feel like this isn't needed anymore
         int index = 0;
 		boolean result = false;
 
@@ -89,13 +87,13 @@ public class MoneyHandler {
         }
         if (denomStore[index] - numOfDenom >= 0){
             denomStore[index] -= numOfDenom;
-            result = true;  //@ megan method will return true if cashOne was successful.
+            result = true;
         }
 
         return result;
     }
 
-    // TODO: create method splitDenom(cashIn) to split inputted cash into denominations and store them into the vending machine. DONE
+    /* TODO: create method splitDenom(cashIn) to split inputted cash into denominations and store them into the vending machine. DONE
     public void splitDenom(int cashIn)
     { // @megan i feel like this won't be needed anymore since cash is inputed seperately by bills
         for(int i = 0; i < denomStore.length; i++){
@@ -104,7 +102,7 @@ public class MoneyHandler {
                 cashIn %= denomList[i];
             }
         }
-    }
+    }*/
 
     // TODO: create method refillOne(index, denomAdd) to replenish a specified denom given their number. DONE
     public void refillOne(int denomination, int denomAdd){

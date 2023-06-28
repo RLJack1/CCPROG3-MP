@@ -38,35 +38,46 @@ public class ProductDisplay {
         return userItem;
     }
 
-    //@megan made the function that will have the user input items.
-    public ArrayList<Item> populateItemList(ArrayList<Item> predefinedItems, Scanner s){
-        ArrayList<Item> userItemList = new ArrayList<>();
-        String input = null;
+    public ArrayList<Item> populateItemList(ArrayList<Item> predefinedItems, Scanner s) {
+		ArrayList<Item> userItemList = new ArrayList<Item>();
+		String input = null;
+		boolean exists = false;
 
-        for(Item item : predefinedItems){
-            System.out.println("\t\t\t" + item.getName() + "\t"  + item.getCalories() + "\t" + item.getPrice()  + "\t" + item.getStock());
-        }
+		for (Item item : predefinedItems) {
+			System.out.println("\t\t\t" + item.getName() + "\t" + item.getCalories() + "\t" + item.getPrice() + "\t" + item.getStock());
+		}
 
-        do 
-        {
-            System.out.print("Input the name of the item or type \"done\": ");
-            input = s.nextLine();
-            input.toLowerCase();
+		do {
+			System.out.print("Input the name of the item or type \"done\": ");
+			input = s.nextLine();
+			input = input.toLowerCase();
 
-            for(Item item : predefinedItems){
-                if (input.equals(item.getName().toLowerCase())){ 
-                    userItemList.add(item);
-                    System.out.println(item.getName() + " successfully added!");
-                }
-                else if (input.equals("done"))
-                    System.out.println("Item stocking done.");
-                else
-                    System.out.println("Error input, please try again.");
-            }
-        } while(!(input.toLowerCase().equals("done")));
+			exists = false;
 
-        return userItemList;
-    }
+			for (Item item : userItemList) {
+				if (item.getName().toLowerCase().equals(input))
+					exists = true;
+			}
+
+			if (!exists) {
+				if (input.equals("done")) {
+					System.out.println("Item stocking done.");
+				} else {
+					System.out.println("Error input, please try again.");
+				}
+			} else {
+				for (Item item : predefinedItems) {
+					if (input.equals(item.getName().toLowerCase())) {
+						userItemList.add(item);
+						System.out.println(item.getName() + " successfully added!");
+					}
+				}
+			}
+			
+		} while (!input.equals("done"));
+
+		return userItemList;
+	}
 
 	/** 
 	  * Displays all items from this list and returns the user's selected input

@@ -110,7 +110,6 @@ public class VendingMachine {
 	  * @param predefinedList	The destination of loaded items 
 	  * @return The fully loaded list of items
 	  */
-	  //@megan changed predefinedList to predefinedList
 	public ArrayList<Item> populateOptionsList(ArrayList<Item> predefinedList){
         predefinedList.add(new Item("BriocheBread", 346.0, true, 34, 8));
         predefinedList.add(new Item("SesameBread", 140.0, true, 20, 8));
@@ -123,7 +122,6 @@ public class VendingMachine {
         predefinedList.add(new Item("TapaBeef", 187.75, true, 56, 8));
         predefinedList.add(new Item("CheesedBeef", 373.0, true, 214, 8));
         predefinedList.add(new Item("CanadianBacon", 185.0, true, 140, 8));
-		/*@renzo ChickenSchnitzel is 1-2 characters too long :") @megan DONE*/
         predefinedList.add(new Item("WienerSchnitzel", 297.0, true, 175, 8));
         predefinedList.add(new Item("SalmonPatty", 208.0, true, 300, 8));
         predefinedList.add(new Item("BronzeTurkey", 189.0, true, 185, 8));
@@ -279,7 +277,7 @@ public class VendingMachine {
 	
 	/** 
 	  * Clears all data of a file, given its filename
-	  * @param filename 	The name of the file to be cleared
+	  * @param filename The name of the file to be cleared
 	  */
 	public void clearFile(String filename) throws FileNotFoundException {
         try {
@@ -379,19 +377,12 @@ public class VendingMachine {
 
     public void createMenu(Scanner s) throws FileNotFoundException {
         System.out.print("Do you want to obliterate this Vending Machine and create a new one? Y/N\n" + "Input: ");
-		//userChoice = s.nextInt();
-		//char c = 'n';
-		
-		String input = s.nextLine();
-		char c = '\0';
-		
-		if (!input.isEmpty())
-			c = Character.toLowerCase(input.charAt(0));
-		
+		char c = s.next().charAt(0);
+		c = Character.toLowerCase(c);
 		s.nextLine();
 		
 		//For clearing
-		if(c == 'n') {
+		if(c == 'y') {
 			this.clearFile("VM-History.txt");
 			this.clearFile("Transac-History.txt");
 			this.clearFile("Restock-History.txt");
@@ -420,16 +411,15 @@ public class VendingMachine {
 			this.setIsSpecial(isSpecial);
 
 			pDisplay.populateItemList(predefinedList, s);
-			//@megan already done ^^^
 
 			System.out.println("Alright! " + name + " is all set up!");
 			
 			/*@renzo we need to add a bit here that lets the user set up the items of the vm*/
 		}
 		
-		else if(c == 'n')
-			System.out.println("@megan dk why but even if i enter \'y\' it still cancels"); //@megan error here
+		else if(c == 'n') 
 			System.out.println("Canceling vending machine set up...");
+	
     }
 
     public void testMenu(Scanner s) throws FileNotFoundException {
