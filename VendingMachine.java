@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.io.FileWriter;
+import java.io.OutputStreamWriter;
+import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
 
 /** 
   * Contains all menu-calling and file management methods.
@@ -80,12 +83,14 @@ public class VendingMachine {
 			while(s.hasNextLine()) {
 				name = s.nextLine();
 				calories = Double.parseDouble(s.nextLine());
-				standalone = Boolean.parseBoolean(s.nextLine());
+				standalone = Boolean.parseBoolean(s.nextLine());				
 				price = Integer.parseInt(s.nextLine());
 				stock = Integer.parseInt(s.nextLine());
 				
 				itemList.add(new Item(name, calories, standalone, price, stock));
 			}
+			
+			/*implement money save*/
 			
 			s.close();	
 		} catch (NoSuchElementException e) {
@@ -115,6 +120,8 @@ public class VendingMachine {
         predefinedList.add(new Item("BronzeTurkey", 189.0, true, 185, 8));
         predefinedList.add(new Item("BeyondBeef", 210.0, true, 330, 8));
         predefinedList.add(new Item("JackBeef", 100.0, true, 100, 8));
+		
+		/*
         predefinedList.add(new Item("WhiteOnions", 40.0, false, 30, 8));
         predefinedList.add(new Item("OnionRings", 205.5, false, 85, 8));
         predefinedList.add(new Item("TrappistCheese", 355.0, false, 140, 8));
@@ -128,7 +135,7 @@ public class VendingMachine {
         predefinedList.add(new Item("HotSauce", 11.0, false, 50, 8));
         predefinedList.add(new Item("BarbequeSauce", 172.0, false, 70, 8));
         predefinedList.add(new Item("CaviarSauce", 252.0, false, 330, 8));
-        predefinedList.add(new Item("JackSauce", 10.0, false, 10, 8));
+        predefinedList.add(new Item("JackSauce", 10.0, false, 10, 8));*/
 		return predefinedList;
     }
 	
@@ -139,20 +146,22 @@ public class VendingMachine {
 		BufferedWriter b = null;
 		
 		try {
-			b = new BufferedWriter(new FileWriter(new File("VM-History.txt")));
+			b = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("VM-History.txt"), StandardCharsets.UTF_8));
 		
 			b.write(this.machineName + "\n");
 			b.write(this.isSpecial + "\n");
 			b.write(this.lastTotalSales + "\n");
-			b.write(this.totalSales + "\n");
+			b.write(this.totalSales + "");
 			
 			for(Item item : this.itemList) {
 				b.write("\n" + item.getName() + "\n");
 				b.write(item.getCalories() + "\n");
 				b.write(item.getStandalone() + "\n");
-				b.write(item.getPrice()  + "\n");
-				b.write(item.getStock());
+				b.write(item.getPrice() + "\n");
+				b.write(item.getStock() + "");
 			}
+			
+			/*implement money save*/
 			
 			b.close();
 		} catch(IOException e) {
@@ -171,10 +180,10 @@ public class VendingMachine {
 		
 		try {
 			b = new BufferedWriter(new FileWriter(new File("Transac-History.txt"), true));
-			b.write(name + "\n");
+			b.write("\nname" + "\n");
 			b.write(qty + "\n");
 			b.write(this.lastTotalSales + "\n");
-			b.write(this.totalSales + "\n");
+			b.write(this.totalSales + "");
 			b.close();
 		} catch (IOException e) {
 			System.out.println("Oops! An error occurred.");
@@ -198,7 +207,7 @@ public class VendingMachine {
 				b.write(item.getStock()  + "\n");
 			}
 			
-			b.write("999");
+			b.write("---");
 			
 			for(Item item : this.itemList) {
 				b.write(item.getName() + "\n");
@@ -222,25 +231,27 @@ public class VendingMachine {
 				
 			String name = null;
 			int qty = 0;
+			int size = this.itemList.size();
 			
-			System.out.println("=======STARTING INVENTORY========");
+			System.out.println("==============STARTING INVENTORY===============" +
+							   "\nItem Name\t\tQuantity");
 			
-			while(s.hasNextLine()) {
+			while(size > 0) {
 				name = s.nextLine();
-				qty = s.nextInt();
-				
-				System.out.println("Item Name: " + name + "\tQuantity: " + qty + "\n");
+				qty = Integer.parseInt(s.nextLine());
+				System.out.println(name + "\t\t" + qty + "\n");
+				size--;
 			}
 			
-			s.nextInt();
+			s.nextLine();
 			
-			System.out.println("\n========ENDING INVENTORY=========");
+			System.out.println("===============ENDING INVENTORY================" +
+							   "\nItem Name\t\tQuantity");
 			
 			while(s.hasNextLine()) {
 				name = s.nextLine();
-				qty = s.nextInt();
-				
-				System.out.println("Item Name: " + name + "\tQuantity: " + qty + "\n");
+				qty = Integer.parseInt(s.nextLine());
+				System.out.println(name + "\t\t" + qty + "\n");
 			}
 			
 			s.close();
@@ -266,21 +277,13 @@ public class VendingMachine {
         }
 	}
 	
-	/** 
-	  * Saves vending machine history to a file
-	  
-	public void saveToFile(String filename) throws FileNotFoundException { 
-		try {
-			this.writeVMHistory();
-			System.out.println("History saved to: " + filename);
-		} catch (FileNotFoundException e) {
-			System.out.println("Error saving to: " + filename);
-			e.printStackTrace();
-		}
-	} we dont call this anymore*/ 
-    
 	public void displayMenu(VendingMachine vm, Scanner s) throws FileNotFoundException {
 		do {		
+			
+			if(this.itemList == null) {
+				System.out.println("No Vending Machine history was found.");
+			}
+			
 			System.out.print("==============================\n" +
 						 "Welcome to The Founding Fathers' Vending Pantry!\n" + 
 						 "(1) Build a Vending Machine\n" +
@@ -344,7 +347,6 @@ public class VendingMachine {
 			//Error catch
 			else {
 				System.out.println("Invalid input. Please try again.");
-				System.out.println("==============================");
 				userChoice = 0;
 			}
 			
@@ -352,17 +354,22 @@ public class VendingMachine {
 	}
 
     public void createMenu(Scanner s) throws FileNotFoundException {
-        System.out.print("Do you want to obliterate this Vending Machine and create a new one? Y/N\n" + "Input: ");
-		char c = s.next().charAt(0);
-		c = Character.toLowerCase(c);
-		s.nextLine();
+		if(this.itemList != null) {
+			System.out.print("Do you want to obliterate this Vending Machine and create a new one? Y/N\n" + "Input: ");
+			char c = s.next().charAt(0);
+			c = Character.toLowerCase(c);
+			s.nextLine();
+		}
+		
+		else if(this.itemList == null) {
+			c = 'y';
+		}
 		
 		//For clearing
 		if(c == 'y') {
 			this.clearFile("VM-History.txt");
 			this.clearFile("Transac-History.txt");
 			this.clearFile("Restock-History.txt");
-
 			this.clearItemList();
 			this.setCashIn(0);
 			this.setSelectedItem(null);
@@ -386,15 +393,13 @@ public class VendingMachine {
 			this.setMachineName(name);
 			this.setIsSpecial(isSpecial);
 
-			populateOptionsList(predefinedList); //@megan this method initializes the predefined items.
+			populateOptionsList(predefinedList); 
 
-			itemList = pDisplay.populateItemList(predefinedList, s); //@megan this method asks for items and returns the VM's itemList.
+			itemList = pDisplay.populateItemList(predefinedList, s); 
 
 			mh.initialMoneys();
-
-			System.out.println("Alright! " + name + " is all set up!");
 			
-			/*@renzo we need to add a bit here that lets the user set up the items of the vm*/
+			System.out.println("Alright! " + name + " is all set up!");
 		}
 		
 		else if(c == 'n') 
@@ -406,12 +411,6 @@ public class VendingMachine {
 		this.selectedItem = pDisplay.displayOnSale(itemList, s); 
 		
 		if(!(this.selectedItem == null)) {
-			/*@renzo you can change this to your method!*/
-			// System.out.println("Please put money into the Vending Machine: ");
-			// if(s.hasNextLine()) {
-			// 	this.cashIn = s.nextInt();
-			// 	s.nextLine();
-			// }
 			mh.inputDenominations(s); // User will input bills and store into 
 			
 			System.out.print("Proceed with transaction? Type Y to proceed and N to cancel. Y/N\n" + "Input: ");
@@ -423,13 +422,12 @@ public class VendingMachine {
 				s.nextLine();
 			}
 			
-			if(c == 'y') { // @megan implemented logic that will check change if the transaction is proceeded with.
+			if(c == 'y') { 
 				int price = selectedItem.getPrice();
 				boolean doesChange = mh.checkChange(this.cashIn, price);
 				if (doesChange){
 					pDispenser.releaseItem(this.isSpecial, this.selectedItem);
 					System.out.println("Calculating change...");
-					//price = 0;
 					price = selectedItem.getPrice();
 					mh.checkChange(this.cashIn, price);
 
@@ -440,16 +438,6 @@ public class VendingMachine {
 				}
 				else
 					System.out.println("Sorry! This Vending Machine doesn't have enough change to dispense :((");
-				// pDispenser.releaseItem(this.isSpecial, this.selectedItem);
-				// System.out.println("Calculating change...");
-				// int price = 0;
-				// price = selectedItem.getPrice();
-				// mh.checkChange(this.cashIn, price);
-				
-				// pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
-				// this.writeTransacHistory(this.selectedItem, this.cashIn);
-				// this.totalSales = setTotalSales(price);
-				// this.cashIn = 0;
 			}
 			
 			else {
@@ -653,7 +641,6 @@ public class VendingMachine {
 			
 			else {
 				System.out.println("Invalid input. Please try again.");
-				System.out.println("==============================");
 				userChoice = 0;
 			}
 			

@@ -1,6 +1,6 @@
 Flaking Fritters Vending Machine
 false
-125
+378
 378
 BriocheBuns
 346.0

@@ -14,7 +14,7 @@ BeefsteakTomato
 6
 IcebergLettuce
 2
-999
+---
 BriocheBuns
 8
 SesameBuns

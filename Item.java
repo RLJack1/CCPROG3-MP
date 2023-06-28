@@ -4,7 +4,7 @@
 public class Item {
     private final String name;
     private final double calories;
-    private final boolean standalone = false;
+    private final boolean standalone;
     private int price;
     private int stock;
 
@@ -19,6 +19,7 @@ public class Item {
     public Item(String name, double calories, boolean standalone, int price, int stock){ 
         this.name = name;
         this.calories = calories;
+		this.standalone = standalone;
         this.price = price;
         this.stock = stock;
     }

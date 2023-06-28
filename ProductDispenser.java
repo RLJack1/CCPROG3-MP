@@ -62,14 +62,15 @@ public class ProductDispenser {
 			
 			while(s.hasNextLine()) {
 				name = s.nextLine();
-				qty = s.nextInt();
-				lastTotalSales = s.nextInt();
-				totalSales = s.nextInt();
+				qty = Integer.parseInt(s.nextLine());
+				lastTotalSales = Integer.parseInt(s.nextLine());
+				totalSales = Integer.parseInt(s.nextLine());
 				
-				System.out.println("=====TRANSACTION#" + count + "======" +
-								   "\nPurchased Item: " + name + "\tQty: " + qty +
-								   "\nTotal Sales At Last Restock: " + lastTotalSales +
-								   "\nCurrent Total Sales: " + totalSales + "\n");
+				System.out.println("================TRANSACTION#" + count + "=================" +
+								   "\nPurchased Item:\t\t\t" + name + 
+								   "\nQty:\t\t\t\t" + qty +
+								   "\nTotal Sales At Last Restock:\t" + lastTotalSales +
+								   "\nCurrent Total Sales:\t\t" + totalSales + "\n");
 				
 				count++;
 			}

@@ -19,9 +19,6 @@ public class ProductDisplay {
 	  * @return The object instance of the user's selected item 
 	  */
     public Item userChoice(ArrayList<Item> itemList, Scanner s) {
-        /*@renzo not sure why but the for loop never seems to return true!
-		  might need to print out what iteminput actually contains to see what's wrong*/
-          //@megan wdym by "true"? i thought userChoice would only return the item based on the user's input.
 		Item userItem = null;
         String itemInput = s.nextLine();
         itemInput.toLowerCase();
@@ -44,50 +41,54 @@ public class ProductDisplay {
         int index = 0;
 
         for (Item item : predefinedItems) {
-            System.out.println("\t\t\t" + index+1 + ": " + item.getName() + "\t" + item.getCalories() + "\t" + item.getPrice() + "\t" + item.getStock());
+			if((item.getName().length() >= 12 && index > 9) || item.getName().length() >= 13) {
+				System.out.println("\t\t\t" + (index + 1) + ": " + item.getName() + "\t" + item.getCalories() + "\t" + item.getPrice() + "\t" + item.getStock());
+			}
+			
+			else {
+				System.out.println("\t\t\t" + (index + 1) + ": " + item.getName() + "\t\t" + item.getCalories() + "\t" + item.getPrice() + "\t" + item.getStock());
+			}
+            
             index++;
         }
 
         do {
-            System.out.print("Input the index of the item or type \"30\" to exit: ");
+            System.out.print("Input the index of the item or type \"99\" to exit: ");
             input = s.nextInt();
 
-            if (input == 31) {
-                break;
+            if (input == 99 || userItemList.size() == 12) {
+                if(userItemList.size() < 8)
+					System.out.println("Oops! You need a minimum of 8 items to initialize a Vending Machine.\n" + "You currently have " + userItemList.size() + ".");
+				
+				else {
+					if(userItemList.size() == 12)
+						System.out.println("Item capacity of 12 reached.");
+					
+					break;
+				}
+					
             }
 
-            if (input >= 0 && input < predefinedItems.size()) {
-                Item selected = predefinedItems.get(input);
+            else if (input >= 0 && input < predefinedItems.size()) {
+                Item selected = predefinedItems.get(input - 1);
                 if (userItemList.contains(selected)) {
                     System.out.println(selected.getName() + " is already in the list.");
-                } else {
+                } 
+				
+				else {
                     userItemList.add(selected);
                     System.out.println(selected.getName() + " successfully added!");
                 }
-            } else {
+            } 
+			
+			else {
                 System.out.println("Invalid input. Please try again.");
             }
+			
         } while (true);
 
         return userItemList;
-    }
-    
-            // if (exists) {
-            //     for (Item item : predefinedItems) {
-            //         if (!input.equals(item.getName().toLowerCase())) {
-            //             continue;
-            //         }
-            //         userItemList.add(item);
-            //         System.out.println(item.getName() + " successfully added!");
-            //     }
-            // } else {
-            //     if (input.equals("done")) {
-            //         System.out.println("Item stocking done.");
-            //     } else {
-            //         System.out.println("Error input, please try again.");
-            //     }
-            // }
-			
+    }		
 
 	/** 
 	  * Displays all items from this list and returns the user's selected input
@@ -96,16 +97,16 @@ public class ProductDisplay {
 	  * @return The object instance of the user's selected item 
 	  */
     public Item displayOnSale(ArrayList<Item> itemList, Scanner s){
-        System.out.println("Items on Sale:\tName\t Calories\tPrice\tstock");
+        System.out.println("Items on Sale:\tName\t\t Calories\tPrice\tstock");
         Item toBuy = new Item(null, 0, false, 0, 0);
         boolean done;
         
         for(Item item : itemList) 
         {
             if(item.getStock() != 0)
-                System.out.println("\t\t\t" + item.getName() + "\t"  + item.getCalories() + "\t" + item.getPrice()  + "\t" + item.getStock());
+                System.out.println("\t\t" + item.getName() + "\t"  + item.getCalories() + "\t" + item.getPrice()  + "\t" + item.getStock());
             else
-                System.out.println("\t\t\t " + item.getName() + "is SOLD OUT.");
+                System.out.println("\t\t " + item.getName() + "is SOLD OUT.");
         }
 
         do{
