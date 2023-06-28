@@ -1,17 +1,13 @@
 # CCPROG3-MP
 ### MEGAN STATUS CHECK
 - rigorously test and debug
-- fix file calls (3)
-- add a way to error catch menu navigation when no vm is initialized yet
-- make saveToFile default to vm history
-- finish javadoc for VendingMachine and MoneyHandler
-- update uml
+- add money saves in writeVMHistory
+- currently untested: writeTransacHistory() and saveRestock() -> waiting on userChoice()
+- i realize our item cap is too little for the recipes (for mco2 na)
+- finish javadoc and uml and help w test cases
 
 ### RENZO STATUS CHECK
 - TODO: Make test Script and debug based on megan's findings
 - Address comments
-
-### MCO1 REMAINING
-- userselect for item
-- denomination null
-- file inconsistency
+- userChoice()
+- Denomination overhaul
