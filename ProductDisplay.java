@@ -39,45 +39,55 @@ public class ProductDisplay {
     }
 
     public ArrayList<Item> populateItemList(ArrayList<Item> predefinedItems, Scanner s) {
-		ArrayList<Item> userItemList = new ArrayList<Item>();
-		String input = null;
-		boolean exists = false;
+        ArrayList<Item> userItemList = new ArrayList<Item>();
+        int input = 0;
+        int index = 0;
 
-		for (Item item : predefinedItems) {
-			System.out.println("\t\t\t" + item.getName() + "\t" + item.getCalories() + "\t" + item.getPrice() + "\t" + item.getStock());
-		}
+        for (Item item : predefinedItems) {
+            System.out.println("\t\t\t" + index+1 + ": " + item.getName() + "\t" + item.getCalories() + "\t" + item.getPrice() + "\t" + item.getStock());
+            index++;
+        }
 
-		do {
-			System.out.print("Input the name of the item or type \"done\": ");
-			input = s.nextLine();
-			input = input.toLowerCase();
+        do {
+            System.out.print("Input the index of the item or type \"30\" to exit: ");
+            input = s.nextInt();
 
-			exists = false;
+            if (input == 31) {
+                break;
+            }
 
-			for (Item item : userItemList) {
-				if (item.getName().toLowerCase().equals(input))
-					exists = true;
-			}
+            if (input >= 0 && input < predefinedItems.size()) {
+                Item selected = predefinedItems.get(input);
+                if (userItemList.contains(selected)) {
+                    System.out.println(selected.getName() + " is already in the list.");
+                } else {
+                    userItemList.add(selected);
+                    System.out.println(selected.getName() + " successfully added!");
+                }
+            } else {
+                System.out.println("Invalid input. Please try again.");
+            }
+        } while (true);
 
-			if (!exists) {
-				if (input.equals("done")) {
-					System.out.println("Item stocking done.");
-				} else {
-					System.out.println("Error input, please try again.");
-				}
-			} else {
-				for (Item item : predefinedItems) {
-					if (input.equals(item.getName().toLowerCase())) {
-						userItemList.add(item);
-						System.out.println(item.getName() + " successfully added!");
-					}
-				}
-			}
+        return userItemList;
+    }
+    
+            // if (exists) {
+            //     for (Item item : predefinedItems) {
+            //         if (!input.equals(item.getName().toLowerCase())) {
+            //             continue;
+            //         }
+            //         userItemList.add(item);
+            //         System.out.println(item.getName() + " successfully added!");
+            //     }
+            // } else {
+            //     if (input.equals("done")) {
+            //         System.out.println("Item stocking done.");
+            //     } else {
+            //         System.out.println("Error input, please try again.");
+            //     }
+            // }
 			
-		} while (!input.equals("done"));
-
-		return userItemList;
-	}
 
 	/** 
 	  * Displays all items from this list and returns the user's selected input
@@ -88,6 +98,7 @@ public class ProductDisplay {
     public Item displayOnSale(ArrayList<Item> itemList, Scanner s){
         System.out.println("Items on Sale:\tName\t Calories\tPrice\tstock");
         Item toBuy = new Item(null, 0, false, 0, 0);
+        boolean done;
         
         for(Item item : itemList) 
         {
@@ -97,13 +108,19 @@ public class ProductDisplay {
                 System.out.println("\t\t\t " + item.getName() + "is SOLD OUT.");
         }
 
-        toBuy = userChoice(itemList, s);
-        if(toBuy != null){
-            return toBuy;
-        }
-        else{
-            System.out.println("ERROR: yo there isn't an item here");
-            return null;
-        }
+        do{
+            toBuy = userChoice(itemList, s);
+
+            if(toBuy != null){
+                done = true;
+                return toBuy;
+            }
+            else{
+                System.out.println("ERROR: yo there isn't an item here, please try again");
+                return null;
+            }
+        } while (!(done == true));
+
+
     }
 }
