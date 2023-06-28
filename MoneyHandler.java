@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class MoneyHandler {
     private int[] denomList = {1000, 500, 200, 100, 50, 20, 10, 5, 1}; // int array to hold denomination values.
     private int[] denomStore, userDenom = {0, 0, 0, 0, 0, 0, 0, 0, 0}; // int array to hold how many denominations are stored.
+	private int accumulator
 	
 	/** 
       * A constructor that creates an instance of the MoneyHandler object.
