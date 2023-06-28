@@ -22,9 +22,10 @@ public class MoneyHandler {
 
     //TODO: inputDenominations() to store user input denominations into the machine. DONE
     public void inputDenominations(Scanner s) {
+        int totalUser = 0;
         try { 
             System.out.println("Enter the denominations separated by spaces:");
-
+            
             String inputLine = s.nextLine();
             String[] denominations = inputLine.split(" ");
 
@@ -39,11 +40,18 @@ public class MoneyHandler {
                     case 10 -> userDenom[6]++;
                     case 5 -> userDenom[7]++;
                     case 1 -> userDenom[8]++;
+                    default -> System.out.println("Denomination not recognized, skipping input...");
                 }
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
+
+        for (int i = 0; i < userDenom.length; i++) {
+            totalUser += userDenom[i] * denomList[i];
+        }
+
+        System.out.println("You've inserted " + totalUser + " worth of money.");
         System.out.println("Denominations inputted successfully!");
     }
 
@@ -119,44 +127,103 @@ public class MoneyHandler {
         }
     }
 
+    public void changeHelper(boolean doesChange){
+        if(doesChange == true){
+            for(int i = 0; i < denomStore.length; i++){
+                denomStore[i] += userDenom[i];
+            }
+        }
+        else{
+            for(int i = 0; i < denomStore.length; i++){
+                denomStore[i] -= userDenom[i];
+            }
+        }
+    }
+
     // TODO: create method for change(cashIn, productPrice)  to loop thru each denom. should also return money if transaction is unsuccessful. DONE.
-    public int checkChange(int cashIn, int productPrice){
+    public boolean checkChange(int cashIn, int productPrice){
+        boolean enoughChange = false;
         int changeOut = cashIn - productPrice;
-        int countDenom[] = denomStore;
+        int tempStore[] = {}; 
         int totalChange = 0, i;
+        int toChange = 0; 
+
+        for (i = 0; i < denomList.length; i++){
+            totalChange += denomList[i] * denomStore[i]; 
+        }
 
         for (i = 0; i < denomStore.length; i++){
-            totalChange += denomList[i] * denomStore[i];
+            tempStore[i] += denomStore[i] + userDenom[i];
         }
 
         if (totalChange >= changeOut){
-            for(i = 0; i < denomStore.length; i++){
-                if (changeOut >= denomList[i]){
-                    countDenom[i] = changeOut / denomList[i];
-                    changeOut %= denomList[i];
+            for(i = 0; i < denomStore.length; i++){ 
+                if (changeOut >= denomList[i]){ 
+                    tempStore[i] = changeOut / denomList[i];
+                    changeOut %= denomList[i] * tempStore[i]; 
                 }
             }
+            //boolean changeSuccess = changeOut == 0;
+            if(changeOut == 0){
+                enoughChange = true;
 
-            boolean changeSuccess = changeOut == 0;
-
-            if(changeSuccess){
                 for(i = 0; i < denomStore.length; i++){
-                    denomStore[i] -= countDenom[i];
+                    denomStore[i] += userDenom[i];
+                    userDenom[i] = 0;
+                    denomStore[i] -= tempStore[i];
                 }
 
-                return changeOut;
+                return enoughChange;
             }
             else{
                 System.out.println("Sorry! This Vending Machine doesn't have enough change to dispense :((");
-                return cashIn;
+                return enoughChange;
             }
         }
         else{
             System.out.println("Canceling order...");
 		    System.out.println("Returning money...");
-            return cashIn;
+            return enoughChange;
         }
     }
+
+    // public int checkChange(int cashIn, int productPrice){
+    //     int changeOut = cashIn - productPrice;
+    //     int countDenom[] = denomStore;
+    //     int totalChange = 0, i;
+
+    //     for (i = 0; i < denomStore.length; i++){
+    //         totalChange += denomList[i] * denomStore[i];
+    //     }
+
+    //     if (totalChange >= changeOut){
+    //         for(i = 0; i < denomStore.length; i++){
+    //             if (changeOut >= denomList[i]){
+    //                 countDenom[i] = changeOut / denomList[i];
+    //                 changeOut %= denomList[i];
+    //             }
+    //         }
+
+    //         boolean changeSuccess = changeOut == 0;
+
+    //         if(changeSuccess){
+    //             for(i = 0; i < denomStore.length; i++){
+    //                 denomStore[i] -= countDenom[i];
+    //             }
+
+    //             return changeOut;
+    //         }
+    //         else{
+    //             System.out.println("Sorry! This Vending Machine doesn't have enough change to dispense :((");
+    //             return cashIn;
+    //         }
+    //     }
+    //     else{
+    //         System.out.println("Canceling order...");
+	// 	    System.out.println("Returning money...");
+    //         return cashIn;
+    //     }
+    // }
     
     public int getTotal()
     {
