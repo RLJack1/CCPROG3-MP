@@ -437,11 +437,13 @@ public class VendingMachine {
 		
 		if(!(this.selectedItem == null)) {
 			/*@renzo you can change this to your method!*/
-			System.out.println("Please put money into the Vending Machine: ");
-			if(s.hasNextLine()) {
-				this.cashIn = s.nextInt();
-				s.nextLine();
-			}
+			// System.out.println("Please put money into the Vending Machine: ");
+			// if(s.hasNextLine()) {
+			// 	this.cashIn = s.nextInt();
+			// 	s.nextLine();
+			// }
+
+			mh.inputDenominations(s); // User will input bills and store into 
 			
 			System.out.print("Proceed with transaction? Type Y to proceed and N to cancel. Y/N\n" + "Input: ");
 			char c = '\0';
@@ -452,17 +454,33 @@ public class VendingMachine {
 				s.nextLine();
 			}
 			
-			if(c == 'y') {
-				pDispenser.releaseItem(this.isSpecial, this.selectedItem);
-				System.out.println("Calculating change...");
-				int price = 0;
-				price = selectedItem.getPrice();
-				mh.checkChange(this.cashIn, price);
+			if(c == 'y') { // @megan implemented logic that will check change if the transaction is proceeded with.
+				int price = selectedItem.getPrice();
+				boolean doesChange = mh.checkChange(this.cashIn, price);
+				if (doesChange){
+					pDispenser.releaseItem(this.isSpecial, this.selectedItem);
+					System.out.println("Calculating change...");
+					//price = 0;
+					price = selectedItem.getPrice();
+					mh.checkChange(this.cashIn, price);
+
+					pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
+					this.writeTransacHistory(this.selectedItem, this.cashIn);
+					this.totalSales = setTotalSales(price);
+					this.cashIn = 0;
+				}
+				else
+					System.out.println("Sorry! This Vending Machine doesn't have enough change to dispense :((");
+				// pDispenser.releaseItem(this.isSpecial, this.selectedItem);
+				// System.out.println("Calculating change...");
+				// int price = 0;
+				// price = selectedItem.getPrice();
+				// mh.checkChange(this.cashIn, price);
 				
-				pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
-				this.writeTransacHistory(this.selectedItem, this.cashIn);
-				this.totalSales = setTotalSales(price);
-				this.cashIn = 0;
+				// pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
+				// this.writeTransacHistory(this.selectedItem, this.cashIn);
+				// this.totalSales = setTotalSales(price);
+				// this.cashIn = 0;
 			}
 			
 			else {
