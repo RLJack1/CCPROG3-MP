@@ -5,8 +5,8 @@ import java.util.Scanner;
   */
 public class MoneyHandler {
     private int[] denomList = {1000, 500, 200, 100, 50, 20, 10, 5, 1}; // int array to hold denomination values.
-    private int[] denomStore, userDenom = {0, 0, 0, 0, 0, 0, 0, 0, 0}; // int array to hold how many denominations are stored.
-	private int accumulator
+    private int[] denomStore = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private int[] userDenom = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 	
 	/** 
       * A constructor that creates an instance of the MoneyHandler object.
@@ -128,6 +128,12 @@ public class MoneyHandler {
         }
     }
 
+    public void initialMoneys(){
+        for(int i = 0; i < 9; i++){ 
+            denomStore[i] += 25;
+        }
+    }
+
     public void changeHelper(boolean doesChange){
         if(doesChange == true){
             for(int i = 0; i < denomStore.length; i++){
@@ -149,16 +155,16 @@ public class MoneyHandler {
         int totalChange = 0, i;
         int toChange = 0; 
 
-        for (i = 0; i < denomList.length; i++){
+        for (i = 0; i < 9; i++){
             totalChange += denomList[i] * denomStore[i]; 
         }
 
-        for (i = 0; i < denomStore.length; i++){
+        for (i = 0; i < 9; i++){
             tempStore[i] += denomStore[i] + userDenom[i];
         }
 
         if (totalChange >= changeOut){
-            for(i = 0; i < denomStore.length; i++){ 
+            for(i = 0; i < 9; i++){ 
                 if (changeOut >= denomList[i]){ 
                     tempStore[i] = changeOut / denomList[i];
                     changeOut %= denomList[i] * tempStore[i]; 

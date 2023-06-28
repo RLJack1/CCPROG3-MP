@@ -386,7 +386,11 @@ public class VendingMachine {
 			this.setMachineName(name);
 			this.setIsSpecial(isSpecial);
 
-			pDisplay.populateItemList(predefinedList, s);
+			populateOptionsList(predefinedList); //@megan this method initializes the predefined items.
+
+			itemList = pDisplay.populateItemList(predefinedList, s); //@megan this method asks for items and returns the VM's itemList.
+
+			mh.initialMoneys();
 
 			System.out.println("Alright! " + name + " is all set up!");
 			
@@ -408,7 +412,6 @@ public class VendingMachine {
 			// 	this.cashIn = s.nextInt();
 			// 	s.nextLine();
 			// }
-
 			mh.inputDenominations(s); // User will input bills and store into 
 			
 			System.out.print("Proceed with transaction? Type Y to proceed and N to cancel. Y/N\n" + "Input: ");
