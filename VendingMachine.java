@@ -3,7 +3,9 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
+import java.io.BufferedWriter;
 import java.io.PrintWriter;
+import java.io.FileWriter;
 import java.io.FileNotFoundException;
 
 /** 
@@ -20,6 +22,7 @@ public class VendingMachine {
 	private Item selectedItem;
 	private ArrayList<Item> itemList;
 	private ArrayList<Item> predefinedList;
+	private ArrayList<Item> oldInventory;
 	MoneyHandler mh = new MoneyHandler();
 	ProductDisplay pDisplay = new ProductDisplay();
 	ProductDispenser pDispenser = new ProductDispenser();
@@ -37,6 +40,7 @@ public class VendingMachine {
 		this.selectedItem = null;
 		itemList = new ArrayList<Item>();
 		predefinedList = new ArrayList<Item>();
+		oldInventory = new ArrayList<Item>();
 	}
 	
 	/** 
@@ -52,6 +56,7 @@ public class VendingMachine {
 		this.selectedItem = null;
 		itemList = new ArrayList<Item>();
 		predefinedList = new ArrayList<Item>();
+		oldInventory = new ArrayList<Item>();
 	}
 	
 	/** 
@@ -65,41 +70,24 @@ public class VendingMachine {
 			boolean standalone = false;
 			int price = 0;
 			int stock = 0;
-
-			if (s.hasNextLine()) {
-				this.machineName = s.nextLine();
-			}
-			if (s.hasNextBoolean()) {
-				this.isSpecial = s.nextBoolean();
-			}
-			if (s.hasNextInt()) {
-				this.lastTotalSales = s.nextInt();
-			}
-			if (s.hasNextInt()) {
-				this.totalSales = s.nextInt();
-			}
-			s.nextLine();
-
-			while (s.hasNextLine()) {
-				String name = s.nextLine();
-				if (s.hasNextDouble()) {
-					calories = s.nextDouble();
-				}
-				if (s.hasNextBoolean()) {
-					standalone = s.nextBoolean();
-				}
-				if (s.hasNextInt()) {
-					price = s.nextInt();
-				}
-				if (s.hasNextInt()) {
-					stock = s.nextInt();
-				}
-				//s.nextLine();
-
+			String name;
+			
+			this.machineName = s.nextLine();
+			this.isSpecial = Boolean.parseBoolean(s.nextLine());
+			this.lastTotalSales = Integer.parseInt(s.nextLine());
+			this.totalSales = Integer.parseInt(s.nextLine());
+			
+			while(s.hasNextLine()) {
+				name = s.nextLine();
+				calories = Double.parseDouble(s.nextLine());
+				standalone = Boolean.parseBoolean(s.nextLine());
+				price = Integer.parseInt(s.nextLine());
+				stock = Integer.parseInt(s.nextLine());
+				
 				itemList.add(new Item(name, calories, standalone, price, stock));
 			}
-
-			s.close();
+			
+			s.close();	
 		} catch (NoSuchElementException e) {
 			e.printStackTrace();
 		}
@@ -148,25 +136,29 @@ public class VendingMachine {
 	  * Saves all vending machine data into a file
 	  */
 	public void writeVMHistory() throws FileNotFoundException {
-		PrintWriter p = new PrintWriter("VM-History.txt");
+		BufferedWriter b = null;
 		
-		p.println(this.machineName);
-		p.println(this.isSpecial);
-		p.println(this.lastTotalSales);
-		p.println(this.totalSales);
-		p.println();
+		try {
+			b = new BufferedWriter(new FileWriter(new File("VM-History.txt")));
 		
-		for(Item item : itemList) {
-			p.println(item.getName());
-			p.println(item.getCalories());
-			p.println(item.getStandalone());
-			p.println(item.getPrice());
-			p.println(item.getStock());
-			p.println();
+			b.write(this.machineName + "\n");
+			b.write(this.isSpecial + "\n");
+			b.write(this.lastTotalSales + "\n");
+			b.write(this.totalSales + "\n");
+			
+			for(Item item : this.itemList) {
+				b.write("\n" + item.getName() + "\n");
+				b.write(item.getCalories() + "\n");
+				b.write(item.getStandalone() + "\n");
+				b.write(item.getPrice()  + "\n");
+				b.write(item.getStock());
+			}
+			
+			b.close();
+		} catch(IOException e) {
+			System.out.println("Oops! An error occurred.");
+			e.printStackTrace();
 		}
-		
-		p.flush();
-		p.close();
 	}
 	
 	/** 
@@ -174,20 +166,16 @@ public class VendingMachine {
 	  * @param item		The item dispensed during the transaction
 	  * @param cashIn	The amount of money the user paid during the transaction
 	  */
-	public void writeTransacHistory(Item item, int cashIn) throws FileNotFoundException {
+	public void writeTransacHistory(String name, int qty) throws FileNotFoundException {
+		BufferedWriter b = null;
+		
 		try {
-			PrintWriter p = new PrintWriter("Transac-History.txt"); 
-
-			p.println(item.getName());
-			p.println(item.getCalories());
-			p.println(item.getPrice());
-			p.println(cashIn);
-			p.println(cashIn - item.getPrice());
-			p.println();
-			
-			p.flush();
-			p.close();
-
+			b = new BufferedWriter(new FileWriter(new File("Transac-History.txt"), true));
+			b.write(name + "\n");
+			b.write(qty + "\n");
+			b.write(this.lastTotalSales + "\n");
+			b.write(this.totalSales + "\n");
+			b.close();
 		} catch (IOException e) {
 			System.out.println("Oops! An error occurred.");
             e.printStackTrace();
@@ -199,25 +187,25 @@ public class VendingMachine {
 	  * @param amountToAdd 	The amount of stock added to the item
 	  * @param newStock 	The new total stock of the item for sale
 	  */
-	public void saveRestock(int amountToAdd, int newStock) throws FileNotFoundException {
+	public void saveRestock() throws FileNotFoundException {
+		BufferedWriter b = null;
+		
 		try {
-			PrintWriter p = new PrintWriter("Restock-History.txt"); 
+			b = new BufferedWriter(new FileWriter(new File("Restock-History.txt")));
 			
-			for(Item item : itemList) {
-				p.println(item.getName());
-				p.println(amountToAdd);
-				p.println(newStock);
-				p.println();
+			for(Item item : this.oldInventory) {
+				b.write(item.getName() + "\n");
+				b.write(item.getStock()  + "\n");
 			}
 			
-			p.println();
-			p.println(this.lastTotalSales);
-			p.println(this.totalSales);
-			p.println(this.totalSales - this.lastTotalSales);
-			p.println("\n---\n\n");
+			b.write("999");
 			
-			p.flush();
-			p.close();
+			for(Item item : this.itemList) {
+				b.write(item.getName() + "\n");
+				b.write(item.getStock()  + "\n");
+			}
+			
+			b.close();
 		} catch (IOException e) {
 			System.out.println("Oops! An error occurred.");
             e.printStackTrace();
@@ -233,38 +221,26 @@ public class VendingMachine {
 			Scanner s = new Scanner(f);
 				
 			String name = null;
-			int amountAdded = 0;
-			int newStock = 0;
-			int lastTotalSales = 0;
-			int totalSales = 0;
-			int count = 1;
-			int numItems = 0;
+			int qty = 0;
+			
+			System.out.println("=======STARTING INVENTORY========");
 			
 			while(s.hasNextLine()) {
-				for(Item item : itemList) {
-					numItems++;
-				}
+				name = s.nextLine();
+				qty = s.nextInt();
 				
-				System.out.println("=======RESTOCK#" + count + "========");
-					
-				while(numItems > 0) {
-					name = s.nextLine();
-					amountAdded = s.nextInt();
-					newStock = s.nextInt();
-					s.nextLine();
-					
-					System.out.println("Item Name: " + name +
-									   "\nAmount Added: " + amountAdded +
-									   "\nNew Stock: " + newStock + "\n");
-									   
-					numItems--;
-				}
+				System.out.println("Item Name: " + name + "\tQuantity: " + qty + "\n");
+			}
+			
+			s.nextInt();
+			
+			System.out.println("\n========ENDING INVENTORY=========");
+			
+			while(s.hasNextLine()) {
+				name = s.nextLine();
+				qty = s.nextInt();
 				
-				System.out.println("\nLast Total Sales: " + lastTotalSales +
-								   "\nCurrent Total Sales: " + totalSales +
-								   "\nAmount Earned from Last Restock: " + (lastTotalSales - totalSales) + "\n---\n\n");
-				
-				count++;
+				System.out.println("Item Name: " + name + "\tQuantity: " + qty + "\n");
 			}
 			
 			s.close();
@@ -292,7 +268,7 @@ public class VendingMachine {
 	
 	/** 
 	  * Saves vending machine history to a file
-	  */
+	  
 	public void saveToFile(String filename) throws FileNotFoundException { 
 		try {
 			this.writeVMHistory();
@@ -301,7 +277,7 @@ public class VendingMachine {
 			System.out.println("Error saving to: " + filename);
 			e.printStackTrace();
 		}
-	}
+	} we dont call this anymore*/ 
     
 	public void displayMenu(VendingMachine vm, Scanner s) throws FileNotFoundException {
 		do {		
@@ -455,7 +431,7 @@ public class VendingMachine {
 					mh.checkChange(this.cashIn, price);
 
 					pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
-					this.writeTransacHistory(this.selectedItem, this.cashIn);
+					this.writeTransacHistory(this.selectedItem.getName(), 1);
 					this.totalSales = setTotalSales(price);
 					this.cashIn = 0;
 				}
@@ -486,6 +462,7 @@ public class VendingMachine {
     }
 
     public void maintainMenu(Scanner s) throws FileNotFoundException {
+		char c = '\0';
 		
 		do {
 			System.out.print("==============================\n" +
@@ -505,6 +482,11 @@ public class VendingMachine {
 			}			
 			
 			if(userChoice == 1) {
+				c = 'y';
+				
+				this.oldInventory.clear();
+				this.oldInventory.addAll(this.itemList);
+				
 				System.out.println("Please select the item you would like to restock!");
 				this.selectedItem = pDisplay.displayOnSale(itemList, s); 
 				
@@ -515,12 +497,42 @@ public class VendingMachine {
 				if(success) {
 					System.out.println("Restocking " + this.selectedItem.getName() + " ...");
 					System.out.println("Restock success!");
-					this.saveRestock(amountToAdd, this.selectedItem.getStock());
 				}
 				
 				else {
 					System.out.println("Oops! Amount to add is too much.");
 				}
+				
+				while(c == 'y') {
+					c = '\0';
+					System.out.print("Restock another item? Y/N\n" + "Input: ");
+					
+					if(s.hasNextLine()) {
+						c = s.next().charAt(0);
+						c = Character.toLowerCase(c);
+						s.nextLine();
+					}
+					
+					System.out.println("Please select the item you would like to restock!");
+					this.selectedItem = pDisplay.displayOnSale(itemList, s); 
+					
+					System.out.println("Input amount of stock to add: ");
+					amountToAdd = s.nextInt();
+					success = selectedItem.addStock(this.selectedItem, amountToAdd);
+					
+					if(success) {
+						System.out.println("Restocking " + this.selectedItem.getName() + " ...");
+						System.out.println("Restock success!");
+					}
+					
+					else {
+						System.out.println("Oops! Amount to add is too much.");
+					}
+				}
+				
+				System.out.println("Saving restock inventories...");
+				this.saveRestock();
+				System.out.println("Returning to Maintenance Menu...");
 			}
 			
 			else if(userChoice == 2) {
@@ -542,7 +554,7 @@ public class VendingMachine {
 								   "Type Y for cash out all money and\n" +
 								   "Type N for cash out specific bills.\n" +
 								   "Select: ");
-				char c = '\0';
+				c = '\0';
 				boolean success = false;
 				
 				if(s.hasNextLine()) {

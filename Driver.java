@@ -35,8 +35,8 @@ public class Driver {
 		
 		try {
 			vm.displayMenu(vm, s); 
-			vm.clearFile("VM-History.txt");
-			vm.saveToFile("VM-History.txt");
+			System.out.println("Saving Vending Machine data...");
+			vm.writeVMHistory();
 		} catch (IOException e) {
 			System.out.println("Oops! An error occurred.");
             e.printStackTrace();

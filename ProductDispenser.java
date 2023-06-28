@@ -55,26 +55,21 @@ public class ProductDispenser {
 			Scanner s = new Scanner(f);
 			
 			String name = null;
-			double calories = 0.0;
-			int price = 0;
-			int cashIn = 0;
-			int change = 0;
+			int qty = 1;
+			int lastTotalSales = 0;
+			int totalSales = 0;
 			int count = 1;
 			
 			while(s.hasNextLine()) {
 				name = s.nextLine();
-				calories = s.nextDouble();
-				price = s.nextInt();
-				cashIn = s.nextInt();
-				change = cashIn - price;
-				s.nextLine();
+				qty = s.nextInt();
+				lastTotalSales = s.nextInt();
+				totalSales = s.nextInt();
 				
 				System.out.println("=====TRANSACTION#" + count + "======" +
-								   "\nPurchased Item: " + name +
-								   "\nTotal Calories: " + calories +
-								   "\nItem Price: " + price +
-								   "\nAmount Paid: " + cashIn +
-								   "\nIssued Change: " + change + "\n");
+								   "\nPurchased Item: " + name + "\tQty: " + qty +
+								   "\nTotal Sales At Last Restock: " + lastTotalSales +
+								   "\nCurrent Total Sales: " + totalSales + "\n");
 				
 				count++;
 			}
