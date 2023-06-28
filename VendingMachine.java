@@ -123,7 +123,7 @@ public class VendingMachine {
         predefinedList.add(new Item("CheesedBeef", 373.0, true, 214, 8));
         predefinedList.add(new Item("CanadianBacon", 185.0, true, 140, 8));
         predefinedList.add(new Item("WienerSchnitzel", 297.0, true, 175, 8));
-        predefinedList.add(new Item("SalmonPatty", 208.0, true, 300, 8));
+        predefinedList.add(new Item("GrilledSalmon", 208.0, true, 300, 8));
         predefinedList.add(new Item("BronzeTurkey", 189.0, true, 185, 8));
         predefinedList.add(new Item("BeyondBeef", 210.0, true, 330, 8));
         predefinedList.add(new Item("JackBeef", 100.0, true, 100, 8));

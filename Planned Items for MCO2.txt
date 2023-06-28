@@ -1,0 +1,120 @@
+Planned Items for MCO2 for Bautista & Sioco of S14A
+
+(1) Items that can be created from other items
+- Classic Chesseburger (847 calories, 414 pesos)
+	- 2 x Sesame Bread
+	- 1 x Angus Beef (as patty)
+	- 1 x American Cheese
+	- 1 x White Onions
+	- 1 x Iceberg Lettuce
+	- 1 x Dill Pickles
+	- 1 x Barbeque Sauce 
+
+- Beyond Burger (1328 calories, 704 pesos)
+	- 2 x Wholewheat Bread 
+	- 1 x Beyond Beef (as patty)
+	- 1 x Mozzarella Cheese
+	- 1 x Onion Rings
+	- 1 x Iceberg Lettuce
+	- 1 x Hot Sauce
+	- 1 x Jack Sauce
+
+- Gourmet Burger (2754.5 calories, 1356 pesos)
+	- 2 x Brioche Bread
+	- 1 x Weiner Schnitzel (as patty)
+	- 1 x Trappist Cheese
+	- 1 x Beefsteak Tomato
+	- 1 x Iceberg Lettuce
+	- 1 x Dill Pickles
+	- 1 x Melted Butter
+
+- Jack's Pizza (1059 calories, 1356 pesos)
+	- 1 x Jack Bread (as dough)
+	- 1 x Jack Beef
+	- 1 x Trappist Cheese
+	- 1 x Mozzarella Cheese
+	- 1 x Tomato Sauce
+	- 1 x Jack Sauce
+	- 1 x White Onions
+
+- Meat Lover's Pizza (1402.5 calories, 554 pesos)
+	- 1 x Rye Bread (as dough)
+	- 1 x Wagyu Beef
+	- 2 x Canadian Bacon
+	- 1 x Mozzarella Cheese
+	- 1 x Tomato Sauce
+	- 1 x White Onions
+	- 1 x Dill Pickles
+
+- Cheezy Pizza (1418 calories, 849 pesos)
+	- 1 x Wholewheat Bread (as dough)
+	- 1 x Cheesed Beef
+	- 1 x Mozzarella Cheese
+	- 1 x Blue Cheese
+	- 1 x Tomato Sauce
+	- 1 x Caviar Sauce
+	- 1 x Beefsteak Tomato
+	- 1 x Onion Rings
+
+- Turkey Burrito (765 calories, 389 pesos)
+	- 1 x Rye Bread
+	- 1 x Bronze Turkey
+	- 1 x American Cheese
+	- 1 x Beefsteak Tomato
+	- 1 x Iceberg Lettuce
+	- 1 x Barbeque Sauce
+	- 1 x Jack Sauce
+
+- Beef Burrito (688.75 calories, 405 pesos)
+	- 1 x Potato Bread
+	- 1 x Tapa Beef
+	- 1 x Trappist Cheese
+	- 1 x White Onions
+	- 1 x Iceberg Lettuce
+	- 1 x Dill Pickles
+	- 1 x Hot Sauce
+
+- Salmon Burrito (1375 calories, 1028 pesos)
+	- 1 x Brioche Bread
+	- 1 x Grilled Salmon
+	- 1 x Mozzarella Cheese
+	- 1 x Beefsteak Tomato
+	- 1 x Iceberg Lettuce
+	- 1 x Dill Pickles
+	- 1 x Caviar Sauce
+
+
+(2) Items that can be sold individually
+- Brioche Bread		(346.0 calories, 34 pesos)
+- Sesame Bread		(140.0 calories, 20 pesos)
+- Rye Bread		(259.0 calories, 48 pesos)
+- Wholewheat Bread	(265.0 calories, 40 pesos)
+- Potato Bread		(266.0 calories, 33 pesos)
+- Jack Bread		(100.0 calories, 100 pesos)
+- Angus Beef		(164.0 calories, 144 pesos)
+- Wagyu Beef		(250.0 calories, 795 pesos)
+- Tapa Beef		(187.75 calories, 56 pesos)
+- Cheesed Beef		(373.0 calories, 214 pesos)
+- Canadian Bacon	(185.0 calories, 140 pesos)
+- Wiener Schnitzel	(297.0 calories, 175 pesos)
+- Grilled Salmon	(208.0 calories, 300 pesos)
+- Bronze Turkey		(189.0 calories, 185 pesos)
+- Beyond Beef		(210.0 calories, 330 pesos)
+- Jack Beef		(100.0 calories, 100 pesos)
+
+
+(3) Items that cannot be sold
+- White Onions		(40.0 calories, 30 pesos)
+- Onion Rings		(205.5 calories, 85 pesos)
+- Trappist Cheese	(355.0 calories, 140 pesos)
+- Mozzarela Cheese	(140.0 calories, 75 pesos) 
+- Blue Cheese		(177.0 calories, 105 pesos)
+- American Cheese	(177.0 calories, 40 pesos)
+- Melted Butter		(307.5 calories, 60 pesos)
+- Beefsteak Tomato	(18.0 calories, 50 pesos)
+- Iceberg Lettuce	(3.0 calories, 45 pesos)
+- Dill Pickles		(11.0 calories, 45 pesos)
+- Hot Sauce		(11.0 calories, 50 pesos)
+- Barbeque Sauce	(172.0 calories, 70 pesos)
+- Caviar Sauce		(252.0 calories, 330 pesos)
+- Jack Sauce		(10.0 calories, 10 pesos)
