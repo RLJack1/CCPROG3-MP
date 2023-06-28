@@ -10,3 +10,8 @@
 ### RENZO STATUS CHECK
 - TODO: Make test Script and debug based on megan's findings
 - Address comments
+
+### MCO1 REMAINING
+- userselect for item
+- denomination null
+- file inconsistency
