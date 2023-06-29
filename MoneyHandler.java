@@ -52,8 +52,30 @@ public class MoneyHandler {
 		}
 	}
 	
-	public void inputDenominations(Scanner s) {
-		
+	public void inputDenominations(Scanner s) {	
+		try { 
+			System.out.println("Enter the denominations separated by spaces:");
+			
+			String inputLine = s.nextLine();
+			String[] denominations = inputLine.split(" ");
+
+			for (int i = 0; i < holder.length; i++) {
+				switch(Integer.parseInt(denominations[i])){
+					case 1000 -> holder[0][1]++;
+					case 500 -> holder[1][1]++;
+					case 200 -> holder[2][1]++;
+					case 100 -> holder[3][1]++;
+					case 50 -> holder[4][1]++;
+					case 20 -> holder[5][1]++;
+					case 10 -> holder[6][1]++;
+					case 5 -> holder[7][1]++;
+					case 1 -> holder[8][1]++;
+					default -> System.out.println("Denomination not recognized, skipping input...");
+				}
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void cashOut() {
