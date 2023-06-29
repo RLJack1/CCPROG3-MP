@@ -12,29 +12,6 @@ public class ProductDisplay {
 	public ProductDisplay() {
 	}
 
-	/** 
-	  * Gets the item's name from the user and return its corresponding item object
-	  * @param itemList	The list of all available items for this list
-	  * @param s 		The active scanner object
-	  * @return The object instance of the user's selected item 
-	  */
-    public Item userChoice(ArrayList<Item> itemList, Scanner s) {
-		Item userItem = null;
-        String itemInput = s.nextLine();
-        itemInput.toLowerCase();
-
-        for (Item item : itemList) {
-            if (item.getName().toLowerCase().equals(itemInput)) {
-                userItem = item;
-                break;
-            }
-        }
-
-        System.out.println(userItem.getName()); // For testing 
-
-        return userItem;
-    }
-
     public ArrayList<Item> populateItemList(ArrayList<Item> predefinedItems, Scanner s) {
         ArrayList<Item> userItemList = new ArrayList<Item>();
         int input = 0;
@@ -64,9 +41,9 @@ public class ProductDisplay {
 					if(userItemList.size() == 12)
 						System.out.println("Item capacity of 12 reached.");
 					
-					break;
-				}
-					
+                break;
+            }
+
             }
 
             else if (input >= 0 && input < predefinedItems.size()) {
@@ -88,18 +65,41 @@ public class ProductDisplay {
         } while (true);
 
         return userItemList;
-    }		
+    }
 
-	/** 
-	  * Displays all items from this list and returns the user's selected input
-	  * @param itemList	The list of all available items for this list
-	  * @param s 		The active scanner object
-	  * @return The object instance of the user's selected item 
-	  */
+    /**
+     * Gets the item's name from the user and return its corresponding item object
+     * @param itemList	The list of all available items for this list
+     * @param s 		The active scanner object
+     * @return The object instance of the user's selected item 
+     */
+    public Item userChoice(ArrayList<Item> itemList, Scanner s) {
+        Item userItem = null;
+        String itemInput = s.nextLine();
+        itemInput = itemInput.toLowerCase();
+
+        for (Item item : itemList) {
+            if (item.getName().toLowerCase().equals(itemInput)) {
+                userItem = item;
+                break;
+            }
+        }
+
+        System.out.println(userItem.getName()); // Testing purpose, get name of the item.
+
+        return userItem;
+    }
+
+    /** 
+     * Displays all items from this list and returns the user's selected input
+     * @param itemList	The list of all available items for this list
+     * @param s 		The active scanner object
+     * @return The object instance of the user's selected item 
+     */
     public Item displayOnSale(ArrayList<Item> itemList, Scanner s){
         System.out.println("Items on Sale:\tName\t\t Calories\tPrice\tstock");
         Item toBuy = new Item(null, 0, false, 0, 0);
-        boolean done;
+        boolean done = false;
         
         for(Item item : itemList) 
         {
@@ -109,19 +109,16 @@ public class ProductDisplay {
                 System.out.println("\t\t " + item.getName() + "is SOLD OUT.");
         }
 
-        do{
+        do {
             toBuy = userChoice(itemList, s);
 
-            if(toBuy != null){
+            if (toBuy != null) {
                 done = true;
-                return toBuy;
+            } else {
+                System.out.println("ERROR: Yo, there isn't an item here, please try again");
             }
-            else{
-                System.out.println("ERROR: yo there isn't an item here, please try again");
-                return null;
-            }
-        } while (!(done == true));
+        } while (!done);
 
-
+        return toBuy;
     }
 }
