@@ -74,11 +74,17 @@ public class VendingMachine {
 			int price = 0;
 			int stock = 0;
 			String name;
+			int bills = 7;
 			
 			this.machineName = s.nextLine();
 			this.isSpecial = Boolean.parseBoolean(s.nextLine());
 			this.lastTotalSales = Integer.parseInt(s.nextLine());
 			this.totalSales = Integer.parseInt(s.nextLine());
+
+			/*while(bills > 0) {
+				denomList[bills] = Integer.parseInt(s.nextLine());
+				bills--;
+			}*/
 			
 			while(s.hasNextLine()) {
 				name = s.nextLine();
@@ -152,6 +158,12 @@ public class VendingMachine {
 			b.write(this.isSpecial + "\n");
 			b.write(this.lastTotalSales + "\n");
 			b.write(this.totalSales + "");
+
+			/*int bills = 7
+			while(bills > 0) {
+				b.write("\n" + denomList.getBill(bills);
+				bills--;
+			}*/
 			
 			for(Item item : this.itemList) {
 				b.write("\n" + item.getName() + "\n");
@@ -354,9 +366,11 @@ public class VendingMachine {
 	}
 
     public void createMenu(Scanner s) throws FileNotFoundException {
+		char c = '\0';
+		
 		if(this.itemList != null) {
 			System.out.print("Do you want to obliterate this Vending Machine and create a new one? Y/N\n" + "Input: ");
-			char c = s.next().charAt(0);
+			c = s.next().charAt(0);
 			c = Character.toLowerCase(c);
 			s.nextLine();
 		}
