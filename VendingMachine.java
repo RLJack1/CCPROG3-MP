@@ -74,17 +74,19 @@ public class VendingMachine {
 			int price = 0;
 			int stock = 0;
 			String name;
-			int bills = 7;
+			int billIndex = 0;
+			int amount = 0;
 			
 			this.machineName = s.nextLine();
 			this.isSpecial = Boolean.parseBoolean(s.nextLine());
 			this.lastTotalSales = Integer.parseInt(s.nextLine());
 			this.totalSales = Integer.parseInt(s.nextLine());
 
-			/*while(bills > 0) {
-				denomList[bills] = Integer.parseInt(s.nextLine());
-				bills--;
-			}*/
+			while(billIndex < 8) {
+				amount = Integer.parseInt(s.nextLine());
+				mh.setCashBox(billIndex, amount);
+				billIndex++;
+			}
 			
 			while(s.hasNextLine()) {
 				name = s.nextLine();
@@ -95,8 +97,6 @@ public class VendingMachine {
 				
 				itemList.add(new Item(name, calories, standalone, price, stock));
 			}
-			
-			/*implement money save*/
 			
 			s.close();	
 		} catch (NoSuchElementException e) {
@@ -159,11 +159,11 @@ public class VendingMachine {
 			b.write(this.lastTotalSales + "\n");
 			b.write(this.totalSales + "");
 
-			/*int bills = 7
-			while(bills > 0) {
-				b.write("\n" + denomList.getBill(bills);
-				bills--;
-			}*/
+			int billIndex= 0;
+			while(billIndex < 8) {
+				b.write("\n" + mh.getCashBoxAmount(billIndex));
+				billIndex++;
+			}
 			
 			for(Item item : this.itemList) {
 				b.write("\n" + item.getName() + "\n");
@@ -172,8 +172,6 @@ public class VendingMachine {
 				b.write(item.getPrice() + "\n");
 				b.write(item.getStock() + "");
 			}
-			
-			/*implement money save*/
 			
 			b.close();
 		} catch(IOException e) {
@@ -219,7 +217,7 @@ public class VendingMachine {
 				b.write(item.getStock()  + "\n");
 			}
 			
-			b.write("---");
+			b.write("---\n");
 			
 			for(Item item : this.itemList) {
 				b.write(item.getName() + "\n");
@@ -406,9 +404,10 @@ public class VendingMachine {
 
 			this.setMachineName(name);
 			this.setIsSpecial(isSpecial);
+			System.out.println("Filling up cash box...");
+			mh.newCashBox();
 
-			populateOptionsList(predefinedList); 
-
+			populateOptionsList(predefinedList);
 			itemList = pDisplay.populateItemList(predefinedList, s); 
 			
 			System.out.println("Alright! " + name + " is all set up!");
@@ -441,6 +440,8 @@ public class VendingMachine {
 
     public void maintainMenu(Scanner s) throws FileNotFoundException {
 		char c = '\0';
+		ArrayList<Item> temp = new ArrayList<Item>();
+		boolean success = false;
 		
 		do {
 			System.out.print("==============================\n" +
@@ -461,36 +462,37 @@ public class VendingMachine {
 			
 			if(userChoice == 1) {
 				c = 'y';
-				
-				this.oldInventory.clear();
-				this.oldInventory.addAll(this.itemList);
+				temp.clear();
+				temp.addAll(this.itemList);
 				
 				System.out.println("Please select the item you would like to restock!");
 				this.selectedItem = pDisplay.displayOnSale(itemList, s); 
 				
 				System.out.println("Input amount of stock to add: ");
 				int amountToAdd = s.nextInt();
-				boolean success = selectedItem.addStock(this.selectedItem, amountToAdd);
+				success = selectedItem.addStock(this.selectedItem, amountToAdd);
 				
 				if(success) {
 					System.out.println("Restocking " + this.selectedItem.getName() + " ...");
 					System.out.println("Restock success!");
+					this.oldInventory.clear();
+					this.oldInventory.addAll(temp);
 				}
 				
 				else {
 					System.out.println("Oops! Amount to add is too much.");
 				}
 				
+				System.out.print("Restock another item? Y/N\n" + "Input: ");
+				c = s.next().charAt(0);
+				c = Character.toLowerCase(c);
+				s.nextLine();
+					
 				while(c == 'y') {
 					c = '\0';
-					System.out.print("Restock another item? Y/N\n" + "Input: ");
-					
-					if(s.hasNextLine()) {
-						c = s.next().charAt(0);
-						c = Character.toLowerCase(c);
-						s.nextLine();
-					}
-					
+					temp.clear();
+					temp.addAll(this.itemList);
+				
 					System.out.println("Please select the item you would like to restock!");
 					this.selectedItem = pDisplay.displayOnSale(itemList, s); 
 					
@@ -501,11 +503,18 @@ public class VendingMachine {
 					if(success) {
 						System.out.println("Restocking " + this.selectedItem.getName() + " ...");
 						System.out.println("Restock success!");
+						this.oldInventory.clear();
+						this.oldInventory.addAll(temp);
 					}
 					
 					else {
-						System.out.println("Oops! Amount to add is too much.");
+						System.out.println("Oops! Amount to add is too much.\n");
 					}
+					
+					System.out.print("Restock another item? Y/N\n" + "Input: ");
+					c = s.next().charAt(0);
+					c = Character.toLowerCase(c);
+					s.nextLine();
 				}
 				
 				System.out.println("Saving restock inventories...");
@@ -515,13 +524,15 @@ public class VendingMachine {
 			
 			else if(userChoice == 2) {
 				System.out.println("Please select the item you would like to re-price!");
-				this.selectedItem = pDisplay.userChoice(itemList, s);
+				this.selectedItem = pDisplay.displayOnSale(itemList, s); 
 				
 				System.out.println("Input new price for " + this.selectedItem.getName() + ":");
 				int newPrice = this.selectedItem.getPrice();
 				
-				if(s.hasNextInt())
-					newPrice = s.nextInt();
+				if(s.hasNextInt()) {
+					userChoice = s.nextInt();
+					s.nextLine();
+				}
 				
 				this.selectedItem.setPrice(newPrice);
 				System.out.println("New price successfully set!");
@@ -533,7 +544,7 @@ public class VendingMachine {
 								   "Type N for cash out specific bills.\n" +
 								   "Select: ");
 				c = '\0';
-				boolean success = false;
+				success = false;
 				
 				if(s.hasNextLine()) {
 					c = s.next().charAt(0);
@@ -544,7 +555,7 @@ public class VendingMachine {
 				if(c == 'y') {
 					int moneyTotal = mh.getTotal();
 					mh.cashOut();
-					System.out.println("Successfully cashed out " + moneyTotal + " pesos." + this.getMachineName() + " is now cash-empty.");
+					System.out.println("Successfully cashed out " + moneyTotal + " pesos. " + this.getMachineName() + " is now cash-empty.");
 				}
 				
 				else {
@@ -567,16 +578,7 @@ public class VendingMachine {
 						s.nextLine();
 					}
 					
-					success = mh.cashOne(bill, amount);
-					
-					if(success) {
-						System.out.println("Cashing out " + amount + " " + bill + " bills...");
-						System.out.println("Cash out success!");
-					}
-					
-					else {
-						System.out.println("Oops! Amount to cash out is too much.");
-					}
+					mh.cashOne(bill, amount);
 				}
 			}
 			
@@ -600,9 +602,15 @@ public class VendingMachine {
 					s.nextLine();
 				}
 				
-				mh.refillOne(bill, amount);
-				System.out.println("Replenishing " + amount + " " + bill + " bills...");
-				System.out.println("Replenish success!");
+				success = mh.refillOne(bill, amount);
+				
+				if(success) {
+					System.out.println("Replenishing " + amount + " " + bill + " bills...");
+					System.out.println("Replenish success!");
+				}
+				
+				else
+					System.out.println("Invalid bill value.\n");
 			}
 			
 			else if(userChoice == 5) {
