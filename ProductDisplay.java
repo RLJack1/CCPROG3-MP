@@ -69,7 +69,7 @@ public class ProductDisplay {
 					
             }
 
-            else if (input >= 0 && input < predefinedItems.size()) {
+            else if (input > 0 && input <= predefinedItems.size()) {
                 Item selected = predefinedItems.get(input - 1);
                 if (userItemList.contains(selected)) {
                     System.out.println(selected.getName() + " is already in the list.");
@@ -102,6 +102,7 @@ public class ProductDisplay {
         boolean done = false;
 		int index = 0;
 		int input = 99;
+		int avail = 1;
         
 		//display items 
         for(Item item : itemList) 
@@ -124,8 +125,10 @@ public class ProductDisplay {
 		do {
             System.out.print("Input the index of the item: ");
             input = s.nextInt();
+			toBuy = itemList.get(input - 1);
+			avail = toBuy.getStock();
 			
-            if(input >= 0 && input <= itemList.size()) {
+            if(input >= 0 && input <= itemList.size() && avail > 0) {
 				toBuy = itemList.get(input - 1);
 				System.out.println("Successfully selected " + toBuy.getName() + "!\n");
 				done = true;

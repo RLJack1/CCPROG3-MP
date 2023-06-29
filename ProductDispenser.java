@@ -26,8 +26,8 @@ public class ProductDispenser {
 			if(result) 
 				System.out.println("Dispensing " + selectedItem.getName() + "...");
 			
-			else 
-				System.out.println("Oops! Not enough stock.");
+			else
+				System.out.println("Oops! An error occurred.");
 		}
 	}
 	

@@ -38,11 +38,11 @@ public class MoneyHandler {
 	}
 	
 	public void newCashBox() {
-		int amount = 10;
+		int amount = 100;
 		
 		for(int i = 0; i < this.cashBox.length; i++) {
 			this.cashBox[i][1] = amount;
-			amount += 15;
+			amount += 150;
 		}
 		
 		this.displayDenomList();
@@ -57,21 +57,20 @@ public class MoneyHandler {
 	public void inputDenominations(Scanner s) {	
 		try { 
 			System.out.println("Enter the denominations separated by spaces:");
-			
+			s.nextLine();
 			String inputLine = s.nextLine();
 			String[] denominations = inputLine.split(" ");
-
-			for (int i = 0; i < holder.length; i++) {
+			
+			for(int i = 0; i < denominations.length; i++) {
 				switch(Integer.parseInt(denominations[i])){
-					case 1000 -> holder[0][1]++;
-					case 500 -> holder[1][1]++;
-					case 200 -> holder[2][1]++;
-					case 100 -> holder[3][1]++;
-					case 50 -> holder[4][1]++;
-					case 20 -> holder[5][1]++;
-					case 10 -> holder[6][1]++;
-					case 5 -> holder[7][1]++;
-					case 1 -> holder[8][1]++;
+					case 1000 -> this.holder[0][1]++;
+					case 500 -> this.holder[1][1]++;
+					case 200 -> this.holder[2][1]++;
+					case 100 -> this.holder[3][1]++;
+					case 50 -> this.holder[4][1]++;
+					case 10 -> this.holder[5][1]++;
+					case 5 -> this.holder[6][1]++;
+					case 1 -> this.holder[7][1]++;
 					default -> System.out.println("Denomination not recognized, skipping input...");
 				}
 			}
@@ -88,7 +87,6 @@ public class MoneyHandler {
 	
 	public void cashOne(int denomination, int numOfDenom) {
 		boolean success = false;
-		
 		int row = 99;
 		
 		for(int i = 0; i < this.cashBox.length; i++) {
@@ -96,6 +94,11 @@ public class MoneyHandler {
 				row = i;
 				success = true;
 			}
+		}
+		
+		if(numOfDenom <= 0) {
+			System.out.println("Invalid input.");
+			success = false;
 		}
 		
 		if(success) {
@@ -152,17 +155,16 @@ public class MoneyHandler {
 			s.nextLine();
 		}
 		
+		//transfer all holder money into cashBox
+		System.out.println("Loading money into the cashbox...");
+		for(i = 0; i < this.holder.length; i++) {
+			this.cashBox[i][1] += this.holder[i][1];
+		}
+		
 		//payment procedures
 		if(c == 'y') {
 			//if the user gave enough
 			if(change >= 0) {
-				//transfer all holder money into cashBox
-				System.out.println("Loading money into the cashbox...");
-				for(i = 0; i < holder.length; i++) {
-					cashBox[i][1] += holder[i][1];
-					holder[i][1] = 0;
-				}
-				
 				//break down change
 				this.breakdownChange(change);
 				
@@ -173,15 +175,15 @@ public class MoneyHandler {
 				if(enoughStock) {
 					//load money from cashBox to change
 					System.out.println("Getting your change ready...");
-					for(i = 0; i < changeArray.length; i++) {
-						if(changeArray[i][1] > 0) 
-							cashBox[i][1] -= changeArray[i][1];
+					for(i = 0; i < this.changeArray.length; i++) {
+						if(this.changeArray[i][1] > 0) 
+							this.cashBox[i][1] -= this.changeArray[i][1];
 					}
 					
 					//empty change array
 					System.out.println("Ka-ching! Change has been dispensed.");
-					for(i = 0; i < changeArray.length; i++) {
-						changeArray[i][1] = 0;
+					for(i = 0; i < this.changeArray.length; i++) {
+						this.changeArray[i][1] = 0;
 					}
 					
 					success = true;
@@ -209,8 +211,12 @@ public class MoneyHandler {
 		if(releaseAll) {
 			System.out.println("Canceling transaction...");
 			System.out.println("Releasing full change...");
-			for(i = 0; i < holder.length; i++) 
-				holder[i][1] = 0;
+			for(i = 0; i < this.holder.length; i++) {
+				if(this.holder[i][1] > 0) {
+					this.cashBox[i][1] -= this.holder[i][1];
+				}
+				this.holder[i][1] = 0;
+			}		
 		}
 		
 		return success;
@@ -220,10 +226,10 @@ public class MoneyHandler {
 		System.out.println("Breaking down change...");
 		int numBills = 0;
 		
-		for(int i = 0; i < changeArray.length; i++) {
-			numBills = change / changeArray[i][0];
-			changeArray[i][1] += numBills;
-			change %= changeArray[i][0];
+		for(int i = 0; i < this.changeArray.length; i++) {
+			numBills = change / this.changeArray[i][0];
+			this.changeArray[i][1] += numBills;
+			change %= this.changeArray[i][0];
 		}
 	}
 	
@@ -231,8 +237,8 @@ public class MoneyHandler {
 		System.out.println("Checking if there are enough bills to give change...");
 		boolean enoughChange = true;
 		
-		for(int i = 0; i < changeArray.length; i++) {
-			if(cashBox[i][1] - changeArray[i][1] < 0)
+		for(int i = 0; i < this.changeArray.length; i++) {
+			if(cashBox[i][1] - this.changeArray[i][1] < 0)
 				enoughChange = false;
 		}
 
@@ -243,8 +249,8 @@ public class MoneyHandler {
 	public int getTotal() {
 		int total = 0;
 		
-		for(int i = 0; i < cashBox.length; i++)
-			total += (cashBox[i][0] * cashBox[i][1]);
+		for(int i = 0; i < this.cashBox.length; i++)
+			total += (this.cashBox[i][0] * this.cashBox[i][1]);
 		
 		return total;
 	}
@@ -253,8 +259,8 @@ public class MoneyHandler {
 	public int getCashIn() {
 		int total = 0;
 		
-		for(int i = 0; i < holder.length; i++)
-			total += (holder[i][0] * holder[i][1]);
+		for(int i = 0; i < this.holder.length; i++)
+			total += (this.holder[i][0] * this.holder[i][1]);
 		
 		return total;
 	}
