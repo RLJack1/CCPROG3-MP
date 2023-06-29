@@ -79,7 +79,7 @@ public class Item {
 	  * @return Whether the program successfully added the stock
       */
     public boolean addStock(Item item, int amountToAdd){
-        if (this.stock + amountToAdd >= 10)
+        if (this.stock + amountToAdd > 10)
             return false;
         else
         {

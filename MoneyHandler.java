@@ -35,7 +35,9 @@ public class MoneyHandler {
 	};
 	
 	public MoneyHandler() {
-		//initialize cashBox -> @megan needs to update with file
+	}
+	
+	public void newCashBox() {
 		int amount = 10;
 		
 		for(int i = 0; i < this.cashBox.length; i++) {
@@ -84,7 +86,7 @@ public class MoneyHandler {
 		}
 	}
 	
-	public boolean cashOne(int denomination, int numOfDenom) {
+	public void cashOne(int denomination, int numOfDenom) {
 		boolean success = false;
 		
 		int row = 99;
@@ -97,28 +99,38 @@ public class MoneyHandler {
 		}
 		
 		if(success) {
-			if(numOfDenom > this.cashBox[row][1])
+			if(numOfDenom > this.cashBox[row][1]) {
 				success = false;
-			
-			else
+				System.out.println("Oops! Not enough biils to dispense.");
+			}
+				
+			else {
 				this.cashBox[row][1] -= numOfDenom;
+				System.out.println("Cashing out " + numOfDenom + " " + this.cashBox[row][0] + " bills...");
+				System.out.println("Cash out success!");
+			}	
 		}
 		
-		return success;
+		else
+			System.out.println("Oops! Invalid bill input.");
 	}
 	
-	public void refillOne(int denomination, int denomAdd) {
+	public boolean refillOne(int denomination, int denomAdd) {
+		boolean success = true;
+		
 		switch(denomination){
             case 1000 -> cashBox[0][1] += denomAdd;
             case 500 -> cashBox[1][1] += denomAdd;
             case 200 -> cashBox[2][1] += denomAdd;
             case 100 -> cashBox[3][1] += denomAdd;
             case 50 -> cashBox[4][1] += denomAdd;
-            case 20 -> cashBox[5][1] += denomAdd;
-            case 10 -> cashBox[6][1] += denomAdd;
-            case 5 -> cashBox[7][1] += denomAdd;
-            case 1 -> cashBox[8][1] += denomAdd;
+            case 10 -> cashBox[5][1] += denomAdd;
+            case 5 -> cashBox[6][1] += denomAdd;
+            case 1 -> cashBox[7][1] += denomAdd;
+			default -> success = false;
         }
+		
+		return success;
 	}
 	
 	public boolean payment(Item selectedItem, Scanner s) {
@@ -245,5 +257,13 @@ public class MoneyHandler {
 			total += (holder[i][0] * holder[i][1]);
 		
 		return total;
+	}
+	
+	public int getCashBoxAmount(int index) {
+		return this.cashBox[index][1];
+	}
+	
+	public void setCashBox(int index, int amount) {
+		this.cashBox[index][1] = amount;
 	}
 }
