@@ -212,16 +212,16 @@ public class VendingMachine {
 		try {
 			b = new BufferedWriter(new FileWriter(new File("Restock-History.txt")));
 			
-			for(Item item : this.oldInventory) {
-				b.write(item.getName() + "\n");
-				b.write(item.getStock()  + "\n");
+			for(Item start : this.oldInventory) {
+				b.write(start.getName() + "\n");
+				b.write(start.getStock()  + "\n");
 			}
 			
 			b.write("---\n");
 			
-			for(Item item : this.itemList) {
-				b.write(item.getName() + "\n");
-				b.write(item.getStock()  + "\n");
+			for(Item end : this.itemList) {
+				b.write(end.getName() + "\n");
+				b.write(end.getStock()  + "\n");
 			}
 			
 			b.close();

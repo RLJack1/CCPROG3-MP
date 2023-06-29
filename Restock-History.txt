@@ -13,7 +13,7 @@ WagyuBeef
 TapaBeef
 8
 BronzeTurkey
-8
+9
 ---
 BriocheBuns
 10
@@ -30,4 +30,4 @@ WagyuBeef
 TapaBeef
 8
 BronzeTurkey
-8
+9
