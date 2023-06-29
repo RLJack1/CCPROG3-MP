@@ -410,8 +410,6 @@ public class VendingMachine {
 			populateOptionsList(predefinedList); 
 
 			itemList = pDisplay.populateItemList(predefinedList, s); 
-
-			mh.initialMoneys();
 			
 			System.out.println("Alright! " + name + " is all set up!");
 		}
@@ -422,49 +420,24 @@ public class VendingMachine {
     }
 
     public void testMenu(Scanner s) throws FileNotFoundException {
+		boolean success = false;
 		this.selectedItem = pDisplay.displayOnSale(itemList, s); 
 		
 		if(!(this.selectedItem == null)) {
-			mh.inputDenominations(s); // User will input bills and store into 
+			mh.inputDenominations(s);
+			this.cashIn = mh.getCashIn();
+			success = mh.payment(selectedItem, s);
 			
-			System.out.print("Proceed with transaction? Type Y to proceed and N to cancel. Y/N\n" + "Input: ");
-			char c = '\0';
-			
-			if(s.hasNextLine()) {
-				c = s.next().charAt(0);
-				c = Character.toLowerCase(c);
-				s.nextLine();
+			if(success) {
+				pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - this.selectedItem.getPrice());
+				this.writeTransacHistory(this.selectedItem.getName(), 1);
+				this.addTotalSales(this.selectedItem.getPrice());
 			}
 			
-			if(c == 'y') { 
-				int price = selectedItem.getPrice();
-				boolean doesChange = mh.checkChange(this.cashIn, price);
-				if (doesChange){
-					pDispenser.releaseItem(this.isSpecial, this.selectedItem);
-					System.out.println("Calculating change...");
-					price = selectedItem.getPrice();
-					mh.checkChange(this.cashIn, price);
-
-					pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - price);
-					this.writeTransacHistory(this.selectedItem.getName(), 1);
-					this.totalSales = setTotalSales(price);
-					this.cashIn = 0;
-				}
-				else
-					System.out.println("Sorry! This Vending Machine doesn't have enough change to dispense :((");
-			}
-			
-			else {
-				System.out.println("Canceling transaction...");
-				System.out.println("Releasing full change...");
+			else
 				this.cashIn = 0;
-			}
 		}
-		
-		else {
-			System.out.println("Oops! An error occured.");
-		}
-    }
+	}
 
     public void maintainMenu(Scanner s) throws FileNotFoundException {
 		char c = '\0';
@@ -570,13 +543,8 @@ public class VendingMachine {
 				
 				if(c == 'y') {
 					int moneyTotal = mh.getTotal();
-					success = mh.cashOut();
-					
-					if(success)
+					mh.cashOut();
 					System.out.println("Successfully cashed out " + moneyTotal + " pesos." + this.getMachineName() + " is now cash-empty.");
-				
-					else
-						System.out.println("Oops! An error occurred.");
 				}
 				
 				else {
@@ -592,8 +560,6 @@ public class VendingMachine {
 						s.nextLine();
 					}
 					
-					int index = mh.getIndex(bill);
-					
 					System.out.print("How many " + bill + " bills would you like to take?\n" + "Amount: ");
 					
 					if(s.hasNextInt()) {
@@ -601,7 +567,7 @@ public class VendingMachine {
 						s.nextLine();
 					}
 					
-					success = mh.cashOne(index, amount);
+					success = mh.cashOne(bill, amount);
 					
 					if(success) {
 						System.out.println("Cashing out " + amount + " " + bill + " bills...");
@@ -627,8 +593,6 @@ public class VendingMachine {
 					s.nextLine();
 				}
 				
-				int index = mh.getIndex(bill);
-				
 				System.out.print("How many " + bill + " bills would you like to add?\n" + "Amount: ");
 				
 				if(s.hasNextInt()) {
@@ -636,7 +600,7 @@ public class VendingMachine {
 					s.nextLine();
 				}
 				
-				mh.refillOne(index, amount);
+				mh.refillOne(bill, amount);
 				System.out.println("Replenishing " + amount + " " + bill + " bills...");
 				System.out.println("Replenish success!");
 			}
@@ -716,8 +680,8 @@ public class VendingMachine {
 		this.cashIn = newCashIn;
 	}
 	
-	public int setTotalSales(int amountToAdd) {
-		return (this.totalSales + amountToAdd);
+	public void addTotalSales(int amountToAdd) {
+		this.totalSales += amountToAdd;
 	}
 	
 	public void setLastTotalSales(int newAmount) {
