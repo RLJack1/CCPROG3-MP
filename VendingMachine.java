@@ -410,8 +410,6 @@ public class VendingMachine {
 			populateOptionsList(predefinedList); 
 
 			itemList = pDisplay.populateItemList(predefinedList, s); 
-
-			mh.initialMoneys();
 			
 			System.out.println("Alright! " + name + " is all set up!");
 		}
@@ -592,8 +590,6 @@ public class VendingMachine {
 						s.nextLine();
 					}
 					
-					int index = mh.getIndex(bill);
-					
 					System.out.print("How many " + bill + " bills would you like to take?\n" + "Amount: ");
 					
 					if(s.hasNextInt()) {
@@ -601,7 +597,7 @@ public class VendingMachine {
 						s.nextLine();
 					}
 					
-					success = mh.cashOne(index, amount);
+					success = mh.cashOne(bill, amount);
 					
 					if(success) {
 						System.out.println("Cashing out " + amount + " " + bill + " bills...");
@@ -627,8 +623,6 @@ public class VendingMachine {
 					s.nextLine();
 				}
 				
-				int index = mh.getIndex(bill);
-				
 				System.out.print("How many " + bill + " bills would you like to add?\n" + "Amount: ");
 				
 				if(s.hasNextInt()) {
@@ -636,7 +630,7 @@ public class VendingMachine {
 					s.nextLine();
 				}
 				
-				mh.refillOne(index, amount);
+				mh.refillOne(bill, amount);
 				System.out.println("Replenishing " + amount + " " + bill + " bills...");
 				System.out.println("Replenish success!");
 			}
