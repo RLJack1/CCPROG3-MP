@@ -366,9 +366,11 @@ public class VendingMachine {
 	}
 
     public void createMenu(Scanner s) throws FileNotFoundException {
+		char c = '\0';
+		
 		if(this.itemList != null) {
 			System.out.print("Do you want to obliterate this Vending Machine and create a new one? Y/N\n" + "Input: ");
-			char c = s.next().charAt(0);
+			c = s.next().charAt(0);
 			c = Character.toLowerCase(c);
 			s.nextLine();
 		}
