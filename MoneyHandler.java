@@ -224,6 +224,13 @@ public class MoneyHandler {
 					for(i = 0; i < this.changeArray.length; i++) {
 						this.changeArray[i][1] = 0;
 					}
+
+					for(i = 0; i < this.holder.length; i++) {
+						if(this.holder[i][1] > 0) {
+							this.cashBox[i][1] -= this.holder[i][1];
+						}
+						this.holder[i][1] = 0;
+					}
 					
 					success = true;
 				}
@@ -257,7 +264,7 @@ public class MoneyHandler {
 				this.holder[i][1] = 0;
 			}		
 		}
-		
+
 		return success;
 	}
 	
