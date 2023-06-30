@@ -65,7 +65,7 @@ public class Item {
     }
 
 	/** 
-      * Changes the item's current price
+      * Changes the item's current price to a new amount
 	  * @param newPrice The updated cost of the item
       */
     public void setPrice(int newPrice){
@@ -73,7 +73,7 @@ public class Item {
     }
 
 	/** 
-      * Increases the item's current stock
+      * Increases the item's current stock by an amount and returns its success
 	  * @param item			The item object to add stock to
 	  * @param amountToAdd	The amount of stock to be added
 	  * @return Whether the program successfully added the stock
@@ -89,7 +89,7 @@ public class Item {
     }
 
 	/** 
-      * Reduces the item's current stock
+      * Reduces the item's current stock by an amount and returns its success
 	  * @param item				The item object to remove stock from
 	  * @param amountToMinus	The amount of stock to be subtracted
 	  * @return Whether the program successfully reduced the stock

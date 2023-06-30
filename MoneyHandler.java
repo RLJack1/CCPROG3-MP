@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/** 
+  * Stores and conducts operations on all money inside the Vending Machine
+  */
 public class MoneyHandler {
 	private int[][] cashBox = {
 	  {1000, 0},
@@ -34,9 +37,16 @@ public class MoneyHandler {
 	  {1, 0}
 	};
 	
+	/** 
+	  * A constructor that creates an instance of the ProductDispenser object.
+	  */
 	public MoneyHandler() {
 	}
 	
+	/** 
+	  * Called to initialize the cashBox to default values.
+	  * Only used when a new Vending Machine is created.
+	  */
 	public void newCashBox() {
 		int amount = 100;
 		
@@ -48,12 +58,19 @@ public class MoneyHandler {
 		this.displayDenomList();
 	}
 	
+	/** 
+	  * Displays the stock of all bills inside the Vending Machine
+	  */
 	public void displayDenomList() {
 		for(int i = 0; i < this.cashBox.length; i++) {
 			System.out.println("P" + this.cashBox[i][0] + ": " + this.cashBox[i][1] + " stored.");
 		}
 	}
 	
+	/** 
+	  * Gets money input from the user and stores it into the holder (basically temp) array
+	  * @param s The active scanner object
+	  */
 	public void inputDenominations(Scanner s) {	
 		try { 
 			System.out.println("Enter the denominations separated by spaces:");
@@ -80,16 +97,25 @@ public class MoneyHandler {
 		}
 	}
 	
+	/** 
+	  * Completely empties the cashBox
+	  */
 	public void cashOut() {
 		for(int i = 0; i < this.cashBox.length; i++) {
 			this.cashBox[i][1] = 0;
 		}
 	}
 	
+	/** 
+	  * Deducts (or cashes out) a bill's stock by an amount
+	  * @param denomination	The bill value to be cashed out
+	  * @param numOfDenom	The number of bills to be cashed out
+	  */
 	public void cashOne(int denomination, int numOfDenom) {
 		boolean success = false;
 		int row = 99;
 		
+		//looks for the index where the bill blongs
 		for(int i = 0; i < this.cashBox.length; i++) {
 			if(this.cashBox[i][0] == denomination) {
 				row = i;
@@ -119,6 +145,12 @@ public class MoneyHandler {
 			System.out.println("Oops! Invalid bill input.");
 	}
 	
+	/** 
+	  * Replenishes a bill's stock by an amount
+	  * @param denomination	The bill value to be replenished
+	  * @param denomAdd		The number of bills to be replenished
+	  * @return Whether or not the bill value was valid
+	  */
 	public boolean refillOne(int denomination, int denomAdd) {
 		boolean success = true;
 		
@@ -137,6 +169,12 @@ public class MoneyHandler {
 		return success;
 	}
 	
+	/** 
+	  * Conducts the payment process during product transaction
+	  * @param selectedItem	The item selected by the user for purchase
+	  * @param s			The active scanner object
+	  * @return Whether or not the payment was successfully performed
+	  */
 	public boolean payment(Item selectedItem, Scanner s) {
 		boolean releaseAll = false;	
 		boolean enoughStock = true;
@@ -223,6 +261,10 @@ public class MoneyHandler {
 		return success;
 	}
 	
+	/** 
+	  * Splits the user's given change into its separate bill form
+	  * @param change The total amount of change to be issued
+	  */
 	public void breakdownChange(int change) {
 		System.out.println("Breaking down change...");
 		int numBills = 0;
@@ -234,6 +276,10 @@ public class MoneyHandler {
 		}
 	}
 	
+	/** 
+	  * Checks if the Vending Machine has sufficient bills to dispense needed change
+	  * @return Whether there is enough bill stock for dispensing
+	  */
 	public boolean checkChange() {
 		System.out.println("Checking if there are enough bills to give change...");
 		boolean enoughChange = true;
@@ -246,7 +292,10 @@ public class MoneyHandler {
 		return enoughChange;
 	}
 	
-	//sum of cashBox
+	/** 
+	  * Computes for and returns the sum of money stored in this Vending Machine's cashBox
+	  * @return The total amount of money stored in the cashBox of the Vending Machine
+	  */
 	public int getTotal() {
 		int total = 0;
 		
@@ -256,7 +305,10 @@ public class MoneyHandler {
 		return total;
 	}
 	
-	//sum of holder
+	/** 
+	  * Computes for and returns the sum of money stored in this Vending Machine's holder array
+	  * @return The total amount of money stored in the holder array of the Vending Machine
+	  */
 	public int getCashIn() {
 		int total = 0;
 		
@@ -266,10 +318,20 @@ public class MoneyHandler {
 		return total;
 	}
 	
+	/** 
+	  * Finds the number of bill stock given the bill's index
+	  * @param index	The index of the bill
+	  * @return The available stock of the bill
+	  */
 	public int getCashBoxAmount(int index) {
 		return this.cashBox[index][1];
 	}
 	
+	/** 
+	  * Sets the stock of a certain bill to a new amount
+	  * @param index	The index of the bill
+	  * @param amount	The new amount of stock
+	  */
 	public void setCashBox(int index, int amount) {
 		this.cashBox[index][1] = amount;
 	}

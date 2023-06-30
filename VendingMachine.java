@@ -48,6 +48,8 @@ public class VendingMachine {
 	
 	/** 
 	  * A constructor that creates a vending machine instance given its name and special status
+	  * @param machineName 	The name to be given to the Vending Machine
+	  * @param isSpecial	The special status to be assigned to this Vending Machine
 	  */
 	public VendingMachine(String machineName, boolean isSpecial) {
 		this.machineName = machineName;
@@ -64,6 +66,7 @@ public class VendingMachine {
 	
 	/** 
 	  * Loads the previously saved vending machine data into the current program 
+	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
 	public void populateVMHistory() throws FileNotFoundException {
 		try {
@@ -129,7 +132,7 @@ public class VendingMachine {
         predefinedList.add(new Item("BeyondBeef", 210.0, true, 330, 8));
         predefinedList.add(new Item("JackBeef", 100.0, true, 100, 8));
 		
-		/*
+		/* Items for MCO2:
         predefinedList.add(new Item("WhiteOnions", 40.0, false, 30, 8));
         predefinedList.add(new Item("OnionRings", 205.5, false, 85, 8));
         predefinedList.add(new Item("TrappistCheese", 355.0, false, 140, 8));
@@ -143,12 +146,15 @@ public class VendingMachine {
         predefinedList.add(new Item("HotSauce", 11.0, false, 50, 8));
         predefinedList.add(new Item("BarbequeSauce", 172.0, false, 70, 8));
         predefinedList.add(new Item("CaviarSauce", 252.0, false, 330, 8));
-        predefinedList.add(new Item("JackSauce", 10.0, false, 10, 8));*/
+        predefinedList.add(new Item("JackSauce", 10.0, false, 10, 8));
+		*/
+		
 		return predefinedList;
     }
 	
 	/** 
 	  * Saves all vending machine data into a file
+	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
 	public void writeVMHistory() throws FileNotFoundException {
 		BufferedWriter b = null;
@@ -184,8 +190,9 @@ public class VendingMachine {
 	
 	/** 
 	  * Saves the details of one transaction into a file
-	  * @param item		The item dispensed during the transaction
-	  * @param cashIn	The amount of money the user paid during the transaction
+	  * @param name		The name of the item dispensed
+	  * @param qty		The number of times the item was dispensed
+	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
 	public void writeTransacHistory(String name, int qty) throws FileNotFoundException {
 		BufferedWriter b = null;
@@ -204,9 +211,8 @@ public class VendingMachine {
 	}
 
 	/** 
-	  * Saves the details of a restock into a file
-	  * @param amountToAdd 	The amount of stock added to the item
-	  * @param newStock 	The new total stock of the item for sale
+	  * Saves the details of one restock into a file
+	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
 	public void saveRestock() throws FileNotFoundException {
 		BufferedWriter b = null;
@@ -235,6 +241,7 @@ public class VendingMachine {
 	
 	/** 
 	  * Displays all restock history details from the savefile
+	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
 	public void printRestockHistory() throws FileNotFoundException {
 		try {
@@ -278,6 +285,7 @@ public class VendingMachine {
 	/** 
 	  * Clears all data of a file, given its filename
 	  * @param filename The name of the file to be cleared
+	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
 	public void clearFile(String filename) throws FileNotFoundException {
         try {
@@ -290,6 +298,13 @@ public class VendingMachine {
         }
 	}
 	
+	/** 
+	  * Displays the main menu of the Vending Machine and repeatedly gets user input.
+	  * Makes the necessary method calls to perform specific sub-tasks.
+	  * @param vm	The Vending Machine being operated on
+	  * @param s 	The active scanner object
+	  * @throws FileNotFoundException if the needed file does not exist in this directory
+	  */
 	public void displayMenu(VendingMachine vm, Scanner s) throws FileNotFoundException {
 		do {		
 			
@@ -367,6 +382,11 @@ public class VendingMachine {
 		} while(userChoice != 3);
 	}
 
+	/** 
+	  * Gets input from the user and creates a new Vending Machine
+	  * @param s 	The active scanner object
+	  * @throws FileNotFoundException if the file does not exist in this directory
+	  */
     public void createMenu(Scanner s) throws FileNotFoundException {
 		char c = '\0';
 		
@@ -390,6 +410,7 @@ public class VendingMachine {
 			this.setCashIn(0);
 			this.setSelectedItem(null);
 			
+			//Get VM details from user
 			System.out.println("Name your Vending Machine!\n" + "Input: ");
 			String name = s.nextLine();
 				
@@ -400,6 +421,7 @@ public class VendingMachine {
 				s.nextLine();
 			}
 			
+			//Sets up new VM
 			boolean isSpecial = false;
 			
 			if(c == 'y') {
@@ -425,16 +447,25 @@ public class VendingMachine {
 	
     }
 
+	/** 
+	  * Facilitates the product transaction process
+	  * @param s 	The active scanner object
+	  * @throws FileNotFoundException if the file does not exist in this directory
+	  */
     public void testMenu(Scanner s) throws FileNotFoundException {
 		boolean success = false;
+		
+		//Display items on sale
 		this.selectedItem = pDisplay.displayOnSale(itemList, s); 
 		
 		if(!(this.selectedItem == null)) {
+			//Get money from the user
 			mh.inputDenominations(s);
 			this.cashIn = mh.getCashIn();
 			success = mh.payment(selectedItem, s);
 			
 			if(success) {
+				//Dispense item, print receipt, record transaction
 				pDispenser.releaseItem(this.isSpecial, this.selectedItem);
 				this.setLastTotalSales(this.totalSales);
 				this.addTotalSales(this.selectedItem.getPrice());
@@ -447,6 +478,11 @@ public class VendingMachine {
 		}
 	}
 
+	/** 
+	  * Facilitates and conducts all maintenance features. 
+	  * @param s 	The active scanner object
+	  * @throws FileNotFoundException if the file does not exist in this directory
+	  */
     public void maintainMenu(Scanner s) throws FileNotFoundException {
 		char c = '\0';
 		ArrayList<Item> temp = new ArrayList<Item>();
@@ -469,8 +505,10 @@ public class VendingMachine {
 				s.nextLine();
 			}			
 			
+			//Item restock
 			if(userChoice == 1) {
 				c = 'y';
+				//Temporary old inventory holder
 				temp.clear();
 				for(Item i : itemList) {
 					temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice(), i.getStock()));
@@ -484,6 +522,7 @@ public class VendingMachine {
 				success = selectedItem.addStock(this.selectedItem, amountToAdd);
 				
 				if(success) {
+					//Sets old inventory to temp if restock is successful
 					System.out.println("Restocking " + this.selectedItem.getName() + " ...");
 					System.out.println("Restock success!");
 					this.oldInventory.clear();
@@ -530,6 +569,7 @@ public class VendingMachine {
 					s.nextLine();
 				}
 				
+				//Save restock details into file
 				this.lastTotalSales = 0;
 				this.totalSales = 0;
 				System.out.println("Saving restock inventories...");
@@ -537,6 +577,7 @@ public class VendingMachine {
 				System.out.println("Returning to Maintenance Menu...");
 			}
 			
+			//Item re-price
 			else if(userChoice == 2) {
 				System.out.println("Please select the item you would like to re-price!");
 				this.selectedItem = pDisplay.displayOnSale(itemList, s); 
@@ -553,6 +594,7 @@ public class VendingMachine {
 				System.out.println("New price successfully set!");
 			}
 			
+			//Take out money
 			else if(userChoice == 3) {
 				mh.displayDenomList();
 				
@@ -563,18 +605,21 @@ public class VendingMachine {
 				c = '\0';
 				success = false;
 				
+				//Get input
 				if(s.hasNextLine()) {
 					c = s.next().charAt(0);
 					c = Character.toLowerCase(c);
 					s.nextLine();
 				}
 				
+				//Take out all money
 				if(c == 'y') {
 					int moneyTotal = mh.getTotal();
 					mh.cashOut();
 					System.out.println("Successfully cashed out " + moneyTotal + " pesos. " + this.getName() + " is now cash-empty.");
 				}
 				
+				//Take out specific bill/s
 				else {
 					System.out.print("Which bill would you like to cash out?\n" + "Bill value: ");
 					
@@ -597,6 +642,7 @@ public class VendingMachine {
 				}
 			}
 			
+			//Replenish money
 			else if(userChoice == 4) {
 				mh.displayDenomList();
 					
@@ -628,18 +674,22 @@ public class VendingMachine {
 					System.out.println("Invalid bill value.\n");
 			}
 			
+			//Print transaction history
 			else if(userChoice == 5) {
 				pDispenser.printTransacHistory();
 			}
 			
+			//Print restock history
 			else if(userChoice == 6) {
 				this.printRestockHistory();
 			}
 			
+			//Exit
 			else if(userChoice == 7) {
 				System.out.println("Returning to Features Menu...");
 			}
 			
+			//Error catch
 			else {
 				System.out.println("Invalid input. Please try again.");
 				userChoice = 0;
@@ -650,46 +700,90 @@ public class VendingMachine {
 		userChoice = 0;
     }
 
+	/** 
+      * Gets and returns the name of this Vending Machine
+	  * @return The machine's name
+      */
 	public String getName() {
 		return this.machineName;
 	}
 	
+	/** 
+      * Gets and returns the special status of this Vending Machine
+	  * @return The special status
+      */
 	public boolean getIsSpecial() {
 		return this.isSpecial;
 	}
 	
+	/** 
+      * Gets and returns the list of items on sale for this Vending Machine
+	  * @return The ArrayList of item objects for sale
+      */
 	public ArrayList<Item> getItemList() {
 		return this.itemList;
 	}
 	
+	/** 
+      * Gets and returns the amount of inputted user cash bring held by this Vending Machine
+	  * @return The amount of cash
+      */
 	public int getCashIn() {
 		return this.cashIn;
 	}
 	
+	/** 
+      * Gets and returns the current total sales from the last restocking
+	  * @return The current total sales
+      */
 	public int getTotalSales() {
 		return this.totalSales;
 	}
 	
+	/** 
+      * Gets and returns the last saved total sales from the last restocking
+	  * @return The last saved total sales
+      */
 	public int getLastTotalSales() {
 		return this.lastTotalSales;
 	}
 	
+	/** 
+      * Gets and returns the currently selected item by the user
+	  * @return The selected item object
+      */
 	public Item getSelectedItem() {
 		return this.selectedItem;
 	}
 	
+	/** 
+      * Changes the Vending Machine's name to a new one
+	  * @param newName The new name of this VendingMachine object
+      */
 	public void setMachineName(String newName) {
 		this.machineName = newName;
 	}
 	
+	/** 
+      * Changes the Vending Machine's special status
+	  * @param newIsSpecial The new special status of this VendingMachine object
+      */
 	public void setIsSpecial(boolean newIsSpecial) {
 		this.isSpecial = newIsSpecial;
 	}
 	
+	/** 
+      * Clears all item objects for sale
+      */
 	public void clearItemList() {
 		this.itemList.clear();
 	}
 	
+	/** 
+      * Adds an item to the list of items on sale
+	  * @param item The item object to be added
+	  * @return Whether the item was successfully added
+      */
 	public boolean addItem(Item item) {
 		boolean result = false;
 		
@@ -699,18 +793,34 @@ public class VendingMachine {
 		return result;
 	}
 	
+	/** 
+      * Changes the amount of user money held to a new value
+	  * @param newCashIn The new amount of user money being held
+      */
 	public void setCashIn(int newCashIn) {
 		this.cashIn = newCashIn;
 	}
 	
+	/** 
+      * Increases the total sales since last restock by the specified amount
+	  * @param amountToAdd The amount by which the total sales will increase
+      */
 	public void addTotalSales(int amountToAdd) {
 		this.totalSales += amountToAdd;
 	}
 	
+	/** 
+      * Changes the value of the last saved total sales to a new value
+	  * @param newAmount The new amount of last saved total sales
+      */
 	public void setLastTotalSales(int newAmount) {
 		this.lastTotalSales = newAmount;
 	}
 	
+	/** 
+      * Sets the currently selected item to a different item object
+	  * @param newSelectedItem The new item the user selected
+      */
 	public void setSelectedItem(Item newSelectedItem) {
 		this.selectedItem = newSelectedItem;
 	}

@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 
 /** 
-  * Updates stock and prints details relative to the transaction conducted. 
+  * Performs supplementary tasks during and after the transaction process
   */
 public class ProductDispenser {
 	/** 
@@ -15,7 +15,7 @@ public class ProductDispenser {
 	}
 	
 	/** 
-	  * Narrates item dispense and subtracts its stock by 1
+	  * Narrates dispensing of the item and subtracts its stock by 1
 	  * @param isSpecial 	Whether the vending machine is a special vending machine
 	  * @param selectedItem	The item to be dispensed
 	  */
@@ -48,6 +48,7 @@ public class ProductDispenser {
 	
 	/** 
 	  * Displays all details of all previous transactions on this vending machine
+	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
 	public void printTransacHistory() throws FileNotFoundException {
 		try {

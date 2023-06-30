@@ -2,8 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /** 
-  * Displays: all available preset products to add to the vending machine, and
-  * all available items on sale.
+  * Aids in any process needing a display of current products and receiving user item selection
   */
 public class ProductDisplay {
 	/** 
@@ -13,33 +12,18 @@ public class ProductDisplay {
 	}
 
 	/** 
-	  * Gets the item's name from the user and return its corresponding item object
-	  * @param itemList	The list of all available items for this list
-	  * @param s 		The active scanner object
-	  * @return The object instance of the user's selected item 
+	  * Displays all predefined items and returns the user's selected input. 
+	  * Called at Vending Machine creation.
+	  * @param predefinedItems	The list of all predefined items
+	  * @param s 				The active scanner object
+	  * @return The ArrayList of item objects added by the user 
 	  */
-    public Item userChoice(ArrayList<Item> itemList, Scanner s) {
-		Item userItem = null;
-        String itemInput = s.nextLine();
-        itemInput.toLowerCase();
-
-        for (Item item : itemList) {
-            if (item.getName().toLowerCase().equals(itemInput)) {
-                userItem = item;
-                break;
-            }
-        }
-
-        System.out.println(userItem.getName()); // For testing 
-
-        return userItem;
-    }
-
     public ArrayList<Item> populateItemList(ArrayList<Item> predefinedItems, Scanner s) {
         ArrayList<Item> userItemList = new ArrayList<Item>();
         int input = 0;
         int index = 0;
 
+		//displays the predefined items
         for (Item item : predefinedItems) {
 			if((item.getName().length() >= 12 && index > 9) || item.getName().length() >= 13) {
 				System.out.println("\t\t\t" + (index + 1) + ": " + item.getName() + "\t" + item.getCalories() + "\t" + item.getPrice() + "\t" + item.getStock());
@@ -52,6 +36,7 @@ public class ProductDisplay {
             index++;
         }
 
+		//repeatedly takes in user input, error checks, and adds items
         do {
             System.out.print("Input the index of the item or type \"99\" to exit: ");
             input = s.nextInt();
@@ -91,8 +76,8 @@ public class ProductDisplay {
     }		
 
 	/** 
-	  * Displays all items from this list and returns the user's selected input
-	  * @param itemList	The list of all available items for this list
+	  * Displays all items on sale and returns the user's selected input
+	  * @param itemList	The list of all items on sale
 	  * @param s 		The active scanner object
 	  * @return The object instance of the user's selected item 
 	  */

@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /** 
-  * Makes the initial function calls to start the co-interaction of classes.
+  * Makes the initial function calls to start the interaction of classes.
   */
 public class Driver {
 	private VendingMachine vm;
