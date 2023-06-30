@@ -4,7 +4,6 @@ public class MoneyHandler {
 	private int[][] cashBox = {
 	  {1000, 0},
 	  {500, 0},
-	  {200, 0},
 	  {100, 0},
 	  {50, 0},
 	  {20, 0},
@@ -16,7 +15,6 @@ public class MoneyHandler {
 	private int[][] holder = {
 	  {1000, 0},
 	  {500, 0},
-	  {200, 0},
 	  {100, 0},
 	  {50, 0},
 	  {20, 0},
@@ -28,7 +26,6 @@ public class MoneyHandler {
 	private int[][] changeArray = {
 	  {1000, 0},
 	  {500, 0},
-	  {200, 0},
 	  {100, 0},
 	  {50, 0},
 	  {20, 0},
@@ -68,13 +65,12 @@ public class MoneyHandler {
 				switch(Integer.parseInt(denominations[i])){
 					case 1000 -> {this.holder[0][1]++; System.out.println("1000 inserted...");}
 					case 500 -> {this.holder[1][1]++; System.out.println("500 inserted...");}
-					case 200 -> {this.holder[2][1]++; System.out.println("200 inserted...");}
-					case 100 -> {this.holder[3][1]++; System.out.println("100 inserted...");}
-					case 50 -> {this.holder[4][1]++; System.out.println("50 inserted...");}
-					case 20 -> {this.holder[5][1]++; System.out.println("20 inserted...");}
-					case 10 -> {this.holder[6][1]++; System.out.println("10 inserted...");}
-					case 5 -> {this.holder[7][1]++; System.out.println("5 inserted...");}
-					case 1 -> {this.holder[8][1]++; System.out.println("1 inserted...");}
+					case 100 -> {this.holder[2][1]++; System.out.println("100 inserted...");}
+					case 50 -> {this.holder[3][1]++; System.out.println("50 inserted...");}
+					case 20 -> {this.holder[4][1]++; System.out.println("20 inserted...");}
+					case 10 -> {this.holder[5][1]++; System.out.println("10 inserted...");}
+					case 5 -> {this.holder[6][1]++; System.out.println("5 inserted...");}
+					case 1 -> {this.holder[7][1]++; System.out.println("1 inserted...");}
 					default -> System.out.println("Denomination " + denominations[i] + " not recognized, skipping input...");
 				}
 			}
@@ -129,13 +125,12 @@ public class MoneyHandler {
 		switch(denomination){
             case 1000 -> cashBox[0][1] += denomAdd;
             case 500 -> cashBox[1][1] += denomAdd;
-            case 200 -> cashBox[2][1] += denomAdd;
-            case 100 -> cashBox[3][1] += denomAdd;
-            case 50 -> cashBox[4][1] += denomAdd;
-			case 20 -> cashBox[5][1] += denomAdd;
-            case 10 -> cashBox[6][1] += denomAdd;
-            case 5 -> cashBox[7][1] += denomAdd;
-            case 1 -> cashBox[8][1] += denomAdd;
+            case 100 -> cashBox[2][1] += denomAdd;
+            case 50 -> cashBox[3][1] += denomAdd;
+			case 20 -> cashBox[4][1] += denomAdd;
+            case 10 -> cashBox[5][1] += denomAdd;
+            case 5 -> cashBox[6][1] += denomAdd;
+            case 1 -> cashBox[7][1] += denomAdd;
 			default -> success = false;
         }
 		

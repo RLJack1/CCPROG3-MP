@@ -1,5 +1,5 @@
 BriocheBread
-9
+8
 RyeBread
 8
 PotatoBread
@@ -7,7 +7,7 @@ PotatoBread
 AngusBeef
 7
 TapaBeef
-8
+7
 CanadianBacon
 7
 GrilledSalmon
@@ -16,7 +16,7 @@ BeyondBeef
 8
 ---
 BriocheBread
-10
+8
 RyeBread
 8
 PotatoBread
@@ -24,10 +24,10 @@ PotatoBread
 AngusBeef
 7
 TapaBeef
-8
+7
 CanadianBacon
 7
 GrilledSalmon
 7
 BeyondBeef
-8
+9
