@@ -1,6 +1,6 @@
 # CCPROG3-MP
 ### MEGAN STATUS CHECK
-- finish javadoc and help w test cases if kaya
+- done
 
 ### RENZO STATUS CHECK
 - finish test cases
