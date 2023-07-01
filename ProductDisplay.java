@@ -110,11 +110,12 @@ public class ProductDisplay {
 		do {
             System.out.print("Input the index of the item: ");
             input = s.nextInt();
-			toBuy = itemList.get(input - 1);
+			input -= 1;
+			toBuy = itemList.get(input);
 			avail = toBuy.getStock();
 			
             if(input >= 0 && input <= itemList.size() && avail > 0) {
-				toBuy = itemList.get(input - 1);
+				toBuy = itemList.get(input);
 				System.out.println("Successfully selected " + toBuy.getName() + "!\n");
 				done = true;
 			}

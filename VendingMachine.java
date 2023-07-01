@@ -507,67 +507,39 @@ public class VendingMachine {
 			
 			//Item restock
 			if(userChoice == 1) {
-				c = 'y';
 				//Temporary old inventory holder
 				temp.clear();
 				for(Item i : itemList) {
 					temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice(), i.getStock()));
 				}
-				
-				System.out.println("Please select the item you would like to restock!");
-				this.selectedItem = pDisplay.displayOnSale(itemList, s); 
-				
-				System.out.println("Input amount of stock to add: ");
-				int amountToAdd = s.nextInt();
-				success = selectedItem.addStock(this.selectedItem, amountToAdd);
-				
-				if(success) {
-					//Sets old inventory to temp if restock is successful
-					System.out.println("Restocking " + this.selectedItem.getName() + " ...");
-					System.out.println("Restock success!");
-					this.oldInventory.clear();
-					this.oldInventory.addAll(temp);
-				}
-				
-				else {
-					System.out.println("Oops! Amount to add is too much.");
-				}
-				
-				System.out.print("Restock another item? Y/N\n" + "Input: ");
-				c = s.next().charAt(0);
-				c = Character.toLowerCase(c);
-				s.nextLine();
 					
-				while(c == 'y') {
+				do {
 					c = '\0';
-					temp.clear();
-					for(Item i : itemList) {
-						temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice(), i.getStock()));
-					}
-				
+					
 					System.out.println("Please select the item you would like to restock!");
 					this.selectedItem = pDisplay.displayOnSale(itemList, s); 
 					
 					System.out.println("Input amount of stock to add: ");
-					amountToAdd = s.nextInt();
+					int amountToAdd = s.nextInt();
 					success = selectedItem.addStock(this.selectedItem, amountToAdd);
 					
 					if(success) {
-						System.out.println("Restocking " + this.selectedItem.getName() + " ...");
+						//Sets old inventory to temp if restock is successful
+						System.out.println("Restocking " + this.selectedItem.getName() + "...");
 						System.out.println("Restock success!");
 						this.oldInventory.clear();
 						this.oldInventory.addAll(temp);
 					}
 					
 					else {
-						System.out.println("Oops! Amount to add is too much.\n");
+						System.out.println("Oops! Amount to add is too much.");
 					}
 					
 					System.out.print("Restock another item? Y/N\n" + "Input: ");
 					c = s.next().charAt(0);
 					c = Character.toLowerCase(c);
 					s.nextLine();
-				}
+				} while(c == 'y');
 				
 				//Save restock details into file
 				this.lastTotalSales = 0;
