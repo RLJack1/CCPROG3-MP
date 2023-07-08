@@ -1,12 +1,21 @@
 # CCPROG3-MP
 ### MEGAN STATUS CHECK
-- done
+- 
 
 ### RENZO STATUS CHECK
-- finish test cases
+- 
 
 ### FUTURE NOTES
-- i realize our item cap is too little for the recipes (for mco2 na)
-- does money also have to be treated as an object in mco2?
-- i want to add more features to the maintenance menu (show all vm details, show all denom, show all stock)
-- implement recipe scheme
+- calorie computation
+- categorize items, recipes, vms
+- show item prep narration
+- custom orders
+- option to create a non-preset item
+- prevent sale on non-standalone foods
+- maintenance (show all vm features, denom, stock, items)
+- increase item cap
+- make items indiv objects 
+- inheritance, polymorphism, encapsulation, overriding/overloading
+- mvc architecture (separate items) 
+- implement simple items (item, vm, cashbox) 
+- gui
