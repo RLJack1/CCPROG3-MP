@@ -1,0 +1,23 @@
+- user is presented with vm interface
+- interface includes: products, display screen panel, space for text input, number input pad, dispenser compartment
+- upon startup, controller calls populateVMHistory() and makes view display appropriate message (code currently in Driver)
+- controller makes view display the 3 menu options and has the user navigate through the menus in controller? (code for menus currently in VendingMachine)
+
+CREATE MENU
+- 
+
+
+TEST MENU
+- 
+
+
+MAINTAIN MENU
+- controller prompts the user to give input
+- view takes input, passes data into controller
+- controller calls the necessary function for such a feature
+
+
+
++ make items indiv objects
++ create more (and smaller) object classes
++ split all menus into callable functions
