@@ -5,16 +5,24 @@ VendingMachineView
 - 
 
 Controller 
--
+- calls view and model
+- prompt and perform menu operations
+- write data into files
 
-VendingMachine 
--
+VendingMachine (stores)
+- vm details
+- all object instantiations of VM parts
+- getters and setters
 
-SpecialVM
-- 
+SpecialVM (stores)
+- food typ (burger pizza burrito)
+- available preset recipes
+- number of items per recipe
+- recipes chosen by the creator
 
 FileHandler
 - clear files
+- load files?
 
 CashBox (stores) 
 - current money 2d array
@@ -28,12 +36,12 @@ Item (stores)
 - price
 - stock 
 - standalone 
+- getters and setters
 
 ItemRack (stores) 
 - available preset items 
-- available preset recipes
 - items on sale
-- number of items per recipe
+- getters and setters
 
 
 INITIALIZING 
