@@ -21,3 +21,8 @@ MAINTAIN MENU
 + make items indiv objects
 + create more (and smaller) object classes
 + split all menus into callable functions
+
+renzo note: create comprehensive overview of the view; methods and major processes of the view such as user inputs through buttons and text fields, reflecting information from the controller into panels,
+and 
+search designs and formatting for the vending machine and images/vectors for each of the items. sold out items must be shown to be empty. 
+there must be two GUIs, one for the factory and one for the vending machine. 
