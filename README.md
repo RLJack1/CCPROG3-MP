@@ -1,21 +1,15 @@
 # CCPROG3-MP
 ### MEGAN STATUS CHECK
-- 
+- started organizing code into respective objects
 
 ### RENZO STATUS CHECK
 - 
 
 ### FUTURE NOTES
 - calorie computation
-- categorize items, recipes, vms
-- show item prep narration
 - custom orders
 - option to create a non-preset item
 - prevent sale on non-standalone foods
 - maintenance (show all vm features, denom, stock, items)
-- increase item cap
+- increase item cap to min 8 max 16
 - make items indiv objects
-- inheritance, polymorphism, encapsulation, overriding/overloading
-- mvc architecture (separate items)
-- implement simple items (item, vm, cashbox)
-- gui
