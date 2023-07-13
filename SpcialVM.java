@@ -3,6 +3,17 @@
  */
 
 public class SpecialVM extends VendingMachine {
-	public SpecialVM() {
+	private String delicacy;
+	private 
+	
+	public SpecialVM(String delicacy, String machineName, int totalSales, int lastTotalSales) {
+		this.delicacy = delicacy;
+		super(machineName, totalSales, lastTotalSales);
+	}
+	
+	
+	
+	public getDelicacy() {
+		return this.delicacy;
 	}
 }

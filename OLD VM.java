@@ -16,53 +16,7 @@ import java.nio.charset.StandardCharsets;
   * Is central to the operations and functionality of the whole vending machine program.
   */
 public class VendingMachine {
-    private String machineName;
-    private boolean isSpecial;
-	private int cashIn;
-	private int userChoice;
-	private int totalSales;
-	private int lastTotalSales;
-	private Item selectedItem;
-	private ArrayList<Item> itemList;
-	private ArrayList<Item> predefinedList;
-	private ArrayList<Item> oldInventory;
-	MoneyHandler mh = new MoneyHandler();
-	ProductDisplay pDisplay = new ProductDisplay();
-	ProductDispenser pDispenser = new ProductDispenser();
-	
-	/** 
-	  * A constructor that creates a vending machine instance with null parameters
-	  */
-	public VendingMachine() {
-		this.machineName = null;
-		this.isSpecial = false;
-		this.cashIn = 0;
-		this.userChoice = 0;
-		this.totalSales = 0;
-		this.lastTotalSales = 0;
-		this.selectedItem = null;
-		itemList = new ArrayList<Item>();
-		predefinedList = new ArrayList<Item>();
-		oldInventory = new ArrayList<Item>();
-	}
-	
-	/** 
-	  * A constructor that creates a vending machine instance given its name and special status
-	  * @param machineName 	The name to be given to the Vending Machine
-	  * @param isSpecial	The special status to be assigned to this Vending Machine
-	  */
-	public VendingMachine(String machineName, boolean isSpecial) {
-		this.machineName = machineName;
-		this.isSpecial = isSpecial;
-		this.cashIn = 0;
-		this.userChoice = 0;
-		this.totalSales = 0;
-		this.lastTotalSales = 0;
-		this.selectedItem = null;
-		itemList = new ArrayList<Item>();
-		predefinedList = new ArrayList<Item>();
-		oldInventory = new ArrayList<Item>();
-	}
+ 
 	
 	/** 
 	  * Loads the previously saved vending machine data into the current program 
@@ -281,393 +235,222 @@ public class VendingMachine {
 	}
 	
 	/** 
-	  * Clears all data of a file, given its filename
-	  * @param filename The name of the file to be cleared
-	  * @throws FileNotFoundException if the file does not exist in this directory
+	  * Narrates dispensing of the item and subtracts its stock by 1
+	  * @param isSpecial 	Whether the vending machine is a special vending machine
+	  * @param selectedItem	The item to be dispensed
 	  */
-	public void clearFile(String filename) throws FileNotFoundException {
-        try {
-			PrintWriter p = new PrintWriter(filename);
-            p.close();
-			System.out.println("File cleared: " + filename);
-        } catch (IOException e) {
-			System.out.println("Error clearing: " + filename);
-            e.printStackTrace();
-        }
+	public void releaseItem(boolean isSpecial, Item selectedItem) {
+		if(!isSpecial) {
+			boolean result = selectedItem.minusStock(selectedItem, 1);
+			
+			if(result) 
+				System.out.println("Dispensing " + selectedItem.getName() + "...");
+			
+			else
+				System.out.println("Oops! An error occurred.");
+		}
 	}
 	
 	/** 
-	  * Displays the main menu of the Vending Machine and repeatedly gets user input.
-	  * Makes the necessary method calls to perform specific sub-tasks.
-	  * @param vm	The Vending Machine being operated on
-	  * @param s 	The active scanner object
-	  * @throws FileNotFoundException if the needed file does not exist in this directory
+	  * Displays all details of the transaction that just occurred
+	  * @param selectedItem	The item that was sold
+	  * @param cashIn		The total amount of money inputted by the user
+	  * @param change		The amount of change given in the transaction
 	  */
-	public void displayMenu(VendingMachine vm, Scanner s) throws FileNotFoundException {
-		do {		
+	public void printReceipt(Item selectedItem, int cashIn, int change) {
+		System.out.println("============RECEIPT===========" +
+						 "\nPurchased Item: " + selectedItem.getName() +
+						 "\nTotal Calories: " + selectedItem.getCalories() +
+						 "\nItem Price: " + selectedItem.getPrice() +
+						 "\nAmount Paid: " + cashIn +
+						 "\nIssued Change: " + change);
+	}
+	
+	/** 
+	  * Displays all details of all previous transactions on this vending machine
+	  * @throws FileNotFoundException if the file does not exist in this directory
+	  */
+	public void printTransacHistory() throws FileNotFoundException {
+		try {
+			File f = new File("Transac-History.txt");
+			Scanner s = new Scanner(f);
 			
-			if(this.itemList == null) {
-				System.out.println("No Vending Machine history was found.");
-			}
+			String name = null;
+			int qty = 1;
+			int lastTotalSales = 0;
+			int totalSales = 0;
+			int count = 1;
 			
-			System.out.print("==============================\n" +
-						 "Welcome to The Founding Fathers' Vending Pantry!\n" + 
-						 "You are currently operating: " + vm.getName() + "\n" +
-						 "(1) Build a Vending Machine\n" +
-						 "(2) Test a Vending Machine\n" +
-						 "(3) Leave and Exit\n" +
-						 "Select: ");
-			userChoice = s.nextInt();
-			
-			//Create VM
-			if(userChoice == 1) {
-				createMenu(s);
-				System.out.println("Returning to Main Menu...");
-			}
-			
-			//Test or Maintain
-			else if(userChoice == 2) {
-				do {
-					System.out.print("==============================\n" +
-								 "Vending Machine Features:\n" + 
-								 "(1) Test Current Vending Machine Features\n" +
-								 "(2) Perform Maintenance Features\n" +
-								 "(3) Return to Main Menu\n" +
-								 "Select: ");
-					userChoice = s.nextInt();
-					s.nextLine();
-					
-					//Test
-					if(userChoice == 1) {
-						testMenu(s);
-						System.out.println("Transaction complete. Returning to Features Menu...");
-					}
-					
-					//Maintain
-					else if(userChoice == 2) {
-						maintainMenu(s);
-						System.out.println("Maintenance complete. Returning to Features Menu...");
-					}
-					
-					//Return to main menu
-					else if(userChoice == 3) {
-						System.out.println("Returning to Main Menu...");
-					}
-					
-					//Error catch
-					else {
-						System.out.println("Invalid input. Please try again.");
-						userChoice = 0;
-					}
-					
-				} while (userChoice != 3);
+			while(s.hasNextLine()) {
+				name = s.nextLine();
+				qty = Integer.parseInt(s.nextLine());
+				lastTotalSales = Integer.parseInt(s.nextLine());
+				totalSales = Integer.parseInt(s.nextLine());
 				
-				userChoice = 0;
+				System.out.println("================TRANSACTION#" + count + "=================" +
+								   "\nPurchased Item:\t\t\t" + name + 
+								   "\nQty:\t\t\t\t" + qty +
+								   "\nTotal Sales At Last Restock:\t" + lastTotalSales +
+								   "\nCurrent Total Sales:\t\t" + totalSales + "\n");
+				
+				count++;
 			}
 			
-			//Exit
-			else if(userChoice == 3) {
-				System.out.println("Thank you for coming!\n" + "Exiting program...");
-				setLastTotalSales(0);
+			s.close();
+		} catch (IOException e) {
+		System.out.println("Oops! An error occurred.");
+		e.printStackTrace();
+		}
+	}
+	
+	/** 
+	  * Displays all predefined items and returns the user's selected input. 
+	  * Called at Vending Machine creation.
+	  * @param predefinedItems	The list of all predefined items
+	  * @param s 				The active scanner object
+	  * @return The ArrayList of item objects added by the user 
+	  */
+    public ArrayList<Item> populateItemList(ArrayList<Item> predefinedItems, Scanner s) {
+        ArrayList<Item> userItemList = new ArrayList<Item>();
+        int input = 0;
+        int index = 0;
+
+		//displays the predefined items
+        for (Item item : predefinedItems) {
+			if((item.getName().length() >= 12 && index > 9) || item.getName().length() >= 13) {
+				System.out.println("\t\t\t" + (index + 1) + ": " + item.getName() + "\t" + item.getCalories() + "\t" + item.getPrice() + "\t" + item.getStock());
 			}
 			
-			//Error catch
 			else {
-				System.out.println("Invalid input. Please try again.");
-				userChoice = 0;
+				System.out.println("\t\t\t" + (index + 1) + ": " + item.getName() + "\t\t" + item.getCalories() + "\t" + item.getPrice() + "\t" + item.getStock());
 			}
+            
+            index++;
+        }
+
+		//repeatedly takes in user input, error checks, and adds items
+        do {
+            System.out.print("Input the index of the item or type \"99\" to exit: ");
+            input = s.nextInt();
+
+            if (input == 99 || userItemList.size() == 12) {
+                if(userItemList.size() < 8)
+					System.out.println("Oops! You need a minimum of 8 items to initialize a Vending Machine.\n" + "You currently have " + userItemList.size() + ".");
+				
+				else {
+					if(userItemList.size() == 12)
+						System.out.println("Item capacity of 12 reached.");
+					
+					break;
+				}
+					
+            }
+
+            else if (input > 0 && input <= predefinedItems.size()) {
+                Item selected = predefinedItems.get(input - 1);
+                if (userItemList.contains(selected)) {
+                    System.out.println(selected.getName() + " is already in the list.");
+                } 
+				
+				else {
+                    userItemList.add(selected);
+                    System.out.println(selected.getName() + " successfully added!");
+                }
+            } 
 			
-		} while(userChoice != 3);
-	}
+			else {
+                System.out.println("Invalid input. Please try again.");
+            }
+			
+        } while (true);
+
+        return userItemList;
+    }		
 
 	/** 
-	  * Gets input from the user and creates a new Vending Machine
-	  * @param s 	The active scanner object
-	  * @throws FileNotFoundException if the file does not exist in this directory
+	  * Displays all items on sale and returns the user's selected input
+	  * @param itemList	The list of all items on sale
+	  * @param s 		The active scanner object
+	  * @return The object instance of the user's selected item 
 	  */
-    public void createMenu(Scanner s) throws FileNotFoundException {
-		char c = '\0';
-		
-		if(this.itemList != null) {
-			System.out.print("Do you want to obliterate this Vending Machine and create a new one? Y/N\n" + "Input: ");
-			c = s.next().charAt(0);
-			c = Character.toLowerCase(c);
-			s.nextLine();
-		}
-		
-		else if(this.itemList == null) {
-			c = 'y';
-		}
-		
-		//For clearing
-		if(c == 'y') {
-			this.clearFile("VM-History.txt");
-			this.clearFile("Transac-History.txt");
-			this.clearFile("Restock-History.txt");
-			this.clearItemList();
-			this.setCashIn(0);
-			this.setSelectedItem(null);
-			
-			//Get VM details from user
-			System.out.println("Name your Vending Machine!\n" + "Input: ");
-			String name = s.nextLine();
-				
-			System.out.print("\nGreat! Do you want " + name + " to be a Special Vending Machine? Y/N\n" + "Input: ");
-			if(s.hasNextLine()) {
-				c = s.next().charAt(0);
-				c = Character.toLowerCase(c);
-				s.nextLine();
+    public Item displayOnSale(ArrayList<Item> itemList, Scanner s){
+        System.out.println("Items on Sale:\tName\t\t Calories\tPrice\tstock");
+        Item toBuy = new Item(null, 0, false, 0, 0);
+        boolean done = false;
+		int index = 0;
+		int input = 99;
+		int avail = 1;
+        
+		//display items 
+        for(Item item : itemList) 
+        {	
+			if(item.getStock() != 0 && ((item.getName().length() >= 12 && index > 9) || item.getName().length() >= 13)) {
+				System.out.println("\t\t" + (index + 1) + ": " + item.getName() + "\t" + item.getCalories() + "\t" + item.getPrice() + "\t" + item.getStock());
 			}
 			
-			//Sets up new VM
-			boolean isSpecial = false;
-			
-			if(c == 'y') {
-				isSpecial = true;
+			else if (item.getStock() != 0) {
+				System.out.println("\t\t" + (index + 1) + ": " + item.getName() + "\t\t" + item.getCalories() + "\t" + item.getPrice() + "\t" + item.getStock());
 			}
-
-			this.setMachineName(name);
-			this.setIsSpecial(isSpecial);
-			this.setLastTotalSales(0);
-			this.totalSales = 0;
-			System.out.println("Filling up cash box...");
-			mh.newCashBox();
-
-			System.out.println("Alright! Let's get some items in here!");
-			populateOptionsList(predefinedList);
-			itemList = pDisplay.populateItemList(predefinedList, s); 
+            
+			else
+                System.out.println("\t\t" + (index + 1) + ": " + item.getName() + " is SOLD OUT.");
 			
-			System.out.println("Alright! " + name + " is all set up!");
-		}
+            index++;
+        }
 		
-		else if(c == 'n') 
-			System.out.println("Canceling vending machine set up...");
+		//take input 
+		do {
+            System.out.print("Input the index of the item: ");
+            input = s.nextInt();
+			input -= 1;
+			toBuy = itemList.get(input);
+			avail = toBuy.getStock();
+			
+            if(input >= 0 && input <= itemList.size() && avail > 0) {
+				toBuy = itemList.get(input);
+				System.out.println("Successfully selected " + toBuy.getName() + "!\n");
+				done = true;
+			}
+			
+			else {
+				System.out.println("Invalid input. Please try again.\n");
+			}
+			
+        } while (done == false);
+
+		return toBuy;
+    }
 	
+	/** 
+      * Increases the item's current stock by an amount and returns its success
+	  * @param item			The item object to add stock to
+	  * @param amountToAdd	The amount of stock to be added
+	  * @return Whether the program successfully added the stock
+      */
+    public boolean addStock(Item item, int amountToAdd){
+        if (this.stock + amountToAdd > 10)
+            return false;
+        else
+        {
+            this.stock += amountToAdd;
+            return true;
+        }
     }
 
 	/** 
-	  * Facilitates the product transaction process
-	  * @param s 	The active scanner object
-	  * @throws FileNotFoundException if the file does not exist in this directory
-	  */
-    public void testMenu(Scanner s) throws FileNotFoundException {
-		boolean success = false;
-		
-		//Display items on sale
-		this.selectedItem = pDisplay.displayOnSale(itemList, s); 
-		
-		if(!(this.selectedItem == null)) {
-			//Get money from the user
-			mh.inputDenominations(s);
-			this.cashIn = mh.getCashIn();
-			success = mh.payment(selectedItem, s);
-			
-			if(success) {
-				//Dispense item, print receipt, record transaction
-				pDispenser.releaseItem(this.isSpecial, this.selectedItem);
-				this.setLastTotalSales(this.totalSales);
-				this.addTotalSales(this.selectedItem.getPrice());
-				pDispenser.printReceipt(this.selectedItem, this.cashIn, this.cashIn - this.selectedItem.getPrice());
-				this.writeTransacHistory(this.selectedItem.getName(), 1);
-			}
-			
-			else
-				this.cashIn = 0;
-		}
-	}
-
-	/** 
-	  * Facilitates and conducts all maintenance features. 
-	  * @param s 	The active scanner object
-	  * @throws FileNotFoundException if the file does not exist in this directory
-	  */
-    public void maintainMenu(Scanner s) throws FileNotFoundException {
-		char c = '\0';
-		ArrayList<Item> temp = new ArrayList<Item>();
-		boolean success = false;
-		
-		do {
-			System.out.print("==============================\n" +
-							 "Maintenance Menu:\n" + 
-							 "(1) Restock Items\n" +
-							 "(2) Change Item Price\n" +
-							 "(3) Take Out Money\n" +
-							 "(4) Replenish Money\n" +
-							 "(5) Print Transaction History\n" +
-							 "(6) Print Restock History\n" +
-							 "(7) Exit Maintenance Menu\n" +
-							 "Select: ");
-			
-			if(s.hasNextInt()) {
-				userChoice = s.nextInt();
-				s.nextLine();
-			}			
-			
-			//Item restock
-			if(userChoice == 1) {
-				//Temporary old inventory holder
-				temp.clear();
-				for(Item i : itemList) {
-					temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice(), i.getStock()));
-				}
-					
-				do {
-					c = '\0';
-					
-					System.out.println("Please select the item you would like to restock!");
-					this.selectedItem = pDisplay.displayOnSale(itemList, s); 
-					
-					System.out.println("Input amount of stock to add: ");
-					int amountToAdd = s.nextInt();
-					success = selectedItem.addStock(this.selectedItem, amountToAdd);
-					
-					if(success) {
-						//Sets old inventory to temp if restock is successful
-						System.out.println("Restocking " + this.selectedItem.getName() + "...");
-						System.out.println("Restock success!");
-						this.oldInventory.clear();
-						this.oldInventory.addAll(temp);
-					}
-					
-					else {
-						System.out.println("Oops! Amount to add is too much.");
-					}
-					
-					System.out.print("Restock another item? Y/N\n" + "Input: ");
-					c = s.next().charAt(0);
-					c = Character.toLowerCase(c);
-					s.nextLine();
-				} while(c == 'y');
-				
-				//Save restock details into file
-				this.lastTotalSales = 0;
-				this.totalSales = 0;
-				System.out.println("Saving restock inventories...");
-				this.saveRestock();
-				System.out.println("Returning to Maintenance Menu...");
-			}
-			
-			//Item re-price
-			else if(userChoice == 2) {
-				System.out.println("Please select the item you would like to re-price!");
-				this.selectedItem = pDisplay.displayOnSale(itemList, s); 
-				
-				System.out.println("Input new price for " + this.selectedItem.getName() + ":");
-				int newPrice = this.selectedItem.getPrice();
-				
-				if(s.hasNextInt()) {
-					newPrice = s.nextInt();
-					s.nextLine();
-				}
-				
-				this.selectedItem.setPrice(newPrice);
-				System.out.println("New price successfully set!");
-			}
-			
-			//Take out money
-			else if(userChoice == 3) {
-				mh.displayDenomList();
-				
-				System.out.print("\nCash out all money? Or only specific bills?\n" +
-								   "Type Y for cash out all money and\n" +
-								   "Type N for cash out specific bills.\n" +
-								   "Select: ");
-				c = '\0';
-				success = false;
-				
-				//Get input
-				if(s.hasNextLine()) {
-					c = s.next().charAt(0);
-					c = Character.toLowerCase(c);
-					s.nextLine();
-				}
-				
-				//Take out all money
-				if(c == 'y') {
-					int moneyTotal = mh.getTotal();
-					mh.cashOut();
-					System.out.println("Successfully cashed out " + moneyTotal + " pesos. " + this.getName() + " is now cash-empty.");
-				}
-				
-				//Take out specific bill/s
-				else {
-					System.out.print("Which bill would you like to cash out?\n" + "Bill value: ");
-					
-					int bill = 0;
-					int amount = 0;
-					
-					if(s.hasNextInt()) {
-						bill = s.nextInt();
-						s.nextLine();
-					}
-					
-					System.out.print("How many " + bill + " bills would you like to take?\n" + "Amount: ");
-					
-					if(s.hasNextInt()) {
-						amount = s.nextInt();
-						s.nextLine();
-					}
-					
-					mh.cashOne(bill, amount);
-				}
-			}
-			
-			//Replenish money
-			else if(userChoice == 4) {
-				mh.displayDenomList();
-					
-				System.out.print("Which bill would you like to replenish?\n" + "Bill value: ");
-				
-				int bill = 0;
-				int amount = 0;
-				
-				if(s.hasNextInt()) {
-					bill = s.nextInt();
-					s.nextLine();
-				}
-				
-				System.out.print("How many " + bill + " bills would you like to add?\n" + "Amount: ");
-				
-				if(s.hasNextInt()) {
-					amount = s.nextInt();
-					s.nextLine();
-				}
-				
-				success = mh.refillOne(bill, amount);
-				
-				if(success) {
-					System.out.println("Replenishing " + amount + " " + bill + " bills...");
-					System.out.println("Replenish success!");
-				}
-				
-				else
-					System.out.println("Invalid bill value.\n");
-			}
-			
-			//Print transaction history
-			else if(userChoice == 5) {
-				pDispenser.printTransacHistory();
-			}
-			
-			//Print restock history
-			else if(userChoice == 6) {
-				this.printRestockHistory();
-			}
-			
-			//Exit
-			else if(userChoice == 7) {
-				System.out.println("Returning to Features Menu...");
-			}
-			
-			//Error catch
-			else {
-				System.out.println("Invalid input. Please try again.");
-				userChoice = 0;
-			}
-			
-		} while(userChoice != 7);
-					
-		userChoice = 0;
+      * Reduces the item's current stock by an amount and returns its success
+	  * @param item				The item object to remove stock from
+	  * @param amountToMinus	The amount of stock to be subtracted
+	  * @return Whether the program successfully reduced the stock
+      */
+    public boolean minusStock(Item item, int amountToMinus) {
+        if (this.stock - amountToMinus < 0)
+            return false;
+        else
+        {
+            this.stock -= amountToMinus;
+            return true;
+        }
     }
 
 	/** 

@@ -1,5 +1,5 @@
-/*MAIN TASKS: stores attributes of each item
- *			: getters and setters
+/*MAIN TASKS: stores attributes of each item (done)
+ *			: getters and setters (done)
  */
 
 /** 
@@ -10,7 +10,6 @@ public class Item {
     private final double calories;
     private final boolean standalone;
     private int price;
-    private int stock;
 
 	/** 
       * A constructor that creates an item instance given complete attributes.
@@ -20,12 +19,11 @@ public class Item {
 	  * @param price		The cost of the item
 	  * @param stock 		The quantity of the item available for sale
       */
-    public Item(String name, double calories, boolean standalone, int price, int stock){ 
+    public Item(String name, double calories, boolean standalone, int price) { 
         this.name = name;
         this.calories = calories;
 		this.standalone = standalone;
         this.price = price;
-        this.stock = stock;
     }
 
 	/** 
@@ -61,50 +59,10 @@ public class Item {
     }
 
 	/** 
-      * Gets and returns the item's stock.
-	  * @return The item's quantity available for sale
-      */
-    public int getStock(){
-        return stock;
-    }
-
-	/** 
       * Changes the item's current price to a new amount
 	  * @param newPrice The updated cost of the item
       */
     public void setPrice(int newPrice){
         this.price = newPrice;   
-    }
-
-	/** 
-      * Increases the item's current stock by an amount and returns its success
-	  * @param item			The item object to add stock to
-	  * @param amountToAdd	The amount of stock to be added
-	  * @return Whether the program successfully added the stock
-      */
-    public boolean addStock(Item item, int amountToAdd){
-        if (this.stock + amountToAdd > 10)
-            return false;
-        else
-        {
-            this.stock += amountToAdd;
-            return true;
-        }
-    }
-
-	/** 
-      * Reduces the item's current stock by an amount and returns its success
-	  * @param item				The item object to remove stock from
-	  * @param amountToMinus	The amount of stock to be subtracted
-	  * @return Whether the program successfully reduced the stock
-      */
-    public boolean minusStock(Item item, int amountToMinus) {
-        if (this.stock - amountToMinus < 0)
-            return false;
-        else
-        {
-            this.stock -= amountToMinus;
-            return true;
-        }
     }
 }
