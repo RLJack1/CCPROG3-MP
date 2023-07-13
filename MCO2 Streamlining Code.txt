@@ -7,7 +7,33 @@ VendingMachineView
 Controller 
 -
 
+VendingMachine 
+-
 
+SpecialVM
+- 
+
+FileHandler
+- clear files
+
+CashBox (stores) 
+- current money 2d array
+
+MoneyHandler 
+- process payment
+
+Item (stores) 
+- name
+- calories*
+- price
+- stock 
+- standalone 
+
+ItemRack (stores) 
+- available preset items 
+- available preset recipes
+- items on sale
+- number of items per recipe
 
 
 INITIALIZING 
@@ -50,12 +76,26 @@ TEST MENU
 - if custom, Controller calls VendingMachineView to keep getting input until the user stops
 - VendingMachineView confirms continuing the transaction 
 - if yes, VendingMachineView prompts user input for cash, else, return null
-- VendingMachineView returns item object and cash 2d array to Controller 
+- VendingMachineView returns arraylist of items in the recipe and cash 2d array to Controller 
 - Controller calls MoneyHandler to process payment 
 - if payment is unsuccessful, don't do the transaction and return to the menu
-- if payment is successful, Controller destroys 1 item instance from ItemRack 
+- if payment is successful, Controller destroys the right number of ingredient instances from ItemRack 
 - Controller writes transaction data into text files
+- Controller checks SpecialVM's attribute for the recipe type
 - Controller calls VendingMachineView to narrate and dispense item
 
 MAINTAIN MENU
-- 
+- Controller calls VendingMachineView to prompt maintenance options
+
+- for restock, Controller calls VendingMachineView to get input for what to restock
+- VendingMachineView/Controller error checks input
+- Controller adds an Item instance to ItemRack
+- keep looping until user is done restocking 
+- Controller calls FileHandler to clear restock file data
+- Controller writes restock data into text file
+- Controller calls VendingMachineView to display success message 
+
+- for money refills, Controller calls MoneyHandler 
+- if success, Controller calls VendingMachineView to display success message
+
+- for history printing, Controller reads files and prints 
