@@ -1,3 +1,8 @@
+/*MAIN TASKS: call view and model to interact with one another
+ *			: prompt and perform menu processes (create, test, maintain)
+ *			: write data into files
+ */
+
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -5,15 +10,15 @@ import java.io.IOException;
 /** 
   * Makes the initial function calls to start the interaction of classes.
   */
-public class Driver {
+public class VMController {
 	private VendingMachine vm;
 	
 	/** 
-      * A constructor that creates an instance of the Driver object.
+      * A constructor that creates an instance of the VMController object.
       */
-	public Driver() {
+	public VMController() {
 	}
-	
+
 	/** 
       * The main method of the program
 	  * @param args Stores Java command-line arguments

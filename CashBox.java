@@ -1,3 +1,7 @@
+/*MAIN TASKS: stores money
+ *			: getters and setters
+ */
+
 public class CashBox {
 	private int[][] cashBox = {
 	  {1000, 0},

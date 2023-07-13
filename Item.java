@@ -1,3 +1,7 @@
+/*MAIN TASKS: stores attributes of each item
+ *			: getters and setters
+ */
+
 /** 
   * Stores and operates on item details like name, calories, standalone status, price, and stock.
   */

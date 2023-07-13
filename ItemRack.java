@@ -1,3 +1,7 @@
+/*MAIN TASKS: stores (available preset items, itemlist)
+ *			: getters and setters
+ */
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
