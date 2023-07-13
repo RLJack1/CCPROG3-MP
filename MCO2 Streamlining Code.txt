@@ -1,20 +1,61 @@
+CreateView
+- 
+
+VendingMachineView 
+- 
+
+Controller 
+-
+
+
+
+
 INITIALIZING 
 - Controller calls FileHandler to check if VM data exists 
 - if no, Controller calls the view gui for CreateView 
-- Controller/View writes data to files
+- CreateView passes data into Controller 
+- Controller writes data to files
 - Controller proceeds to call VendingMachineView to prompt create, test, maintain menus
 
 CREATE MENU
 - Controller calls FileHandler to clear text files
 - Controller calls view gui for CreateView 
-- Controller/View writes data to files
+- Controller writes data to files
 
 
 TEST MENU
 - Controller calls FileHandler to load text file data
 - depending on isSpecial in Controller:
-- if regular, Controller calls ItemRack and passes on-sale item data to VendingMachineView 
 
+
+- if regular:
+- Controller calls ItemRack and passes on-sale item data to VendingMachineView 
+- VendingMachineView gets and returns user input for selected item 
+- VendingMachineView confirms continuing the transaction 
+- if yes, VendingMachineView prompts user input for cash, else, return null
+- VendingMachineView returns item object and cash 2d array to Controller 
+- Controller calls MoneyHandler to process payment 
+- if payment is unsuccessful, don't do the transaction and return to the menu
+- if payment is successful, Controller destroys 1 item instance from ItemRack 
+- Controller writes transaction data into text files
+- Controller calls VendingMachineView to narrate and dispense item
+
+
+- if special:
+- Controller calls View to prompt if user will buy recipe or standalone item
+- if standalone item, call everything the same way as regular
+- if recipe, Controller calls view to prompt if preset or custom
+- if preset, Controller calls ItemRack to return the recipes and whether all ingredients are available 
+- Controller passes data to VendingMachineView to display and prompt input
+- if custom, Controller calls VendingMachineView to keep getting input until the user stops
+- VendingMachineView confirms continuing the transaction 
+- if yes, VendingMachineView prompts user input for cash, else, return null
+- VendingMachineView returns item object and cash 2d array to Controller 
+- Controller calls MoneyHandler to process payment 
+- if payment is unsuccessful, don't do the transaction and return to the menu
+- if payment is successful, Controller destroys 1 item instance from ItemRack 
+- Controller writes transaction data into text files
+- Controller calls VendingMachineView to narrate and dispense item
 
 MAINTAIN MENU
 - 
