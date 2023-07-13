@@ -12,7 +12,8 @@ CREATE MENU
 
 TEST MENU
 - Controller calls FileHandler to load text file data
-- 
+- depending on isSpecial in Controller:
+- if regular, Controller calls ItemRack and passes on-sale item data to VendingMachineView 
 
 
 MAINTAIN MENU
