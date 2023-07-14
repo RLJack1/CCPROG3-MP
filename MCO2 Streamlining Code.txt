@@ -1,8 +1,15 @@
 CreateView
-- 
+- TextField for user inputs (name of vending machine, index of items to add)
+- Should have a panel that shows the item to be added ("name item added...", image of the item)
 
 VendingMachineView 
-- 
+- Should show buttons for user inputs instead of text.
+- Calls ItemRack to show available items and if theyre sold-out or not.
+- General design of the VM
+- (Maybe at ItemRack???) Store the images for the items.
+- Should have a button for the user to discard the current VM and make a new one (call CreateView)
+- TextPanel to show what the VM is currently doing.
+- Panel to show items, maximum of 30 items on a 6x5 matrix
 
 Controller 
 - calls view and model
