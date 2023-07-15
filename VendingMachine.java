@@ -49,4 +49,28 @@ public class VendingMachine {
 	public int getLastTotalSales() {
 		return this.lastTotalSales;
 	}
+	
+	/** 
+      * Changes the Vending Machine's name to a new one
+	  * @param newName The new name of this VendingMachine object
+      */
+	public void setMachineName(String newName) {
+		this.machineName = newName;
+	}
+	
+	/** 
+      * Increases the total sales since last restock by the specified amount
+	  * @param amountToAdd The amount by which the total sales will increase
+      */
+	public void addTotalSales(int amountToAdd) {
+		this.totalSales += amountToAdd;
+	}
+	
+	/** 
+      * Changes the value of the last saved total sales to a new value
+	  * @param newAmount The new amount of last saved total sales
+      */
+	public void setLastTotalSales(int newAmount) {
+		this.lastTotalSales = newAmount;
+	}
 }

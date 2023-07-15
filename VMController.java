@@ -13,7 +13,7 @@ import java.io.IOException;
 public class VMController {
 	private int cashIn;
 	private int userChoice;
-	private boolean isSpecial;
+	private boolean isSpecial; //not sure if we really need this
 	private Item selectedItem;
 	private ArrayList<Item> oldInventory;
 	private VendingMachine vm;
