@@ -8,7 +8,7 @@ public class Meat extends Ingredient {
 	
 	@Override
 	public String narrate() {
-		String narration = "Cooking " + name "...";
+		String narration = "Cooking " + name + "...";
 		return narration;
 	}
 }

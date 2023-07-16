@@ -8,7 +8,7 @@ public class Condiment extends Ingredient {
 	
 	@Override
 	public String narrate() {
-		String narration = "Pouring " + name "...";
+		String narration = "Pouring " + name + "...";
 		return narration;
 	}
 }

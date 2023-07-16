@@ -18,7 +18,7 @@ public class Recipe {
 		 return this.name;
 	 }
 	 
-	 public ArrayList<Ingredient> getRecipe() {
+	 public ArrayList<Ingredient> getIngredientList() {
 		 return this.ingredientList;
 	 }
  }

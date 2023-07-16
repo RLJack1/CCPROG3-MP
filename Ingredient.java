@@ -2,7 +2,7 @@
  */
  
 public class Ingredient extends Item {
-	final int quantity;
+	final private int quantity;
 	
 	public Ingredient(String name, double calories, boolean standalone, int price, int quantity) {
 		super(name, calories, standalone, price);
@@ -10,7 +10,11 @@ public class Ingredient extends Item {
 	}
 	
 	public String narrate() {
-		String narration = "Preparing " + name "...";
+		String narration = "Preparing " + name + "...";
 		return narration;
+	}
+	
+	public int getQuantity() {
+		return this.quantity;
 	}
 }

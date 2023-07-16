@@ -8,7 +8,7 @@ public class Bread extends Ingredient {
 	
 	@Override
 	public String narrate() {
-		String narration = "Baking " + name "...";
+		String narration = "Baking " + name + "...";
 		return narration;
 	}
 }

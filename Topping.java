@@ -8,7 +8,7 @@ public class Topping extends Ingredient {
 	
 	@Override
 	public String narrate() {
-		String narration = "Sprinkling " + name "...";
+		String narration = "Sprinkling " + name + "...";
 		return narration;
 	}
 }
