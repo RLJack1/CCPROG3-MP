@@ -11,6 +11,7 @@
 - prevent sale on non-standalone foods
 - maintenance (show all vm features, denom, stock, items)
 - increase item cap to min 8 max 16
+- confirm how the uml should look if the child classes are created/composed in other classes than the parent
 
 ### MEGAN TODO
 - make 6 new burger recipes
