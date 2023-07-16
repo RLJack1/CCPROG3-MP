@@ -6,10 +6,16 @@
 - 
 
 ### FUTURE NOTES
-- calorie computation
 - custom orders
 - option to create a non-preset item
 - prevent sale on non-standalone foods
 - maintenance (show all vm features, denom, stock, items)
 - increase item cap to min 8 max 16
-- make items indiv objects
+
+### MEGAN TODO
+- make 6 new burger recipes
+- import into Recipe object
+- make functions for SpecialVM (recipe purchase and narration)
+- update uml and streamline file
+- whoop everything into controller
+- generally double check for special: files, purchasing
