@@ -17,6 +17,5 @@
 - make 6 new burger recipes
 - import into Recipe object
 - make functions for SpecialVM (recipe purchase and narration)
-- update uml and streamline file
 - whoop everything into controller
 - generally double check for special: files, purchasing
