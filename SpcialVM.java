@@ -5,11 +5,13 @@
 public class SpecialVM extends VendingMachine {
 	private ArrayList<Recipe> presetRecpieList;
 	private ArrayList<Recipe> recipeList;
+	private SpecialIR spir;
 	
 	public SpecialVM(String machineName, int totalSales, int lastTotalSales) {
 		super(machineName, totalSales, lastTotalSales);
 		this.presetRecpieList = loadRecipes();
 		this.recipeList = new ArrayList<Recipe>();
+		this.spir = new SpecialIR();
 	}
 	
 	private void loadRecipes() {
@@ -36,10 +38,6 @@ public class SpecialVM extends VendingMachine {
 		
 		else
 			temp.addIngredient(i);
-	}
-	
-	public void autoAddItems() {
-		ir.loadItems(recipeList);
 	}
 	
 	public ArrayList<Recipe> getPresetRecipes() {

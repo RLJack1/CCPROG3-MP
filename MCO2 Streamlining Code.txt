@@ -11,44 +11,66 @@ VendingMachineView
 - TextPanel to show what the VM is currently doing.
 - Panel to show items, maximum of 30 items on a 6x5 matrix
 
-Controller 
+VMController 
 - calls view and model
-- prompt and perform menu operations
+- prompt and perform all menu operations
 - write data into files
-
-VendingMachine (stores)
-- vm details
-- all object instantiations of VM parts
-- getters and setters
-
-SpecialVM (stores)
-- food typ (burger pizza burrito)
-- available preset recipes
-- number of items per recipe
-- recipes chosen by the creator
 
 FileHandler
 - clear files
 - load files?
 
-CashBox (stores) 
-- current money 2d array
-
-MoneyHandler 
-- process payment
-
-Item (stores) 
-- name
-- calories*
-- price
-- stock 
-- standalone 
+VendingMachine
+- vm details
+- all object instantiations of VM parts
 - getters and setters
 
-ItemRack (stores) 
+SpecialVM
+- available preset recipes
+- number of items per recipe
+- recipes chosen by the creator
+- handles recipe functions
+
+Recipe
+- contains recipe data for a single recipe
+- such as the ingredients and quantity
+- can add ingredients to the recipe
+- getters and setters
+
+ItemRack 
 - available preset items 
 - items on sale
+- add to items on sale
 - getters and setters
+
+SpecialIR
+- the item rack that has everything in ingredient form
+- can check what type of ingredient something is
+- auto adds all items from the recipes chosen by the user
+
+Item
+- name, calories, price, standalone 
+- getters and setters
+
+Ingredient
+- basically an item but additionally contains quantity (num of that item for the recipe)
+
+Bread 
+- overridden narration
+
+Meat
+- overridden narration
+
+Topping
+- overridden narration
+
+Condiment
+- overridden narration
+
+MoneyHandler
+- stores money 
+- process payment
+
 
 
 INITIALIZING 

@@ -1,5 +1,5 @@
-/*MAIN TASKS: stores attributes of each item (done)
- *			: getters and setters (done)
+/*MAIN TASKS: stores attributes of each item 
+ *			: getters and setters 
  */
 
 /** 
