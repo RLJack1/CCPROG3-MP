@@ -4,6 +4,10 @@
 public class Ingredient extends Item {
 	final private int quantity;
 	
+	public Ingredient(String name, double calories, boolean standalone, int price) {
+		super(name, calories, standalone, price);
+	}
+	
 	public Ingredient(String name, double calories, boolean standalone, int price, int quantity) {
 		super(name, calories, standalone, price);
 		this.quantity = quantity;

@@ -2,6 +2,10 @@
  */
  
 public class Condiment extends Ingredient {
+	public Condiment(String name, double calories, boolean standalone, int price) {
+		super(name, calories, standalone, price);
+	}
+	
 	public Condiment(String name, double calories, boolean standalone, int price, int quantity) {
 		super(name, calories, standalone, price, quantity);
 	}

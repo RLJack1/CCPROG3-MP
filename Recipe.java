@@ -2,6 +2,8 @@
 			: getters and setters
  */
  
+import java.util.ArrayList;
+
 public class Recipe {
 	 private String name;
 	 private ArrayList<Ingredient> ingredientList;

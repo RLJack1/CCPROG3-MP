@@ -2,6 +2,8 @@
  *			: getters and setters
  */
 
+import java.util.ArrayList;
+
 public class ItemRack {
 	private ArrayList<Item> presetItemList;
 	private ArrayList<Item> itemList;
@@ -55,6 +57,11 @@ public class ItemRack {
 	
 	public void addItem(String name, double calories, boolean standalone, int price) {
 		this.itemList.add(new Item(name, calories, standalone, price));
+	}
+	
+	//not sure if we'll actually use this but just in case
+	public void addItem(Item item) {
+		this.itemList.add(item);
 	}
 	
 	public void removeItem(Item item) {

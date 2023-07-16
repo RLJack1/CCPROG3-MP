@@ -41,52 +41,31 @@ public class SpecialIR extends ItemRack {
         this.presetItemList.add(new Condiment("JackSauce", 10.0, false, 10));
 	}
 	
-	//assumes that i is from presetItemList
-	public String findIngredientType(Ingredient i) {
-		String type = "";
-		
-		if(i.narrate().equals("Baking " + i.getName() + "..."))
-			type = "Bread";
-		
-		else if(i.narrate().equals("Cooking " + i.getName() + "..."))
-			type = "Meat";
-		
-		else if(i.narrate().equals("Sprinkling " + i.getName() + "..."))
-			type = "Topping";
-		
-		else if(i.narrate().equals("Pouring " + i.getName() + "..."))
-			type = "Condiment";
-		
-		return type;
-	}
-	
-	//assumes that i is input from the user, after seeing what's available in presetItemList
 	@Override
 	public void addFullStock(Ingredient i, int stock) {
 		int j;
-		String type = this.findIngredientType(i);
 		
-		if(type.equals("Bread"))
+		if(i instanceof Bread)
 			for(j = 0; j <= stock; j++) {
 				this.itemList.add(new Bread(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice(), i.getQuantity()));
 			}
 			
-		else if(type.equals("Meat"))
+		else if(i instanceof Meat)
 			for(j = 0; j <= stock; j++) {
 				this.itemList.add(new Meat(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice(), i.getQuantity()));
 			}
 			
-		else if(type.equals("Topping"))
+		else if(i instanceof Topping)
 			for(j = 0; j <= stock; j++) {
 				this.itemList.add(new Topping(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice(), i.getQuantity()));
 			}
 			
-		else if(type.equals("Condiment"))
+		else if(i instanceof Condiment)
 			for(j = 0; j <= stock; j++) {
 				this.itemList.add(new Condiment(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice(), i.getQuantity()));
 			}
 			
-		else if(type.equals(""))
+		else if(i instanceof Ingredient)
 			for(j = 0; j <= stock; j++) {
 				this.itemList.add(new Ingredient(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice(), i.getQuantity()));
 			}

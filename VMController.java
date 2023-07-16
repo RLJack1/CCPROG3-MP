@@ -24,6 +24,13 @@ public class VMController {
       * A constructor that creates an instance of the VMController object.
       */
 	public VMController() {
+		this.cashIn = 0;
+		this.userChoice = 0;
+		this.isSpecial = false;
+		this.selectedItem = null;
+		this.oldInventory = new ArrayList<Item>();
+		this.vm = new VendingMachine();
+		this.fh = new FileHandler();
 	}
 
 	/** 
@@ -31,12 +38,13 @@ public class VMController {
 	  * @param args Stores Java command-line arguments
       */
 	public static void main(String[] args) {
-		Driver driver = new Driver ();
-		VendingMachine vm = new VendingMachine();
-		Scanner s = new Scanner(System.in);
-		
+		VMController c = new VMController();
+		Scanner s = new Scanner();
 		System.out.println("Loading Vending Machine...");
-			
+		//load vm details via filehandler
+		
+		this.displayMenu();
+		
 		try {
 			vm.populateVMHistory();
 			System.out.println("Done!");
@@ -45,7 +53,7 @@ public class VMController {
 			e.printStackTrace();
 		}
 		
-		/** 
+	/** 
 	  * Displays the main menu of the Vending Machine and repeatedly gets user input.
 	  * Makes the necessary method calls to perform specific sub-tasks.
 	  * @param vm	The Vending Machine being operated on
@@ -54,7 +62,6 @@ public class VMController {
 	  */
 	public void displayMenu(VendingMachine vm, Scanner s) throws FileNotFoundException {
 		do {		
-			
 			if(this.itemList == null) {
 				System.out.println("No Vending Machine history was found.");
 			}

@@ -2,6 +2,10 @@
  */
  
 public class Topping extends Ingredient {
+	public Topping(String name, double calories, boolean standalone, int price) {
+		super(name, calories, standalone, price);
+	}
+	
 	public Topping(String name, double calories, boolean standalone, int price, int quantity) {
 		super(name, calories, standalone, price, quantity);
 	}
