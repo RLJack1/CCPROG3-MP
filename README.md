@@ -3,7 +3,13 @@
 - started organizing code into respective objects
 
 ### RENZO STATUS CHECK
-- 
+- GUI update, no connection to the main code thus far
+- Itemrack placeholder finished
+
+
+### RENZO TODO
+- Continue working on the GUI, especially creation of vending machine
+-  
 
 ### FUTURE NOTES
 - custom orders
