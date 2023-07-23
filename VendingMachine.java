@@ -7,8 +7,8 @@ public class VendingMachine {
 	private String machineName;
 	private int totalSales;
 	private int lastTotalSales;
-	private MoneyHandler mh;
-	private ItemRack ir;
+	protected MoneyHandler mh;
+	protected ItemRack ir;
 	
 	public VendingMachine() {
 		this.machineName = null;

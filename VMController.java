@@ -13,12 +13,10 @@ import java.io.IOException;
 public class VMController {
 	private int cashIn;
 	private int userChoice;
-	private boolean isSpecial; //not sure if we really need this
+	private boolean isSpecial;
 	private Item selectedItem;
 	private ArrayList<Item> oldInventory;
 	private VendingMachine vm;
-	private FileHandler fh;
-	
 	
 	/** 
       * A constructor that creates an instance of the VMController object.
@@ -29,8 +27,10 @@ public class VMController {
 		this.isSpecial = false;
 		this.selectedItem = null;
 		this.oldInventory = new ArrayList<Item>();
-		this.vm = new VendingMachine();
-		this.fh = new FileHandler();
+		this.vm = new VendingMachine("The Classic Vending Machine", 0, 0);
+		
+		this.vm.mh.newCashBox();
+		this.vm.ir.newItemRack();
 	}
 
 	/** 
@@ -39,19 +39,10 @@ public class VMController {
       */
 	public static void main(String[] args) {
 		VMController c = new VMController();
-		Scanner s = new Scanner();
 		System.out.println("Loading Vending Machine...");
-		//load vm details via filehandler
-		
-		this.displayMenu();
-		
-		try {
-			vm.populateVMHistory();
-			System.out.println("Done!");
-		} catch (FileNotFoundException e) {
-			System.out.println("Oops! An error occurred.");
-			e.printStackTrace();
-		}
+		System.out.println("Done!");
+		c.displayMenu();
+	}
 		
 	/** 
 	  * Displays the main menu of the Vending Machine and repeatedly gets user input.
@@ -62,46 +53,49 @@ public class VMController {
 	  */
 	public void displayMenu(VendingMachine vm, Scanner s) throws FileNotFoundException {
 		do {		
-			if(this.itemList == null) {
-				System.out.println("No Vending Machine history was found.");
-			}
-			
-			System.out.print("==============================\n" +
+			/*buttonSend("==============================\n" +
 						 "Welcome to The Founding Fathers' Vending Pantry!\n" + 
 						 "You are currently operating: " + vm.getName() + "\n" +
 						 "(1) Build a Vending Machine\n" +
 						 "(2) Test a Vending Machine\n" +
 						 "(3) Leave and Exit\n" +
 						 "Select: ");
-			userChoice = s.nextInt();
+			userChoice = Integer.parseInt(buttonCall);*/
 			
 			//Create VM
 			if(userChoice == 1) {
-				createMenu(s);
+				this.createMenu();
 				System.out.println("Returning to Main Menu...");
 			}
 			
 			//Test or Maintain
 			else if(userChoice == 2) {
 				do {
-					System.out.print("==============================\n" +
+					/*buttonSend("==============================\n" +
 								 "Vending Machine Features:\n" + 
 								 "(1) Test Current Vending Machine Features\n" +
 								 "(2) Perform Maintenance Features\n" +
 								 "(3) Return to Main Menu\n" +
 								 "Select: ");
-					userChoice = s.nextInt();
-					s.nextLine();
+					userChoice = Integer.parseInt(buttonCall);*/
 					
 					//Test
 					if(userChoice == 1) {
-						testMenu(s);
+						if(!this.isSpecial)
+							this.testMenu();
+						else
+							this.specialTestMenu();
+						
 						System.out.println("Transaction complete. Returning to Features Menu...");
 					}
 					
 					//Maintain
 					else if(userChoice == 2) {
-						maintainMenu(s);
+						if(!this.isSpecial)
+							this.maintainMenu();
+						else
+							this.specialMaintainMenu();
+						
 						System.out.println("Maintenance complete. Returning to Features Menu...");
 					}
 					
@@ -124,7 +118,6 @@ public class VMController {
 			//Exit
 			else if(userChoice == 3) {
 				System.out.println("Thank you for coming!\n" + "Exiting program...");
-				setLastTotalSales(0);
 			}
 			
 			//Error catch
@@ -141,39 +134,36 @@ public class VMController {
 	  * @param s 	The active scanner object
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
-    public void createMenu(Scanner s) throws FileNotFoundException {
+    public void createMenu() throws FileNotFoundException {
 		char c = '\0';
 		
-		if(this.itemList != null) {
+		if(vm.ir.getItemsOnSale() != null) {
 			System.out.print("Do you want to obliterate this Vending Machine and create a new one? Y/N\n" + "Input: ");
 			c = s.next().charAt(0);
 			c = Character.toLowerCase(c);
 			s.nextLine();
 		}
 		
-		else if(this.itemList == null) {
+		else if(vm.ir.getItemsOnSale() == null) {
 			c = 'y';
 		}
 		
 		//For clearing
 		if(c == 'y') {
-			this.clearFile("VM-History.txt");
-			this.clearFile("Transac-History.txt");
-			this.clearFile("Restock-History.txt");
-			this.clearItemList();
-			this.setCashIn(0);
-			this.setSelectedItem(null);
+			vm.ir.clearItemList();
+			this.cashIn = 0;
+			this.selectedItem = null;
 			
 			//Get VM details from user
-			System.out.println("Name your Vending Machine!\n" + "Input: ");
-			String name = s.nextLine();
+			/*buttonSend("Name your Vending Machine!\n" + "Input: ");
+			String name = Integer.parseInt(buttonCall);*/
 				
-			System.out.print("\nGreat! Do you want " + name + " to be a Special Vending Machine? Y/N\n" + "Input: ");
+			/*buttonSend("\nGreat! Do you want " + name + " to be a Special Vending Machine? Y/N\n" + "Input: ");
 			if(s.hasNextLine()) {
 				c = s.next().charAt(0);
 				c = Character.toLowerCase(c);
 				s.nextLine();
-			}
+			} buttonCall*/
 			
 			//Sets up new VM
 			boolean isSpecial = false;
@@ -182,17 +172,43 @@ public class VMController {
 				isSpecial = true;
 			}
 
-			this.setMachineName(name);
-			this.setIsSpecial(isSpecial);
-			this.setLastTotalSales(0);
-			this.totalSales = 0;
+			vm.setMachineName(name);
+			this.isSpecial = isSpecial;
+			vm.setLastTotalSales(0);
+			vm.totalSales = 0;
 			System.out.println("Filling up cash box...");
-			mh.newCashBox();
+			vm.mh.newCashBox();
 
 			System.out.println("Alright! Let's get some items in here!");
-			populateOptionsList(predefinedList);
-			itemList = pDisplay.populateItemList(predefinedList, s); 
+			if(!isSpecial) {
+				/*buttonSend(this.vm.ir.getPresetItems());
+				do {
+					//add way to count unique items
+					
+					if(buttonCall == 99) {
+						if(unique < 8) {
+							buttonSend("Oops! The minimum of 8 items has not yet been reached. You are at " + unique + "items.\n");
+							buttonCall = 98;
+						}
+					} 
+					
+					else if(unique == 16) {
+						buttonSend("Maximum 16 items reached.\n");
+						buttonCall = 99;
+					}
+					
+					if(buttonCall != 99) {
+						selectedItem = this.vm.ir.getPresetItemAt(buttonCall());
+						this.vm.ir.addItem(selectedItem);
+						this.vm.ir.addFullStock(selectedItem, 7);
+					}
+				} while(buttonCall != 99);*/
+			}
 			
+			else {
+				//SPECIAL VM INITIALIZATION AAAAAAAAAAAAAAAAAAAAAA
+			}
+
 			System.out.println("Alright! " + name + " is all set up!");
 		}
 		
@@ -206,15 +222,15 @@ public class VMController {
 	  * @param s 	The active scanner object
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
-    public void testMenu(Scanner s) throws FileNotFoundException {
+    public void testMenu() throws FileNotFoundException {
 		boolean success = false;
 		
 		//Display items on sale
-		this.selectedItem = pDisplay.displayOnSale(itemList, s); 
+		//this.selectedItem = pDisplay.displayOnSale(itemList, s); 
 		
 		if(!(this.selectedItem == null)) {
 			//Get money from the user
-			mh.inputDenominations(s);
+			mh.inputDenominations();
 			this.cashIn = mh.getCashIn();
 			success = mh.payment(selectedItem, s);
 			
@@ -231,13 +247,17 @@ public class VMController {
 				this.cashIn = 0;
 		}
 	}
+	
+	public void specialTestMenu() {
+		//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	}
 
 	/** 
 	  * Facilitates and conducts all maintenance features. 
 	  * @param s 	The active scanner object
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
-    public void maintainMenu(Scanner s) throws FileNotFoundException {
+    public void maintainMenu() throws FileNotFoundException {
 		char c = '\0';
 		ArrayList<Item> temp = new ArrayList<Item>();
 		boolean success = false;
@@ -425,16 +445,8 @@ public class VMController {
 					
 		userChoice = 0;
     }
-		
-		try {
-			vm.displayMenu(vm, s); 
-			System.out.println("Saving Vending Machine data...");
-			vm.writeVMHistory();
-		} catch (IOException e) {
-			System.out.println("Oops! An error occurred.");
-            e.printStackTrace();
-        }
-		
-		s.close();
-	}
 }
+
+	public void specialMaintainMenu() {
+		//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	}

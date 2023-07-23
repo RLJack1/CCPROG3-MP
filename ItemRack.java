@@ -5,8 +5,8 @@
 import java.util.ArrayList;
 
 public class ItemRack {
-	private ArrayList<Item> presetItemList;
-	private ArrayList<Item> itemList;
+	protected ArrayList<Item> presetItemList;
+	protected ArrayList<Item> itemList;
 
 	public ItemRack() {
 		this.presetItemList = new ArrayList<Item>();
@@ -47,6 +47,21 @@ public class ItemRack {
         this.presetItemList.add(new Item("JackSauce", 10.0, false, 10));
 	}
 	
+	public void newItemRack() {
+		this.itemList.add(new Item("BriocheBread", 346.0, true, 34));
+        this.itemList.add(new Item("SesameBread", 140.0, true, 20));
+		this.itemList.add(new Item("AngusBeef", 164.0, true, 144));
+        this.itemList.add(new Item("WagyuBeef", 250.0, true, 795));
+		this.itemList.add(new Item("TrappistCheese", 355.0, false, 140));
+        this.itemList.add(new Item("IcebergLettuce", 3.0, false, 45));
+		this.itemList.add(new Item("HotSauce", 11.0, false, 50));
+        this.itemList.add(new Item("BarbequeSauce", 172.0, false, 70));
+		
+		for(Item i : itemList) {
+			this.addFullStock(i, 7);
+		}
+	}
+	
 	public void addFullStock(Item i, int stock) {
 		int j;
 		
@@ -59,13 +74,20 @@ public class ItemRack {
 		this.itemList.add(new Item(name, calories, standalone, price));
 	}
 	
-	//not sure if we'll actually use this but just in case
 	public void addItem(Item item) {
 		this.itemList.add(item);
 	}
 	
 	public void removeItem(Item item) {
 		this.itemList.remove(item);
+	}
+	
+	public void clearItemList() {
+		this.itemList.clear();
+	}
+	
+	public Item getPresetItemAt(int index) {
+		return this.presetItemList.get(index);
 	}
 	
 	public ArrayList<Item> getPresetItems() {

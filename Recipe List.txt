@@ -4,8 +4,6 @@
 	- 1 x Angus Beef 
 	- 1 x American Cheese
 	- 1 x White Onions
-	- 1 x Iceberg Lettuce
-	- 1 x Dill Pickles
 	- 1 x Barbeque Sauce 
 
 - Cheesy Cheeseburger
@@ -14,13 +12,13 @@
 	- 1 x Mozzarella Cheese
 	- 1 x Blue Cheese
 	- 1 x Jack Sauce
-	- 1 x Beefsteak Tomato
+	- 1 x Iceberg Lettuce
 	- 1 x Onion Rings
 
 - Beyond Burger
 	- 2 x Wholewheat Bread 
-	- 1 x Beyond Beef 
-	- 1 x Mozzarella Cheese
+	- 2 x Beyond Beef 
+	- 2 x Mozzarella Cheese
 	- 1 x Onion Rings
 	- 1 x Iceberg Lettuce
 	- 1 x Hot Sauce
@@ -33,6 +31,7 @@
 	- 1 x Beefsteak Tomato
 	- 1 x Iceberg Lettuce
 	- 1 x Dill Pickles
+	- 1 x Onion Rings
 	- 1 x Melted Butter
 
 - Jack Burger 
@@ -42,14 +41,16 @@
 	- 1 x Mozzarella Cheese
 	- 1 x Jack Sauce
 	- 1 x White Onions
+	- 1 x Beefsteak Tomato
 
 - Meat Overload Burger
 	- 2 x Rye Bread 
-	- 1 x Wagyu Beef
+	- 2 x Wagyu Beef
 	- 2 x Canadian Bacon
-	- 1 x Mozzarella Cheese
+	- 2 x Mozzarella Cheese
 	- 1 x Barbeque Sauce
-	- 1 x White Onions
+	- 1 x Beefsteak Tomato
+	- 1 x Iceberg Lettuce
 	- 1 x Dill Pickles
 
 - Spicy Tapa Burger
@@ -59,22 +60,20 @@
 	- 1 x White Onions
 	- 1 x Iceberg Lettuce
 	- 1 x Dill Pickles
-	- 1 x Hot Sauce
+	- 1 x Beefsteak Tomato
+	- 1 x Jack Sauce
 
 - Salmon Burger
 	- 2 x Brioche Bread
 	- 1 x Grilled Salmon
 	- 1 x Mozzarella Cheese
-	- 1 x Beefsteak Tomato
 	- 1 x Iceberg Lettuce
-	- 1 x Dill Pickles
 	- 1 x Caviar Sauce
 
 - Turkey Burger
 	- 2 x Rye Bread
 	- 1 x Bronze Turkey
 	- 1 x American Cheese
-	- 1 x Beefsteak Tomato
 	- 1 x Iceberg Lettuce
 	- 1 x Barbeque Sauce
 	- 1 x Jack Sauce
