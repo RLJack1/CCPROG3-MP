@@ -28,8 +28,6 @@ public class VM_GUI extends javax.swing.JFrame {
 
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
         ItemRack = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         ItemPic1 = new javax.swing.JLabel();
@@ -63,7 +61,7 @@ public class VM_GUI extends javax.swing.JFrame {
         ItemName15 = new javax.swing.JLabel();
         ItemPic15 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        jTextAreaConsole = new javax.swing.JTextArea();
         jInputTextField = new javax.swing.JTextField();
         jButton0 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -79,8 +77,8 @@ public class VM_GUI extends javax.swing.JFrame {
         jButtonConfirm = new javax.swing.JButton();
         jVMName = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jComboMenu = new javax.swing.JMenu();
+        jMenuCreate = new javax.swing.JMenu();
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -89,9 +87,6 @@ public class VM_GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
-
-        jTextPane1.setText("jVendingMachineName");
-        jScrollPane2.setViewportView(jTextPane1);
 
         ItemRack.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         ItemRack.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -352,10 +347,10 @@ public class VM_GUI extends javax.swing.JFrame {
 
         ItemRack.setViewportView(jPanel1);
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jTextArea3.setText("jTextPanel");
-        jScrollPane4.setViewportView(jTextArea3);
+        jTextAreaConsole.setColumns(20);
+        jTextAreaConsole.setRows(5);
+        jTextAreaConsole.setText("jTextPanel");
+        jScrollPane4.setViewportView(jTextAreaConsole);
 
         jInputTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jInputTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -464,12 +459,12 @@ public class VM_GUI extends javax.swing.JFrame {
 
         jVMName.setText("jVMName");
 
-        jMenu1.setText("Create ");
+        jComboMenu.setText("Create ");
 
-        jMenu2.setText("New Vending Machine");
-        jMenu1.add(jMenu2);
+        jMenuCreate.setText("New Vending Machine");
+        jComboMenu.add(jMenuCreate);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jComboMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -480,6 +475,7 @@ public class VM_GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jVMName, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ItemRack, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -508,20 +504,14 @@ public class VM_GUI extends javax.swing.JFrame {
                                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jVMName, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jVMName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jVMName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ItemRack, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -622,6 +612,9 @@ public class VM_GUI extends javax.swing.JFrame {
 
     private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
+        String input = jInputTextField.getText();
+        jTextAreaConsole.setText(input);
+        jInputTextField.setText("");
     }                                              
 
     private void jButtonActionPerformed(java.awt.event.ActionEvent evt, String number) {
@@ -709,17 +702,15 @@ public class VM_GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonConfirm;
+    private javax.swing.JMenu jComboMenu;
     private javax.swing.JTextField jInputTextField;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuCreate;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextArea jTextAreaConsole;
     private javax.swing.JLabel jVMName;
     // End of variables declaration                   
 }
