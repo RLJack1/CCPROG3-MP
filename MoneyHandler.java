@@ -62,40 +62,43 @@ public class MoneyHandler {
 	/** 
 	  * Displays the stock of all bills inside the Vending Machine
 	  */
-	public void displayDenomList() {
+	public String displayDenomList() {
+		String toDisplay = "";
+		
 		for(int i = 0; i < this.cashBox.length; i++) {
-			System.out.println("P" + this.cashBox[i][0] + ": " + this.cashBox[i][1] + " stored.");
+			toDisplay.concat("P" + this.cashBox[i][0] + ": " + this.cashBox[i][1] + " stored.\n");
 		}
+		
+		return toDisplay;
 	}
 	
 	/** 
 	  * Gets money input from the user and stores it into the holder (basically temp) array
 	  * @param s The active scanner object
 	  */
-	public void inputDenominations(Scanner s) {	
+	public String inputDenominations(int amount) {	
 		try { 
-			System.out.println("Enter the denominations separated by spaces:");
-			s.nextLine();
-			String inputLine = s.nextLine();
-			String[] denominations = inputLine.split(" ");
+			String toDisplay = "";
 			
 			for(int i = 0; i < denominations.length; i++) {
-				switch(Integer.parseInt(denominations[i])){
-					case 1000 -> {this.holder[0][1]++; System.out.println("1000 inserted...");}
-					case 500 -> {this.holder[1][1]++; System.out.println("500 inserted...");}
-					case 100 -> {this.holder[2][1]++; System.out.println("100 inserted...");}
-					case 50 -> {this.holder[3][1]++; System.out.println("50 inserted...");}
-					case 20 -> {this.holder[4][1]++; System.out.println("20 inserted...");}
-					case 10 -> {this.holder[5][1]++; System.out.println("10 inserted...");}
-					case 5 -> {this.holder[6][1]++; System.out.println("5 inserted...");}
-					case 1 -> {this.holder[7][1]++; System.out.println("1 inserted...");}
-					default -> System.out.println("Denomination " + denominations[i] + " not recognized, skipping input...");
+				switch(amount){
+					case 1000 -> {this.holder[0][1]++; toDisplay = "1000 inserted...\n";}
+					case 500 -> {this.holder[1][1]++; toDisplay = "500 inserted...\n";}
+					case 100 -> {this.holder[2][1]++; toDisplay = "100 inserted...\n";}
+					case 50 -> {this.holder[3][1]++; toDisplay = "50 inserted...\n";}
+					case 20 -> {this.holder[4][1]++; toDisplay = "20 inserted...\n";}
+					case 10 -> {this.holder[5][1]++; toDisplay = "10 inserted...\n";}
+					case 5 -> {this.holder[6][1]++; toDisplay = "5 inserted...\n";}
+					case 1 -> {this.holder[7][1]++; toDisplay = "1 inserted...\n";}
+					default -> toDisplay = "Denomination " + amount + " not recognized, skipping input...\n";
 				}
 			}
 
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
+		
+		return toDisplay;
 	}
 	
 	/** 
@@ -176,7 +179,7 @@ public class MoneyHandler {
 	  * @param s			The active scanner object
 	  * @return Whether or not the payment was successfully performed
 	  */
-	public boolean payment(Item selectedItem, Scanner s) {
+	public boolean payment(Item selectedItem) {
 		boolean releaseAll = false;	
 		boolean enoughStock = true;
 		boolean success = false;
@@ -186,17 +189,13 @@ public class MoneyHandler {
 		int change = cashIn - price;
 		int i = 0;
 		
-		System.out.print("Proceed with transaction? Type Y to proceed and N to cancel. Y/N\n" + "Input: ");
+		/*buttonSend("Proceed with transaction? Type Y to proceed and N to cancel. Y/N\n" + "Input: ");*/
 		
 		//gets input
-		if(s.hasNextLine()) {
-			c = s.next().charAt(0);
-			c = Character.toLowerCase(c);
-			s.nextLine();
-		}
+		/*buttonCall*/
 		
 		//transfer all holder money into cashBox
-		System.out.println("Loading money into the cashbox...");
+		/*buttonSend("Loading money into the cashbox...");*/
 		for(i = 0; i < this.holder.length; i++) {
 			this.cashBox[i][1] += this.holder[i][1];
 		}
@@ -214,14 +213,14 @@ public class MoneyHandler {
 				//if enough
 				if(enoughStock) {
 					//load money from cashBox to change
-					System.out.println("Getting your change ready...");
+					/*buttonSend("Getting your change ready...");*/
 					for(i = 0; i < this.changeArray.length; i++) {
 						if(this.changeArray[i][1] > 0) 
 							this.cashBox[i][1] -= this.changeArray[i][1];
 					}
 					
 					//empty change array
-					System.out.println("Ka-ching! Change has been dispensed.");
+					/*buttonSend("Ka-ching! Change has been dispensed.");*/
 					for(i = 0; i < this.changeArray.length; i++) {
 						this.changeArray[i][1] = 0;
 					}
@@ -238,14 +237,14 @@ public class MoneyHandler {
 				
 				//not enough stock
 				else {
-					System.out.println("Oh no! This Vending Machine doesn't have enough change.");
+					/*buttonSend("Oh no! This Vending Machine doesn't have enough change.");*/
 					releaseAll = true;
 				}
 			}
 			
 			//user didn't give enough
 			else {
-				System.out.println("Oops! Not enough money was inserted.");
+				/*buttonSend("Oops! Not enough money was inserted.");*/
 				releaseAll = true;
 			}
 		}
@@ -256,8 +255,8 @@ public class MoneyHandler {
 		
 		//if anything failed
 		if(releaseAll) {
-			System.out.println("Canceling transaction...");
-			System.out.println("Releasing full change...");
+			/*buttonSend("Canceling transaction...");
+			buttonSend("Releasing full change...");*/
 			for(i = 0; i < this.holder.length; i++) {
 				if(this.holder[i][1] > 0) {
 					this.cashBox[i][1] -= this.holder[i][1];
@@ -342,5 +341,15 @@ public class MoneyHandler {
 	  */
 	public void setCashBox(int index, int amount) {
 		this.cashBox[index][1] = amount;
+	}
+	
+	public String displayCashBox() {
+		String toDisplay = "";
+		
+		for(int i = 0; i < this.cashBox.length; i++) {
+			toDisplay.concat("\nAmount of " + this.cashBox[i][0] + " bills stored: " + this.cashBox[i][1]);
+		}
+		
+		return toDisplay;
 	}
 }

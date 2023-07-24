@@ -6,7 +6,7 @@
   * Stores and operates on item details like name, calories, standalone status, price, and stock.
   */
 public class Item {
-    private final String name;
+    protected final String name;
     private final double calories;
     private final boolean standalone;
     private int price;

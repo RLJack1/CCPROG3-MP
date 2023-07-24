@@ -2,7 +2,7 @@
  */
  
 public class Ingredient extends Item {
-	final private int quantity;
+	final protected int quantity;
 	
 	public Ingredient(String name, double calories, boolean standalone, int price) {
 		super(name, calories, standalone, price);

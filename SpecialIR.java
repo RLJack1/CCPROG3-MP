@@ -1,6 +1,8 @@
 /*MAIN TASKS: handles recipes and ingredients
  *			: getters and setters
  */
+
+import java.util.ArrayList;
  
 public class SpecialIR extends ItemRack {
 	public SpecialIR() {
