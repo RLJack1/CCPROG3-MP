@@ -1,27 +1,20 @@
 # CCPROG3-MP
 ### MEGAN STATUS CHECK
-- started organizing code into respective objects
+- making progress actionlistener-fying the controller
+- currently done with create and test for regular
+- going to work on the maintain for regular, and create/test/maintain for special
 
 ### RENZO STATUS CHECK
-- GUI update, no connection to the main code thus far
-- Itemrack placeholder finished
-
+- 
 
 ### RENZO TODO
 - Continue working on the GUI, especially creation of vending machine
--  
-
-### FUTURE NOTES
-- custom orders
-- option to create a non-preset item
-- prevent sale on non-standalone foods
-- maintenance (show all vm features, denom, stock, items)
-- increase item cap to min 8 max 16
-- confirm how the uml should look if the child classes are created/composed in other classes than the parent
 
 ### MEGAN TODO
-- make 6 new burger recipes
-- import into Recipe object
 - make functions for SpecialVM (recipe purchase and narration)
 - whoop everything into controller
-- generally double check for special: files, purchasing
+- custom orders
+- prevent sale on non-standalone foods
+- prompt user to add new item if one item gets sold out
+- maintenance (show all vm features, denom, stock, items)
+- confirm how the uml should look if the child classes are created/composed in other classes than the parent

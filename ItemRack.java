@@ -90,6 +90,10 @@ public class ItemRack {
 		return this.presetItemList.get(index);
 	}
 	
+	public Item getItemAt(int index) {
+		return this.itemList.get(index);
+	}
+	
 	public ArrayList<Item> getPresetItems() {
 		return this.presetItemList;
 	}
