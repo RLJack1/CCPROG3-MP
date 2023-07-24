@@ -82,15 +82,15 @@ public class MoneyHandler {
 			
 			for(int i = 0; i < denominations.length; i++) {
 				switch(amount){
-					case 1000 -> {this.holder[0][1]++; toDisplay = "1000 inserted...";}
-					case 500 -> {this.holder[1][1]++; toDisplay = "500 inserted...";}
-					case 100 -> {this.holder[2][1]++; toDisplay = "100 inserted...";}
-					case 50 -> {this.holder[3][1]++; toDisplay = "50 inserted...";}
-					case 20 -> {this.holder[4][1]++; toDisplay = "20 inserted...";}
-					case 10 -> {this.holder[5][1]++; toDisplay = "10 inserted...";}
-					case 5 -> {this.holder[6][1]++; toDisplay = "5 inserted...";}
-					case 1 -> {this.holder[7][1]++; toDisplay = "1 inserted...";}
-					default -> toDisplay = "Denomination " + amount + " not recognized, skipping input...";
+					case 1000 -> {this.holder[0][1]++; toDisplay = "1000 inserted...\n";}
+					case 500 -> {this.holder[1][1]++; toDisplay = "500 inserted...\n";}
+					case 100 -> {this.holder[2][1]++; toDisplay = "100 inserted...\n";}
+					case 50 -> {this.holder[3][1]++; toDisplay = "50 inserted...\n";}
+					case 20 -> {this.holder[4][1]++; toDisplay = "20 inserted...\n";}
+					case 10 -> {this.holder[5][1]++; toDisplay = "10 inserted...\n";}
+					case 5 -> {this.holder[6][1]++; toDisplay = "5 inserted...\n";}
+					case 1 -> {this.holder[7][1]++; toDisplay = "1 inserted...\n";}
+					default -> toDisplay = "Denomination " + amount + " not recognized, skipping input...\n";
 				}
 			}
 

@@ -18,3 +18,6 @@
 - prompt user to add new item if one item gets sold out
 - maintenance (show all vm features, denom, stock, items)
 - confirm how the uml should look if the child classes are created/composed in other classes than the parent
+
+### ASK SIR
+- Whether item and recipes are all built in or the user /has/ to choose

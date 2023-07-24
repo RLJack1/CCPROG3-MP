@@ -3,6 +3,7 @@
  *			: write data into files
  */
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -231,7 +232,7 @@ public class VMController {
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
     public void testMenu() {
-		/*buttonSend(this.vm.ir.getItemsOnSale());
+		buttonSend(this.vm.ir.getItemsOnSale());
 		buttonCall(input);
 		set this.selectedItem = this.vm.ir.getItemAt(index)*/
 		
@@ -271,6 +272,9 @@ public class VMController {
 	
 	public void specialTestMenu() {
 		//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+		/*recipe purchase (custom or preset)
+		regular item purchase (only standalone)
+		special payment, special transaction + stock saving*/
 	}
 
 	/** 
