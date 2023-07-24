@@ -3,6 +3,8 @@
  *			: getters and setters
  */
 
+import javax.swing.ImageIcon;
+
 public class VendingMachine {
 	private String machineName;
 	private int totalSales;

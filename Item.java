@@ -2,6 +2,8 @@
  *			: getters and setters 
  */
 
+import javax.swing.ImageIcon;
+
 /** 
   * Stores and operates on item details like name, calories, standalone status, price, and stock.
   */
@@ -10,6 +12,7 @@ public class Item {
     private final double calories;
     private final boolean standalone;
     private int price;
+	private int grid;
 
 	/** 
       * A constructor that creates an item instance given complete attributes.
@@ -19,11 +22,12 @@ public class Item {
 	  * @param price		The cost of the item
 	  * @param stock 		The quantity of the item available for sale
       */
-    public Item(String name, double calories, boolean standalone, int price) { 
+    public Item(String name, double calories, boolean standalone, int price, int grid) { 
         this.name = name;
         this.calories = calories;
 		this.standalone = standalone;
         this.price = price;
+		this.grid
     }
 
 	/** 
@@ -64,5 +68,16 @@ public class Item {
       */
     public void setPrice(int newPrice){
         this.price = newPrice;   
+    }
+	
+	public ImageIcon getImageIcon() {
+		ImageIcon spriteSheet = new ImageIcon("path/to/ingredients_sprite_sheet.png");
+
+        int x = this.grid * 32; //each ingredient image is 32x32 pixels in size
+        int width = 32;
+        int height = 32;
+
+        // Extract the ingredient's image from the sprite sheet and create a new ImageIcon
+        return new ImageIcon(spriteSheet.getImage().getSubimage(x, width, height));
     }
 }
