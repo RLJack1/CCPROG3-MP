@@ -311,18 +311,19 @@ public class VMController {
 				//Temporary old inventory holder
 				temp.clear();
 				for(Item i : itemList) {
-					temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice(), i.getStock()));
+					temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice(), i.getStock(), i.getGrid()));
 				}
 					
 				do {
 					c = '\0';
 					
-					System.out.println("Please select the item you would like to restock!");
-					this.selectedItem = pDisplay.displayOnSale(itemList, s); 
+					/*buttonSend("Please select the item you would like to restock!");
+					buttonSend(this.vm.ir.getItemsOnSale);
+					this.selectedItem(buttonCall);*/
 					
-					System.out.println("Input amount of stock to add: ");
-					int amountToAdd = s.nextInt();
-					success = selectedItem.addStock(this.selectedItem, amountToAdd);
+					/*buttonSend("Input amount of stock to add: ");
+					int amountToAdd = s.nextInt();*/
+					this.vm.ir.addItem(this.selectedItem);
 					
 					if(success) {
 						//Sets old inventory to temp if restock is successful

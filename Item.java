@@ -37,33 +37,37 @@ public class Item {
       * Gets and returns the item's name.
 	  * @return The item's name
       */
-    public String getName(){
-        return name;
+    public String getName() {
+        return this.name;
     }
 
 	/** 
       * Gets and returns the item's calorie measurement.
 	  * @return The item's decimal calorie measurement
       */
-    public double getCalories(){
-        return calories;
+    public double getCalories() {
+        return this.calories;
     }
 
 	/** 
       * Gets and returns the item's standalone status.
 	  * @return Whether or not the item can be sold alone
       */
-    public boolean getStandalone(){
-        return standalone;
+    public boolean getStandalone() {
+        return this.standalone;
     }
 
 	/** 
       * Gets and returns the item's price.
 	  * @return The item's price
       */
-    public int getPrice(){
-        return price;
+    public int getPrice() {
+        return this.price;
     }
+	
+	public int getGrid() {
+		return this.grid;
+	}
 
 	/** 
       * Changes the item's current price to a new amount
