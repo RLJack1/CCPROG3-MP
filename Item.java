@@ -58,10 +58,6 @@ public class Item {
         return this.price;
     }
 	
-	public int getGrid() {
-		return this.grid;
-	}
-
 	/** 
       * Changes the item's current price to a new amount
 	  * @param newPrice The updated cost of the item

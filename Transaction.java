@@ -2,13 +2,11 @@ public class Transaction {
 	private String name;
 	private int lastTotalSales;
 	private int totalSales;
-	private boolean isSpecial;
 	
-	public Transaction(String name, int lastTotalSales, int totalSales, boolean isSpecial) {
+	public Transaction(String name, int lastTotalSales, int totalSales) {
 		this.name = name;
 		this.lastTotalSales = lastTotalSales;
 		this.totalSales = totalSales;
-		this.isSpecial = isSpecial;
 	}
 	
 	public String getName() {
@@ -21,9 +19,5 @@ public class Transaction {
 	
 	public int getTotalSales() {
 		return this.totalSales;
-	}
-	
-	public boolean getIsSpecial() {
-		return this.isSpecial;
 	}
 }
