@@ -8,6 +8,9 @@
  *
  * @author Renzo
  */
+
+import javax.swing.ImageIcon;
+import java.awt.Image;
 public class VM_GUI extends javax.swing.JFrame {
 
     /**
@@ -28,8 +31,12 @@ public class VM_GUI extends javax.swing.JFrame {
 
         CreateMenuGUI = new javax.swing.JFrame();
         CreateVendingMachinePanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        ConfirmSelection = new javax.swing.JButton();
+        CreateVMTitle = new javax.swing.JLabel();
+        ConfirmVMButton = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        VMNameText = new javax.swing.JTextField();
+        VMButtonGroup = new javax.swing.ButtonGroup();
         TestVendingMachinePanel = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -109,21 +116,43 @@ public class VM_GUI extends javax.swing.JFrame {
         ItemName29 = new javax.swing.JLabel();
         ItemPic30 = new javax.swing.JLabel();
         jVMName = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jComboMenu = new javax.swing.JMenu();
-        jMenuCreate = new javax.swing.JMenu();
         CreateMenu = new javax.swing.JMenuItem();
 
-        CreateMenuGUI.setMinimumSize(new java.awt.Dimension(411, 300));
+        CreateMenuGUI.setMaximumSize(new java.awt.Dimension(300, 300));
+        CreateMenuGUI.setMinimumSize(new java.awt.Dimension(300, 300));
+        CreateMenuGUI.setResizable(false);
 
+        CreateVendingMachinePanel.setMaximumSize(new java.awt.Dimension(300, 300));
+        CreateVendingMachinePanel.setMinimumSize(new java.awt.Dimension(300, 300));
         CreateVendingMachinePanel.setPreferredSize(new java.awt.Dimension(300, 300));
 
-        jLabel1.setText("This is Jack YOUVE BEEN JACKED");
+        CreateVMTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        CreateVMTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CreateVMTitle.setText("Create Your Vending Machine");
+        CreateVMTitle.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        ConfirmSelection.setText("Confirm");
-        ConfirmSelection.addActionListener(new java.awt.event.ActionListener() {
+        ConfirmVMButton.setText("Confirm");
+        ConfirmVMButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConfirmSelectionActionPerformed(evt);
+                ConfirmVMButtonActionPerformed(evt);
+            }
+        });
+
+        VMButtonGroup.add(jRadioButton1);
+        jRadioButton1.setText("Regular Vending Machine");
+        jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        VMButtonGroup.add(jRadioButton2);
+        jRadioButton2.setText("Special Vending Machine");
+
+        VMNameText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        VMNameText.setText("New Vending Machine");
+        VMNameText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VMNameTextActionPerformed(evt);
             }
         });
 
@@ -131,31 +160,46 @@ public class VM_GUI extends javax.swing.JFrame {
         CreateVendingMachinePanel.setLayout(CreateVendingMachinePanelLayout);
         CreateVendingMachinePanelLayout.setHorizontalGroup(
             CreateVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CreateVendingMachinePanelLayout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(CreateVMTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
             .addGroup(CreateVendingMachinePanelLayout.createSequentialGroup()
                 .addGroup(CreateVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CreateVendingMachinePanelLayout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(ConfirmSelection))
+                        .addGap(108, 108, 108)
+                        .addComponent(ConfirmVMButton))
                     .addGroup(CreateVendingMachinePanelLayout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                        .addGap(65, 65, 65)
+                        .addGroup(CreateVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(CreateVendingMachinePanelLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(VMNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CreateVendingMachinePanelLayout.setVerticalGroup(
             CreateVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CreateVendingMachinePanelLayout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(CreateVMTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(jRadioButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButton2)
+                .addGap(34, 34, 34)
+                .addComponent(VMNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(ConfirmSelection)
-                .addGap(29, 29, 29))
+                .addComponent(ConfirmVMButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
 
         javax.swing.GroupLayout CreateMenuGUILayout = new javax.swing.GroupLayout(CreateMenuGUI.getContentPane());
         CreateMenuGUI.getContentPane().setLayout(CreateMenuGUILayout);
         CreateMenuGUILayout.setHorizontalGroup(
             CreateMenuGUILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CreateVendingMachinePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+            .addComponent(CreateVendingMachinePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         CreateMenuGUILayout.setVerticalGroup(
             CreateMenuGUILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +344,10 @@ public class VM_GUI extends javax.swing.JFrame {
         ItemPic_2.setFocusable(false);
 
         ItemPic1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic1.setText("ItemPic1");
+        javax.swing.ImageIcon originalIcon1 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/1 Brioche Bread.png"));       
+        Image scaledImage1 = originalIcon1.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon1 = new javax.swing.ImageIcon(scaledImage1);
+        ItemPic1.setIcon(scaledIcon1);
         ItemPic1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         ItemPic1.setFocusable(false);
 
@@ -789,6 +836,15 @@ public class VM_GUI extends javax.swing.JFrame {
 
         jVMName.setText("jVMName");
 
+        jButton10.setText("Space");
+        jButton10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton10.setPreferredSize(new java.awt.Dimension(37, 20));
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout TestVendingMachinePanelLayout = new javax.swing.GroupLayout(TestVendingMachinePanel);
         TestVendingMachinePanel.setLayout(TestVendingMachinePanelLayout);
         TestVendingMachinePanelLayout.setHorizontalGroup(
@@ -796,22 +852,11 @@ public class VM_GUI extends javax.swing.JFrame {
             .addGroup(TestVendingMachinePanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(TestVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TestVendingMachinePanelLayout.createSequentialGroup()
-                        .addGroup(TestVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jVMName, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ItemRack, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(21, Short.MAX_VALUE))
-                    .addGroup(TestVendingMachinePanelLayout.createSequentialGroup()
-                        .addComponent(jTextAreaPane)
-                        .addGap(18, 18, 18)
-                        .addGroup(TestVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TestVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(TestVendingMachinePanelLayout.createSequentialGroup()
+                            .addComponent(jTextAreaPane, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(TestVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(TestVendingMachinePanelLayout.createSequentialGroup()
-                                    .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButtonConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButtonClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(TestVendingMachinePanelLayout.createSequentialGroup()
                                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -829,24 +874,32 @@ public class VM_GUI extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42))))
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TestVendingMachinePanelLayout.createSequentialGroup()
+                                    .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButtonClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jInputTextField)
+                                .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ItemRack, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jVMName, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         TestVendingMachinePanelLayout.setVerticalGroup(
             TestVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TestVendingMachinePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jVMName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(TestVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TestVendingMachinePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jVMName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ItemRack, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextAreaPane, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(42, Short.MAX_VALUE))
+                        .addComponent(jTextAreaPane, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TestVendingMachinePanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(TestVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -868,20 +921,14 @@ public class VM_GUI extends javax.swing.JFrame {
                             .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(71, 71, 71))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jComboMenu.setText("Create ");
 
-        jMenuCreate.setText("New Vending Machine");
-        jMenuCreate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCreateActionPerformed(evt);
-            }
-        });
-        jComboMenu.add(jMenuCreate);
-
-        CreateMenu.setText("jMenuItem1");
+        CreateMenu.setText("Create Vending Machine");
         CreateMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateMenuActionPerformed(evt);
@@ -906,11 +953,6 @@ public class VM_GUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
-
-    private void jMenuCreateActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        CreateMenuGUI.setVisible(!TestVendingMachinePanel.isVisible());
-        //TestVendingMachinePanel.setVisible(!CreateMenuGUI.isVisible());
-    }                                           
 
     private void jInputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
@@ -972,11 +1014,23 @@ public class VM_GUI extends javax.swing.JFrame {
         //TestVendingMachinePanel.setVisible(!CreateMenuGUI.isVisible());
     }                                          
 
-    private void ConfirmSelectionActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+    private void ConfirmVMButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
+        //String VMName = VMNameText.getText();
+        boolean isSpecial = jRadioButton1.isSelected(); //Note, will be used for determining if VM is special or not
+        jVMName.setText(VMNameText.getText()+ isSpecial);
         CreateMenuGUI.setVisible(false);
-        jInputTextField.setText("mrjack");
-    }                                                
+
+        //jTextField.setText("mrjack");Input
+    }                                               
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void VMNameTextActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
 
     private void jButtonActionPerformed(java.awt.event.ActionEvent evt, String number) {
         String currentText = jInputTextField.getText();
@@ -1020,9 +1074,10 @@ public class VM_GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton ConfirmSelection;
+    private javax.swing.JButton ConfirmVMButton;
     private javax.swing.JMenuItem CreateMenu;
     private javax.swing.JFrame CreateMenuGUI;
+    private javax.swing.JLabel CreateVMTitle;
     private javax.swing.JPanel CreateVendingMachinePanel;
     private javax.swing.JLabel ItemName0;
     private javax.swing.JLabel ItemName1;
@@ -1087,8 +1142,11 @@ public class VM_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel ItemPic_2;
     private javax.swing.JScrollPane ItemRack;
     private javax.swing.JPanel TestVendingMachinePanel;
+    private javax.swing.ButtonGroup VMButtonGroup;
+    public javax.swing.JTextField VMNameText;
     private javax.swing.JButton jButton0;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1101,9 +1159,9 @@ public class VM_GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonConfirm;
     private javax.swing.JMenu jComboMenu;
     private javax.swing.JTextField jInputTextField;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMenuCreate;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextArea jTextAreaConsole;
     private javax.swing.JScrollPane jTextAreaPane;
     private javax.swing.JLabel jVMName;
