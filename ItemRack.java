@@ -14,48 +14,48 @@ public class ItemRack {
 	}
 	
 	public void loadItems() {
-		this.presetItemList.add(new Item("BriocheBread", 346.0, true, 34, 1));
-        this.presetItemList.add(new Item("SesameBread", 140.0, true, 20, 2));
-        this.presetItemList.add(new Item("RyeBread", 259.0, true, 48, 3));
-        this.presetItemList.add(new Item("WholewheatBread", 265.0, true, 40, 4));
-        this.presetItemList.add(new Item("PotatoBread", 266.0, true, 33, 5));
-        this.presetItemList.add(new Item("JackBread", 100.0, true, 100, 6));
-        this.presetItemList.add(new Item("AngusBeef", 164.0, true, 144, 7));
-        this.presetItemList.add(new Item("WagyuBeef", 250.0, true, 795, 8));
-        this.presetItemList.add(new Item("TapaBeef", 187.75, true, 56, 9));
-        this.presetItemList.add(new Item("CheesedBeef", 373.0, true, 214, 10));
-        this.presetItemList.add(new Item("CanadianBacon", 185.0, true, 140, 11));
-        this.presetItemList.add(new Item("WienerSchnitzel", 297.0, true, 175, 12));
-        this.presetItemList.add(new Item("GrilledSalmon", 208.0, true, 300, 13));
-        this.presetItemList.add(new Item("BronzeTurkey", 189.0, true, 185, 14));
-        this.presetItemList.add(new Item("BeyondBeef", 210.0, true, 330, 15));
-        this.presetItemList.add(new Item("JackBeef", 100.0, true, 100, 16));
+		this.presetItemList.add(new Item("BriocheBread", 346.0, true, 34));
+        this.presetItemList.add(new Item("SesameBread", 140.0, true, 20));
+        this.presetItemList.add(new Item("RyeBread", 259.0, true, 48));
+        this.presetItemList.add(new Item("WholewheatBread", 265.0, true, 40));
+        this.presetItemList.add(new Item("PotatoBread", 266.0, true, 33));
+        this.presetItemList.add(new Item("JackBread", 100.0, true, 100));
+        this.presetItemList.add(new Item("AngusBeef", 164.0, true, 144));
+        this.presetItemList.add(new Item("WagyuBeef", 250.0, true, 795));
+        this.presetItemList.add(new Item("TapaBeef", 187.75, true, 56));
+        this.presetItemList.add(new Item("CheesedBeef", 373.0, true, 214));
+        this.presetItemList.add(new Item("CanadianBacon", 185.0, true, 140));
+        this.presetItemList.add(new Item("WienerSchnitzel", 297.0, true, 175));
+        this.presetItemList.add(new Item("GrilledSalmon", 208.0, true, 300));
+        this.presetItemList.add(new Item("BronzeTurkey", 189.0, true, 185));
+        this.presetItemList.add(new Item("BeyondBeef", 210.0, true, 330));
+        this.presetItemList.add(new Item("JackBeef", 100.0, true, 100));
 		
-        this.presetItemList.add(new Item("WhiteOnions", 40.0, false, 30, 17));
-        this.presetItemList.add(new Item("OnionRings", 205.5, false, 85, 18));
-        this.presetItemList.add(new Item("TrappistCheese", 355.0, false, 140, 19));
-        this.presetItemList.add(new Item("MozzarelaCheese", 140.0, false, 75, 20));
-        this.presetItemList.add(new Item("BlueCheese", 177.0, false, 105, 21));
-        this.presetItemList.add(new Item("AmericanCheese", 177.0, false, 40, 22));
-        this.presetItemList.add(new Item("MeltedButter", 307.5, false, 60, 23));
-        this.presetItemList.add(new Item("BeefsteakTomato", 18.0, false, 50, 24));
-        this.presetItemList.add(new Item("IcebergLettuce", 3.0, false, 45, 25));
-        this.presetItemList.add(new Item("DillPickles", 11.0, false, 45, 26));
-        this.presetItemList.add(new Item("HotSauce", 11.0, false, 50, 27));
-        this.presetItemList.add(new Item("BarbequeSauce", 172.0, false, 70, 28));
-        this.presetItemList.add(new Item("CaviarSauce", 252.0, false, 330, 29));
-        this.presetItemList.add(new Item("JackSauce", 10.0, false, 10, 30));
+        this.presetItemList.add(new Item("WhiteOnions", 40.0, false, 30));
+        this.presetItemList.add(new Item("OnionRings", 205.5, false, 85));
+        this.presetItemList.add(new Item("TrappistCheese", 355.0, false, 140));
+        this.presetItemList.add(new Item("MozzarelaCheese", 140.0, false, 75));
+        this.presetItemList.add(new Item("BlueCheese", 177.0, false, 105));
+        this.presetItemList.add(new Item("AmericanCheese", 177.0, false, 40));
+        this.presetItemList.add(new Item("MeltedButter", 307.5, false, 60));
+        this.presetItemList.add(new Item("BeefsteakTomato", 18.0, false, 50));
+        this.presetItemList.add(new Item("IcebergLettuce", 3.0, false, 45));
+        this.presetItemList.add(new Item("DillPickles", 11.0, false, 45));
+        this.presetItemList.add(new Item("HotSauce", 11.0, false, 50));
+        this.presetItemList.add(new Item("BarbequeSauce", 172.0, false, 70));
+        this.presetItemList.add(new Item("CaviarSauce", 252.0, false, 330));
+        this.presetItemList.add(new Item("JackSauce", 10.0, false, 10));
 	}
 	
 	public void newItemRack() {
-		this.itemList.add(new Item("BriocheBread", 346.0, true, 34, 1));
-        this.itemList.add(new Item("SesameBread", 140.0, true, 20, 2));
-		this.itemList.add(new Item("RyeBread", 259.0, true, 48, 3));
-        this.itemList.add(new Item("WholewheatBread", 265.0, true, 40, 4));
-		this.itemList.add(new Item("AngusBeef", 164.0, true, 144, 7));
-        this.itemList.add(new Item("WagyuBeef", 250.0, true, 795, 8));
-		this.itemList.add(new Item("TapaBeef", 187.75, true, 56, 9));
-        this.itemList.add(new Item("CheesedBeef", 373.0, true, 214, 10));
+		this.itemList.add(new Item("BriocheBread", 346.0, true, 34));
+        this.itemList.add(new Item("SesameBread", 140.0, true, 20));
+		this.itemList.add(new Item("AngusBeef", 164.0, true, 144));
+        this.itemList.add(new Item("WagyuBeef", 250.0, true, 795));
+		this.itemList.add(new Item("TrappistCheese", 355.0, false, 140));
+        this.itemList.add(new Item("IcebergLettuce", 3.0, false, 45));
+		this.itemList.add(new Item("HotSauce", 11.0, false, 50));
+        this.itemList.add(new Item("BarbequeSauce", 172.0, false, 70));
 		
 		for(Item i : itemList) {
 			this.addFullStock(i, 7);

@@ -59,7 +59,7 @@ public class VMController {
 			/*buttonSend("==============================\n" +
 						 "Welcome to The Founding Fathers' Vending Pantry!\n" + 
 						 "You are currently operating: " + vm.getName() + "\n" +
-						 "(1) Build a Vending Machine\n" +
+						
 						 "(2) Test a Vending Machine\n" +
 						 "(3) Leave and Exit\n" +
 						 "Select: ");
@@ -133,7 +133,7 @@ public class VMController {
 	  * @param s 	The active scanner object
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
-    public void createMenu() {
+    public void createMenu(name, ispecial) {
 		char c = '\0';
 		
 		if(vm.ir.getItemsOnSale() != null) {
@@ -232,7 +232,7 @@ public class VMController {
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
     public void testMenu() {
-		buttonSend(this.vm.ir.getItemsOnSale());
+		/*buttonSend(this.vm.ir.getItemsOnSale());
 		buttonCall(input);
 		set this.selectedItem = this.vm.ir.getItemAt(index)*/
 		
@@ -244,7 +244,7 @@ public class VMController {
 			do {
 				/*buttonCall(value)
 				buttonSend(this.vm.mh.inputDenominations(value));*/
-			} while(input != 99);
+			} while(input != 999);
 			
 			this.cashIn = this.vm.mh.getCashIn();
 			success = this.vm.mh.payment(selectedItem);
