@@ -3,6 +3,9 @@
  */
 
 import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.net.URL;
 
 /** 
   * Stores and operates on item details like name, calories, standalone status, price, and stock.
@@ -71,13 +74,20 @@ public class Item {
     }
 	
 	public ImageIcon getImageIcon() {
-		ImageIcon spriteSheet = new ImageIcon("path/to/ingredients_sprite_sheet.png");
+		try{
+			Url spriteSheet = Item.class.getResource("Item_Sprite_Sheet.png");
+			
+			ImageIcon spriteSheet = new ImageIcon(spriteSheet);
 
-        int x = this.grid * 32; //each ingredient image is 32x32 pixels in size
-        int width = 32;
-        int height = 32;
+			int x = this.grid * 32; //each ingredient image is 32x32 pixels in size
+			int width = 32;
+			int height = 32;
 
-        // Extract the ingredient's image from the sprite sheet and create a new ImageIcon
-        return new ImageIcon(spriteSheet.getImage().getSubimage(x, width, height));
+			// Extract the ingredient's image from the sprite sheet and create a new ImageIcon
+			return new ImageIcon(spriteSheet.getImage().getSubimage(x, width, height));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 }

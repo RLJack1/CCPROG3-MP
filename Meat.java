@@ -2,12 +2,12 @@
  */
  
 public class Meat extends Ingredient {
-	public Meat(String name, double calories, boolean standalone, int price) {
-		super(name, calories, standalone, price);
+	public Meat(String name, double calories, boolean standalone, int price, int grid) {
+		super(name, calories, standalone, price, grid);
 	}
 	
-	public Meat(String name, double calories, boolean standalone, int price, int quantity) {
-		super(name, calories, standalone, price, quantity);
+	public Meat(String name, double calories, boolean standalone, int price, int grid, int quantity) {
+		super(name, calories, standalone, price, grid, quantity);
 	}
 	
 	@Override
