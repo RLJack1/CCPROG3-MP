@@ -1441,7 +1441,7 @@ public class VM_GUI extends javax.swing.JFrame {
     private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {                                               
         String string = jInputTextField.getText();
         jInputTextField.setText("");
-        jTextAreaConsole.setText(string);
+        jTextAreaConsole.append("\n"+ string);
     }                                              
 
     private void CreateMenuActionPerformed(java.awt.event.ActionEvent evt) {                                           
