@@ -61,8 +61,7 @@ public class VMController {
 						 "Vending Machine Features:\n" + 
 						 "(1) Test Current Vending Machine Features\n" +
 						 "(2) Perform Maintenance Features\n" +
-						 "(3) Return to Main Menu\n" +
-						 "Select: ");
+						 "(3) Return to Main Menu\n");
 			userChoice = Integer.parseInt(buttonCall);*/
 			
 			//Test
@@ -133,9 +132,17 @@ public class VMController {
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
     public void testMenu() {
-		/*buttonSend(this.vm.ir.getItemsOnSale());
-		buttonCall(index);
-		set this.selectedItem = this.vm.ir.getItemAt(index)*/
+		/*if(!isSpecial) {
+			buttonSend(this.vm.ir.getItemsOnSale());
+			buttonCall(index);
+			set this.selectedItem = this.vm.ir.getItemAt(index);
+		}
+		
+		else {
+			buttonSend(this.svm.spir.getItemsOnSale());
+			buttonCall(index);
+			set this.selectedItem = this.svm.spir.getItemAt(index);
+		}*/
 		
 		if(this.selectedItem.getStandalone() == false) {
 			/*buttonSend("Oops! The selected item cannot be bought alone. Please try again.");*/
@@ -147,44 +154,224 @@ public class VMController {
 			int input = 0;
 			boolean success = false;
 			
+			if(!isSpecial) {
+				do {
+					/*buttonCall(value)
+					buttonSend(this.vm.mh.inputDenominations(value));*/
+				} while(input != 999);
+				
+				this.cashIn = this.vm.mh.getCashIn();
+				success = this.vm.mh.payment(selectedItem);
+				
+				if(success) {
+					//Dispense item, print receipt, record transaction
+					/*buttonSend("\nDispensing " + this.selectedItem.getName() + "...");*/
+					this.vm.ir.removeItem(this.selectedItem);
+					this.vm.setLastTotalSales(this.vm.getTotalSales());
+					this.vm.addTotalSales(this.selectedItem.getPrice());
+					this.transacHistory.add(new Transaction(this.selectedItem.getName(), this.vm.getLastTotalSales(), this.vm.getTotalSales()));
+					
+					/*buttonSend("============RECEIPT===========" +
+							 "\nPurchased Item: " + this.selectedItem.getName() +
+							 "\nTotal Calories: " + this.selectedItem.getCalories() +
+							 "\nItem Price: " + this.selectedItem.getPrice() +
+							 "\nAmount Paid: " + this.cashIn +
+							 "\nIssued Change: " + this.cashIn - this.selectedItem.getPrice()\n\n);*/
+							 
+					if(this.vm.ir.getNumUnique() != 30) {
+						this.restockMenu();
+					}
+				}
+				
+				else
+					this.cashIn = 0;
+			}
+			
+			else {
+				do {
+					/*buttonCall(value)
+					buttonSend(this.svm.mh.inputDenominations(value));*/
+				} while(input != 999);
+				
+				this.cashIn = this.svm.mh.getCashIn();
+				success = this.svm.mh.payment(selectedItem);
+				
+				if(success) {
+					//Dispense item, print receipt, record transaction
+					/*buttonSend("\nDispensing " + this.selectedItem.getName() + "...");*/
+					this.svm.spir.removeItem(this.selectedItem);
+					this.svm.setLastTotalSales(this.svm.getTotalSales());
+					this.svm.addTotalSales(this.selectedItem.getPrice());
+					this.transacHistory.add(new Transaction(this.selectedItem.getName(), this.svm.getLastTotalSales(), this.svm.getTotalSales()));
+					
+					/*buttonSend("============RECEIPT===========" +
+							 "\nPurchased Item: " + this.selectedItem.getName() +
+							 "\nTotal Calories: " + this.selectedItem.getCalories() +
+							 "\nItem Price: " + this.selectedItem.getPrice() +
+							 "\nAmount Paid: " + this.cashIn +
+							 "\nIssued Change: " + this.cashIn - this.selectedItem.getPrice()\n\n);*/
+							 
+					if(this.svm.spir.getNumUnique() != 30) {
+						this.restockMenu();
+					}
+				}
+				
+				else
+					this.cashIn = 0;
+			}
+		}
+	}
+	
+	public void specialTestMenu() {
+		Recipe selectedRecipe = null;
+		boolean success = false;
+		boolean okay = false;
+		int qty = 0;
+		/*buttonSend("\nPurchase burger? Or single item?\n" +
+					"Press Y for burgers and combos.\n" +
+					"Press N for breads and meats.\n");
+		userChoice = buttonCall;*/
+		
+		if(userChoice == 1) {
+			/*buttonCall for burger or custom*/
+			
+			if(userChoice != 10) {
+				/*selectedRecipe = this.svm.getRecipeAt(userChoice);*/
+				
+				if(selectedRecipe != null) {
+					success = this.svm.buyRecipe(selectedRecipe);
+				}
+			}
+			
+			else if(userChoice == 10) {
+				Recipe custom = new Recipe("Custom");
+				
+				do {
+					okay = false;
+					
+					/*buttonSend(this.svm.spir.getItemsOnSale());
+					userChoice = buttonCall;
+					this.selectedItem = this.svm.spir.getItemAt(userChoice);
+					if(this.svm.spir.getItemsOnSale().contains(this.selectedItem)) {
+						custom.addIngredient(this.selectedItem.getName(), this.selectedItem.getCalories(), this.selectedItem.getStandalone(), this.selectedItem.getPrice());
+					}*/
+					
+					//checks if there's at least 1 standalone item in the recipe
+					if(userChoice == 999) {
+						for(Ingredient i : custom.getIngredientList())
+							if(i.getStandalone() == true)
+								okay = true;
+					}
+					
+					//if(okay == false)
+						/*buttonSend("\nOops! You need at least 1 bread or meat in your custom order.");*/
+					
+				} while (userChoice != 999 && okay == false);
+				
+				/*success = this.svm.buyRecipe(custom);*/
+			}
+			
+			if(success) {
+			//Get money from the user
+			int input = 0;
+			success = false;
+			
 			do {
 				/*buttonCall(value)
-				buttonSend(this.vm.mh.inputDenominations(value));*/
+				buttonSend(this.svm.mh.inputDenominations(value));*/
 			} while(input != 999);
 			
 			this.cashIn = this.vm.mh.getCashIn();
-			success = this.vm.mh.payment(selectedItem);
+			success = this.svm.mh.payment(selectedRecipe);
 			
 			if(success) {
-				//Dispense item, print receipt, record transaction
-				/*buttonSend("\nDispensing " + this.selectedItem.getName() + "...");*/
-				this.vm.ir.removeItem(this.selectedItem);
+				//*buttonSend(this.selectedRecipe.getNarration());
 				this.vm.setLastTotalSales(this.vm.getTotalSales());
 				this.vm.addTotalSales(this.selectedItem.getPrice());
-				this.transacHistory.add(new Transaction(this.selectedItem.getName(), this.vm.getLastTotalSales(), this.vm.getTotalSales()));
+				this.transacHistory.add(new Transaction(selectedRecipe.getName(), this.vm.getLastTotalSales(), this.vm.getTotalSales()));
 				
 				/*buttonSend("============RECEIPT===========" +
-						 "\nPurchased Item: " + this.selectedItem.getName() +
-						 "\nTotal Calories: " + this.selectedItem.getCalories() +
-						 "\nItem Price: " + this.selectedItem.getPrice() +
+						 "\nPurchased Item: " + this.selectedRecipe.getName() +
+						 "\nTotal Calories: " + this.selectedRecipe.getCalories() +
+						 "\nItem Price: " + this.selectedRecipe.getPrice() +
 						 "\nAmount Paid: " + this.cashIn +
-						 "\nIssued Change: " + this.cashIn - this.selectedItem.getPrice()\n\n);*/
+						 "\nIssued Change: " + this.cashIn - this.selectedRecipe.getPrice()\n\n);*/
 						 
-				if(this.vm.ir.getNumUnique() != 30) {
-					/*prompt restock AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*/
+				if(this.svm.spir.getNumUnique() != 30) {
+					this.restockMenu();
 				}
 			}
 			
 			else
 				this.cashIn = 0;
 		}
+			
+		//else
+			/*buttonSend("\nOops! Not enough ingredients for the selected recipe.");*/
+		
+		} 
+		
+		else if(userChoice == 0) {
+			this.testMenu();
+		}
 	}
 	
-	public void specialTestMenu() {
-		//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		/*recipe purchase (custom or preset)
-		regular item purchase (only standalone)
-		special payment, special transaction + stock saving*/
+	public void restockMenu() {
+		boolean success = false;
+		ArrayList<Item> temp = new ArrayList<Item>();
+		
+		//Temporary old inventory holder
+		temp.clear();
+		if(!isSpecial) {
+			for(Item i : this.vm.ir.getItemsOnSale()) {
+				temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));
+			}
+		}
+		
+		else {
+			for(Item i : this.svm.spir.getItemsOnSale()) {
+				temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));
+			}
+		}
+			
+		do {
+			/*buttonSend("Please select the item you would like to restock!");
+			buttonSend(this.vm.ir.getItemsOnSale);
+			this.selectedItem(buttonCall);*/
+			
+			/*buttonSend("Input amount of stock to add.");
+			int amountToAdd = s.nextInt();*/
+			if(!isSpecial)
+				success = this.vm.ir.addItem(this.selectedItem);
+			
+			else
+				success = this.svm.spir.addItem(this.selectedItem);
+			
+			if(success) {
+				//Sets old inventory to temp if restock is successful
+				/*buttonSend("Restocking " + this.selectedItem.getName() + "...");
+				("Restock success!");*/
+				this.oldInventory.clear();
+				this.oldInventory.addAll(temp);
+			}
+			
+			else {
+				/*buttonSend("Oops! Amount to add is too much.");*/
+			}
+			
+		} while(userChoice != 999);
+		
+		if(!isSpecial) {
+			this.vm.setLastTotalSales(0);
+			this.vm.setTotalSales(0);
+		}
+		
+		else {
+			this.svm.setLastTotalSales(0);
+			this.svm.setTotalSales(0);
+		}
+		
+		success = false;
 	}
 
 	/** 
@@ -207,64 +394,12 @@ public class VMController {
 							 "(6) Print Restock History\n" +
 							 "(7) Display CashBox Contents\n" +
 							 "(8) Display Items on Sale\n" +
-							 "(9) Exit Maintenance Menu\n" +
-							 "Select: ");*/
+							 "(9) Exit Maintenance Menu\n");*/
 			/*buttonCall*/
 			
 			//Item restock
 			if(userChoice == 1) {
-				//Temporary old inventory holder
-				temp.clear();
-				if(!isSpecial) {
-					for(Item i : this.vm.ir.getItemsOnSale()) {
-						temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));
-					}
-				}
-				
-				else {
-					for(Item i : this.svm.spir.getItemsOnSale()) {
-						temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));
-					}
-				}
-					
-				do {
-					/*buttonSend("Please select the item you would like to restock!");
-					buttonSend(this.vm.ir.getItemsOnSale);
-					this.selectedItem(buttonCall);*/
-					
-					/*buttonSend("Input amount of stock to add: ");
-					int amountToAdd = s.nextInt();*/
-					if(!isSpecial)
-						success = this.vm.ir.addItem(this.selectedItem);
-					
-					else
-						success = this.svm.spir.addItem(this.selectedItem);
-					
-					if(success) {
-						//Sets old inventory to temp if restock is successful
-						/*buttonSend("Restocking " + this.selectedItem.getName() + "...");
-						("Restock success!");*/
-						this.oldInventory.clear();
-						this.oldInventory.addAll(temp);
-					}
-					
-					else {
-						/*buttonSend("Oops! Amount to add is too much.");*/
-					}
-					
-				} while(userChoice != 999);
-				
-				if(!isSpecial) {
-					this.vm.setLastTotalSales(0);
-					this.vm.setTotalSales(0);
-				}
-				
-				else {
-					this.svm.setLastTotalSales(0);
-					this.svm.setTotalSales(0);
-				}
-				
-				success = false;
+				this.restockMenu();
 				/*buttonSend("Returning to Maintenance Menu...");*/
 			}
 			
@@ -306,9 +441,8 @@ public class VMController {
 			else if(userChoice == 3) {
 				/*buttonSend(this.vm.mh.displayCashBox()); add else if here
 				buttonSend("\nCash out all money? Or only specific bills?\n" +
-								   "Type Y for cash out all money and\n" +
-								   "Type N for cash out specific bills.\n" +
-								   "Select: ");
+								   "Press Y for cash out all money and\n" +
+								   "Press N for cash out specific bills.\n");
 				success = false;
 				userChoice = buttonCall;*/
 				
@@ -334,9 +468,9 @@ public class VMController {
 				
 				//Take out specific bill/s
 				else {
-					/*buttonSend("Which bill would you like to cash out?\n" + "Bill value: ");
+					/*buttonSend("Which bill would you like to cash out?\n");
 					int bill = buttonCall();
-					buttonSend("How many " + bill + " bills would you like to take?\n" + "Amount: ");
+					buttonSend("How many " + bill + " bills would you like to take?\n");
 					int amount = buttonCall();
 					
 					if(!isSpecial)
@@ -356,9 +490,9 @@ public class VMController {
 				else
 					buttonSend(this.svm.mh.displayCashBox());
 				
-				buttonSend("Which bill would you like to replenish?\n" + "Bill value: ");
+				buttonSend("Which bill would you like to replenish?\n");
 				int bill = buttonCall();
-				buttonSend("How many " + bill + " bills would you like to add?\n" + "Amount: ");
+				buttonSend("How many " + bill + " bills would you like to add?\n");
 				int amount = buttonCall();
 					
 				if(!isSpecial)

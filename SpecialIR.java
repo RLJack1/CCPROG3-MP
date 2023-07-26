@@ -41,7 +41,7 @@ public class SpecialIR extends ItemRack {
         this.itemList.add(new Condiment("JackSauce", 10.0, false, 10));
 		
 		for(Item i : itemList) {
-			this.addFullStock(i, 7);
+			this.addFullStock(i, 9);
 		}
 	}
 }

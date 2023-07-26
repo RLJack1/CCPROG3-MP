@@ -6,6 +6,12 @@ import java.util.ArrayList;
 
 public class ItemRack {
 	protected ArrayList<Item> itemList;
+	protected String[] indexList = {"BriocheBread", "SesameBread", "RyeBread", "WholewheatBread", "PotatoBread",
+									"JackBread", "AngusBeef", "WagyuBeef", "TapaBeef", "CheesedBeef", 
+									"CanadianBacon", "WienerSchnitzel", "GrilledSalmon", "BronzeTurkey", "BeyondBeef", 
+									"JackBeef", "WhiteOnions", "OnionRings", "TrappistCheese", "MozzarelaCheese",
+									"BlueCheese", "AmericanCheese", "MeltedButter", "BeefsteakTomato", "IcebergLettuce",
+									"DillPickles", "HotSauce", "BarbequeSauce", "CaviarSauce", "JackSauce"};
 
 	public ItemRack() {
 		this.itemList = new ArrayList<Item>();
@@ -45,7 +51,7 @@ public class ItemRack {
         this.itemList.add(new Item("JackSauce", 10.0, false, 10));
 		
 		for(Item i : itemList) {
-			this.addFullStock(i, 7);
+			this.addFullStock(i, 9);
 		}
 	}
 	
@@ -91,6 +97,10 @@ public class ItemRack {
 		return success;
 	}
 	
+	public void addAll(ArrayList<Item> temp) {
+		this.itemList.addAll(temp);
+	}
+	
 	public void removeItem(Item item) {
 		this.itemList.remove(item);
 	}
@@ -111,7 +121,15 @@ public class ItemRack {
 	}
 	
 	public Item getItemAt(int index) {
-		return this.itemList.get(index);
+		String name = this.indexList[index];
+		Item item = null;
+		
+		for(Item i : this.itemList) {
+			if(i.getName().equals(name))
+				item = i;
+		}
+		
+		return item;
 	}
 	
 	public ArrayList<Item> getItemsOnSale() {

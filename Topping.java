@@ -6,10 +6,6 @@ public class Topping extends Ingredient {
 		super(name, calories, standalone, price);
 	}
 	
-	public Topping(String name, double calories, boolean standalone, int price, int quantity) {
-		super(name, calories, standalone, price, quantity);
-	}
-	
 	@Override
 	public String narrate() {
 		String narration = "Sprinkling " + name + "...";
