@@ -1,8 +1,8 @@
 /*MAIN TASKS: contain ingredient quantity
  */
  
-public class Ingredient extends Item {
-	final protected int quantity;
+abstract public class Ingredient extends Item {
+	protected int quantity = 0;
 	
 	public Ingredient(String name, double calories, boolean standalone, int price) {
 		super(name, calories, standalone, price);
@@ -13,10 +13,7 @@ public class Ingredient extends Item {
 		this.quantity = quantity;
 	}
 	
-	public String narrate() {
-		String narration = "Preparing " + name + "...";
-		return narration;
-	}
+	abstract public String narrate();
 	
 	public int getQuantity() {
 		return this.quantity;

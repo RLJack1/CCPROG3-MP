@@ -19,6 +19,7 @@ public class VMController {
 	private ArrayList<Item> oldInventory;
 	private ArrayList<Transaction> transacHistory;
 	private VendingMachine vm;
+	private SpecialVM svm;
 	
 	/** 
       * A constructor that creates an instance of the VMController object.
@@ -57,61 +58,27 @@ public class VMController {
 	public void displayMenu() {
 		do {		
 			/*buttonSend("==============================\n" +
-						 "Welcome to The Founding Fathers' Vending Pantry!\n" + 
-						 "You are currently operating: " + vm.getName() + "\n" +
-						 "(1) Build a Vending Machine\n" +
-						 "(2) Test a Vending Machine\n" +
-						 "(3) Leave and Exit\n" +
+						 "Vending Machine Features:\n" + 
+						 "(1) Test Current Vending Machine Features\n" +
+						 "(2) Perform Maintenance Features\n" +
+						 "(3) Return to Main Menu\n" +
 						 "Select: ");
 			userChoice = Integer.parseInt(buttonCall);*/
 			
-			//Create VM
+			//Test
 			if(userChoice == 1) {
-				this.createMenu();
-				/*buttonSend("\nReturning to Main Menu...");*/
+				if(!this.isSpecial)
+					this.testMenu();
+				else
+					this.specialTestMenu();
+				
+				/*buttonSend("\nTransaction complete. Returning to Features Menu...\n");*/
 			}
 			
-			//Test or Maintain
+			//Maintain
 			else if(userChoice == 2) {
-				do {
-					/*buttonSend("==============================\n" +
-								 "Vending Machine Features:\n" + 
-								 "(1) Test Current Vending Machine Features\n" +
-								 "(2) Perform Maintenance Features\n" +
-								 "(3) Return to Main Menu\n" +
-								 "Select: ");
-					userChoice = Integer.parseInt(buttonCall);*/
-					
-					//Test
-					if(userChoice == 1) {
-						if(!this.isSpecial)
-							this.testMenu();
-						else
-							this.specialTestMenu();
-						
-						/*buttonSend("\nTransaction complete. Returning to Features Menu...\n");*/
-					}
-					
-					//Maintain
-					else if(userChoice == 2) {
-						this.maintainMenu();
-						/*buttonSend("\nMaintenance complete. Returning to Features Menu...\n");*/
-					}
-					
-					//Return to main menu
-					else if(userChoice == 3) {
-						/*buttonSend("\nReturning to Main Menu...\n");*/
-					}
-					
-					//Error catch
-					else {
-						/*buttonSend("\nInvalid input. Please try again.\n");*/
-						userChoice = 0;
-					}
-					
-				} while (userChoice != 3);
-				
-				userChoice = 0;
+				this.maintainMenu();
+				/*buttonSend("\nMaintenance complete. Returning to Features Menu...\n");*/
 			}
 			
 			//Exit
@@ -133,97 +100,31 @@ public class VMController {
 	  * @param s 	The active scanner object
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
-    public void createMenu() {
-		char c = '\0';
-		
-		if(vm.ir.getItemsOnSale() != null) {
-			/*buttonSend("\nDo you want to obliterate this Vending Machine and create a new one? Y/N\n" + "Input: ");*/
-			c = s.next().charAt(0);
-			c = Character.toLowerCase(c);
-			s.nextLine();
-		}
-		
-		else if(vm.ir.getItemsOnSale() == null) {
-			c = 'y';
-		}
-		
-		//For clearing
-		if(c == 'y') {
-			vm.ir.clearItemList();
-			this.cashIn = 0;
-			this.selectedItem = null;
-			
-			//Get VM details from user
-			/*buttonSend("\nName your Vending Machine!\n" + "Input: ");
-			String name = Integer.parseInt(buttonCall);*/
-				
-			/*buttonSend("\nGreat! Do you want " + name + " to be a Special Vending Machine? Y/N\n" + "Input: ");
-			if(s.hasNextLine()) {
-				c = s.next().charAt(0);
-				c = Character.toLowerCase(c);
-				s.nextLine();
-			} buttonCall*/
-			
-			//Sets up new VM
-			boolean isSpecial = false;
-			
-			if(c == 'y') {
-				isSpecial = true;
-			}
-
+    public void createMenu(String name, boolean isSpecial) {
+		if(!this.isSpecial) {
+			this.vm.ir.clearItemList();
 			this.vm.setMachineName(name);
-			this.isSpecial = isSpecial;
 			this.vm.setLastTotalSales(0);
-			this.vm.totalSales = 0;
-			this.transacHistory.clear();
-			/*buttonSend("\nFilling up cash box...");*/
+			this.vm.setTotalSales(0);
 			this.vm.mh.newCashBox();
-
-			/*buttonSend("\nAlright! Let's get some items in here!\n");*/
-			if(!isSpecial) {
-				/*buttonSend(this.vm.ir.getPresetItems());
-				do {
-					//add way to count unique items
-					
-					if(buttonCall == 99) {
-						if(unique < 8) {
-							buttonSend("\nOops! The minimum of 8 items has not yet been reached. You are at " + unique + "items.\n");
-							buttonCall = 98;
-						}
-					} 
-					
-					else if(unique == 16) {
-						buttonSend("\nMaximum 16 items reached.\n");
-						buttonCall = 99;
-					}
-					
-					if(buttonCall != 99) {
-						selectedItem = this.vm.ir.getPresetItemAt(buttonCall());
-						
-						if(selectedItem.getStandalone == true) {
-							this.vm.ir.addItem(selectedItem);
-							this.vm.ir.addFullStock(selectedItem, 7);
-							buttonSend("\nItem add success!\n");
-						}
-						
-						else {
-							buttonSend("\nOops! The selected item could not be sold individually. Please try again.\n");
-						}
-					}
-				} while(buttonCall != 99);*/
-			}
-			
-			else {
-				//SPECIAL VM INITIALIZATION AAAAAAAAAAAAAAAAAAAAAA
-			}
-
-			/*buttonSend("\nAlright! " + name + " is all set up!");*/
+			this.vm.ir.newItemRack();
 		}
 		
-		else if(c == 'n') 
-			/*buttonSend("\nCanceling vending machine set up...");*/
+		else {
+			this.svm.spir.clearItemList();
+			this.svm.setMachineName(name);
+			this.svm.setLastTotalSales(0);
+			this.vm.setTotalSales(0);
+			this.svm.mh.newCashBox();
+			this.svm.spir.newItemRack();
+		}
 		
+		this.userChoice = 0;
+		this.cashIn = 0;
 		this.selectedItem = null;
+		this.isSpecial = isSpecial;
+		this.transacHistory.clear();
+		this.oldInventory.clear();
     }
 
 	/** 
@@ -232,9 +133,14 @@ public class VMController {
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
     public void testMenu() {
-		buttonSend(this.vm.ir.getItemsOnSale());
-		buttonCall(input);
+		/*buttonSend(this.vm.ir.getItemsOnSale());
+		buttonCall(index);
 		set this.selectedItem = this.vm.ir.getItemAt(index)*/
+		
+		if(this.selectedItem.getStandalone() == false) {
+			/*buttonSend("Oops! The selected item cannot be bought alone. Please try again.");*/
+			this.selectedItem = null;
+		}
 		
 		if(!(this.selectedItem == null)) {
 			//Get money from the user
@@ -244,7 +150,7 @@ public class VMController {
 			do {
 				/*buttonCall(value)
 				buttonSend(this.vm.mh.inputDenominations(value));*/
-			} while(input != 99);
+			} while(input != 999);
 			
 			this.cashIn = this.vm.mh.getCashIn();
 			success = this.vm.mh.payment(selectedItem);
@@ -253,9 +159,9 @@ public class VMController {
 				//Dispense item, print receipt, record transaction
 				/*buttonSend("\nDispensing " + this.selectedItem.getName() + "...");*/
 				this.vm.ir.removeItem(this.selectedItem);
-				this.vm.setLastTotalSales(this.vm.totalSales);
+				this.vm.setLastTotalSales(this.vm.getTotalSales());
 				this.vm.addTotalSales(this.selectedItem.getPrice());
-				this.transacHistory.add(new Transaction(this.selectedItem.getName(), this.vm.getLastTotalSales, this.vm.getTotalSales(), false));
+				this.transacHistory.add(new Transaction(this.selectedItem.getName(), this.vm.getLastTotalSales(), this.vm.getTotalSales()));
 				
 				/*buttonSend("============RECEIPT===========" +
 						 "\nPurchased Item: " + this.selectedItem.getName() +
@@ -263,6 +169,10 @@ public class VMController {
 						 "\nItem Price: " + this.selectedItem.getPrice() +
 						 "\nAmount Paid: " + this.cashIn +
 						 "\nIssued Change: " + this.cashIn - this.selectedItem.getPrice()\n\n);*/
+						 
+				if(this.vm.ir.getNumUnique() != 30) {
+					/*prompt restock AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*/
+				}
 			}
 			
 			else
@@ -282,8 +192,7 @@ public class VMController {
 	  * @param s 	The active scanner object
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
-    public void maintainMenu() throws FileNotFoundException {
-		char c = '\0';
+    public void maintainMenu() {
 		ArrayList<Item> temp = new ArrayList<Item>();
 		boolean success = false;
 		
@@ -300,161 +209,221 @@ public class VMController {
 							 "(8) Display Items on Sale\n" +
 							 "(9) Exit Maintenance Menu\n" +
 							 "Select: ");*/
-			
-			if(s.hasNextInt()) {
-				userChoice = s.nextInt();
-				s.nextLine();
-			}			
+			/*buttonCall*/
 			
 			//Item restock
 			if(userChoice == 1) {
 				//Temporary old inventory holder
 				temp.clear();
-				for(Item i : itemList) {
-					temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice(), i.getStock()));
+				if(!isSpecial) {
+					for(Item i : this.vm.ir.getItemsOnSale()) {
+						temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));
+					}
+				}
+				
+				else {
+					for(Item i : this.svm.spir.getItemsOnSale()) {
+						temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));
+					}
 				}
 					
 				do {
-					c = '\0';
+					/*buttonSend("Please select the item you would like to restock!");
+					buttonSend(this.vm.ir.getItemsOnSale);
+					this.selectedItem(buttonCall);*/
 					
-					System.out.println("Please select the item you would like to restock!");
-					this.selectedItem = pDisplay.displayOnSale(itemList, s); 
+					/*buttonSend("Input amount of stock to add: ");
+					int amountToAdd = s.nextInt();*/
+					if(!isSpecial)
+						success = this.vm.ir.addItem(this.selectedItem);
 					
-					System.out.println("Input amount of stock to add: ");
-					int amountToAdd = s.nextInt();
-					success = selectedItem.addStock(this.selectedItem, amountToAdd);
+					else
+						success = this.svm.spir.addItem(this.selectedItem);
 					
 					if(success) {
 						//Sets old inventory to temp if restock is successful
-						System.out.println("Restocking " + this.selectedItem.getName() + "...");
-						System.out.println("Restock success!");
+						/*buttonSend("Restocking " + this.selectedItem.getName() + "...");
+						("Restock success!");*/
 						this.oldInventory.clear();
 						this.oldInventory.addAll(temp);
 					}
 					
 					else {
-						System.out.println("Oops! Amount to add is too much.");
+						/*buttonSend("Oops! Amount to add is too much.");*/
 					}
 					
-					System.out.print("Restock another item? Y/N\n" + "Input: ");
-					c = s.next().charAt(0);
-					c = Character.toLowerCase(c);
-					s.nextLine();
-				} while(c == 'y');
+				} while(userChoice != 999);
 				
-				//Save restock details into file
-				this.lastTotalSales = 0;
-				this.totalSales = 0;
-				System.out.println("Saving restock inventories...");
-				this.saveRestock();
-				System.out.println("Returning to Maintenance Menu...");
+				if(!isSpecial) {
+					this.vm.setLastTotalSales(0);
+					this.vm.setTotalSales(0);
+				}
+				
+				else {
+					this.svm.setLastTotalSales(0);
+					this.svm.setTotalSales(0);
+				}
+				
+				success = false;
+				/*buttonSend("Returning to Maintenance Menu...");*/
 			}
 			
 			//Item re-price
 			else if(userChoice == 2) {
-				System.out.println("Please select the item you would like to re-price!");
-				this.selectedItem = pDisplay.displayOnSale(itemList, s); 
+				/*buttonSend("Please select the item you would like to re-price!");
+				buttonSend(this.vm.ir.getItemsOnSale());
+				buttonCall(index);
 				
-				System.out.println("Input new price for " + this.selectedItem.getName() + ":");
-				int newPrice = this.selectedItem.getPrice();
+				if(!isSpecial)
+					set this.selectedItem = this.vm.ir.getItemAt(index);
 				
-				if(s.hasNextInt()) {
-					newPrice = s.nextInt();
-					s.nextLine();
+				else
+					set this.selectedItem = this.svm.spir.getItemAt(index);
+				
+				buttonSend("Input new price for " + this.selectedItem.getName() + ":");
+				newPrice = buttonCall()*/
+				int newPrice = 0; //to be removed
+				
+				if(!isSpecial) {
+					for(Item i : this.vm.ir.getItemsOnSale()) {
+						if(i.getName().equals(this.selectedItem.getName()))
+							i.setPrice(newPrice);
+					}
 				}
 				
-				this.selectedItem.setPrice(newPrice);
-				System.out.println("New price successfully set!");
+				else {
+					for(Item i : this.svm.spir.getItemsOnSale()) {
+						if(i.getName().equals(this.selectedItem.getName()))
+							i.setPrice(newPrice);
+					}
+				}
+				
+				/*buttonSend("New price successfully set!");
+				buttonSend("Returning to Maintenance Menu...");*/
 			}
 			
 			//Take out money
 			else if(userChoice == 3) {
-				mh.displayDenomList();
-				
-				System.out.print("\nCash out all money? Or only specific bills?\n" +
+				/*buttonSend(this.vm.mh.displayCashBox()); add else if here
+				buttonSend("\nCash out all money? Or only specific bills?\n" +
 								   "Type Y for cash out all money and\n" +
 								   "Type N for cash out specific bills.\n" +
 								   "Select: ");
-				c = '\0';
 				success = false;
-				
-				//Get input
-				if(s.hasNextLine()) {
-					c = s.next().charAt(0);
-					c = Character.toLowerCase(c);
-					s.nextLine();
-				}
+				userChoice = buttonCall;*/
 				
 				//Take out all money
-				if(c == 'y') {
-					int moneyTotal = mh.getTotal();
-					mh.cashOut();
-					System.out.println("Successfully cashed out " + moneyTotal + " pesos. " + this.getName() + " is now cash-empty.");
+				if(userChoice == 1) {
+					int moneyTotal = 0;
+					String name = "";
+					
+					if(!isSpecial) {
+						moneyTotal = this.vm.mh.getTotal();
+						this.vm.mh.cashOut();
+						name = this.vm.getName();
+					}
+					
+					else {
+						moneyTotal = this.svm.mh.getTotal();
+						this.svm.mh.cashOut();
+						name = this.vm.getName();
+					}
+					
+					/*buttonSend("Successfully cashed out " + moneyTotal + " pesos. " + name + " is now cash-empty.");*/
 				}
 				
 				//Take out specific bill/s
 				else {
-					System.out.print("Which bill would you like to cash out?\n" + "Bill value: ");
+					/*buttonSend("Which bill would you like to cash out?\n" + "Bill value: ");
+					int bill = buttonCall();
+					buttonSend("How many " + bill + " bills would you like to take?\n" + "Amount: ");
+					int amount = buttonCall();
 					
-					int bill = 0;
-					int amount = 0;
+					if(!isSpecial)
+						this.vm.mh(cashOne(bill, amount));
 					
-					if(s.hasNextInt()) {
-						bill = s.nextInt();
-						s.nextLine();
-					}
+					else 
+						this.svm.mh(cashOne(bill, amount));
 					
-					System.out.print("How many " + bill + " bills would you like to take?\n" + "Amount: ");
-					
-					if(s.hasNextInt()) {
-						amount = s.nextInt();
-						s.nextLine();
-					}
-					
-					mh.cashOne(bill, amount);
+					buttonSend("Successfully cashed out " + amount  + " of " + bill + " bills.\n"); */
 				}
 			}
 			
 			//Replenish money
 			else if(userChoice == 4) {
-				mh.displayDenomList();
+				/*if(!isSpecial)
+					buttonSend(this.vm.mh.displayCashBox());
+				else
+					buttonSend(this.svm.mh.displayCashBox());
+				
+				buttonSend("Which bill would you like to replenish?\n" + "Bill value: ");
+				int bill = buttonCall();
+				buttonSend("How many " + bill + " bills would you like to add?\n" + "Amount: ");
+				int amount = buttonCall();
 					
-				System.out.print("Which bill would you like to replenish?\n" + "Bill value: ");
-				
-				int bill = 0;
-				int amount = 0;
-				
-				if(s.hasNextInt()) {
-					bill = s.nextInt();
-					s.nextLine();
-				}
-				
-				System.out.print("How many " + bill + " bills would you like to add?\n" + "Amount: ");
-				
-				if(s.hasNextInt()) {
-					amount = s.nextInt();
-					s.nextLine();
-				}
-				
-				success = mh.refillOne(bill, amount);
+				if(!isSpecial)
+					success = this.vm.mh.refillOne(bill, amount);
+				else
+					success = this.svm.mh.refillOne(bill, amount);
 				
 				if(success) {
-					System.out.println("Replenishing " + amount + " " + bill + " bills...");
-					System.out.println("Replenish success!");
+					buttonSend("Replenishing " + amount + " " + bill + " bills...");
+					buttonSend("Replenish success!");
 				}
 				
 				else
-					System.out.println("Invalid bill value.\n");
+					buttonSend("Invalid bill value.\n");*/
+				
+				success = false;
 			}
 			
 			//Print transaction history
 			else if(userChoice == 5) {
+				int count = 1;
 				
+				if(!isSpecial) {
+					for(Transaction t : this.transacHistory) {
+						/*buttonSend("================TRANSACTION#" + count + "=================" +
+									   "\nPurchased Item:\t\t\t" + t.getName + 
+									   "\nQty:\t\t\t\t" + 1 +
+									   "\nTotal Sales At Last Restock:\t" + t.getLastTotalSales +
+									   "\nCurrent Total Sales:\t\t" + t.getTotalSales + "\n");*/
+					}
+				}
+				
+				//else 
+					//implement special transac histo AAAAAAAAAAAAAAAAAAAAAAAAAAA
 			}
 			
 			//Print restock history
 			else if(userChoice == 6) {
-				this.printRestockHistory();
+				/*buttonSend("==============STARTING INVENTORY===============" +
+							"\nItem Name\t\tQuantity");
+				
+				for(Item i : oldInventory) {
+					name = i.getName();
+					qty = i.countStock(name);
+					System.out.println(name + "\t\t" + qty + "\n");
+				}
+	
+				buttonSend("===============ENDING INVENTORY================" +
+							"\nItem Name\t\tQuantity");
+				
+				if(!isSpecial) {
+					for(Item i : this.vm.ir.getItemsOnSale()) {
+						name = i.getName();
+						qty = i.countStock(name);
+						System.out.println(name + "\t\t" + qty + "\n");
+					}
+				}
+				
+				else {
+					for(Item i : this.svm.spir.getItemsOnSale()) {
+						name = i.getName();
+						qty = i.countStock(name);
+						System.out.println(name + "\t\t" + qty + "\n");
+					}
+				}*/
 			}
 			
 			else if(userChoice == 7) {

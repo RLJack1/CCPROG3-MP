@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.io.NumberFormatException;
 
 /** 
   * Stores and conducts operations on all money inside the Vending Machine
@@ -77,10 +76,10 @@ public class MoneyHandler {
 	  * @param s The active scanner object
 	  */
 	public String inputDenominations(int amount) {	
+		String toDisplay = "";
+		
 		try { 
-			String toDisplay = "";
-			
-			for(int i = 0; i < denominations.length; i++) {
+			for(int i = 0; i < holder.length; i++) {
 				switch(amount){
 					case 1000 -> {this.holder[0][1]++; toDisplay = "1000 inserted...\n";}
 					case 500 -> {this.holder[1][1]++; toDisplay = "500 inserted...\n";}

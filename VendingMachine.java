@@ -58,6 +58,10 @@ public class VendingMachine {
 		this.machineName = newName;
 	}
 	
+	public void setTotalSales(int newAmount) {
+		this.totalSales = newAmount;
+	}
+	
 	/** 
       * Increases the total sales since last restock by the specified amount
 	  * @param amountToAdd The amount by which the total sales will increase
