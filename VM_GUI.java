@@ -1487,6 +1487,26 @@ public class VM_GUI extends javax.swing.JFrame {
         String currentText = jInputTextField.getText();
         jInputTextField.setText(currentText + number);
     }
+	
+	public JButton getConfirmButton() {
+		return this.jButtonConfirm;
+	}
+	
+	public JButton getBreakButton() {
+		return this.jButtonBreak;
+	}
+	
+	public JButton getYButton () {
+		return this.jButtonClearY;
+	}
+	
+	public JButton getNButton () {
+		return this.jButtonClearN;
+	}
+	
+	public JTextField getTextField() {
+		return this.jInputTextField;
+	}
     
     /**
      * @param args the command line arguments

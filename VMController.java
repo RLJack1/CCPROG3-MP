@@ -3,15 +3,19 @@
  *			: write data into files
  */
 
+package StringInterviewprograms;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /** 
   * Makes the initial function calls to start the interaction of classes.
   */
-public class VMController {
+public class VMController implements ActionListener {
 	private int cashIn;
 	private int userChoice;
 	private boolean isSpecial;
@@ -20,6 +24,7 @@ public class VMController {
 	private ArrayList<Transaction> transacHistory;
 	private VendingMachine vm;
 	private SpecialVM svm;
+	private VM_GUI view;
 	
 	/** 
       * A constructor that creates an instance of the VMController object.
@@ -32,9 +37,14 @@ public class VMController {
 		this.oldInventory = new ArrayList<Item>();
 		this.transacHistory = new ArrayList<Transaction>();
 		this.vm = new VendingMachine("The Classic Vending Machine", 0, 0);
-		
 		this.vm.mh.newCashBox();
 		this.vm.ir.newItemRack();
+		
+		this.view = new VM_GUI();
+		this.view.getYButton().addActionListener(this);
+		this.view.getNButton().addActionListener(this);
+		this.view.getConfirmButton().addActionListener(this);
+		this.view.getBreakButton().addActionListener(this);
 	}
 
 	/** 
@@ -46,6 +56,31 @@ public class VMController {
 		/*buttonSend("Loading Vending Machine...\n");*/
 		/*buttonSend("Done!\n");*/
 		c.displayMenu();
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Jbutton clicked = (Jbutton) e.getSource();
+		
+		String buttonText = clicked.getText();
+		
+		if(buttonText == "✓") {
+			String textFieldText = view.getTextField().getText();
+			String textFieldText = Integer.parseInt(textFieldText);
+			this.userChoice = (int) textFieldText.substring(0, 2);
+		}
+		
+		else if(buttonText == "Break") {
+			this.userChoice = 999;
+		}
+		
+		else if(buttonText == "Y") {
+			this.userChoice = 1;
+		}
+		
+		else if(buttonText == "N") {
+			this.userChoice = 0;
+		}
 	}
 		
 	/** 
