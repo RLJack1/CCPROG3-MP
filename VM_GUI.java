@@ -1760,6 +1760,10 @@ public class VM_GUI extends javax.swing.JFrame {
 	public JTextField getTextField() {
 		return this.jInputTextField;
 	}
+	
+	public void displayText(String text) {
+		this.jTextAreaConsole.append(text);
+	}
     
     /**
      * @param args the command line arguments

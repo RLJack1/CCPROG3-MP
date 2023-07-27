@@ -53,8 +53,8 @@ public class VMController implements ActionListener {
       */
 	public static void main(String[] args) {
 		VMController c = new VMController();
-		/*buttonSend("Loading Vending Machine...\n");*/
-		/*buttonSend("Done!\n");*/
+		this.displayText("Loading Vending Machine...\n");
+		this.displayText("Done!\n");
 		c.displayMenu();
 	}
 	
@@ -68,6 +68,13 @@ public class VMController implements ActionListener {
 			String textFieldText = view.getTextField().getText();
 			String textFieldText = Integer.parseInt(textFieldText);
 			this.userChoice = (int) textFieldText.substring(0, 2);
+			this.cashIn = 0;
+			
+			if(!isSpecial)
+				//@renzo pass in this.vm.ir.getItemsOnSale();
+			
+			else 
+				//@renzo pass in this.svm.spir.getItemsOnSale();
 		}
 		
 		else if(buttonText == "Break") {
@@ -82,6 +89,12 @@ public class VMController implements ActionListener {
 			this.userChoice = 0;
 		}
 	}
+	
+	public void displayText(String text) {
+		if(this.view != null) {
+			this.view.displayText(text);
+		}
+	}
 		
 	/** 
 	  * Displays the main menu of the Vending Machine and repeatedly gets user input.
@@ -92,12 +105,11 @@ public class VMController implements ActionListener {
 	  */
 	public void displayMenu() {
 		do {		
-			/*buttonSend("==============================\n" +
+			this.displayText("==============================\n" +
 						 "Vending Machine Features:\n" + 
 						 "(1) Test Current Vending Machine Features\n" +
 						 "(2) Perform Maintenance Features\n" +
 						 "(3) Return to Main Menu\n");
-			userChoice = Integer.parseInt(buttonCall);*/
 			
 			//Test
 			if(userChoice == 1) {
@@ -106,23 +118,23 @@ public class VMController implements ActionListener {
 				else
 					this.specialTestMenu();
 				
-				/*buttonSend("\nTransaction complete. Returning to Features Menu...\n");*/
+				this.displayText("\nTransaction complete. Returning to Features Menu...\n");
 			}
 			
 			//Maintain
 			else if(userChoice == 2) {
 				this.maintainMenu();
-				/*buttonSend("\nMaintenance complete. Returning to Features Menu...\n");*/
+				this.displayText("\nMaintenance complete. Returning to Features Menu...\n");
 			}
 			
 			//Exit
 			else if(userChoice == 3) {
-				/*buttonSend("\nThank you for coming!\n" + "Exiting program...\n");*/
+				this.displayText("\nThank you for coming!\n" + "Exiting program...\n");
 			}
 			
 			//Error catch
 			else {
-				/*buttonSend("\nInvalid input. Please try again.\n");*/
+				this.displayText("\nInvalid input. Please try again.\n");
 				userChoice = 0;
 			}
 			
@@ -167,20 +179,16 @@ public class VMController implements ActionListener {
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
     public void testMenu() {
-		/*if(!isSpecial) {
-			buttonSend(this.vm.ir.getItemsOnSale());
-			buttonCall(index);
-			set this.selectedItem = this.vm.ir.getItemAt(index);
+		if(userChoice >= 0 && userChoice <= 30) {
+			if(!isSpecial)
+				this.selectedItem = this.vm.ir.getItemAt(userChoice);
+			
+			else
+				this.selectedItem = this.svm.spir.getItemAt(userChoice);
 		}
-		
-		else {
-			buttonSend(this.svm.spir.getItemsOnSale());
-			buttonCall(index);
-			set this.selectedItem = this.svm.spir.getItemAt(index);
-		}*/
-		
+			
 		if(this.selectedItem.getStandalone() == false) {
-			/*buttonSend("Oops! The selected item cannot be bought alone. Please try again.");*/
+			this.displayText("\nOops! The selected item cannot be bought alone. Please try again.\n");
 			this.selectedItem = null;
 		}
 		
