@@ -11,8 +11,8 @@ public class SpecialVM extends VendingMachine {
 									"GourmetBurger", "JackBurger", "MeatOverloadBurger",
 									"SpicyTapaBurger", "SalmonBurger", "TurkeyBurger"};
 	
-	public SpecialVM(String machineName, int totalSales, int lastTotalSales) {
-		super(machineName, totalSales, lastTotalSales);
+	public SpecialVM(VMController c, String machineName, int totalSales, int lastTotalSales) {
+		super(c, machineName, totalSales, lastTotalSales);
 		this.recipeList = new ArrayList<Recipe>();
 		this.loadRecipes();
 		this.spir = new SpecialIR();

@@ -4,6 +4,7 @@ import java.util.Scanner;
   * Stores and conducts operations on all money inside the Vending Machine
   */
 public class MoneyHandler {
+	private VMController c;
 	private int[][] cashBox = {
 	  {1000, 0},
 	  {500, 0},
@@ -40,7 +41,8 @@ public class MoneyHandler {
 	/** 
 	  * A constructor that creates an instance of the ProductDispenser object.
 	  */
-	public MoneyHandler() {
+	public MoneyHandler(VMController c) {
+		this.c = c;
 	}
 	
 	/** 
@@ -127,25 +129,25 @@ public class MoneyHandler {
 		}
 		
 		if(numOfDenom <= 0) {
-			System.out.println("Invalid input.");
+			this.c.displayText("\nInvalid input.");
 			success = false;
 		}
 		
 		if(success) {
 			if(numOfDenom > this.cashBox[row][1]) {
 				success = false;
-				System.out.println("Oops! Not enough biils to dispense.");
+				this.c.displayText("\nOops! Not enough biils to dispense.");
 			}
 				
 			else {
 				this.cashBox[row][1] -= numOfDenom;
-				System.out.println("Cashing out " + numOfDenom + " " + this.cashBox[row][0] + " bills...");
-				System.out.println("Cash out success!");
+				this.c.displayText("\nCashing out " + numOfDenom + " " + this.cashBox[row][0] + " bills...");
+				this.c.displayText("\nCash out success!");
 			}	
 		}
 		
 		else
-			System.out.println("Oops! Invalid bill input.");
+			this.c.displayText("\nOops! Invalid bill input.");
 	}
 	
 	/** 
@@ -188,13 +190,11 @@ public class MoneyHandler {
 		int change = cashIn - price;
 		int i = 0;
 		
-		/*buttonSend("Proceed with transaction? Press Y to proceed and N to cancel. Y/N\n");*/
-		
-		//gets input
-		/*userChoice = buttonCall*/
+		this.c.displayText("\nProceed with transaction? Press Y to proceed and N to cancel. Y/N\n");
+		userChoice = this.c.userChoice;
 		
 		//transfer all holder money into cashBox
-		/*buttonSend("Loading money into the cashbox...");*/
+		this.c.displayText("\nLoading money into the cashbox...");
 		for(i = 0; i < this.holder.length; i++) {
 			this.cashBox[i][1] += this.holder[i][1];
 		}
@@ -212,14 +212,14 @@ public class MoneyHandler {
 				//if enough
 				if(enoughStock) {
 					//load money from cashBox to change
-					/*buttonSend("Getting your change ready...");*/
+					this.c.displayText("\nGetting your change ready...");
 					for(i = 0; i < this.changeArray.length; i++) {
 						if(this.changeArray[i][1] > 0) 
 							this.cashBox[i][1] -= this.changeArray[i][1];
 					}
 					
 					//empty change array
-					/*buttonSend("Ka-ching! Change has been dispensed.");*/
+					this.c.displayText("\nKa-ching! Change has been dispensed.");
 					for(i = 0; i < this.changeArray.length; i++) {
 						this.changeArray[i][1] = 0;
 					}
@@ -236,14 +236,14 @@ public class MoneyHandler {
 				
 				//not enough stock
 				else {
-					/*buttonSend("Oh no! This Vending Machine doesn't have enough change.");*/
+					this.c.displayText("\nOh no! This Vending Machine doesn't have enough change.");
 					releaseAll = true;
 				}
 			}
 			
 			//user didn't give enough
 			else {
-				/*buttonSend("Oops! Not enough money was inserted.");*/
+				this.c.displayText("\nOops! Not enough money was inserted.");
 				releaseAll = true;
 			}
 		}
@@ -254,8 +254,8 @@ public class MoneyHandler {
 		
 		//if anything failed
 		if(releaseAll) {
-			/*buttonSend("Canceling transaction...");
-			buttonSend("Releasing full change...");*/
+			this.c.displayText("\nCanceling transaction...");
+			this.c.displayText("\nReleasing full change...");
 			for(i = 0; i < this.holder.length; i++) {
 				if(this.holder[i][1] > 0) {
 					this.cashBox[i][1] -= this.holder[i][1];
@@ -277,13 +277,11 @@ public class MoneyHandler {
 		int change = cashIn - price;
 		int i = 0;
 		
-		/*buttonSend("Proceed with transaction? Press Y to proceed and N to cancel. Y/N\n");*/
-		
-		//gets input
-		/*userChoice = buttonCall*/
+		this.c.displayText("\nProceed with transaction? Press Y to proceed and N to cancel. Y/N\n");
+		userChoice = this.c.userChoice;
 		
 		//transfer all holder money into cashBox
-		/*buttonSend("Loading money into the cashbox...");*/
+		this.c.displayText("\nLoading money into the cashbox...");
 		for(i = 0; i < this.holder.length; i++) {
 			this.cashBox[i][1] += this.holder[i][1];
 		}
@@ -301,14 +299,14 @@ public class MoneyHandler {
 				//if enough
 				if(enoughStock) {
 					//load money from cashBox to change
-					/*buttonSend("Getting your change ready...");*/
+					this.c.displayText("\nGetting your change ready...");
 					for(i = 0; i < this.changeArray.length; i++) {
 						if(this.changeArray[i][1] > 0) 
 							this.cashBox[i][1] -= this.changeArray[i][1];
 					}
 					
 					//empty change array
-					/*buttonSend("Ka-ching! Change has been dispensed.");*/
+					this.c.displayText("\nKa-ching! Change has been dispensed.");
 					for(i = 0; i < this.changeArray.length; i++) {
 						this.changeArray[i][1] = 0;
 					}
@@ -325,14 +323,14 @@ public class MoneyHandler {
 				
 				//not enough stock
 				else {
-					/*buttonSend("Oh no! This Vending Machine doesn't have enough change.");*/
+					this.c.displayText("\nOh no! This Vending Machine doesn't have enough change.");
 					releaseAll = true;
 				}
 			}
 			
 			//user didn't give enough
 			else {
-				/*buttonSend("Oops! Not enough money was inserted.");*/
+				this.c.displayText("\nOops! Not enough money was inserted.");
 				releaseAll = true;
 			}
 		}
@@ -343,8 +341,8 @@ public class MoneyHandler {
 		
 		//if anything failed
 		if(releaseAll) {
-			/*buttonSend("Canceling transaction...");
-			buttonSend("Releasing full change...");*/
+			this.c.displayText("\nCanceling transaction...");
+			this.c.displayText("\nReleasing full change...");
 			for(i = 0; i < this.holder.length; i++) {
 				if(this.holder[i][1] > 0) {
 					this.cashBox[i][1] -= this.holder[i][1];
@@ -361,7 +359,7 @@ public class MoneyHandler {
 	  * @param change The total amount of change to be issued
 	  */
 	public void breakdownChange(int change) {
-		System.out.println("Breaking down change...");
+		this.c.displayText("\nBreaking down change...");
 		int numBills = 0;
 		
 		for(int i = 0; i < this.changeArray.length; i++) {
@@ -376,7 +374,7 @@ public class MoneyHandler {
 	  * @return Whether there is enough bill stock for dispensing
 	  */
 	public boolean checkChange() {
-		System.out.println("Checking if there are enough bills to give change...");
+		this.c.displayText("\nChecking if there are enough bills to give change...");
 		boolean enoughChange = true;
 		
 		for(int i = 0; i < this.changeArray.length; i++) {

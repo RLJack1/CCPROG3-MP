@@ -55,10 +55,22 @@ public class ItemRack {
 		}
 	}
 	
-	public void addFullStock(Item i, int stock) {
-		int j;
+	public void addFullStock(Item item) {
+		int count = 0;
 		
-		for(j = 0; j <= stock; j++) {
+		for(Item i : this.itemList) {
+			if(i.getName().equals(item.getName()))
+				count++;
+		}
+		
+		int neededStock = 10 - count;
+		
+		for(int j = 0; j <= neededStock; j++)
+			this.itemList.add(new Item(item.getName(), item.getCalories(), item.getStandalone(), item.getPrice()));
+	}
+	
+	public void addFullStock(Item i, int stock) {
+		for(int j = 0; j <= stock; j++) {
 			this.itemList.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));
 		}
 	}

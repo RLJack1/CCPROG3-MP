@@ -10,19 +10,11 @@ public class VendingMachine {
 	protected MoneyHandler mh;
 	protected ItemRack ir;
 	
-	public VendingMachine() {
-		this.machineName = null;
-		this.totalSales = 0;
-		this.lastTotalSales = 0;
-		mh = new MoneyHandler();
-		ir = new ItemRack();
-	}
-	
-	public VendingMachine(String machineName, int totalSales, int lastTotalSales) {
+	public VendingMachine(VMController c, String machineName, int totalSales, int lastTotalSales) {
 		this.machineName = machineName;
 		this.totalSales = totalSales;
 		this.lastTotalSales = lastTotalSales;
-		mh = new MoneyHandler();
+		mh = new MoneyHandler(c);
 		ir = new ItemRack();
 	}
 	
