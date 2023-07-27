@@ -1,0 +1,88 @@
+public void initStockLabels(){ //Code to initialize the ItemStock labels into an arraylist so they can be updated.
+        labelList.add(ItemStock1);
+        labelList.add(ItemStock2);
+        labelList.add(ItemStock3);
+        labelList.add(ItemStock4);
+        labelList.add(ItemStock5);
+        labelList.add(ItemStock6);
+        labelList.add(ItemStock7);
+        labelList.add(ItemStock8);
+        labelList.add(ItemStock9);
+        labelList.add(ItemStock10);
+        labelList.add(ItemStock11);
+        labelList.add(ItemStock12);
+        labelList.add(ItemStock13);
+        labelList.add(ItemStock14);
+        labelList.add(ItemStock15);
+        labelList.add(ItemStock16);
+        labelList.add(ItemStock17);
+        labelList.add(ItemStock18);
+        labelList.add(ItemStock19);
+        labelList.add(ItemStock20);
+        labelList.add(ItemStock21);
+        labelList.add(ItemStock22);
+        labelList.add(ItemStock23);
+        labelList.add(ItemStock24);
+        labelList.add(ItemStock25);
+        labelList.add(ItemStock26);
+        labelList.add(ItemStock27);
+        labelList.add(ItemStock28);
+        labelList.add(ItemStock29);
+        labelList.add(ItemStock30);
+    }
+
+
+// in VM_GUI.java
+
+public class VM_GUI extends javax.swing.JFrame { // class code for the GUI contains
+    private ArrayList<JLabel> labelList; // The arraylist for the stock.
+    /**
+     * Creates new form VM_GUI
+     */
+    public VM_GUI() {
+        labelList = new ArrayList<>(); // declaration of the labellist
+        initComponents(); // initializes the components 
+        initStockLabels(); // Method to add the itemstock labels into the labellist
+    }
+
+public static void CreateShowGUI(String args[]) { //CreateShowGUI was originally the main; changed the method name so it can be called by the controller
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new VM_GUI().setVisible(true);
+            }
+        });
+    }
+
+//in VM_Controller
+public static void main(String[] args) {
+		VMController c = new VMController();
+		VM_GUI.CreateShowGUI(args); // VM Gui is created. still dk if this works because the gui's former main is also public static void(String[] args)
+		/*buttonSend("Loading Vending Machine...\n");*/
+		/*buttonSend("Done!\n");*/
+		c.displayMenu();
+	}
