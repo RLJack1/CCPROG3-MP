@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 //package jackpackage;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 /**
  *
