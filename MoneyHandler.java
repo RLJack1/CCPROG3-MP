@@ -182,16 +182,16 @@ public class MoneyHandler {
 		boolean releaseAll = false;	
 		boolean enoughStock = true;
 		boolean success = false;
-		char c = '\0';
+		int userChoice = 0;
 		int cashIn = this.getCashIn();
 		int price = selectedItem.getPrice();
 		int change = cashIn - price;
 		int i = 0;
 		
-		/*buttonSend("Proceed with transaction? Type Y to proceed and N to cancel. Y/N\n" + "Input: ");*/
+		/*buttonSend("Proceed with transaction? Press Y to proceed and N to cancel. Y/N\n");*/
 		
 		//gets input
-		/*buttonCall*/
+		/*userChoice = buttonCall*/
 		
 		//transfer all holder money into cashBox
 		/*buttonSend("Loading money into the cashbox...");*/
@@ -200,7 +200,96 @@ public class MoneyHandler {
 		}
 		
 		//payment procedures
-		if(c == 'y') {
+		if(userChoice == 1) {
+			//if the user gave enough
+			if(change >= 0) {
+				//break down change
+				this.breakdownChange(change);
+				
+				//check enough
+				enoughStock = checkChange();
+				
+				//if enough
+				if(enoughStock) {
+					//load money from cashBox to change
+					/*buttonSend("Getting your change ready...");*/
+					for(i = 0; i < this.changeArray.length; i++) {
+						if(this.changeArray[i][1] > 0) 
+							this.cashBox[i][1] -= this.changeArray[i][1];
+					}
+					
+					//empty change array
+					/*buttonSend("Ka-ching! Change has been dispensed.");*/
+					for(i = 0; i < this.changeArray.length; i++) {
+						this.changeArray[i][1] = 0;
+					}
+
+					for(i = 0; i < this.holder.length; i++) {
+						if(this.holder[i][1] > 0) {
+							this.cashBox[i][1] -= this.holder[i][1];
+						}
+						this.holder[i][1] = 0;
+					}
+					
+					success = true;
+				}
+				
+				//not enough stock
+				else {
+					/*buttonSend("Oh no! This Vending Machine doesn't have enough change.");*/
+					releaseAll = true;
+				}
+			}
+			
+			//user didn't give enough
+			else {
+				/*buttonSend("Oops! Not enough money was inserted.");*/
+				releaseAll = true;
+			}
+		}
+		
+		//the user wants to cancel
+		else 
+			releaseAll = true;
+		
+		//if anything failed
+		if(releaseAll) {
+			/*buttonSend("Canceling transaction...");
+			buttonSend("Releasing full change...");*/
+			for(i = 0; i < this.holder.length; i++) {
+				if(this.holder[i][1] > 0) {
+					this.cashBox[i][1] -= this.holder[i][1];
+				}
+				this.holder[i][1] = 0;
+			}		
+		}
+
+		return success;
+	}
+	
+	public boolean payment(Recipe selectedRecipe) {
+		boolean releaseAll = false;	
+		boolean enoughStock = true;
+		boolean success = false;
+		int userChoice = 0;
+		int cashIn = this.getCashIn();
+		int price = selectedRecipe.getPrice();
+		int change = cashIn - price;
+		int i = 0;
+		
+		/*buttonSend("Proceed with transaction? Press Y to proceed and N to cancel. Y/N\n");*/
+		
+		//gets input
+		/*userChoice = buttonCall*/
+		
+		//transfer all holder money into cashBox
+		/*buttonSend("Loading money into the cashbox...");*/
+		for(i = 0; i < this.holder.length; i++) {
+			this.cashBox[i][1] += this.holder[i][1];
+		}
+		
+		//payment procedures
+		if(userChoice == 1) {
 			//if the user gave enough
 			if(change >= 0) {
 				//break down change
