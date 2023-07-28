@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /** 
@@ -53,10 +54,26 @@ public class VMController implements ActionListener {
       */
 	public static void main(String[] args) {
 		VMController c = new VMController();
+		//VM_GUI.CreateShowGUI(args); // @megan calls the gui to be shown.
 		c.displayText("Loading Vending Machine...\n");
 		c.displayText("Done!\n");
 		c.displayMenu();
 	}
+
+	// public void UpdateStockLabel(){ @megan WIP helper method to get the names from the ir so that 
+	// 	int i = 0;
+	// 	ArrayList <Item> items = this.vm.ir.getItemsOnSale();
+	// 	ArrayList <String> names = new ArrayList<>();
+	// 	for(Item item : items){
+	// 		String extractedNames = item.getName();
+	// 		names.add(extractedNames);
+	// 	}
+
+	// 	for (JLabel label : view.labelList) {
+	// 		label.setText(""+ this.vm.ir.countStock(names.get(i)));
+	// 		i++;
+	// 	}
+	// }
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -65,8 +82,8 @@ public class VMController implements ActionListener {
 		String buttonText = clicked.getText();
 		
 		if(buttonText == "✓") {
-			String textFieldText = view.getTextField().getText();
-			
+			String textFieldText = view.jInputTextField.getText(); //@megan I assume this code just gets the text from the InputTF. in that case, we can just name it here.
+			// I also changed the visibility of the jInputTextField to default the whole package can see
 			if(textFieldText.length() <= 1)
 				this.userChoice = Integer.parseInt(textFieldText.substring(0, 1));
 			
@@ -79,10 +96,12 @@ public class VMController implements ActionListener {
 			this.cashIn = 0;
 			
 			if(!isSpecial) {}
-				//@renzo pass in this.vm.ir.getItemsOnSale();
+				//@renzo pass in this.vm.ir.getItemsOnSale(); @megan i assume this is the part where the labels for stock is updated huhuhuhuh
+				// WIP UpdateStockLabel();
 			
 			else {}
 				//@renzo pass in this.svm.spir.getItemsOnSale();
+				// WIP UpdateStockLabel();
 		}
 		
 		else if(buttonText == "Break") {
@@ -98,7 +117,7 @@ public class VMController implements ActionListener {
 		}
 	}
 	
-	public void displayText(String text) {
+	public void displayText(String text) { //@megan this could just append to the view's text area.
 		if(this.view != null) {
 			this.view.displayText(text);
 		}
@@ -548,10 +567,10 @@ public class VMController implements ActionListener {
 				if(!isSpecial) {
 					for(Transaction t : this.transacHistory) {
 						this.displayText("================TRANSACTION#" + count + "=================" +
-									   "\nPurchased Item:\t\t\t" + t.getName + 
+									   "\nPurchased Item:\t\t\t" + t.getName() + 
 									   "\nQty:\t\t\t\t" + 1 +
-									   "\nTotal Sales At Last Restock:\t" + t.getLastTotalSales +
-									   "\nCurrent Total Sales:\t\t" + t.getTotalSales + "\n");
+									   "\nTotal Sales At Last Restock:\t" + t.getLastTotalSales() +
+									   "\nCurrent Total Sales:\t\t" + t.getTotalSales() + "\n"); //@megan added the parantheses to complete the method calls.
 					}
 				}
 				
