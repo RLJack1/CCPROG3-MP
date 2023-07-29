@@ -42,7 +42,7 @@ public class VMController implements ActionListener {
 		this.vm.ir.newItemRack();
 		
 		this.view = new VM_GUI();
-		this.view.getYButton().addActionListener(this);
+		this.view.getYButton().addActionListener(this); //@megan what do these do huhuhuh
 		this.view.getNButton().addActionListener(this);
 		this.view.getConfirmButton().addActionListener(this);
 		this.view.getBreakButton().addActionListener(this);
@@ -119,7 +119,8 @@ public class VMController implements ActionListener {
 	
 	public void displayText(String text) { //@megan this could just append to the view's text area.
 		if(this.view != null) {
-			this.view.displayText(text);
+			//this.view.displayText(text);
+			this.view.jTextAreaConsole.append("\n"+text);
 		}
 	}
 		
@@ -240,7 +241,7 @@ public class VMController implements ActionListener {
 							 "\nTotal Calories: " + this.selectedItem.getCalories() +
 							 "\nItem Price: " + this.selectedItem.getPrice() +
 							 "\nAmount Paid: " + this.cashIn +
-							 "\nIssued Change: " + this.cashIn - this.selectedItem.getPrice() + "\n\n");
+							 "\nIssued Change: " + (this.cashIn - this.selectedItem.getPrice()) + "\n\n"); //@megan parentheses'd the equation because java grammar.
 							 
 					if(this.vm.ir.getNumUnique() != 30) {
 						this.restockMenu();
@@ -273,7 +274,7 @@ public class VMController implements ActionListener {
 							 "\nTotal Calories: " + this.selectedItem.getCalories() +
 							 "\nItem Price: " + this.selectedItem.getPrice() +
 							 "\nAmount Paid: " + this.cashIn +
-							 "\nIssued Change: " + this.cashIn - this.selectedItem.getPrice() + "\n\n");
+							 "\nIssued Change: " + (this.cashIn - this.selectedItem.getPrice()) + "\n\n"); //@megan parentheses'd the equation because java grammar.
 							 
 					if(this.svm.spir.getNumUnique() != 30) {
 						this.restockMenu();
@@ -353,7 +354,7 @@ public class VMController implements ActionListener {
 						 "\nTotal Calories: " + selectedRecipe.getCalories() +
 						 "\nItem Price: " + selectedRecipe.getPrice() +
 						 "\nAmount Paid: " + this.cashIn +
-						 "\nIssued Change: " + this.cashIn - selectedRecipe.getPrice() + "\n\n");
+						 "\nIssued Change: " + (this.cashIn - selectedRecipe.getPrice()) + "\n\n"); //@megan parentheses'd the equation because java grammar.
 						 
 				if(this.svm.spir.getNumUnique() != 30) {
 					this.restockMenu();
