@@ -82,8 +82,7 @@ public class VMController implements ActionListener {
 		String buttonText = clicked.getText();
 		
 		if(buttonText == "✓") {
-			String textFieldText = view.jInputTextField.getText(); //@megan I assume this code just gets the text from the InputTF. in that case, we can just name it here.
-			// I also changed the visibility of the jInputTextField to default the whole package can see
+			String textFieldText = view.jInputTextField.getText(); 
 			if(textFieldText.length() <= 1)
 				this.userChoice = Integer.parseInt(textFieldText.substring(0, 1));
 			

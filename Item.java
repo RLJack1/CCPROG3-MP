@@ -1,9 +1,5 @@
-/*MAIN TASKS: stores attributes of each item 
- *			: getters and setters 
- */
-
 /** 
-  * Stores and operates on item details like name, calories, standalone status, price, and stock.
+  * Stores and operates on Item attributes like name, calories, standalone status, and price
   */
 public class Item {
     protected final String name;
@@ -12,12 +8,11 @@ public class Item {
     private int price;
 
 	/** 
-      * A constructor that creates an item instance given complete attributes.
+      * A constructor that creates an Item instance given
 	  * @param name 		The item's name
 	  * @param calories		The decimal amount of calories the item contains
 	  * @param standalone	Whether or not the item can be sold alone
 	  * @param price		The cost of the item
-	  * @param stock 		The quantity of the item available for sale
       */
     public Item(String name, double calories, boolean standalone, int price) { 
         this.name = name;
@@ -27,7 +22,7 @@ public class Item {
     }
 
 	/** 
-      * Gets and returns the item's name.
+      * Gets and returns the item's name
 	  * @return The item's name
       */
     public String getName() {
@@ -35,7 +30,7 @@ public class Item {
     }
 
 	/** 
-      * Gets and returns the item's calorie measurement.
+      * Gets and returns the item's calorie measurement
 	  * @return The item's decimal calorie measurement
       */
     public double getCalories() {
@@ -43,7 +38,7 @@ public class Item {
     }
 
 	/** 
-      * Gets and returns the item's standalone status.
+      * Gets and returns the item's standalone status
 	  * @return Whether or not the item can be sold alone
       */
     public boolean getStandalone() {
@@ -51,7 +46,7 @@ public class Item {
     }
 
 	/** 
-      * Gets and returns the item's price.
+      * Gets and returns the item's price
 	  * @return The item's price
       */
     public int getPrice() {

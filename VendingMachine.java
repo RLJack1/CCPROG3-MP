@@ -1,8 +1,6 @@
-/*MAIN TASKS: stores the basic details of the vending machine (done)
- *			: stores all the objects needed 
- *			: getters and setters
- */
-
+/** 
+  * Stores Vending Machine information and conducts direct operations on VM attributes
+  */
 public class VendingMachine {
 	private String machineName;
 	private int totalSales;
@@ -10,6 +8,13 @@ public class VendingMachine {
 	protected MoneyHandler mh;
 	protected ItemRack ir;
 	
+	/** 
+	  * A constructor that creates an instance of the VendingMachine object.
+	  * @param c				The controller wherein the Vending Machine was instantiated
+	  * @param machineName		The name of this Vending Machine
+	  * @param totalSales		The current total sales since last restock
+	  * @param lastTotalSales	The last total sales since last restock
+	  */
 	public VendingMachine(VMController c, String machineName, int totalSales, int lastTotalSales) {
 		this.machineName = machineName;
 		this.totalSales = totalSales;
@@ -50,6 +55,10 @@ public class VendingMachine {
 		this.machineName = newName;
 	}
 	
+	/** 
+      * Changes the value of the saved total sales to a new value
+	  * @param newAmount The new amount of total sales
+      */
 	public void setTotalSales(int newAmount) {
 		this.totalSales = newAmount;
 	}
