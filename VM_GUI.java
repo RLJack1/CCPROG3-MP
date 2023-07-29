@@ -6,7 +6,7 @@
 
 import java.awt.Image;
 import java.util.ArrayList;
-
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /**
@@ -1802,7 +1802,7 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) { // switch between main and CreateShowGUI when testing GUI with and without the controller connection.
+    public void CreateShowGUI(String args[]) { // switch between main and CreateShowGUI when testing GUI with and without the controller connection.
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1834,6 +1834,26 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
             }
         });
     }
+	
+	public JButton getYButton() {
+		return this.jButtonClearY;
+	}
+	
+	public JButton getNButton() {
+		return this.jButtonClearN;
+	}
+	
+	public JButton getConfirmButton() {
+		return this.jButtonClear;
+	}
+	
+	public JButton getBreakButton() {
+		return this.jButtonBreak;
+	}
+	
+	public void displayText(String text) {
+		this.jTextAreaConsole.append(text);
+	}
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton ConfirmVMButton;

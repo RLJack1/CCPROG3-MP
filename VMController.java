@@ -54,7 +54,7 @@ public class VMController implements ActionListener {
       */
 	public static void main(String[] args) {
 		VMController c = new VMController();
-		//VM_GUI.CreateShowGUI(args); // @megan calls the gui to be shown.
+		c.view.CreateShowGUI(args); 
 		c.displayText("Loading Vending Machine...\n");
 		c.displayText("Done!\n");
 		c.displayMenu();
@@ -117,7 +117,7 @@ public class VMController implements ActionListener {
 		}
 	}
 	
-	public void displayText(String text) { //@megan this could just append to the view's text area.
+	public void displayText(String text) {
 		if(this.view != null) {
 			//this.view.displayText(text);
 			this.view.jTextAreaConsole.append("\n"+text);
@@ -241,7 +241,7 @@ public class VMController implements ActionListener {
 							 "\nTotal Calories: " + this.selectedItem.getCalories() +
 							 "\nItem Price: " + this.selectedItem.getPrice() +
 							 "\nAmount Paid: " + this.cashIn +
-							 "\nIssued Change: " + (this.cashIn - this.selectedItem.getPrice()) + "\n\n"); //@megan parentheses'd the equation because java grammar.
+							 "\nIssued Change: " + (this.cashIn - this.selectedItem.getPrice()) + "\n\n");
 							 
 					if(this.vm.ir.getNumUnique() != 30) {
 						this.restockMenu();
@@ -274,7 +274,7 @@ public class VMController implements ActionListener {
 							 "\nTotal Calories: " + this.selectedItem.getCalories() +
 							 "\nItem Price: " + this.selectedItem.getPrice() +
 							 "\nAmount Paid: " + this.cashIn +
-							 "\nIssued Change: " + (this.cashIn - this.selectedItem.getPrice()) + "\n\n"); //@megan parentheses'd the equation because java grammar.
+							 "\nIssued Change: " + (this.cashIn - this.selectedItem.getPrice()) + "\n\n");
 							 
 					if(this.svm.spir.getNumUnique() != 30) {
 						this.restockMenu();
@@ -312,7 +312,7 @@ public class VMController implements ActionListener {
 					okay = false;
 					this.selectedItem = this.svm.spir.getItemAt(userChoice);
 					if(this.svm.spir.getItemsOnSale().contains(this.selectedItem)) {
-						custom.addIngredient(this.selectedItem.getName(), this.selectedItem.getCalories(), this.selectedItem.getStandalone(), this.selectedItem.getPrice());
+						custom.addIngredient((Ingredient) this.selectedItem);
 					}
 					
 					//checks if there's at least 1 standalone item in the recipe
@@ -344,7 +344,7 @@ public class VMController implements ActionListener {
 			success = this.svm.mh.payment(selectedRecipe);
 			
 			if(success) {
-				this.displayText(this.selectedRecipe.getNarration());
+				this.displayText(selectedRecipe.getNarration());
 				this.svm.setLastTotalSales(this.svm.getTotalSales());
 				this.svm.addTotalSales(this.selectedItem.getPrice());
 				this.transacHistory.add(new Transaction(selectedRecipe.getName(), this.svm.getLastTotalSales(), this.svm.getTotalSales()));
@@ -354,7 +354,7 @@ public class VMController implements ActionListener {
 						 "\nTotal Calories: " + selectedRecipe.getCalories() +
 						 "\nItem Price: " + selectedRecipe.getPrice() +
 						 "\nAmount Paid: " + this.cashIn +
-						 "\nIssued Change: " + (this.cashIn - selectedRecipe.getPrice()) + "\n\n"); //@megan parentheses'd the equation because java grammar.
+						 "\nIssued Change: " + (this.cashIn - selectedRecipe.getPrice()) + "\n\n");
 						 
 				if(this.svm.spir.getNumUnique() != 30) {
 					this.restockMenu();
@@ -571,7 +571,7 @@ public class VMController implements ActionListener {
 									   "\nPurchased Item:\t\t\t" + t.getName() + 
 									   "\nQty:\t\t\t\t" + 1 +
 									   "\nTotal Sales At Last Restock:\t" + t.getLastTotalSales() +
-									   "\nCurrent Total Sales:\t\t" + t.getTotalSales() + "\n"); //@megan added the parantheses to complete the method calls.
+									   "\nCurrent Total Sales:\t\t" + t.getTotalSales() + "\n"); 
 					}
 				}
 				
@@ -589,8 +589,14 @@ public class VMController implements ActionListener {
 				
 				for(Item i : oldInventory) {
 					name = i.getName();
-					qty = i.countStock(name);
+				
+					for(Item item : oldInventory) {
+						if(item.getName().equals(name))
+							qty++;
+					}
+					
 					this.displayText(name + "\t\t" + qty + "\n");
+					qty = 0;
 				}
 	
 				this.displayText("===============ENDING INVENTORY================" +
@@ -599,7 +605,7 @@ public class VMController implements ActionListener {
 				if(!isSpecial) {
 					for(Item i : this.vm.ir.getItemsOnSale()) {
 						name = i.getName();
-						qty = i.countStock(name);
+						qty = this.vm.ir.countStock(name);
 						this.displayText(name + "\t\t" + qty + "\n");
 					}
 				}
@@ -607,7 +613,7 @@ public class VMController implements ActionListener {
 				else {
 					for(Item i : this.svm.spir.getItemsOnSale()) {
 						name = i.getName();
-						qty = i.countStock(name);
+						qty = this.svm.spir.countStock(name);
 						this.displayText(name + "\t\t" + qty + "\n");
 					}
 				}
