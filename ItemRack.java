@@ -50,10 +50,17 @@ public class ItemRack {
         this.itemList.add(new Item("CaviarSauce", 252.0, false, 330));
         this.itemList.add(new Item("JackSauce", 10.0, false, 10));
 		
+		
+		ArrayList<Item> addedItemList = new ArrayList<Item>();
+		
 		for(Item i : itemList) {
-			this.addFullStock(i, 9);
+			for(int j = 0; j < 10; j++) 
+			addedItemList.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));	
 		}
+		
+		this.itemList.addAll(addedItemList);
 	}
+		
 	
 	public void addFullStock(Item item) {
 		int count = 0;
@@ -70,9 +77,13 @@ public class ItemRack {
 	}
 	
 	public void addFullStock(Item i, int stock) {
+		ArrayList<Item> addedItemList = new ArrayList<Item>();
+		
 		for(int j = 0; j <= stock; j++) {
-			this.itemList.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));
+			addedItemList.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));
 		}
+		
+		this.itemList.addAll(addedItemList);
 	}
 	
 	public boolean addItem(String name, double calories, boolean standalone, int price) {
