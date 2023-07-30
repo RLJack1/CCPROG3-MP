@@ -47,16 +47,15 @@ public class VMController implements ActionListener {
 		this.vm.ir.newItemRack();
 		
 		this.view = new VM_GUI();
-		//view.CreateShowGUI();
-		this.view.getYButton().addActionListener(this); //@megan there is no getButton methods in the view...
+		this.view.getYButton().addActionListener(this); 
 		this.view.getNButton().addActionListener(this);
 		this.view.getConfirmButton().addActionListener(this);
 		this.view.getBreakButton().addActionListener(this);
 
-		// this.getYButton().addActionListener(this); //@megan so idk if this is the intended code or what
-		// this.getNButton().addActionListener(this);
-		// this.getConfirmButton().addActionListener(this);
-		// this.view.getBreakButton().addActionListener(this);
+		this.getYButton().addActionListener(this);
+		this.getNButton().addActionListener(this);
+		this.getConfirmButton().addActionListener(this);
+		this.view.getBreakButton().addActionListener(this);
 	}
 
 	/** 
@@ -65,7 +64,6 @@ public class VMController implements ActionListener {
       */
 	public static void main(String[] args) {
 			VMController c = new VMController();
-			//c.view.CreateShowGUI(); 
 			c.displayText("Loading Vending Machine...\n");
 			c.displayText("Done!\n");
 			c.displayMenu();
@@ -74,6 +72,14 @@ public class VMController implements ActionListener {
 
 	public void UpdateStockLabel(){ //@megan WIP helper method to get the names from the ir so that 
 		int i = 0;
+		ArrayList <Item> items = new ArrayList<>();
+		if (!isSpecial){
+			items = this.vm.ir.getItemsOnSale();
+		}
+		else{
+			items = this.svm.ir.getItemsOnSale();
+		}
+
 		ArrayList <String> names = new ArrayList<>();
 		for(Item item : items){
 			String extractedNames = item.getName();
@@ -93,17 +99,9 @@ public class VMController implements ActionListener {
 		String buttonText = clicked.getText();
 		
 		if(buttonText == "✓") {
-			String textFieldText = view.jInputTextField.getText(); 
-			if(textFieldText.length() <= 1)
-				this.userChoice = Integer.parseInt(textFieldText.substring(0, 1));
-			
-			else {
-				this.userChoice = Integer.parseInt(textFieldText.substring(0, 2));
-				this.cashIn = Integer.parseInt(textFieldText); //@megan this fails to differentiate
-			}
-				
-			
-			this.cashIn = 0;
+			String textFieldText = view.jInputTextField.getText();
+			this.userChoice = Integer.parseInt(textFieldText.substring(0, 2));
+			this.cashIn = Integer.parseInt(textFieldText); 
 			
 			if(!isSpecial) {}
 				//@renzo pass in this.vm.ir.getItemsOnSale(); @megan i assume this is the part where the labels for stock is updated huhuhuhuh
@@ -142,25 +140,8 @@ public class VMController implements ActionListener {
 	public JButton getBreakButton() {
 		return this.view.jButtonBreak;
 	}
-	
-	// public void displayText(String text) {
-	// 	this.jTextAreaConsole.append(text);
-	// }
-	
-	// public void displayText(String text) {
-	// 	if(this.view != null) {
-	// 		//this.view.displayText(text);
-	// 		this.view.jTextAreaConsole.append("\n"+text);
-	// 	}
-	// }
 
 	public void displayText(String text) {
-        // JTextArea textPane = view.getTextArea();
-        // StyledDocument doc = textPane.getStyledDocument();
-
-        //JTextArea textArea = view.getTextArea();
-		// JTextArea textArea = view.getTextArea();
-        // textArea.append(text + "\n");
 		this.view.jTextAreaConsole.append(text + "\n");
     }
     
@@ -177,12 +158,10 @@ public class VMController implements ActionListener {
 			this.displayText("==============================\n" +
 						 "Vending Machine Features:\n" + 
 						 "(1) Test Current Vending Machine Features\n" +
-						 "(2) Perform Maintenance Features\n" +
-						 "(3) Return to Main Menu\n");
+						 "(2) Perform Maintenance Features\n");
 			
 			//Test
-			userChoice = 1; //@renzo and @megan for debuggin 
-			this.displayText(Integer.toString(userChoice)); //@renzo and @megan for debuggin 
+			this.displayText(Integer.toString(userChoice));
 			if(userChoice == 1) {
 				if(!this.isSpecial)
 					this.testMenu();
@@ -246,6 +225,8 @@ public class VMController implements ActionListener {
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
     public void testMenu() {
+		this.displayText("Please select an item to purchase!");
+		
 		if(userChoice >= 0 && userChoice <= 30) {
 			if(!isSpecial)
 				this.selectedItem = this.vm.ir.getItemAt(userChoice);
@@ -298,8 +279,8 @@ public class VMController implements ActionListener {
 			
 			else {
 				do {
+					this.displayText("Please input a bill: ");
 					this.displayText(this.svm.mh.inputDenominations(this.cashIn));
-					this.cashIn = 0;
 				} while(input != 999);
 				
 				this.cashIn = this.svm.mh.getCashIn();
@@ -391,7 +372,7 @@ public class VMController implements ActionListener {
 				this.displayText(selectedRecipe.getNarration());
 				this.svm.setLastTotalSales(this.svm.getTotalSales());
 				this.svm.addTotalSales(this.selectedItem.getPrice());
-				this.transacHistory.add(new Transaction(selectedRecipe.getName(), this.svm.getLastTotalSales(), this.svm.getTotalSales()));
+				this.transacHistory.add(new Transaction(selectedRecipe, this.svm.getLastTotalSales(), this.svm.getTotalSales()));
 				
 				this.displayText("============RECEIPT===========" +
 						 "\nPurchased Item: " + selectedRecipe.getName() +
@@ -477,7 +458,6 @@ public class VMController implements ActionListener {
 	  * @throws FileNotFoundException if the file does not exist in this directory
 	  */
     public void maintainMenu() {
-		ArrayList<Item> temp = new ArrayList<Item>();
 		boolean success = false;
 		
 		do {
@@ -587,7 +567,7 @@ public class VMController implements ActionListener {
 				this.displayText("\nWhich bill would you like to replenish?\n");
 				int bill = this.cashIn;
 				this.displayText("\nHow many " + bill + " bills would you like to add?\n");
-				int amount = this.cashIn; //these parts feel iffy @megan
+				int amount = this.cashIn;
 					
 				if(!isSpecial)
 					success = this.vm.mh.refillOne(bill, amount);
@@ -608,19 +588,41 @@ public class VMController implements ActionListener {
 			//Print transaction history
 			else if(userChoice == 5) {
 				int count = 1;
+				int qty = 0;
+				ArrayList<Ingredient> temp = new ArrayList<Ingredient>();
 				
-				if(!isSpecial) {
-					for(Transaction t : this.transacHistory) {
-						this.displayText("================TRANSACTION#" + count + "=================" +
-									   "\nPurchased Item:\t\t\t" + t.getName() + 
-									   "\nQty:\t\t\t\t" + 1 +
-									   "\nTotal Sales At Last Restock:\t" + t.getLastTotalSales() +
-									   "\nCurrent Total Sales:\t\t" + t.getTotalSales() + "\n"); 
+				for(Transaction t : this.transacHistory) {
+					this.displayText("================TRANSACTION#" + count + "=================" +
+								   "\nPurchased Item:\t\t\t" + t.getName());
+					
+					if(t.getIngredientList() != null) {
+						this.displayText("\nIngredient Breakdown: ");
+						temp.clear();
+						
+						//Fill the temp arraylist with only unique ingredients
+						for(Ingredient i : t.getIngredientList()) {
+							if(!(temp.contains(i)))
+								temp.add(i);
+						}
+						
+						//Print out every ingredient in the unique temp list and cross check ingredient list for qty
+						for(Ingredient key : temp) {
+							qty = 0;
+							
+							for(Ingredient i : t.getIngredientList()) {
+								if(i.getName().equals(key.getName()))
+									qty++;
+							}
+							
+							this.displayText(key.getName() + "\t\t\t" + qty);
+						}
 					}
+					
+					this.displayText("\nTotal Sales At Last Restock:\t" + t.getLastTotalSales() +
+								    "\nCurrent Total Sales:\t\t" + t.getTotalSales() + "\n"); 
+								   
+					count++;
 				}
-				
-				else {}
-					//implement special transac histo AAAAAAAAAAAAAAAAAAAAAAAAAAA @megan
 			}
 			
 			//Print restock history
