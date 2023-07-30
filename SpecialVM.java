@@ -156,12 +156,14 @@ public class SpecialVM extends VendingMachine {
 	  * @return The recipe at the given index
       */
 	public Recipe getRecipeAt(int index) {
-		String name = this.indexList[index];
 		Recipe recipe = null;
-		
-		for(Recipe r : recipeList) {
-			if(r.getName().equals(name))
-				recipe = r;
+		if(this.indexList[index] != null) {
+			String name = this.indexList[index];
+			
+			for(Recipe r : recipeList) {
+				if(r.getName().equals(name))
+					recipe = r;
+			}
 		}
 		
 		return recipe;

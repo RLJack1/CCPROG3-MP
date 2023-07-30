@@ -66,10 +66,10 @@ public class VMController implements ActionListener {
 			VMController c = new VMController();
 			c.displayText("Loading Vending Machine...\n");
 			c.displayText("Done!\n");
-			c.UpdateStockLabel();
+			c.updateStockLabel();
 	}
 
-	public void UpdateStockLabel(){ //@megan WIP helper method to get the names from the ir so that 
+	public void updateStockLabel(){ //@megan WIP helper method to get the names from the ir so that 
 		int i = 0;
 		ArrayList <Item> items = new ArrayList<>();
 		if (!isSpecial){
@@ -416,7 +416,7 @@ public class VMController implements ActionListener {
 		this.displayText("\nCash out all money? Or only specific bills?\n" +
 						   "Press Y for cash out all money and\n" +
 						   "Press N for cash out specific bills.\n");
-		success = false;
+		boolean success = false;
 		
 		//Take out all money
 		if(userChoice == 1) {
@@ -456,6 +456,8 @@ public class VMController implements ActionListener {
 	}
 				
 	public void cashIn() {
+		boolean success = false;
+
 		if(!isSpecial)
 			this.displayText(this.vm.mh.displayCashBox()); 
 		else
@@ -478,8 +480,6 @@ public class VMController implements ActionListener {
 		
 		else
 			this.displayText("\nInvalid bill value.\n");
-		
-		success = false;
 	}
 				
 	public void printTransacHistory() {

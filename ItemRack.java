@@ -128,12 +128,15 @@ public class ItemRack {
 	  * @return The item at the index
       */
 	public Item getItemAt(int index) {
-		String name = this.indexList[index];
 		Item item = null;
 		
-		for(Item i : this.itemList) {
-			if(i.getName().equals(name))
-				item = i;
+		if(this.indexList[index] != null) {
+			String name = this.indexList[index];
+		
+			for(Item i : this.itemList) {
+				if(i.getName().equals(name))
+					item = i;
+			}
 		}
 		
 		return item;
