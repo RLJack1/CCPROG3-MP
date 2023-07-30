@@ -269,7 +269,7 @@ public class VMController implements ActionListener {
 			if(!isSpecial) {
 				do {
 					this.displayText(this.vm.mh.inputDenominations(this.cashIn));
-					this.cashIn = 0;
+					//this.cashIn = 0; @
 				} while(input != 999);
 				
 				this.cashIn = this.vm.mh.getCashIn();

@@ -1,9 +1,8 @@
-/*MAIN TASKS: stores (available preset items, itemlist)
- *			: getters and setters
- */
-
 import java.util.ArrayList;
 
+/** 
+  * Stores the item presets and items on sale
+  */
 public class ItemRack {
 	protected ArrayList<Item> itemList;
 	protected String[] indexList = {"BriocheBread", "SesameBread", "RyeBread", "WholewheatBread", "PotatoBread",
@@ -13,10 +12,16 @@ public class ItemRack {
 									"BlueCheese", "AmericanCheese", "MeltedButter", "BeefsteakTomato", "IcebergLettuce",
 									"DillPickles", "HotSauce", "BarbequeSauce", "CaviarSauce", "JackSauce"};
 
+	/** 
+      * Creates an instance of the ItemRack object
+      */
 	public ItemRack() {
 		this.itemList = new ArrayList<Item>();
 	}
 	
+	/** 
+      * Loads all the preset items into the ItemRack
+      */
 	public void newItemRack() {
 		this.itemList.add(new Item("BriocheBread", 346.0, true, 34));
         this.itemList.add(new Item("SesameBread", 140.0, true, 20));
@@ -50,7 +55,6 @@ public class ItemRack {
         this.itemList.add(new Item("CaviarSauce", 252.0, false, 330));
         this.itemList.add(new Item("JackSauce", 10.0, false, 10));
 		
-		
 		ArrayList<Item> addedItemList = new ArrayList<Item>();
 		
 		for(Item i : itemList) {
@@ -61,7 +65,10 @@ public class ItemRack {
 		this.itemList.addAll(addedItemList);
 	}
 		
-	
+	/** 
+      * Fully refills the item's stock
+	  * @param item The item to be fully restocked
+      */
 	public void addFullStock(Item item) {
 		int count = 0;
 		
@@ -76,58 +83,27 @@ public class ItemRack {
 			this.itemList.add(new Item(item.getName(), item.getCalories(), item.getStandalone(), item.getPrice()));
 	}
 	
-	public void addFullStock(Item i, int stock) {
-		ArrayList<Item> addedItemList = new ArrayList<Item>();
-		
-		for(int j = 0; j <= stock; j++) {
-			addedItemList.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));
-		}
-		
-		this.itemList.addAll(addedItemList);
-	}
-	
-	public boolean addItem(String name, double calories, boolean standalone, int price) {
-		int count = 0;
-		boolean success = false;
-		
-		for(Item i : itemList) {
-			if(i.getName().equals(name))
-				count++;
-		}
-		
-		if(count < 10) {
-			this.itemList.add(new Item(name, calories, standalone, price));
-			success = true;
-		}
-			
-		return success;
-	}
-	
-	public boolean addItem(Item item) {
-		int count = 0;
-		boolean success = false;
-		
-		for(Item i : itemList) {
-			if(i.getName().equals(item.getName()))
-				count++;
-		}
-		
-		if(count < 10) {
-			this.itemList.add(item);
-			success = true;
-		}
-			
-		return success;
-	}
-	
+	/** 
+      * Adds all items from an array to ItemList
+	  * @param temp The list of item objects to be added
+      */
 	public void addAll(ArrayList<Item> temp) {
 		this.itemList.addAll(temp);
 	}
 	
+	/** 
+      * Removes an item from ItemList
+	  * @param item The item object to be removed
+      */
 	public void removeItem(Item item) {
 		this.itemList.remove(item);
 	}
 	
+	/** 
+      * Counts how many instances of an item exist in ItemList (basically stock)
+	  * @param name The name of the item to count stock for
+	  * @return The stock of the item
+      */
 	public int countStock(String name) {
 		int stock = 0;
 		
@@ -139,10 +115,18 @@ public class ItemRack {
 		return stock;
 	}
 	
+	/** 
+      * Removes all objects from ItemList
+      */
 	public void clearItemList() {
 		this.itemList.clear();
 	}
 	
+	/** 
+      * Gets and returns the item at a given index of ItemList
+	  * @param index The index of the item
+	  * @return The item at the index
+      */
 	public Item getItemAt(int index) {
 		String name = this.indexList[index];
 		Item item = null;
@@ -155,10 +139,18 @@ public class ItemRack {
 		return item;
 	}
 	
+	/** 
+      * Gets and returns list of items on sale (in stock)
+	  * @return The list of items on sale
+      */
 	public ArrayList<Item> getItemsOnSale() {
 		return this.itemList;
 	}
 	
+	/** 
+      * Counts how many unique items exist in ItemList
+	  * @return The number of unique items
+      */
 	public int getNumUnique() {
 		int count = 0;
 		boolean dupe = false;

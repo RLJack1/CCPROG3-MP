@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /** 
-  * Stores and conducts operations on all money inside the Vending Machine
+  * Stores and conducts operations on all money stored
   */
 public class MoneyHandler {
 	private VMController c;
@@ -40,6 +40,7 @@ public class MoneyHandler {
 	
 	/** 
 	  * A constructor that creates an instance of the ProductDispenser object.
+	  * @param c The controller the that instantiated the Vending Machine that instantiated this Money Handler
 	  */
 	public MoneyHandler(VMController c) {
 		this.c = c;
@@ -56,26 +57,11 @@ public class MoneyHandler {
 			this.cashBox[i][1] = amount;
 			amount += 150;
 		}
-		
-		this.displayDenomList();
-	}
-	
-	/** 
-	  * Displays the stock of all bills inside the Vending Machine
-	  */
-	public String displayDenomList() {
-		String toDisplay = "";
-		
-		for(int i = 0; i < this.cashBox.length; i++) {
-			toDisplay.concat("P" + this.cashBox[i][0] + ": " + this.cashBox[i][1] + " stored.\n");
-		}
-		
-		return toDisplay;
 	}
 	
 	/** 
 	  * Gets money input from the user and stores it into the holder (basically temp) array
-	  * @param s The active scanner object
+	  * @param amount The bill or amount that was added by the user
 	  */
 	public String inputDenominations(int amount) {	
 		String toDisplay = "";
@@ -175,9 +161,8 @@ public class MoneyHandler {
 	}
 	
 	/** 
-	  * Conducts the payment process during product transaction
+	  * Conducts the payment process during product transaction for single items
 	  * @param selectedItem	The item selected by the user for purchase
-	  * @param s			The active scanner object
 	  * @return Whether or not the payment was successfully performed
 	  */
 	public boolean payment(Item selectedItem) {
@@ -267,6 +252,11 @@ public class MoneyHandler {
 		return success;
 	}
 	
+	/** 
+	  * Conducts the payment process during product transaction for recipes
+	  * @param selectedRecipe The selected recipe by the user for purchase
+	  * @return Whether or not the payment was successfully performed
+	  */
 	public boolean payment(Recipe selectedRecipe) {
 		boolean releaseAll = false;	
 		boolean enoughStock = true;
@@ -429,6 +419,10 @@ public class MoneyHandler {
 		this.cashBox[index][1] = amount;
 	}
 	
+	/** 
+	  * Shows how many of each bill are stored
+	  * @return The plain text equivalent of the values to display 
+	  */
 	public String displayCashBox() {
 		String toDisplay = "";
 		

@@ -1735,8 +1735,8 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
         //TestVendingMachinePanel.setVisible(!CreateMenuGUI.isVisible());
     }                                          
 
-    private void ConfirmVMButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        jVMName.setText(VMNameText.getText());
+    private void ConfirmVMButtonActionPerformed(java.awt.event.ActionEvent evt) {     
+		jVMName.setText(VMNameText.getText());
         CreateMenuGUI.setVisible(false);
         if (SpeRadioButton.isSelected()){
             jRegOrSpeLabel.setText("Special Vending Machine");
@@ -1746,10 +1746,9 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
             jRegOrSpeLabel.setText("Regular Vending Machine");
             jPanelRecipe.setVisible(false);
         }
-        // name = VMNameText.getText();
-        // isSpecial = SpeRadioButton.isSelected();
-        // f.createMenu(name, isSpecial);
-    }                                               
+    }
+    
+                                                   
 
     private void jButtonBreakActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
