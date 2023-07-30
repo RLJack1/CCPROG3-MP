@@ -98,7 +98,7 @@ public class VMController implements ActionListener {
 		
 		String buttonText = clicked.getText();
 		
-		if(buttonText == "✓") {
+		if(buttonText.equals("✓")) {
 			String textFieldText = view.jInputTextField.getText();
 			this.userChoice = Integer.parseInt(textFieldText.substring(0, 2));
 			this.cashIn = Integer.parseInt(textFieldText); 
@@ -112,15 +112,15 @@ public class VMController implements ActionListener {
 				// WIP UpdateStockLabel();
 		}
 		
-		else if(buttonText == "Break") {
+		else if(buttonText.equals("Break")) {
 			this.userChoice = 999;
 		}
 		
-		else if(buttonText == "Y") {
+		else if(buttonText.equals("Y")) {
 			this.userChoice = 1;
 		}
 		
-		else if(buttonText == "N") {
+		else if(buttonText.equals("N")) {
 			this.userChoice = 0;
 		}
 	}
@@ -212,11 +212,11 @@ public class VMController implements ActionListener {
 		}
 		
 		this.userChoice = 0;
-		this.cashIn = 0;
 		this.selectedItem = null;
 		this.isSpecial = isSpecial;
 		this.transacHistory.clear();
 		this.oldInventory.clear();
+		this.cashIn = 0;
     }
 
 	/** 
