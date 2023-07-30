@@ -6,7 +6,6 @@
 
 import java.awt.Image;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;

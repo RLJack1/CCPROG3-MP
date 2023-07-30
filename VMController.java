@@ -74,7 +74,6 @@ public class VMController implements ActionListener {
 
 	public void UpdateStockLabel(){ //@megan WIP helper method to get the names from the ir so that 
 		int i = 0;
-		ArrayList <Item> items = this.vm.ir.getItemsOnSale();
 		ArrayList <String> names = new ArrayList<>();
 		for(Item item : items){
 			String extractedNames = item.getName();
@@ -94,8 +93,7 @@ public class VMController implements ActionListener {
 		String buttonText = clicked.getText();
 		
 		if(buttonText == "✓") {
-			String textFieldText = view.jInputTextField.getText(); //@megan I assume this code just gets the text from the InputTF. in that case, we can just name it here.
-			// I also changed the visibility of the jInputTextField to default the whole package can see
+			String textFieldText = view.jInputTextField.getText(); 
 			if(textFieldText.length() <= 1)
 				this.userChoice = Integer.parseInt(textFieldText.substring(0, 1));
 			
@@ -269,7 +267,6 @@ public class VMController implements ActionListener {
 			if(!isSpecial) {
 				do {
 					this.displayText(this.vm.mh.inputDenominations(this.cashIn));
-					//this.cashIn = 0; @
 				} while(input != 999);
 				
 				this.cashIn = this.vm.mh.getCashIn();
