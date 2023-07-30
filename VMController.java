@@ -11,7 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 
 /** 
   * Makes the initial function calls to start the interaction of classes.
@@ -42,10 +47,16 @@ public class VMController implements ActionListener {
 		this.vm.ir.newItemRack();
 		
 		this.view = new VM_GUI();
-		this.view.getYButton().addActionListener(this); //@megan what do these do huhuhuh
+		//view.CreateShowGUI();
+		this.view.getYButton().addActionListener(this); //@megan there is no getButton methods in the view...
 		this.view.getNButton().addActionListener(this);
 		this.view.getConfirmButton().addActionListener(this);
 		this.view.getBreakButton().addActionListener(this);
+
+		// this.getYButton().addActionListener(this); //@megan so idk if this is the intended code or what
+		// this.getNButton().addActionListener(this);
+		// this.getConfirmButton().addActionListener(this);
+		// this.view.getBreakButton().addActionListener(this);
 	}
 
 	/** 
@@ -53,27 +64,34 @@ public class VMController implements ActionListener {
 	  * @param args Stores Java command-line arguments
       */
 	public static void main(String[] args) {
-		VMController c = new VMController();
-		c.view.CreateShowGUI(args); 
-		c.displayText("Loading Vending Machine...\n");
-		c.displayText("Done!\n");
-		c.displayMenu();
+			VMController c = new VMController();
+			//c.view.CreateShowGUI(); 
+			c.displayText("Loading Vending Machine...\n");
+			c.displayText("Done!\n");
+			c.displayMenu();
+			c.UpdateStockLabel();
 	}
 
-	// public void UpdateStockLabel(){ @megan WIP helper method to get the names from the ir so that 
-	// 	int i = 0;
-	// 	ArrayList <Item> items = this.vm.ir.getItemsOnSale();
-	// 	ArrayList <String> names = new ArrayList<>();
-	// 	for(Item item : items){
-	// 		String extractedNames = item.getName();
-	// 		names.add(extractedNames);
-	// 	}
+	public void UpdateStockLabel(){ //@megan WIP helper method to get the names from the ir so that 
+		int i = 0;
+		ArrayList <Item> items = new ArrayList<>();
+		if (!isSpecial){
+			items = this.vm.ir.getItemsOnSale();
+		}
+		else{
+			items = this.svm.ir.getItemsOnSale();
+		}
+		ArrayList <String> names = new ArrayList<>();
+		for(Item item : items){
+			String extractedNames = item.getName();
+			names.add(extractedNames);
+		}
 
-	// 	for (JLabel label : view.labelList) {
-	// 		label.setText(""+ this.vm.ir.countStock(names.get(i)));
-	// 		i++;
-	// 	}
-	// }
+		for (JLabel label : view.labelList) {
+			label.setText(""+ this.vm.ir.countStock(names.get(i)));
+			i++;
+		}
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -82,7 +100,8 @@ public class VMController implements ActionListener {
 		String buttonText = clicked.getText();
 		
 		if(buttonText == "✓") {
-			String textFieldText = view.jInputTextField.getText(); 
+			String textFieldText = view.jInputTextField.getText(); //@megan I assume this code just gets the text from the InputTF. in that case, we can just name it here.
+			// I also changed the visibility of the jInputTextField to default the whole package can see
 			if(textFieldText.length() <= 1)
 				this.userChoice = Integer.parseInt(textFieldText.substring(0, 1));
 			
@@ -115,13 +134,44 @@ public class VMController implements ActionListener {
 			this.userChoice = 0;
 		}
 	}
-	
-	public void displayText(String text) {
-		if(this.view != null) {
-			//this.view.displayText(text);
-			this.view.jTextAreaConsole.append("\n"+text);
-		}
+
+	public JButton getYButton() {
+		return this.view.jButtonClearY;
 	}
+	
+	public JButton getNButton() {
+		return this.view.jButtonClearN;
+	}
+	
+	public JButton getConfirmButton() {
+		return this.view.jButtonClearY;
+	}
+	
+	public JButton getBreakButton() {
+		return this.view.jButtonBreak;
+	}
+	
+	// public void displayText(String text) {
+	// 	this.jTextAreaConsole.append(text);
+	// }
+	
+	// public void displayText(String text) {
+	// 	if(this.view != null) {
+	// 		//this.view.displayText(text);
+	// 		this.view.jTextAreaConsole.append("\n"+text);
+	// 	}
+	// }
+
+	public void displayText(String text) {
+        // JTextArea textPane = view.getTextArea();
+        // StyledDocument doc = textPane.getStyledDocument();
+
+        //JTextArea textArea = view.getTextArea();
+		// JTextArea textArea = view.getTextArea();
+        // textArea.append(text + "\n");
+		this.view.jTextAreaConsole.append(text + "\n");
+    }
+    
 		
 	/** 
 	  * Displays the main menu of the Vending Machine and repeatedly gets user input.
@@ -139,6 +189,8 @@ public class VMController implements ActionListener {
 						 "(3) Return to Main Menu\n");
 			
 			//Test
+			userChoice = 1; //@renzo and @megan for debuggin 
+			this.displayText(Integer.toString(userChoice)); //@renzo and @megan for debuggin 
 			if(userChoice == 1) {
 				if(!this.isSpecial)
 					this.testMenu();
@@ -164,6 +216,8 @@ public class VMController implements ActionListener {
 				this.displayText("\nInvalid input. Please try again.\n");
 				userChoice = 0;
 			}
+
+			this.UpdateStockLabel();
 			
 		} while(userChoice != 3);
 	}
@@ -221,7 +275,7 @@ public class VMController implements ActionListener {
 			if(!isSpecial) {
 				do {
 					this.displayText(this.vm.mh.inputDenominations(this.cashIn));
-					this.cashIn = 0;
+					this.cashIn = 77;// @megan i think this is where the code bugs out, because it doesnt wait for the program to input. 
 				} while(input != 999);
 				
 				this.cashIn = this.vm.mh.getCashIn();
