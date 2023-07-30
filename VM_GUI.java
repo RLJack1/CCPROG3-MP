@@ -2,26 +2,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-//package jackpackage;
+//package CCPROG3-MP;
 
 import java.awt.Image;
 import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author Renzo
  */
 public class VM_GUI extends javax.swing.JFrame { // class code for the GUI contains
+    //VMController f = new VMController(); 
+    boolean isSpecial;
+    String name;
+
     public ArrayList<JLabel> labelList; // The arraylist for the stock.
     /**
      * Creates new form VM_GUI
      */
     public VM_GUI() {
         labelList = new ArrayList<>(); // declaration of the labellist
+        initStockLabels();
         initComponents(); // initializes the components 
-        initStockLabels(); // Method to add the itemstock labels into the labellist
+         // Method to add the itemstock labels into the labellist
+        this.setVisible(true);
     }
 
     /**
@@ -438,11 +448,14 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
         ItemPic_2.setFocusable(false);
         ItemPic_2.setOpaque(true);
 
-        ItemPic1.setBackground(new java.awt.Color(204, 204, 204));
         ItemPic1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon1 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/1 Brioche Bread.png"));       
+        Image scaledImage1 = originalIcon1.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon1 = new javax.swing.ImageIcon(scaledImage1);
+        ItemPic1.setIcon(scaledIcon1);
         ItemPic1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         ItemPic1.setFocusable(false);
-        ItemPic1.setOpaque(true);
+	    ItemPic1.setOpaque(true);
 
         ItemPic3.setBackground(new java.awt.Color(204, 204, 204));
         ItemPic3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1290,14 +1303,11 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
         RecipePic2.setFocusable(false);
         RecipePic2.setOpaque(true);
 
+        RecipePic1.setBackground(new java.awt.Color(204, 204, 204));
         RecipePic1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        javax.swing.ImageIcon originalIcon31 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/burger/1 Classic Burger.png"));
-        Image scaledImage31 = originalIcon31.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
-        javax.swing.ImageIcon scaledIcon31 = new javax.swing.ImageIcon(scaledImage31);
-        RecipePic1.setIcon(scaledIcon31);
         RecipePic1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         RecipePic1.setFocusable(false);
-	    RecipePic1.setOpaque(true);
+        RecipePic1.setOpaque(true);
 
         RecipePic3.setBackground(new java.awt.Color(204, 204, 204));
         RecipePic3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1662,6 +1672,7 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
         );
 
         pack();
+        setVisible(true);
     }// </editor-fold>                        
 
     private void jInputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                
@@ -1725,17 +1736,19 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
     }                                          
 
     private void ConfirmVMButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        //@megan this returns false when regular vm is chosen, and true when special is chosen
         jVMName.setText(VMNameText.getText());
         CreateMenuGUI.setVisible(false);
-        //jRegOrSpeLabel.setText(SpeRadioButton.isSelected() + "");
-        if (SpeRadioButton.isSelected())
-        
+        if (SpeRadioButton.isSelected()){
             jRegOrSpeLabel.setText("Special Vending Machine");
-        else
+            jPanelRecipe.setVisible(true);
+        }
+        else{
             jRegOrSpeLabel.setText("Regular Vending Machine");
-
-
+            jPanelRecipe.setVisible(false);
+        }
+        // name = VMNameText.getText();
+        // isSpecial = SpeRadioButton.isSelected();
+        // f.createMenu(name, isSpecial);
     }                                               
 
     private void jButtonBreakActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -1798,11 +1811,39 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
         labelList.add(ItemStock29);
         labelList.add(ItemStock30);
     }
+
+    // public void updateText(String text) {
+    //     try {
+    //         jTextAreaConsole.getDocument().insertString(jTextAreaConsole.getDocument().getLength(), text, null);
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    // }
+
+    public JTextArea getTextArea() {
+        return jTextAreaConsole;
+    }
+
+    public JButton getYButton() {
+		return this.jButtonClearY;
+	}
+	
+	public JButton getNButton() {
+		return this.jButtonClearN;
+	}
+	
+	public JButton getConfirmButton() {
+		return this.jButtonClear;
+	}
+	
+	public JButton getBreakButton() {
+		return this.jButtonBreak;
+	}
     
     /**
      * @param args the command line arguments
      */
-    public void CreateShowGUI(String args[]) { // switch between main and CreateShowGUI when testing GUI with and without the controller connection.
+    public void CreateShowGUI() { // switch between public static void main and CreateShowGUI when testing GUI with and without the controller connection.
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1828,32 +1869,13 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VM_GUI().setVisible(true);
-            }
-        });
+        // java.awt.EventQueue.invokeLater(new Runnable() { //@renzo and @megan experiment comment out
+        //     public void run() {
+        //         //new VM_GUI().setVisible(true);
+        //         //SwingUtilities.invokeLater(() -> new VM_GUI());
+        //     }
+        // });
     }
-	
-	public JButton getYButton() {
-		return this.jButtonClearY;
-	}
-	
-	public JButton getNButton() {
-		return this.jButtonClearN;
-	}
-	
-	public JButton getConfirmButton() {
-		return this.jButtonClear;
-	}
-	
-	public JButton getBreakButton() {
-		return this.jButtonBreak;
-	}
-	
-	public void displayText(String text) {
-		this.jTextAreaConsole.append(text);
-	}
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton ConfirmVMButton;
@@ -1988,10 +2010,10 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JButton jButtonBreak;
+    javax.swing.JButton jButtonBreak;
     private javax.swing.JButton jButtonClear;
-    private javax.swing.JButton jButtonClearN;
-    private javax.swing.JButton jButtonClearY;
+    javax.swing.JButton jButtonClearN;
+    javax.swing.JButton jButtonClearY;
     private javax.swing.JButton jButtonConfirm;
     private javax.swing.JMenu jComboMenu;
     public javax.swing.JTextField jInputTextField;
@@ -2001,7 +2023,7 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
     private javax.swing.JPanel jPanelRecipe;
     private javax.swing.JLabel jRegOrSpeLabel;
     private javax.swing.JTabbedPane jTabbedPaneItem;
-    private javax.swing.JTextArea jTextAreaConsole;
+    javax.swing.JTextArea jTextAreaConsole;
     private javax.swing.JScrollPane jTextAreaPane;
     private javax.swing.JLabel jVMName;
     // End of variables declaration                   
