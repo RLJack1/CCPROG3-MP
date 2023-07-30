@@ -1,11 +1,18 @@
-/*MAIN TASKS: handles recipes and ingredients
- *			: getters and setters
- */
- 
+import java.util.ArrayList;
+
+/** 
+  * Overrides items stored into ingredients stored for recipes
+  */
 public class SpecialIR extends ItemRack {
+	/** 
+      * Creates an instance of the special ItemRack object
+      */
 	public SpecialIR() {
 	}
 	
+	/** 
+      * Loads all the preset ingredients into the special ItemRack
+      */
 	@Override
 	public void newItemRack() {
 		this.itemList.add(new Bread("BriocheBread", 346.0, true, 34));
@@ -40,8 +47,13 @@ public class SpecialIR extends ItemRack {
         this.itemList.add(new Condiment("CaviarSauce", 252.0, false, 330));
         this.itemList.add(new Condiment("JackSauce", 10.0, false, 10));
 		
+		ArrayList<Item> addedItemList = new ArrayList<Item>();
+		
 		for(Item i : itemList) {
-			this.addFullStock(i, 9);
+			for(int j = 0; j < 10; j++) 
+			addedItemList.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));	
 		}
+		
+		this.itemList.addAll(addedItemList);
 	}
 }

@@ -4,6 +4,9 @@
  
 import java.util.ArrayList;
 
+/** 
+  * Includes special Vending Machine features like recipe storage and sales
+  */
 public class SpecialVM extends VendingMachine {
 	private ArrayList<Recipe> recipeList;
 	protected SpecialIR spir;
@@ -11,6 +14,13 @@ public class SpecialVM extends VendingMachine {
 									"GourmetBurger", "JackBurger", "MeatOverloadBurger",
 									"SpicyTapaBurger", "SalmonBurger", "TurkeyBurger"};
 	
+	/** 
+	  * A constructor that creates an instance of a special VendingMachine object.
+	  * @param c				The controller wherein the special Vending Machine was instantiated
+	  * @param machineName		The name of this special Vending Machine
+	  * @param totalSales		The current total sales since last restock
+	  * @param lastTotalSales	The last total sales since last restock
+	  */
 	public SpecialVM(VMController c, String machineName, int totalSales, int lastTotalSales) {
 		super(c, machineName, totalSales, lastTotalSales);
 		this.recipeList = new ArrayList<Recipe>();
@@ -18,6 +28,9 @@ public class SpecialVM extends VendingMachine {
 		this.spir = new SpecialIR();
 	}
 	
+	/** 
+	  * Loads the preset recipes into the Recipe List
+	  */
 	private void loadRecipes() {
 		this.newRecipe("ClassicBurger");
 		this.addToRecipe("ClassicBurger", new Bread("SesameBread", 140.0, true, 20));
@@ -112,10 +125,19 @@ public class SpecialVM extends VendingMachine {
 		this.addToRecipe("TurkeyBurger", new Condiment("JackSauce", 10.0, false, 10));
 	}
 	
+	/** 
+      * Creates a new recipe in Recipe List
+	  * @param name The name of the recipe
+      */
 	public void newRecipe(String name) {
 		this.recipeList.add(new Recipe(name));
 	}
 		
+	/** 
+      * Adds an ingredient to an existing recipe
+	  * @param name The name of the recipe to be added to
+	  * @param i	The ingredient object to be added
+      */
 	public void addToRecipe(String name, Ingredient i) {
 		Recipe temp = new Recipe("");
 		
@@ -128,6 +150,11 @@ public class SpecialVM extends VendingMachine {
 		temp.addIngredient(i);
 	}
 	
+	/** 
+      * Gets and returns the recipe at the given index
+	  * @param index The index of the recipe in Recipe List
+	  * @return The recipe at the given index
+      */
 	public Recipe getRecipeAt(int index) {
 		String name = this.indexList[index];
 		Recipe recipe = null;
@@ -140,12 +167,17 @@ public class SpecialVM extends VendingMachine {
 		return recipe;
 	}
 	
+	/** 
+      * Subtracts the needed ingredients for this recipe from the special Item Rack
+	  * @param selectedRecipe The recipe the user wants to purchase
+	  * @return Whether there was enough stock for the purchase
+      */
 	public boolean buyRecipe(Recipe selectedRecipe) {
 		boolean success = true;
 		ArrayList<Item> temp = new ArrayList<Item>();
 		
-		//checks if there exist enough stock of every item for every ingredient in the recipe
-		//if yes, subtract all
+		//Checks if there exist enough stock of every item for every ingredient in the recipe
+		//If yes, subtract all
 		for(Item i : selectedRecipe.getIngredientList()) {
 			if(this.spir.getItemsOnSale().contains(i)) {
 				temp.add(i);
@@ -156,12 +188,17 @@ public class SpecialVM extends VendingMachine {
 				success = false;
 		}
 		
+		//If stock is insufficient, return all items back
 		if(!success)
 			this.spir.addAll(temp);
 		
 		return success;
 	}
 	
+	/** 
+      * Gets and returns the list of stored recipes
+	  * @return The list of stored recipes
+      */
 	public ArrayList<Recipe> getRecipeList() {
 		return this.recipeList;
 	}

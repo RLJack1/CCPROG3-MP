@@ -1724,18 +1724,13 @@ public class VM_GUI extends javax.swing.JFrame { // class code for the GUI conta
         //TestVendingMachinePanel.setVisible(!CreateMenuGUI.isVisible());
     }                                          
 
-    private void ConfirmVMButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        //@megan this returns false when regular vm is chosen, and true when special is chosen
-        jVMName.setText(VMNameText.getText());
+    private void ConfirmVMButtonActionPerformed(java.awt.event.ActionEvent evt) {     
+		jVMName.setText(VMNameText.getText());
         CreateMenuGUI.setVisible(false);
-        //jRegOrSpeLabel.setText(SpeRadioButton.isSelected() + "");
         if (SpeRadioButton.isSelected())
-        
             jRegOrSpeLabel.setText("Special Vending Machine");
         else
             jRegOrSpeLabel.setText("Regular Vending Machine");
-
-
     }                                               
 
     private void jButtonBreakActionPerformed(java.awt.event.ActionEvent evt) {                                             
