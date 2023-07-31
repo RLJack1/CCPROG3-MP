@@ -27,6 +27,7 @@ public class VM_GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup = new javax.swing.ButtonGroup();
+        buttonGroupItems = new javax.swing.ButtonGroup();
         TestVendingMachinePanel = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -204,19 +205,47 @@ public class VM_GUI extends javax.swing.JFrame {
         jCustomButton10 = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         CreateVendingMachinePanel = new javax.swing.JPanel();
-        CreateVMTitle1 = new javax.swing.JLabel();
-        ConfirmVMButton = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
         RegRadioButton = new javax.swing.JRadioButton();
-        SpeRadioButton = new javax.swing.JRadioButton();
         VMNameText = new javax.swing.JTextField();
+        CreateVMTitle1 = new javax.swing.JLabel();
+        SpeRadioButton = new javax.swing.JRadioButton();
+        ConfirmVMButton = new javax.swing.JButton();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jRestockItemsPanel = new javax.swing.JPanel();
-        jChangeItemPanel = new javax.swing.JPanel();
-        jTakeOutPanel = new javax.swing.JPanel();
-        jReplenishPanel = new javax.swing.JPanel();
-        jPrintTransaction = new javax.swing.JPanel();
-        jPrintRestock = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jRadioSesame = new javax.swing.JRadioButton();
+        jRadioBrioche1 = new javax.swing.JRadioButton();
+        jRadioRye = new javax.swing.JRadioButton();
+        jRadioPotato = new javax.swing.JRadioButton();
+        jRadioWholewheat = new javax.swing.JRadioButton();
+        jRadioGrilled = new javax.swing.JRadioButton();
+        jRadioBrioche6 = new javax.swing.JRadioButton();
+        jRadioBrioche7 = new javax.swing.JRadioButton();
+        jRadioWeiner = new javax.swing.JRadioButton();
+        jRadioCanadian = new javax.swing.JRadioButton();
+        jRadioBrioche10 = new javax.swing.JRadioButton();
+        jRadioBrioche11 = new javax.swing.JRadioButton();
+        jRadioBrioche12 = new javax.swing.JRadioButton();
+        jRadioBrioche13 = new javax.swing.JRadioButton();
+        jRadioBrioche14 = new javax.swing.JRadioButton();
+        jRadioBrioche15 = new javax.swing.JRadioButton();
+        jRadioBrioche16 = new javax.swing.JRadioButton();
+        jRadioBrioche17 = new javax.swing.JRadioButton();
+        jRadioBrioche18 = new javax.swing.JRadioButton();
+        jRadioBrioche19 = new javax.swing.JRadioButton();
+        jRadioWagyu = new javax.swing.JRadioButton();
+        jRadioBrioche21 = new javax.swing.JRadioButton();
+        jRadioTapa = new javax.swing.JRadioButton();
+        jRadioAngus = new javax.swing.JRadioButton();
+        jRadioJackB = new javax.swing.JRadioButton();
+        jRadioBrioche20 = new javax.swing.JRadioButton();
+        jRadioBrioche22 = new javax.swing.JRadioButton();
+        jRadioBrioche23 = new javax.swing.JRadioButton();
+        jRadioBrioche24 = new javax.swing.JRadioButton();
+        jRadioBrioche25 = new javax.swing.JRadioButton();
         jDisplayCashBox = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jBillLabel8 = new javax.swing.JLabel();
         jBillLabel2 = new javax.swing.JLabel();
@@ -246,10 +275,12 @@ public class VM_GUI extends javax.swing.JFrame {
         FivePesoSpinner = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jButtonPrintTransaction = new javax.swing.JButton();
+        jButtonPrintRestock = new javax.swing.JButton();
         jTextAreaPane1 = new javax.swing.JScrollPane();
         jTextAreaConsole1 = new javax.swing.JTextArea();
-        jButtonPrintRestock = new javax.swing.JButton();
-        jButtonPrintTransaction = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1691,26 +1722,15 @@ public class VM_GUI extends javax.swing.JFrame {
         CreateVendingMachinePanel.setMaximumSize(new java.awt.Dimension(300, 300));
         CreateVendingMachinePanel.setMinimumSize(new java.awt.Dimension(300, 300));
 
-        CreateVMTitle1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        CreateVMTitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CreateVMTitle1.setText("Create Your Vending Machine");
-        CreateVMTitle1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        ConfirmVMButton.setText("Confirm");
-        ConfirmVMButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConfirmVMButtonActionPerformed(evt);
-            }
-        });
+        jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         buttonGroup.add(RegRadioButton);
+        RegRadioButton.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         RegRadioButton.setSelected(true);
         RegRadioButton.setText("Regular Vending Machine");
         RegRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        buttonGroup.add(SpeRadioButton);
-        SpeRadioButton.setText("Special Vending Machine");
-
+        VMNameText.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         VMNameText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         VMNameText.setText("New Vending Machine");
         VMNameText.addActionListener(new java.awt.event.ActionListener() {
@@ -1719,43 +1739,78 @@ public class VM_GUI extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout CreateVendingMachinePanelLayout = new javax.swing.GroupLayout(CreateVendingMachinePanel);
-        CreateVendingMachinePanel.setLayout(CreateVendingMachinePanelLayout);
-        CreateVendingMachinePanelLayout.setHorizontalGroup(
-            CreateVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CreateVendingMachinePanelLayout.createSequentialGroup()
-                .addGroup(CreateVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CreateVendingMachinePanelLayout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(CreateVMTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CreateVendingMachinePanelLayout.createSequentialGroup()
-                        .addGap(324, 324, 324)
-                        .addGroup(CreateVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RegRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SpeRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(CreateVendingMachinePanelLayout.createSequentialGroup()
-                        .addGap(302, 302, 302)
-                        .addGroup(CreateVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CreateVendingMachinePanelLayout.createSequentialGroup()
+        CreateVMTitle1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        CreateVMTitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CreateVMTitle1.setText("Create Your Vending Machine");
+        CreateVMTitle1.setBorder(new javax.swing.border.MatteBorder(null));
+
+        buttonGroup.add(SpeRadioButton);
+        SpeRadioButton.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        SpeRadioButton.setText("Special Vending Machine");
+
+        ConfirmVMButton.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        ConfirmVMButton.setText("Confirm");
+        ConfirmVMButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmVMButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CreateVMTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(RegRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                                    .addComponent(SpeRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(67, 67, 67)
                                 .addComponent(ConfirmVMButton))
                             .addComponent(VMNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(496, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
-        CreateVendingMachinePanelLayout.setVerticalGroup(
-            CreateVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CreateVendingMachinePanelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addComponent(CreateVMTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(RegRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SpeRadioButton)
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(VMNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ConfirmVMButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
+        );
+
+        javax.swing.GroupLayout CreateVendingMachinePanelLayout = new javax.swing.GroupLayout(CreateVendingMachinePanel);
+        CreateVendingMachinePanel.setLayout(CreateVendingMachinePanelLayout);
+        CreateVendingMachinePanelLayout.setHorizontalGroup(
+            CreateVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CreateVendingMachinePanelLayout.createSequentialGroup()
+                .addGap(318, 318, 318)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(399, Short.MAX_VALUE))
+        );
+        CreateVendingMachinePanelLayout.setVerticalGroup(
+            CreateVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CreateVendingMachinePanelLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         jTabbedPane2.addTab("Welcome To Da Factory", CreateVendingMachinePanel);
@@ -1764,83 +1819,411 @@ public class VM_GUI extends javax.swing.JFrame {
 
         jTabbedPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jRestockItemsPanel.setBackground(new java.awt.Color(153, 153, 153));
+
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        buttonGroupItems.add(jRadioSesame);
+        jRadioSesame.setText("2-Sesame Bread");
+        jRadioSesame.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioSesame.setBorderPainted(true);
+        jRadioSesame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioSesameActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche1);
+        jRadioBrioche1.setText("1-Brioche Bread");
+        jRadioBrioche1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche1.setBorderPainted(true);
+
+        buttonGroupItems.add(jRadioRye);
+        jRadioRye.setText("3-Rye Bread");
+        jRadioRye.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioRye.setBorderPainted(true);
+        jRadioRye.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioRyeActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioPotato);
+        jRadioPotato.setText("5-Potato Bread");
+        jRadioPotato.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioPotato.setBorderPainted(true);
+        jRadioPotato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioPotatoActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioWholewheat);
+        jRadioWholewheat.setText("4-Wholewheat Bread");
+        jRadioWholewheat.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioWholewheat.setBorderPainted(true);
+        jRadioWholewheat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioWholewheatActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioGrilled);
+        jRadioGrilled.setText("13-Grilled Salmon");
+        jRadioGrilled.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioGrilled.setBorderPainted(true);
+        jRadioGrilled.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioGrilledActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche6);
+        jRadioBrioche6.setText("15-Beyond Beef");
+        jRadioBrioche6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche6.setBorderPainted(true);
+        jRadioBrioche6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche6ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche7);
+        jRadioBrioche7.setText("14-Bronze Turkey");
+        jRadioBrioche7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche7.setBorderPainted(true);
+        jRadioBrioche7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche7ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioWeiner);
+        jRadioWeiner.setText("12-Weiner Schnitzel");
+        jRadioWeiner.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioWeiner.setBorderPainted(true);
+        jRadioWeiner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioWeinerActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioCanadian);
+        jRadioCanadian.setText("11-Canadian Bacon");
+        jRadioCanadian.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioCanadian.setBorderPainted(true);
+
+        buttonGroupItems.add(jRadioBrioche10);
+        jRadioBrioche10.setText("18-Onion Rings");
+        jRadioBrioche10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche10.setBorderPainted(true);
+        jRadioBrioche10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche10ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche11);
+        jRadioBrioche11.setText("20-Mozzarella Cheese");
+        jRadioBrioche11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche11.setBorderPainted(true);
+        jRadioBrioche11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche11ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche12);
+        jRadioBrioche12.setText("19-Trappist Cheese");
+        jRadioBrioche12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche12.setBorderPainted(true);
+        jRadioBrioche12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche12ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche13);
+        jRadioBrioche13.setText("23-Melted Butter");
+        jRadioBrioche13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche13.setBorderPainted(true);
+        jRadioBrioche13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche13ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche14);
+        jRadioBrioche14.setText("25-Iceberg Lettuce");
+        jRadioBrioche14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche14.setBorderPainted(true);
+        jRadioBrioche14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche14ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche15);
+        jRadioBrioche15.setText("24-Beefsteak Tomato");
+        jRadioBrioche15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche15.setBorderPainted(true);
+        jRadioBrioche15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche15ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche16);
+        jRadioBrioche16.setText("22-American Cheese");
+        jRadioBrioche16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche16.setBorderPainted(true);
+        jRadioBrioche16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche16ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche17);
+        jRadioBrioche17.setText("21-Blue Cheese");
+        jRadioBrioche17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche17.setBorderPainted(true);
+
+        buttonGroupItems.add(jRadioBrioche18);
+        jRadioBrioche18.setText("17-White Onions");
+        jRadioBrioche18.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche18.setBorderPainted(true);
+        jRadioBrioche18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche18ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche19);
+        jRadioBrioche19.setText("16-Jack Beef");
+        jRadioBrioche19.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche19.setBorderPainted(true);
+
+        buttonGroupItems.add(jRadioWagyu);
+        jRadioWagyu.setText("8-Wagyu Beef");
+        jRadioWagyu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioWagyu.setBorderPainted(true);
+        jRadioWagyu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioWagyuActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche21);
+        jRadioBrioche21.setText("10-Cheesed Beef");
+        jRadioBrioche21.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche21.setBorderPainted(true);
+        jRadioBrioche21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche21ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioTapa);
+        jRadioTapa.setText("9-Tapa Beef");
+        jRadioTapa.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioTapa.setBorderPainted(true);
+        jRadioTapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioTapaActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioAngus);
+        jRadioAngus.setText("7-Angus Beef");
+        jRadioAngus.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioAngus.setBorderPainted(true);
+        jRadioAngus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioAngusActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioJackB);
+        jRadioJackB.setText("6-Jack Bread");
+        jRadioJackB.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioJackB.setBorderPainted(true);
+
+        buttonGroupItems.add(jRadioBrioche20);
+        jRadioBrioche20.setText("28-Barbecue Sauce");
+        jRadioBrioche20.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche20.setBorderPainted(true);
+        jRadioBrioche20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche20ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche22);
+        jRadioBrioche22.setText("30-Jack Sauce");
+        jRadioBrioche22.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche22.setBorderPainted(true);
+        jRadioBrioche22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche22ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche23);
+        jRadioBrioche23.setText("29-Caviar Sauce");
+        jRadioBrioche23.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche23.setBorderPainted(true);
+        jRadioBrioche23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche23ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche24);
+        jRadioBrioche24.setText("27-Hot Sauce");
+        jRadioBrioche24.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche24.setBorderPainted(true);
+        jRadioBrioche24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioBrioche24ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupItems.add(jRadioBrioche25);
+        jRadioBrioche25.setText("26-Dill Pickles");
+        jRadioBrioche25.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jRadioBrioche25.setBorderPainted(true);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioBrioche1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioSesame, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioRye, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioPotato, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioJackB, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioAngus, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioWagyu, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioTapa, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche21, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioWholewheat, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioBrioche19, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche18, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche10, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche12, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche11)
+                    .addComponent(jRadioCanadian, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioWeiner, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioGrilled, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche6, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioBrioche17, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche16, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche13, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche15, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche14, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche25, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche24, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche20, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche23, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioBrioche22, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jRadioBrioche17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioBrioche16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioBrioche13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioBrioche15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioBrioche14))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jRadioCanadian)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioWeiner)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioGrilled)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioBrioche7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioBrioche6))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jRadioBrioche1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioSesame)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioRye)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioWholewheat)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioPotato)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jRadioJackB)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jRadioAngus)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jRadioWagyu)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jRadioTapa)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jRadioBrioche21))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jRadioBrioche19)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jRadioBrioche18)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jRadioBrioche10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jRadioBrioche12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jRadioBrioche11)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jRadioBrioche25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioBrioche24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioBrioche20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioBrioche23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioBrioche22)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jRestockItemsPanelLayout = new javax.swing.GroupLayout(jRestockItemsPanel);
         jRestockItemsPanel.setLayout(jRestockItemsPanelLayout);
         jRestockItemsPanelLayout.setHorizontalGroup(
             jRestockItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1030, Short.MAX_VALUE)
+            .addGroup(jRestockItemsPanelLayout.createSequentialGroup()
+                .addGap(234, 234, 234)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(306, Short.MAX_VALUE))
         );
         jRestockItemsPanelLayout.setVerticalGroup(
             jRestockItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 285, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane3.addTab("Restock Yo Self", jRestockItemsPanel);
+        jTabbedPane3.addTab("Restock and Reprice", jRestockItemsPanel);
 
-        javax.swing.GroupLayout jChangeItemPanelLayout = new javax.swing.GroupLayout(jChangeItemPanel);
-        jChangeItemPanel.setLayout(jChangeItemPanelLayout);
-        jChangeItemPanelLayout.setHorizontalGroup(
-            jChangeItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1030, Short.MAX_VALUE)
-        );
-        jChangeItemPanelLayout.setVerticalGroup(
-            jChangeItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 285, Short.MAX_VALUE)
-        );
-
-        jTabbedPane3.addTab("Reprice Yo Self", jChangeItemPanel);
-
-        javax.swing.GroupLayout jTakeOutPanelLayout = new javax.swing.GroupLayout(jTakeOutPanel);
-        jTakeOutPanel.setLayout(jTakeOutPanelLayout);
-        jTakeOutPanelLayout.setHorizontalGroup(
-            jTakeOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1030, Short.MAX_VALUE)
-        );
-        jTakeOutPanelLayout.setVerticalGroup(
-            jTakeOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 285, Short.MAX_VALUE)
-        );
-
-        jTabbedPane3.addTab("Withdraw Yo Self", jTakeOutPanel);
-
-        javax.swing.GroupLayout jReplenishPanelLayout = new javax.swing.GroupLayout(jReplenishPanel);
-        jReplenishPanel.setLayout(jReplenishPanelLayout);
-        jReplenishPanelLayout.setHorizontalGroup(
-            jReplenishPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1030, Short.MAX_VALUE)
-        );
-        jReplenishPanelLayout.setVerticalGroup(
-            jReplenishPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 285, Short.MAX_VALUE)
-        );
-
-        jTabbedPane3.addTab("Deposit Yo Self", jReplenishPanel);
-
-        javax.swing.GroupLayout jPrintTransactionLayout = new javax.swing.GroupLayout(jPrintTransaction);
-        jPrintTransaction.setLayout(jPrintTransactionLayout);
-        jPrintTransactionLayout.setHorizontalGroup(
-            jPrintTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1030, Short.MAX_VALUE)
-        );
-        jPrintTransactionLayout.setVerticalGroup(
-            jPrintTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 285, Short.MAX_VALUE)
-        );
-
-        jTabbedPane3.addTab("Reciept Yo Self", jPrintTransaction);
-
-        javax.swing.GroupLayout jPrintRestockLayout = new javax.swing.GroupLayout(jPrintRestock);
-        jPrintRestock.setLayout(jPrintRestockLayout);
-        jPrintRestockLayout.setHorizontalGroup(
-            jPrintRestockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1030, Short.MAX_VALUE)
-        );
-        jPrintRestockLayout.setVerticalGroup(
-            jPrintRestockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 285, Short.MAX_VALUE)
-        );
-
-        jTabbedPane3.addTab("Inventorize Yo Self", jPrintRestock);
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -2065,52 +2448,53 @@ public class VM_GUI extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Money Handler: Handle Your Money Handily");
+        jLabel1.setText("Money Handler: Handle Money Handily");
         jLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(255, 102, 0), null, null));
+        jLabel1.setOpaque(true);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jDisplayCashBoxLayout = new javax.swing.GroupLayout(jDisplayCashBox);
         jDisplayCashBox.setLayout(jDisplayCashBoxLayout);
         jDisplayCashBoxLayout.setHorizontalGroup(
             jDisplayCashBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDisplayCashBoxLayout.createSequentialGroup()
-                .addGroup(jDisplayCashBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDisplayCashBoxLayout.createSequentialGroup()
-                        .addGap(323, 323, 323)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDisplayCashBoxLayout.createSequentialGroup()
-                        .addGap(291, 291, 291)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addGap(241, 241, 241)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         jDisplayCashBoxLayout.setVerticalGroup(
             jDisplayCashBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDisplayCashBoxLayout.createSequentialGroup()
+            .addGroup(jDisplayCashBoxLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
 
         jTabbedPane3.addTab("Display Cashbox", jDisplayCashBox);
 
-        jTextAreaConsole1.setBackground(new java.awt.Color(0, 0, 0));
-        jTextAreaConsole1.setColumns(20);
-        jTextAreaConsole1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jTextAreaConsole1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextAreaConsole1.setLineWrap(true);
-        jTextAreaConsole1.setRows(5);
-        jTextAreaConsole1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)));
-        jTextAreaPane1.setViewportView(jTextAreaConsole1);
-
-        jButtonPrintRestock.setText("Print Restock History");
-        jButtonPrintRestock.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
-        jButtonPrintRestock.setPreferredSize(new java.awt.Dimension(37, 20));
-        jButtonPrintRestock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPrintRestockActionPerformed(evt);
-            }
-        });
+        jPanel6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButtonPrintTransaction.setText("Print Transaction History");
         jButtonPrintTransaction.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
@@ -2121,29 +2505,77 @@ public class VM_GUI extends javax.swing.JFrame {
             }
         });
 
+        jButtonPrintRestock.setText("Print Restock History");
+        jButtonPrintRestock.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
+        jButtonPrintRestock.setPreferredSize(new java.awt.Dimension(37, 20));
+        jButtonPrintRestock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPrintRestockActionPerformed(evt);
+            }
+        });
+
+        jTextAreaConsole1.setBackground(new java.awt.Color(0, 0, 0));
+        jTextAreaConsole1.setColumns(20);
+        jTextAreaConsole1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jTextAreaConsole1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextAreaConsole1.setLineWrap(true);
+        jTextAreaConsole1.setRows(5);
+        jTextAreaConsole1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)));
+        jTextAreaPane1.setViewportView(jTextAreaConsole1);
+
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Swiftly Stacked Sales Receipts Showwer");
+        jLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(255, 102, 0), null, null));
+        jLabel2.setOpaque(true);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jButtonPrintTransaction, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonPrintRestock, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextAreaPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextAreaPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonPrintTransaction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonPrintRestock, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(286, 286, 286)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonPrintTransaction, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonPrintRestock, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextAreaPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(265, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(262, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(242, 242, 242))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addComponent(jTextAreaPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonPrintTransaction, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(jButtonPrintRestock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
 
@@ -2227,8 +2659,8 @@ public class VM_GUI extends javax.swing.JFrame {
                     .addComponent(jVMName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRegOrSpeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(TestVendingMachinePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TestVendingMachinePanelLayout.createSequentialGroup()
                         .addComponent(jInputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2438,21 +2870,117 @@ public class VM_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                               
 
+    private void jButtonWithdraw1ActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+    }                                                
+
     private void jButtonWithdrawActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
     }                                               
 
-    private void jButtonWithdraw1ActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+    private void jButtonPrintTransactionActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         // TODO add your handling code here:
-    }                                                
+    }                                                       
 
     private void jButtonPrintRestockActionPerformed(java.awt.event.ActionEvent evt) {                                                    
         // TODO add your handling code here:
     }                                                   
 
-    private void jButtonPrintTransactionActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+    private void jRadioBrioche24ActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
-    }                                                       
+    }                                               
+
+    private void jRadioBrioche23ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jRadioBrioche22ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jRadioBrioche20ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jRadioAngusActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void jRadioTapaActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                          
+
+    private void jRadioBrioche21ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jRadioWagyuActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void jRadioBrioche18ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jRadioBrioche16ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jRadioBrioche15ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jRadioBrioche14ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jRadioBrioche13ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jRadioBrioche12ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jRadioBrioche11ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jRadioBrioche10ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }                                               
+
+    private void jRadioWeinerActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void jRadioBrioche7ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+    }                                              
+
+    private void jRadioBrioche6ActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+    }                                              
+
+    private void jRadioGrilledActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }                                             
+
+    private void jRadioWholewheatActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+    }                                                
+
+    private void jRadioPotatoActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void jRadioRyeActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jRadioSesameActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
 
     private void jButtonActionPerformed(java.awt.event.ActionEvent evt, String number) {
         String currentText = jInputTextField.getText();
@@ -2615,6 +3143,7 @@ public class VM_GUI extends javax.swing.JFrame {
     private javax.swing.JSpinner WhiteSpinner;
     private javax.swing.JSpinner WholewheatSpinner;
     private javax.swing.ButtonGroup buttonGroup;
+    private javax.swing.ButtonGroup buttonGroupItems;
     private javax.swing.JLabel jBill1;
     private javax.swing.JLabel jBill10;
     private javax.swing.JLabel jBill100;
@@ -2697,25 +3226,55 @@ public class VM_GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonPrintTransaction;
     private javax.swing.JButton jButtonWithdraw;
     private javax.swing.JButton jButtonWithdraw1;
-    private javax.swing.JPanel jChangeItemPanel;
     private javax.swing.JButton jCustomButton10;
     private javax.swing.JPanel jDisplayCashBox;
     public javax.swing.JTextField jInputTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanelRecipe;
-    private javax.swing.JPanel jPrintRestock;
-    private javax.swing.JPanel jPrintTransaction;
+    private javax.swing.JRadioButton jRadioAngus;
+    private javax.swing.JRadioButton jRadioBrioche1;
+    private javax.swing.JRadioButton jRadioBrioche10;
+    private javax.swing.JRadioButton jRadioBrioche11;
+    private javax.swing.JRadioButton jRadioBrioche12;
+    private javax.swing.JRadioButton jRadioBrioche13;
+    private javax.swing.JRadioButton jRadioBrioche14;
+    private javax.swing.JRadioButton jRadioBrioche15;
+    private javax.swing.JRadioButton jRadioBrioche16;
+    private javax.swing.JRadioButton jRadioBrioche17;
+    private javax.swing.JRadioButton jRadioBrioche18;
+    private javax.swing.JRadioButton jRadioBrioche19;
+    private javax.swing.JRadioButton jRadioBrioche20;
+    private javax.swing.JRadioButton jRadioBrioche21;
+    private javax.swing.JRadioButton jRadioBrioche22;
+    private javax.swing.JRadioButton jRadioBrioche23;
+    private javax.swing.JRadioButton jRadioBrioche24;
+    private javax.swing.JRadioButton jRadioBrioche25;
+    private javax.swing.JRadioButton jRadioBrioche6;
+    private javax.swing.JRadioButton jRadioBrioche7;
+    private javax.swing.JRadioButton jRadioCanadian;
+    private javax.swing.JRadioButton jRadioGrilled;
+    private javax.swing.JRadioButton jRadioJackB;
+    private javax.swing.JRadioButton jRadioPotato;
+    private javax.swing.JRadioButton jRadioRye;
+    private javax.swing.JRadioButton jRadioSesame;
+    private javax.swing.JRadioButton jRadioTapa;
+    private javax.swing.JRadioButton jRadioWagyu;
+    private javax.swing.JRadioButton jRadioWeiner;
+    private javax.swing.JRadioButton jRadioWholewheat;
     private javax.swing.JLabel jRegOrSpeLabel;
-    private javax.swing.JPanel jReplenishPanel;
     private javax.swing.JPanel jRestockItemsPanel;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPaneItem;
-    private javax.swing.JPanel jTakeOutPanel;
     private javax.swing.JTextArea jTextAreaConsole;
     private javax.swing.JTextArea jTextAreaConsole1;
     private javax.swing.JScrollPane jTextAreaPane;
