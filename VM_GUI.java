@@ -1617,6 +1617,11 @@ public class VM_GUI extends javax.swing.JFrame {
         jCustomButton10.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jCustomButton10.setText("10-Custom Burger");
         jCustomButton10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jCustomButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCustomButton10ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelRecipeLayout = new javax.swing.GroupLayout(jPanelRecipe);
         jPanelRecipe.setLayout(jPanelRecipeLayout);
@@ -2981,6 +2986,10 @@ public class VM_GUI extends javax.swing.JFrame {
     private void jRadioSesameActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
     }                                            
+
+    private void jCustomButton10ActionPerformed(java.awt.event.ActionEvent evt) {                                                
+         jTabbedPaneItem.setSelectedIndex(0);
+    }                                               
 
     private void jButtonActionPerformed(java.awt.event.ActionEvent evt, String number) {
         String currentText = jInputTextField.getText();
