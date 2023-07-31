@@ -1,7 +1,3 @@
-/*MAIN TASKS: contains additional attributes to VM  (food type, recipelist and numIngredients each, available preset recipes)
- *			: getters and setters
- */
- 
 import java.util.ArrayList;
 
 /** 

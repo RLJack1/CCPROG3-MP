@@ -14,11 +14,11 @@ import javax.swing.JSpinner;
  * @author Renzo
  */
 public class VM_GUI extends javax.swing.JFrame {
-    public ArrayList<JLabel> labelList = new ArrayList();
-    public ArrayList<JSpinner> mhSpinnerList = new ArrayList();
-    public ArrayList<JSpinner> itemSpinnerList = new ArrayList();
-    public ArrayList<JRadioButton> restockRadioList = new ArrayList();
-    public ArrayList<JRadioButton> repriceRadioList = new ArrayList();
+    public ArrayList<JLabel> labelList = new ArrayList<JLabel>();
+    public ArrayList<JSpinner> mhSpinnerList = new ArrayList<JSpinner>();
+    public ArrayList<JSpinner> itemSpinnerList = new ArrayList<JSpinner>();
+    public ArrayList<JRadioButton> restockRadioList = new ArrayList<JRadioButton>();
+    public ArrayList<JRadioButton> repriceRadioList = new ArrayList<JRadioButton>();
     /**
      * Creates new form VM_GUI
      */

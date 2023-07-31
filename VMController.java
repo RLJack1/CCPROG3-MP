@@ -1,12 +1,4 @@
-/*MAIN TASKS: call view and model to interact with one another
- *			: prompt and perform menu processes (create, test, maintain)
- *			: write data into files
- */
-
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -19,7 +11,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
 /** 
-  * Makes the initial function calls to start the interaction of classes.
+  * Connects the events happening in the view to the respective logic in the model.
   */
 public class VMController implements ActionListener {
 	private boolean isSpecial;
@@ -52,12 +44,21 @@ public class VMController implements ActionListener {
 			c.displayText("Done!\n");
 	}
 	
+	/** 
+	  * TEXT 
+	  */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		/*attach Als to every relevant button?
+		  per event, make a method that error checks and calls the function*/
 	}
 	
+	/** 
+	  * Gets and returns the stock of every item on sale
+	  * @return A 2D ArrayList of items on sale and their respective stock counts
+	  */
 	public ArrayList<ArrayList<Object>> getItemStock() {
+		//First column is for stock, second is for item names, third is for item indices
 		ArrayList<ArrayList<Object>> itemStock = new ArrayList<>();
 		int i = 0;
 		
@@ -91,6 +92,10 @@ public class VMController implements ActionListener {
 		return itemStock;
 	}
 	
+	/** 
+	  * Gets and returns the stock of every bill in storage
+	  * @return A 2D int array of bills and their respective stock counts
+	  */
 	public int[][] getCashStock() {
 		int[][] cashStock = new int[8][2];
 		
@@ -103,16 +108,20 @@ public class VMController implements ActionListener {
 		return cashStock;
 	}
 
+	/** 
+	  * Display a string of text in the text area of the view
+	  * @param text The text to be displayed
+	  */
 	public void displayText(String text) {
 		//this.view.jTextAreaConsole.append(text + "\n");
     }
 
 	/** 
-	  * Gets input from the user and creates a new Vending Machine
-	  * @param s 	The active scanner object
-	  * @throws FileNotFoundException if the file does not exist in this directory
+	  * Creates a new Vending Machine
+	  * @param name			The name of the Vending Machine
+	  * @param isSpecial	Whether the VM is special or not 
 	  */
-    public void createMenu(String name, boolean isSpecial) {
+    public void create(String name, boolean isSpecial) {
 		if(!this.isSpecial) {
 			this.vm = new VendingMachine(this, name, 0, 0);
 			this.vm.mh.newCashBox();
@@ -130,6 +139,10 @@ public class VMController implements ActionListener {
 		this.oldInventory.clear();
     }
 	
+	/** 
+	  * Facilitates the item purchasing process (get cash, dispense change, dispense item)
+	  * @param item The user's selected item for purchase
+	  */
 	public void buyItem(Item item) {
 		int cashIn = 0;
 		boolean success = false;
@@ -177,6 +190,10 @@ public class VMController implements ActionListener {
 		}
 	}
 
+	/** 
+	  * Facilitates the recipe purchasing process (get cash, dispense change, dispense burger)
+	  * @param item The user's selected recipe for purchase
+	  */
 	public void buyRecipe(Recipe selectedRecipe) {
 		int cashIn = 0;
 		boolean success = this.svm.buyRecipe(selectedRecipe);
@@ -206,6 +223,10 @@ public class VMController implements ActionListener {
 			this.displayText("\nOops! Not enough ingredients for the selected recipe.");
 	}
 
+	/** 
+	  * Facilitates restocking of an item to full capacity
+	  * @param userSelection The arraylist of items the user selected for restocking
+	  */
 	public void restock(ArrayList<Item> userSelection) {
 		ArrayList<Item> temp = new ArrayList<Item>();
 		
@@ -249,6 +270,11 @@ public class VMController implements ActionListener {
 		}
 	}
 	
+	/** 
+	  * Facilitates the repricing of an item
+	  * @param name		The name of the item
+	  * @param newPrice	The new cost of the item
+	  */
 	public void reprice(String name, int newPrice) {
 		if(!isSpecial) {
 			for(Item i : this.vm.ir.getItemsOnSale()) {
@@ -267,6 +293,10 @@ public class VMController implements ActionListener {
 		}
 	}
 	
+	/** 
+	  * Facilitates the cash-in process
+	  * @param userSelection The 2D int array of bills and corresponding amounts for cash-in
+	  */
 	public void deposit(int[][] userSelection) {
 		int i = 0;
 		
@@ -281,6 +311,10 @@ public class VMController implements ActionListener {
 		}
 	}
 	
+	/** 
+	  * Facilitates the cash-out process
+	  * @param userSelection The 2D int array of bills and corresponding amounts for cash-out
+	  */
 	public void withdraw(int[][] userSelection) {
 		int[][] cashStock = this.getCashStock();
 		int i = 0;
@@ -299,6 +333,9 @@ public class VMController implements ActionListener {
 		}
 	}
 	
+	/** 
+	  * Displays this Vending Machine's transaction history
+	  */
 	public void printTransacHistory() {
 		int count = 1;
 		int qty = 0;
@@ -338,6 +375,9 @@ public class VMController implements ActionListener {
 		}
 	}
 	
+	/** 
+	  * Displays this Vending Machine's restock history
+	  */
 	public void printRestockHistory() {
 		String name = "";
 		int qty = 0;
