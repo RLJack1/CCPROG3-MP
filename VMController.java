@@ -22,10 +22,7 @@ import javax.swing.text.StyledDocument;
   * Makes the initial function calls to start the interaction of classes.
   */
 public class VMController implements ActionListener {
-	private int cashIn;
-	protected int userChoice;
 	private boolean isSpecial;
-	private Item selectedItem;
 	private ArrayList<Item> oldInventory;
 	private ArrayList<Transaction> transacHistory;
 	private VendingMachine vm;
@@ -36,26 +33,13 @@ public class VMController implements ActionListener {
       * A constructor that creates an instance of the VMController object.
       */
 	public VMController() {
-		this.cashIn = 0;
-		this.userChoice = 0;
 		this.isSpecial = false;
-		this.selectedItem = null;
 		this.oldInventory = new ArrayList<Item>();
 		this.transacHistory = new ArrayList<Transaction>();
 		this.vm = new VendingMachine(this, "The Classic Vending Machine", 0, 0);
 		this.vm.mh.newCashBox();
 		this.vm.ir.newItemRack();
-		
 		this.view = new VM_GUI();
-		this.view.getYButton().addActionListener(this); 
-		this.view.getNButton().addActionListener(this);
-		this.view.getConfirmButton().addActionListener(this);
-		this.view.getBreakButton().addActionListener(this);
-
-		this.getYButton().addActionListener(this);
-		this.getNButton().addActionListener(this);
-		this.getConfirmButton().addActionListener(this);
-		this.view.getBreakButton().addActionListener(this);
 	}
 
 	/** 
@@ -66,93 +50,61 @@ public class VMController implements ActionListener {
 			VMController c = new VMController();
 			c.displayText("Loading Vending Machine...\n");
 			c.displayText("Done!\n");
-			c.updateStockLabel();
-	}
-
-	public void updateStockLabel(){ //@megan WIP helper method to get the names from the ir so that 
-		int i = 0;
-		ArrayList <Item> items = new ArrayList<>();
-		if (!isSpecial){
-			items = this.vm.ir.getItemsOnSale();
-		}
-		else{
-			items = this.svm.ir.getItemsOnSale();
-		}
-
-		ArrayList <String> names = new ArrayList<>();
-		for(Item item : items){
-			String extractedNames = item.getName();
-			names.add(extractedNames);
-		}
-
-		for (JLabel label : view.labelList) {
-			label.setText(""+ this.vm.ir.countStock(names.get(i)));
-			i++;
-		}
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton clicked = (JButton) e.getSource();
 		
-		String buttonText = clicked.getText();
-		
-		if(buttonText.equals("✓")) {
-			String textFieldText = view.jInputTextField.getText();
-			this.userChoice = Integer.parseInt(textFieldText.substring(0, 2));
-			this.cashIn = Integer.parseInt(textFieldText); 
-			
-			if(!isSpecial) {}
-				//@renzo pass in this.vm.ir.getItemsOnSale(); @megan i assume this is the part where the labels for stock is updated huhuhuhuh
-				// WIP UpdateStockLabel();
-			
-			else {}
-				//@renzo pass in this.svm.spir.getItemsOnSale();
-				// WIP UpdateStockLabel();
-		}
-		
-		else if(buttonText.equals("Break")) {
-			this.userChoice = 999;
-		}
-		
-		else if(buttonText.equals("Y")) {
-			this.userChoice = 1;
-		}
-		
-		else if(buttonText.equals("N")) {
-			this.userChoice = 0;
-		}
-		
-		/* @megan todo
-		 * add buttons and calls for :
-		 * menu choices / tabs
-		 * money buttons
-		 * item and stock buttons
-		 * if cash, input directly into holder and give feedback
-		 * if menu, just go there 
-		 * if recipe building, immediately add to custom.ingredientList
-		 * if menu choices, idk
-		 */
-	}
-
-	public JButton getYButton() {
-		return this.view.jButtonClearY;
 	}
 	
-	public JButton getNButton() {
-		return this.view.jButtonClearN;
+	public ArrayList<ArrayList<Object>> getItemStock() {
+		ArrayList<ArrayList<Object>> itemStock = new ArrayList<>();
+		int i = 0;
+		
+		//Make the ArrayList 2D
+		for(i = 0; i < 30; i++) {
+			ArrayList<Object> row = new ArrayList<>();
+			itemStock.add(row);
+		}
+		
+		i = 0;
+		
+		//Populate the 2D ArrayList
+		if(!isSpecial) {
+			for(Item item : this.vm.ir.getItemsOnSale()) {
+				itemStock.get(i).add(this.vm.ir.countStock(item.getName()));
+				itemStock.get(i).add(item.getName());
+				itemStock.get(i).add(i);
+				i++;
+			}
+		}
+		
+		else {
+			for(Item item : this.svm.spir.getItemsOnSale()) {
+				itemStock.get(i).add(this.svm.spir.countStock(item.getName()));
+				itemStock.get(i).add(item.getName());
+				itemStock.get(i).add(i);
+				i++;
+			}
+		}
+		
+		return itemStock;
 	}
 	
-	public JButton getConfirmButton() {
-		return this.view.jButtonClearY;
-	}
-	
-	public JButton getBreakButton() {
-		return this.view.jButtonBreak;
+	public int[][] getCashStock() {
+		int[][] cashStock = new int[8][2];
+		
+		if(!isSpecial)
+			cashStock = this.vm.mh.getCashBox();
+		
+		else 
+			cashStock = this.svm.mh.getCashBox();
+		
+		return cashStock;
 	}
 
 	public void displayText(String text) {
-		this.view.jTextAreaConsole.append(text + "\n");
+		//this.view.jTextAreaConsole.append(text + "\n");
     }
 
 	/** 
@@ -173,164 +125,88 @@ public class VMController implements ActionListener {
 			this.svm.spir.newItemRack();
 		}
 		
-		this.userChoice = 0;
-		this.selectedItem = null;
 		this.isSpecial = isSpecial;
 		this.transacHistory.clear();
 		this.oldInventory.clear();
-		this.cashIn = 0;
     }
-
-	/** 
-	  * Facilitates the product transaction process
-	  * @param s 	The active scanner object
-	  * @throws FileNotFoundException if the file does not exist in this directory
-	  */
-    public void testMenu() {
-		this.displayText("Please select an item to purchase!");
+	
+	public void buyItem(Item item) {
+		int cashIn = 0;
+		boolean success = false;
 		
-		if(userChoice >= 0 && userChoice <= 30) {
-			if(!isSpecial)
-				this.selectedItem = this.vm.ir.getItemAt(userChoice);
+		if(!isSpecial) {
+			cashIn = this.vm.mh.getCashIn();
+			success = this.vm.mh.payment(item);
 			
-			else
-				this.selectedItem = this.svm.spir.getItemAt(userChoice);
-		}
-			
-		if(this.selectedItem.getStandalone() == false) {
-			this.displayText("\nOops! The selected item cannot be bought alone. Please try again.\n");
-			this.selectedItem = null;
-		}
-		
-		if(!(this.selectedItem == null)) {
-			//Get money from the user
-			int input = 0;
-			boolean success = false;
-			
-			if(!isSpecial) {	
-				this.cashIn = this.vm.mh.getCashIn();
-				success = this.vm.mh.payment(selectedItem);
-				
-				if(success) {
-					//Dispense item, print receipt, record transaction
-					this.displayText("\nDispensing " + this.selectedItem.getName() + "...");
-					this.vm.ir.removeItem(this.selectedItem);
-					this.vm.setLastTotalSales(this.vm.getTotalSales());
-					this.vm.addTotalSales(this.selectedItem.getPrice());
-					this.transacHistory.add(new Transaction(this.selectedItem.getName(), this.vm.getLastTotalSales(), this.vm.getTotalSales()));
-					
-					this.displayText("============RECEIPT===========" +
-							 "\nPurchased Item: " + this.selectedItem.getName() +
-							 "\nTotal Calories: " + this.selectedItem.getCalories() +
-							 "\nItem Price: " + this.selectedItem.getPrice() +
-							 "\nAmount Paid: " + this.cashIn +
-							 "\nIssued Change: " + (this.cashIn - this.selectedItem.getPrice()) + "\n\n");
-							 
-					if(this.vm.ir.getNumUnique() != 30) {
-						this.restockMenu();
-					}
-				}
-				
-				else
-					this.cashIn = 0;
+			if(success) {
+				//Dispense item, print receipt, record transaction
+				this.displayText("\nDispensing " + item.getName() + "...");
+				this.vm.ir.removeItem(item);
+				this.vm.setLastTotalSales(this.vm.getTotalSales());
+				this.vm.addTotalSales(item.getPrice());
+				this.transacHistory.add(new Transaction(item.getName(), this.vm.getLastTotalSales(), this.vm.getTotalSales()));
+	
+				this.displayText("============RECEIPT===========" +
+							 "\nPurchased Item: " + item.getName() +
+							 "\nTotal Calories: " + item.getCalories() +
+							 "\nItem Price: " + item.getPrice() +
+							 "\nAmount Paid: " + cashIn +
+							 "\nIssued Change: " + (cashIn - item.getPrice()) + "\n\n");
 			}
+		}
+		
+		else {
+			cashIn = this.svm.mh.getCashIn();
+			success = this.svm.mh.payment(item);
 			
-			else {
-				this.cashIn = this.svm.mh.getCashIn();
-				success = this.svm.mh.payment(selectedItem);
-				
-				if(success) {
-					//Dispense item, print receipt, record transaction
-					this.displayText("\nDispensing " + this.selectedItem.getName() + "...");
-					this.svm.spir.removeItem(this.selectedItem);
-					this.svm.setLastTotalSales(this.svm.getTotalSales());
-					this.svm.addTotalSales(this.selectedItem.getPrice());
-					this.transacHistory.add(new Transaction(this.selectedItem.getName(), this.svm.getLastTotalSales(), this.svm.getTotalSales()));
-					
-					this.displayText("============RECEIPT===========" +
-							 "\nPurchased Item: " + this.selectedItem.getName() +
-							 "\nTotal Calories: " + this.selectedItem.getCalories() +
-							 "\nItem Price: " + this.selectedItem.getPrice() +
-							 "\nAmount Paid: " + this.cashIn +
-							 "\nIssued Change: " + (this.cashIn - this.selectedItem.getPrice()) + "\n\n");
-							 
-					if(this.svm.spir.getNumUnique() != 30) {
-						this.restockMenu();
-					}
-				}
-				
-				else
-					this.cashIn = 0;
+			if(success) {
+				//Dispense item, print receipt, record transaction
+				this.displayText("\nDispensing " + item.getName() + "...");
+				this.svm.ir.removeItem(item);
+				this.svm.setLastTotalSales(this.svm.getTotalSales());
+				this.svm.addTotalSales(item.getPrice());
+				this.transacHistory.add(new Transaction(item.getName(), this.svm.getLastTotalSales(), this.svm.getTotalSales()));
+	
+				this.displayText("============RECEIPT===========" +
+							 "\nPurchased Item: " + item.getName() +
+							 "\nTotal Calories: " + item.getCalories() +
+							 "\nItem Price: " + item.getPrice() +
+							 "\nAmount Paid: " + cashIn +
+							 "\nIssued Change: " + (cashIn - item.getPrice()) + "\n\n");
 			}
 		}
 	}
-	
-	public void specialTestMenu() {
-		Recipe selectedRecipe = null;
-		boolean success = false;
-		boolean okay = false;
-		int qty = 0;
-		this.displayText("\nPurchase burger? Or single item?\n" +
-					"Press Y for burgers and combos.\n" +
-					"Press N for breads and meats.\n");
+
+	public void buyRecipe(Recipe selectedRecipe) {
+		int cashIn = 0;
+		boolean success = this.svm.buyRecipe(selectedRecipe);
 		
-		if(userChoice == 1) {
-			if(userChoice != 10) {
-				selectedRecipe = this.svm.getRecipeAt(userChoice);
-				
-				if(selectedRecipe != null) {
-					success = this.svm.buyRecipe(selectedRecipe);
-				}
-			}
-			
-			else if(userChoice == 10) {
-				Recipe custom = new Recipe("Custom");
-				//add implementation here
-				success = this.svm.buyRecipe(custom);
-			}
-			
-			if(success) {
-			//Get money from the user
-			int input = 0;
+		//Assumes that this VM is special
+		if(success) {
 			success = false;
-			
-			this.cashIn = this.svm.mh.getCashIn();
+			cashIn = this.svm.mh.getCashIn();
 			success = this.svm.mh.payment(selectedRecipe);
 			
 			if(success) {
 				this.displayText(selectedRecipe.getNarration());
 				this.svm.setLastTotalSales(this.svm.getTotalSales());
-				this.svm.addTotalSales(this.selectedItem.getPrice());
+				this.svm.addTotalSales(selectedRecipe.getPrice());
 				this.transacHistory.add(new Transaction(selectedRecipe, this.svm.getLastTotalSales(), this.svm.getTotalSales()));
 				
 				this.displayText("============RECEIPT===========" +
 						 "\nPurchased Item: " + selectedRecipe.getName() +
 						 "\nTotal Calories: " + selectedRecipe.getCalories() +
 						 "\nItem Price: " + selectedRecipe.getPrice() +
-						 "\nAmount Paid: " + this.cashIn +
-						 "\nIssued Change: " + (this.cashIn - selectedRecipe.getPrice()) + "\n\n");
-						 
-				if(this.svm.spir.getNumUnique() != 30) {
-					this.restockMenu();
-				}
+						 "\nAmount Paid: " + cashIn +
+						 "\nIssued Change: " + (cashIn - selectedRecipe.getPrice()) + "\n\n");
 			}
-			
-			else
-				this.cashIn = 0;
 		}
-			
+		
 		else
 			this.displayText("\nOops! Not enough ingredients for the selected recipe.");
-		
-		} 
-		
-		else if(userChoice == 0) {
-			this.testMenu();
-		}
 	}
-	
-	public void restockMenu() {
-		boolean success = false;
+
+	public void restock(ArrayList<Item> userSelection) {
 		ArrayList<Item> temp = new ArrayList<Item>();
 		
 		//Temporary old inventory holder
@@ -346,22 +222,19 @@ public class VMController implements ActionListener {
 				temp.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));
 			}
 		}
-			
-		this.displayText("\nPlease select the item you would like to restock!");
 		
-		if(!isSpecial) {
-			this.selectedItem = this.vm.ir.getItemAt(userChoice);
-			this.vm.ir.addFullStock(this.selectedItem);
-		}
+		//Fully restock all items in userSelection
+		for(Item i : userSelection) {
+			if(!isSpecial) {
+				this.vm.ir.addFullStock(i);
+			}
 			
-		else {
-			this.selectedItem = this.svm.spir.getItemAt(userChoice);
-			this.svm.spir.addFullStock(this.selectedItem);
+			else {
+				this.svm.spir.addFullStock(i);
+			}
 		}
-
-		//Sets old inventory to temp 
-		this.displayText("\nRestocking " + this.selectedItem.getName() + "...");
-		this.displayText("\nRestock success!");
+		
+		//Set old inventory to temp
 		this.oldInventory.clear();
 		this.oldInventory.addAll(temp);
 		
@@ -374,114 +247,58 @@ public class VMController implements ActionListener {
 			this.svm.setLastTotalSales(0);
 			this.svm.setTotalSales(0);
 		}
-		
-		success = false;
 	}
-
-	public void repriceMenu() {
-		this.displayText("Please select the item you would like to re-price!");
-				
-		if(!isSpecial)
-			this.selectedItem = this.vm.ir.getItemAt(userChoice);
-		
-		else
-			this.selectedItem = this.svm.spir.getItemAt(userChoice);
-		
-		this.displayText("\nInput new price for " + this.selectedItem.getName() + ":");
-
+	
+	public void reprice(String name, int newPrice) {
 		if(!isSpecial) {
 			for(Item i : this.vm.ir.getItemsOnSale()) {
-				if(i.getName().equals(this.selectedItem.getName()))
-					i.setPrice(this.cashIn);
+				if(i.getName().equals(name)) {
+					i.setPrice(newPrice);
+				}
 			}
 		}
 		
 		else {
 			for(Item i : this.svm.spir.getItemsOnSale()) {
-				if(i.getName().equals(this.selectedItem.getName()))
-					i.setPrice(this.cashIn);
+				if(i.getName().equals(name)) {
+					i.setPrice(newPrice);
+				}
 			}
 		}
-		
-		this.displayText("\nNew price successfully set!");
-		this.displayText("\nReturning to Maintenance Menu...");
 	}
 	
-	public void cashOut() {
-		if(!isSpecial)
-			this.displayText(this.vm.mh.displayCashBox()); 
-		else
-			this.displayText(this.svm.mh.displayCashBox()); 
+	public void deposit(int[][] userSelection) {
+		int i = 0;
 		
-		this.displayText("\nCash out all money? Or only specific bills?\n" +
-						   "Press Y for cash out all money and\n" +
-						   "Press N for cash out specific bills.\n");
-		boolean success = false;
-		
-		//Take out all money
-		if(userChoice == 1) {
-			int moneyTotal = 0;
-			String name = "";
-			
-			if(!isSpecial) {
-				moneyTotal = this.vm.mh.getTotal();
-				this.vm.mh.cashOut();
-				name = this.vm.getName();
+		for(i = userSelection.length; i > 0; i--) {
+			if(!isSpecial && userSelection[i][1] > 0) {
+				this.vm.mh.cashIn(userSelection[i][0], userSelection[i][1]);
 			}
 			
-			else {
-				moneyTotal = this.svm.mh.getTotal();
-				this.svm.mh.cashOut();
-				name = this.vm.getName();
+			else if(isSpecial && userSelection[i][1] > 0) {
+				this.svm.mh.cashIn(userSelection[i][0], userSelection[i][1]);
 			}
-			
-			this.displayText("\nSuccessfully cashed out " + moneyTotal + " pesos. " + name + " is now cash-empty.");
 		}
+	}
+	
+	public void withdraw(int[][] userSelection) {
+		int[][] cashStock = this.getCashStock();
+		int i = 0;
 		
-		//Take out specific bill/s
-		else {
-			this.displayText("\nWhich bill would you like to cash out?\n");
-			int bill = this.cashIn;
-			this.displayText("\nHow many " + bill + " bills would you like to take?\n");
-			int amount = this.cashIn;
+		for(i = userSelection.length; i > 0; i--) {
+			if(!isSpecial && cashStock[i][1] > userSelection[i][1]) {
+				this.vm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
+			}
 			
-			if(!isSpecial)
-				this.vm.mh.cashOne(bill, amount);
+			else if(isSpecial && cashStock[i][1] > userSelection[i][1]) {
+				this.svm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
+			}
 			
 			else 
-				this.svm.mh.cashOne(bill, amount);
-			
-			this.displayText("\nSuccessfully cashed out " + amount  + " of " + bill + " bills.\n"); 
+				this.displayText("Oops! Withdraw amount of " + userSelection[i][1] + " exceeds the current stock of " + cashStock[i][1] + " for the " + userSelection[i][0] + " peso bill. Canceled withdrawal for this bill.");
 		}
 	}
-				
-	public void cashIn() {
-		boolean success = false;
-
-		if(!isSpecial)
-			this.displayText(this.vm.mh.displayCashBox()); 
-		else
-			this.displayText(this.svm.mh.displayCashBox()); 
-		
-		this.displayText("\nWhich bill would you like to replenish?\n");
-		int bill = this.cashIn;
-		this.displayText("\nHow many " + bill + " bills would you like to add?\n");
-		int amount = this.cashIn;
-			
-		if(!isSpecial)
-			success = this.vm.mh.refillOne(bill, amount);
-		else
-			success = this.svm.mh.refillOne(bill, amount);
-		
-		if(success) {
-			this.displayText("\nReplenishing " + amount + " " + bill + " bills...");
-			this.displayText("\nReplenish success!");
-		}
-		
-		else
-			this.displayText("\nInvalid bill value.\n");
-	}
-				
+	
 	public void printTransacHistory() {
 		int count = 1;
 		int qty = 0;

@@ -82,15 +82,7 @@ public class ItemRack {
 		for(int j = 0; j <= neededStock; j++)
 			this.itemList.add(new Item(item.getName(), item.getCalories(), item.getStandalone(), item.getPrice()));
 	}
-	
-	/** 
-      * Adds all items from an array to ItemList
-	  * @param temp The list of item objects to be added
-      */
-	public void addAll(ArrayList<Item> temp) {
-		this.itemList.addAll(temp);
-	}
-	
+
 	/** 
       * Removes an item from ItemList
 	  * @param item The item object to be removed
@@ -123,34 +115,6 @@ public class ItemRack {
 	}
 	
 	/** 
-      * Gets and returns the item at a given index of ItemList
-	  * @param index The index of the item
-	  * @return The item at the index
-      */
-	public Item getItemAt(int index) {
-		Item item = null;
-		
-		if(this.indexList[index] != null) {
-			String name = this.indexList[index];
-		
-			for(Item i : this.itemList) {
-				if(i.getName().equals(name))
-					item = i;
-			}
-		}
-		
-		return item;
-	}
-	
-	/** 
-      * Gets and returns list of items on sale (in stock)
-	  * @return The list of items on sale
-      */
-	public ArrayList<Item> getItemsOnSale() {
-		return this.itemList;
-	}
-	
-	/** 
       * Counts how many unique items exist in ItemList
 	  * @return The number of unique items
       */
@@ -171,5 +135,33 @@ public class ItemRack {
 		}
 		
 		return count;
+	}
+
+	/** 
+      * Gets and returns the item at a given index of ItemList
+	  * @param index The index of the item
+	  * @return The item at the index
+      */
+	public Item getItemAt(int index) {
+		Item item = null;
+		
+		if(this.indexList[index] != null) {
+			String name = this.indexList[index];
+		
+			for(Item i : this.itemList) {
+				if(i.getName().equals(name))
+					item = i;
+			}
+		}
+		
+		return item;
+	}
+
+	/** 
+      * Gets and returns list of items on sale (in stock)
+	  * @return The list of items on sale
+      */
+	public ArrayList<Item> getItemsOnSale() {
+		return this.itemList;
 	}
 }

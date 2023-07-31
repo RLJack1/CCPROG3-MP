@@ -192,7 +192,7 @@ public class SpecialVM extends VendingMachine {
 		
 		//If stock is insufficient, return all items back
 		if(!success)
-			this.spir.addAll(temp);
+			this.spir.getItemsOnSale().addAll(temp);
 		
 		return success;
 	}
