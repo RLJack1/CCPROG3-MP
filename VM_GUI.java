@@ -6,6 +6,8 @@
 //import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
@@ -3890,7 +3892,7 @@ public class VM_GUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void secondInit() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -3922,6 +3924,67 @@ public class VM_GUI extends javax.swing.JFrame {
             }
         });
     }
+	
+	public JButton getCreateButton() {
+		return this.ConfirmVMButton;
+	}
+	
+	public JButton getItemButton() {
+		return this.jButtonConfirmItem;
+	}
+	
+	public JButton getRecipeButton() {
+		return this.jButtonConfirmBurger1;
+	}
+	
+	public JButton getRestockButton() {
+		return this.jButtonConfirmRestock;
+	}
+	
+	public JButton getRepriceButton() {
+		return this.jButtonConfirmReprice;
+	}
+	
+	public JButton getDepositButton() {
+		return this.jButtonDeposit;
+	}
+	
+	public JButton getWithdrawButton() {
+		return this.jButtonWithdraw;
+	}
+	
+	public JButton getWithdrawAllButton() {
+		return this.jButtonWithdrawAll;
+	}
+	
+	public JButton getPrintTransacButton() {
+		return this.jButtonPrintTransaction;
+	}
+	
+	public JButton getPrintRestockButton() {
+		return this.jButtonPrintRestock;
+	}
+	
+	public JRadioButton getSpeRadioButton() {
+		return this.SpeRadioButton;
+	}
+	
+	public JTextField getVMNameText() {
+		return this.VMNameText;
+	}
+	
+	public JTextArea getTextAreaReceipt() {
+		return this.jTextAreaReciept;
+	}
+	
+	public void displayText(String text) {
+    this.jTextAreaConsole.append(text + "\n");
+}
+
+public void displayPrint(String text) {
+    this.jTextAreaReceipt.append(text + "\n");
+}
+
 
     // Variables declaration - do not modify                     
     private javax.swing.JSpinner AmericanSpinner;

@@ -61,9 +61,6 @@ public class VMController implements ActionListener {
 	  */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		/*attach Als to every relevant button?
-		  per event, make a method that error checks and calls the function*/
-		
 		JButton clicked = (JButton) e.getSource();
 		
 		if(clicked.equals(this.view.getCreateButton())) {
@@ -177,17 +174,26 @@ public class VMController implements ActionListener {
 	  * Display a string of text in the text area of the view
 	  * @param text The text to be displayed
 	  */
-	public void displayText(String text) {
-		//this.view.jTextAreaConsole.append(text + "\n");
-    }
+	/*public void displayText(String text) {
+		this.view.jTextAreaConsole.append("AAAAAAAA" + "\n");
+    }*/
 	
 	/** 
 	  * Display a string of text in the print text area of the view
 	  * @param text The text to be displayed
 	  */
-	public void displayPrint(String text) {
-		//gettheprintscreen.append(text + "\n");
-	}
+	/*public void displayPrint(String text) {
+		this.view.getTextAreaReceipt().append("AAAAAAAAAAAAAAAAAAA" + "\n");
+	}*/
+	
+	public void displayText(String text) {
+    this.view.displayText("AAAAAAAA");
+}
+
+public void displayPrint(String text) {
+    this.view.displayPrint("AAAAAAAAAAAAAAAAAAA");
+}
+
 
 	/** 
 	  * Creates a new Vending Machine
@@ -414,6 +420,10 @@ public class VMController implements ActionListener {
 		int qty = 0;
 		ArrayList<Ingredient> temp = new ArrayList<Ingredient>();
 		
+		if(this.transacHistory == null) {
+			this.displayPrint("No transaction history found.");
+		}
+		
 		for(Transaction t : this.transacHistory) {
 			this.displayPrint("================TRANSACTION#" + count + "=================" +
 						   "\nPurchased Item:\t\t\t" + t.getName());
@@ -454,6 +464,10 @@ public class VMController implements ActionListener {
 	public void printRestockHistory() {
 		String name = "";
 		int qty = 0;
+		
+		if(this.oldInventory == null) {
+			this.displayPrint("No restock history found.");
+		}
 		
 		this.displayPrint("==============STARTING INVENTORY===============" +
 					"\nItem Name\t\tQuantity");
