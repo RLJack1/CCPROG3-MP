@@ -7,6 +7,8 @@
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 /**
@@ -390,7 +392,7 @@ public class VM_GUI extends javax.swing.JFrame {
         jButtonPrintTransaction = new javax.swing.JButton();
         jButtonPrintRestock = new javax.swing.JButton();
         jTextAreaPane1 = new javax.swing.JScrollPane();
-        jTextAreaReciept = new javax.swing.JTextArea();
+        jTextAreaReceipt = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
@@ -3696,14 +3698,14 @@ public class VM_GUI extends javax.swing.JFrame {
             }
         });
 
-        jTextAreaReciept.setBackground(new java.awt.Color(0, 0, 0));
-        jTextAreaReciept.setColumns(20);
-        jTextAreaReciept.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jTextAreaReciept.setForeground(new java.awt.Color(255, 255, 255));
-        jTextAreaReciept.setLineWrap(true);
-        jTextAreaReciept.setRows(5);
-        jTextAreaReciept.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)));
-        jTextAreaPane1.setViewportView(jTextAreaReciept);
+        jTextAreaReceipt.setBackground(new java.awt.Color(0, 0, 0));
+        jTextAreaReceipt.setColumns(20);
+        jTextAreaReceipt.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jTextAreaReceipt.setForeground(new java.awt.Color(255, 255, 255));
+        jTextAreaReceipt.setLineWrap(true);
+        jTextAreaReceipt.setRows(5);
+        jTextAreaReceipt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)));
+        jTextAreaPane1.setViewportView(jTextAreaReceipt);
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -4453,41 +4455,110 @@ public class VM_GUI extends javax.swing.JFrame {
         recipeButtonList.add(jButton9Turkey);
         recipeButtonList.add(jCustomButton10);
     }
-    /**
-     * @param args the command line arguments
-     */
-    // public static void main(String args[]) {
-    //     /* Set the Nimbus look and feel */
-    //     //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    //     /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-    //      * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-    //      */
-    //     try {
-    //         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-    //             if ("Nimbus".equals(info.getName())) {
-    //                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
-    //                 break;
-    //             }
-    //         }
-    //     } catch (ClassNotFoundException ex) {
-    //         java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (InstantiationException ex) {
-    //         java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (IllegalAccessException ex) {
-    //         java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-    //         java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     }
-    //     //</editor-fold>
-    //     //</editor-fold>
+   
+   public JButton getCreateButton() {
+		return this.ConfirmVMButton;
+	}
+	
+	public JButton getItemButton() {
+		return this.jButtonConfirmItem;
+	}
+	
+	public JButton getRecipeButton() {
+		return this.jButtonConfirmBurger1;
+	}
+	
+	public JButton getRestockButton() {
+		return this.jButtonConfirmRestock;
+	}
+	
+	public JButton getRepriceButton() {
+		return this.jButtonConfirmReprice;
+	}
+	
+	public JButton getDepositButton() {
+		return this.jButtonDeposit;
+	}
+	
+	public JButton getWithdrawButton() {
+		return this.jButtonWithdraw;
+	}
+	
+	public JButton getWithdrawAllButton() {
+		return this.jButtonWithdrawAll;
+	}
+	
+	public JButton getPrintTransacButton() {
+		return this.jButtonPrintTransaction;
+	}
+	
+	public JButton getPrintRestockButton() {
+		return this.jButtonPrintRestock;
+	}
+	
+	public JRadioButton getSpeRadioButton() {
+		return this.SpeRadioButton;
+	}
+	
+	public JTextField getVMNameText() {
+		return this.VMNameText;
+	}
+	
+	public JTextArea getTextAreaReceipt() {
+		return this.jTextAreaReceipt;
+	}
+	
+	public ArrayList<JLabel> getLabels() {
+		return this.labelList;
+	}
+	
+	public ArrayList<JSpinner> getItemSpinners() {
+		return this.itemSpinnerList;
+	}
+	
+	public ArrayList<JSpinner> getMHSpinners() {
+		return this.mhSpinnerList;
+	}
+	
+	public ArrayList<JButton> getItemButtons() {
+		return this.itemButtonList;
+	} 
+	
+	public ArrayList<JButton> getRecipeButtons() {
+		return this.recipeButtonList;
+	}
+	
+	public ArrayList<JRadioButton> getRestockButtons() {
+		return this.restockRadioList;
+	}
+	
+	public ArrayList<JRadioButton> getRepriceButtons() {
+		return this.repriceRadioList;
+	}
+	
+	public JTextField getNewPrice() {
+		return this.jINewPriceTextField;
+	}
+	
+	public void displayText(String text) {
+    this.jTextAreaConsole.append(text + "\n");
+    }
 
-    //     /* Create and display the form */
-    //     java.awt.EventQueue.invokeLater(new Runnable() {
-    //         public void run() {
-    //             new VM_GUI().setVisible(true);
-    //         }
-    //     });
-    // }
+    public void displayPrint(String text) {
+        this.jTextAreaReceipt.append(text + "\n");
+	}
+	
+	public void updateItemStock(ArrayList<ArrayList<Object>> itemStock) {
+		//update item menu labels ata
+	}
+	
+	public void updateCashStock(int[][] cashStock) {
+		//update all labels? spinners? I'm not sure :")
+	}
+	
+	public void updatePrices(ArrayList<ArrayList<Object>> itemPrices) {
+		//update item menu
+	}
 
     // Variables declaration - do not modify                     
     private javax.swing.JSpinner AmericanSpinner;
@@ -4633,7 +4704,7 @@ public class VM_GUI extends javax.swing.JFrame {
     private javax.swing.JSpinner ThousandPesoSpinner;
     private javax.swing.JSpinner TrappistSpinner;
     private javax.swing.JSpinner TwentyPesoSpinner;
-    public javax.swing.JTextField VMNameText;
+    private javax.swing.JTextField VMNameText;
     private javax.swing.JSpinner WagyuSpinner;
     private javax.swing.JSpinner WeinerSpinner;
     private javax.swing.JSpinner WhiteSpinner;
@@ -4727,7 +4798,7 @@ public class VM_GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonWithdrawAll;
     private javax.swing.JButton jCustomButton10;
     private javax.swing.JPanel jDisplayCashBox;
-    public javax.swing.JTextField jINewPriceTextField;
+    private javax.swing.JTextField jINewPriceTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -4817,7 +4888,7 @@ public class VM_GUI extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaConsole;
     private javax.swing.JScrollPane jTextAreaPane;
     private javax.swing.JScrollPane jTextAreaPane1;
-    private javax.swing.JTextArea jTextAreaReciept;
+    private javax.swing.JTextArea jTextAreaReceipt;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel jVMName;
     // End of variables declaration                   

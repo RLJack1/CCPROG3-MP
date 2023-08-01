@@ -31,10 +31,12 @@ public class VMController implements ActionListener {
 		this.oldInventory = new ArrayList<Item>();
 		this.transacHistory = new ArrayList<Transaction>();
 		this.vm = new VendingMachine(this, "The Classic Vending Machine", 0, 0);
+		this.svm = new SpecialVM(this, "The Classic Vending Machine", 0, 0);
 		this.vm.mh.newCashBox();
 		this.vm.ir.newItemRack();
-		this.view = new VM_GUI();
+		this.vm.ir.loadPresetItems();
 		
+		this.view = new VM_GUI();
 		this.view.getCreateButton().addActionListener(this);
 		this.view.getItemButton().addActionListener(this);
 		this.view.getRecipeButton().addActionListener(this);
@@ -45,6 +47,10 @@ public class VMController implements ActionListener {
 		this.view.getWithdrawAllButton().addActionListener(this);
 		this.view.getPrintTransacButton().addActionListener(this);
 		this.view.getPrintRestockButton().addActionListener(this);
+		
+		this.updateItemStock();
+		this.updatePrices();
+		this.updateCashStock();
 	}
 
 	/** 
@@ -85,20 +91,24 @@ public class VMController implements ActionListener {
 		}
 		
 		else if(clicked.equals(this.view.getRestockButton())) {
+			ArrayList<String> temp = new ArrayList<String>();
 			ArrayList<String> userSelection = new ArrayList<String>();
+			ArrayList<Item> presetItemList = this.vm.ir.getPresetItems();
 			
 			//Consolidate the selected items
 			for(JRadioButton r : this.view.getRestockButtons()) {
 				if(r.isSelected()) {
-					userSelection.add(r.getText());
+					temp.add(r.getText());
 				}
 			}
 			
 			//Reformat strings
-			
+			for(String s : temp) {
+				userSelection.add(this.convert(s));
+			}
 			
 			//Call function
-			
+			this.restock(userSelection);
 		}
 		
 		else if(clicked.equals(this.view.getRepriceButton())) {
@@ -220,46 +230,41 @@ public class VMController implements ActionListener {
 	  * Gets and returns the stock of every item on sale
 	  * @return A 2D ArrayList of items on sale and their respective stock counts
 	  */
-	public ArrayList<ArrayList<Object>> getItemStock() {
+	public void updateItemStock() {
 		//First column is for stock, second is for item names, third is for item indices
 		ArrayList<ArrayList<Object>> itemStock = new ArrayList<>();
 		int i = 0;
+		String name = null;
 		
-		//Make the ArrayList 2D
-		for(i = 0; i < 30; i++) {
-			ArrayList<Object> row = new ArrayList<>();
-			itemStock.add(row);
-		}
-		
-		i = 0;
-		
-		//Populate the 2D ArrayList
+		//Make the ArrayList 2D and populate
 		if(!isSpecial) {
-			for(Item item : this.vm.ir.getItemsOnSale()) {
-				itemStock.get(i).add(this.vm.ir.countStock(item.getName()));
-				itemStock.get(i).add(item.getName());
-				itemStock.get(i).add(i);
-				i++;
+			for(i = 0; i < 30; i++) {
+				ArrayList<Object> row = new ArrayList<Object>();
+				name = this.vm.ir.getPresetItemName(i);
+				row.add(name);
+				row.add(this.vm.ir.countStock(name));
+				itemStock.add(row);
 			}
 		}
 		
 		else {
 			for(Item item : this.svm.spir.getItemsOnSale()) {
-				itemStock.get(i).add(this.svm.spir.countStock(item.getName()));
-				itemStock.get(i).add(item.getName());
-				itemStock.get(i).add(i);
-				i++;
+				ArrayList<Object> row = new ArrayList<Object>();
+				name = this.svm.spir.getPresetItemName(i);
+				row.add(name);
+				row.add(this.svm.spir.countStock(name));
+				itemStock.add(row);
 			}
 		}
 		
-		return itemStock;
+		this.view.updateItemStock(itemStock);
 	}
 	
 	/** 
 	  * Gets and returns the stock of every bill in storage
 	  * @return A 2D int array of bills and their respective stock counts
 	  */
-	public int[][] getCashStock() {
+	public void updateCashStock() {
 		int[][] cashStock = new int[8][2];
 		
 		if(!isSpecial)
@@ -268,7 +273,37 @@ public class VMController implements ActionListener {
 		else 
 			cashStock = this.svm.mh.getCashBox();
 		
-		return cashStock;
+		this.view.updateCashStock(cashStock);
+	}
+
+	public void updatePrices() {
+		//First column is for stock, second is for item names, third is for item indices
+		ArrayList<ArrayList<Object>> itemPrices = new ArrayList<>();
+		int i = 0;
+		String name = null;
+		
+		//Make the ArrayList 2D and populate
+		if(!isSpecial) {
+			for(i = 0; i < 30; i++) {
+				ArrayList<Object> row = new ArrayList<Object>();
+				name = this.vm.ir.getPresetItemName(i);
+				row.add(name);
+				row.add(this.vm.ir.getSaleItemPrice(name));
+				itemPrices.add(row);
+			}
+		}
+		
+		else {
+			for(Item item : this.svm.spir.getItemsOnSale()) {
+				ArrayList<Object> row = new ArrayList<Object>();
+				name = this.svm.spir.getPresetItemName(i);
+				row.add(name);
+				row.add(this.svm.spir.getSaleItemPrice(name));
+				itemPrices.add(row);
+			}
+		}
+		
+		this.view.updatePrices(itemPrices);
 	}
 
 	/** 
@@ -308,6 +343,10 @@ public class VMController implements ActionListener {
 		this.isSpecial = isSpecial;
 		this.transacHistory.clear();
 		this.oldInventory.clear();
+		
+		this.updateItemStock();
+		this.updateCashStock();
+		this.updatePrices();
     }
 	
 	/** 
@@ -359,6 +398,9 @@ public class VMController implements ActionListener {
 							 "\nIssued Change: " + (cashIn - item.getPrice()) + "\n\n");
 			}
 		}
+		
+		this.updateItemStock();
+		this.updateCashStock();
 	}
 
 	/** 
@@ -392,14 +434,18 @@ public class VMController implements ActionListener {
 		
 		else
 			this.displayText("\nOops! Not enough ingredients for the selected recipe.");
+		
+		this.updateItemStock();
+		this.updateCashStock();
 	}
 
 	/** 
 	  * Facilitates restocking of an item to full capacity
 	  * @param userSelection The arraylist of items the user selected for restocking
 	  */
-	public void restock(ArrayList<Item> userSelection) {
+	public void restock(ArrayList<String> userSelection) {
 		ArrayList<Item> temp = new ArrayList<Item>();
+		ArrayList<Item> toAdd = new ArrayList<Item>();
 		
 		//Temporary old inventory holder
 		temp.clear();
@@ -415,8 +461,15 @@ public class VMController implements ActionListener {
 			}
 		}
 		
+		//Convert String list to Item list
+		for(String s : userSelection) {
+			if(this.vm.ir.getItemFrom(s) != null) {
+				toAdd.add(this.vm.ir.getItemFrom(s));
+			}
+		}
+		
 		//Fully restock all items in userSelection
-		for(Item i : userSelection) {
+		for(Item i : toAdd) {
 			if(!isSpecial) {
 				this.vm.ir.addFullStock(i);
 			}
@@ -439,6 +492,8 @@ public class VMController implements ActionListener {
 			this.svm.setLastTotalSales(0);
 			this.svm.setTotalSales(0);
 		}
+		
+		this.updateItemStock();
 	}
 	
 	/** 
@@ -462,6 +517,8 @@ public class VMController implements ActionListener {
 				}
 			}
 		}
+		
+		this.updatePrices();
 	}
 	
 	/** 
@@ -480,6 +537,8 @@ public class VMController implements ActionListener {
 				this.svm.mh.cashIn(userSelection[i][0], userSelection[i][1]);
 			}
 		}
+		
+		this.updateCashStock();
 	}
 	
 	/** 
@@ -487,7 +546,14 @@ public class VMController implements ActionListener {
 	  * @param userSelection The 2D int array of bills and corresponding amounts for cash-out
 	  */
 	public void withdraw(int[] userSelection) {
-		int[][] cashStock = this.getCashStock();
+		int[][] cashStock = new int[8][2];
+		
+		if(!isSpecial)
+			cashStock = this.vm.mh.getCashBox();
+		
+		else 
+			cashStock = this.svm.mh.getCashBox();
+		
 		int i = 0;
 		
 		for(i = userSelection.length; i > 0; i--) {
@@ -502,6 +568,8 @@ public class VMController implements ActionListener {
 			else 
 				this.displayText("Oops! Withdraw amount of " + userSelection[i] + " exceeds the current stock of " + cashStock[i][1] + " for the " + cashStock[i][0] + " peso bill. Canceled withdrawal for this bill.");
 		}
+
+		this.updateCashStock();
 	}
 	
 	/** 

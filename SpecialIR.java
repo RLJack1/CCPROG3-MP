@@ -50,7 +50,7 @@ public class SpecialIR extends ItemRack {
 		ArrayList<Item> addedItemList = new ArrayList<Item>();
 		
 		for(Item i : itemList) {
-			for(int j = 0; j < 10; j++) 
+			for(int j = 0; j < 9; j++) 
 			addedItemList.add(new Item(i.getName(), i.getCalories(), i.getStandalone(), i.getPrice()));	
 		}
 		

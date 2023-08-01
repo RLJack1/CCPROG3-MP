@@ -89,3 +89,15 @@ public JButton getCreateButton() {
     public void displayPrint(String text) {
         this.jTextAreaReceipt.append(text + "\n");
 	}
+	
+	public void updateItemStock(ArrayList<ArrayList<Object>> itemStock) {
+		//update item menu labels ata
+	}
+	
+	public void updateCashStock(int[][] cashStock) {
+		//update all labels? spinners? I'm not sure :")
+	}
+	
+	public void updatePrices(ArrayList<ArrayList<Object>> itemPrices) {
+		//update item menu
+	}
