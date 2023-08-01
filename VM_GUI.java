@@ -24,6 +24,7 @@ public class VM_GUI extends javax.swing.JFrame {
     public ArrayList<JRadioButton> restockRadioList = new ArrayList<>();
     public ArrayList<JRadioButton> repriceRadioList = new ArrayList<>();
     public ArrayList<JButton> itemButtonList = new ArrayList<>();
+    public ArrayList<JButton> moneyInputList = new ArrayList<>();
     public ArrayList<JButton> recipeButtonList = new ArrayList<>();
     /**
      * Creates new form VM_GUI
@@ -53,6 +54,7 @@ public class VM_GUI extends javax.swing.JFrame {
         initRecipeButtonList();
         initPriceList();
         initMoneyList();
+        initMoneyInputList();
         this.setVisible(true);
     }
 
@@ -4442,6 +4444,17 @@ public class VM_GUI extends javax.swing.JFrame {
         repriceRadioList.add(jRadioCaviar1);
         repriceRadioList.add(jRadioJackS1);
     }
+
+    private void initMoneyInputList(){
+        moneyInputList.add(jButtonBill1);
+        moneyInputList.add(jButtonBill5);
+        moneyInputList.add(jButtonBill10);
+        moneyInputList.add(jButtonBill1);
+        moneyInputList.add(jButtonBill1);
+        moneyInputList.add(jButtonBill1);
+        moneyInputList.add(jButtonBill1);
+        moneyInputList.add(jButtonBill1);
+    }
     
     private void initRecipeButtonList(){
         recipeButtonList.add(jButton1Classic);
@@ -4561,16 +4574,43 @@ public class VM_GUI extends javax.swing.JFrame {
 	}
 	
 	public void updateItemStock(ArrayList<ArrayList<Object>> itemStock) {
-		//update item menu labels ata
+        //@megan @renzo idk what im doing
+
+        int i = 0;
+        int array;
+        for (ArrayList<Object> innerList : itemStock) {
+            
+            for (Object item : innerList) {
+                for (JLabel label : labelList) {
+                    label.setText("");
+                }
+            }
+        }
+	}
+
+    public void updateCashStock(int[][] cashStock) {
+		for (int i = 0; i < cashStock.length; i++) {
+            int value = cashStock[i][1];
+            mhSpinnerList.get(i).setValue(value);
+        }
 	}
 	
-	public void updateCashStock(int[][] cashStock) {
-		//update all labels? spinners? I'm not sure :")
-	}
+
 	
-	public void updatePrices(ArrayList<ArrayList<Object>> itemPrices) {
-		//update item menu
+    public void updatePrices(ArrayList<ArrayList<Object>> itemPrices) {
+        
+        for (JLabel priceLabel : priceList){
+            for (ArrayList<Object> innerList : itemPrices) {
+                for (Object item : innerList) {
+                    // Access the individual object 'item' here
+                    // Do whatever you want to do with the object
+                    System.out.println(item);
+                }
+            }
+            priceLabel.setText("");
+        }
 	}
+
 
     // Variables declaration - do not modify                     
     private javax.swing.JSpinner AmericanSpinner;
