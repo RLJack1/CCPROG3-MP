@@ -1031,7 +1031,7 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton27Hot.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton28Barbecue.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jButton28Barbecue.setText("28-Barbecue Sauce");
+        jButton28Barbecue.setText("28-Barbecuee Sauce");
         jButton28Barbecue.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton29Caviar.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
