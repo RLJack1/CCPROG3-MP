@@ -51,6 +51,7 @@ public class VMController implements ActionListener {
       */
 	public static void main(String[] args) {
 			VMController c = new VMController();
+			c.view.secondInit();
 			c.displayText("Loading Vending Machine...\n");
 			c.displayText("Done!\n");
 	}
@@ -68,7 +69,7 @@ public class VMController implements ActionListener {
 		if(clicked.equals(this.view.getCreateButton())) {
 			boolean isSpecial = false;
 			
-			if(this.view.getSpeRadioButton.isSelected())
+			if(this.view.getSpeRadioButton().isSelected())
 				isSpecial = true;
 			
 			String name = this.view.getVMNameText().getText();
@@ -76,7 +77,41 @@ public class VMController implements ActionListener {
 			this.create(name, isSpecial);
 		}
 		
+		else if(clicked.equals(this.view.getItemButton())) {
+			
+		}
 		
+		else if(clicked.equals(this.view.getRecipeButton())) {
+			
+		}
+		
+		else if(clicked.equals(this.view.getRestockButton())) {
+			
+		}
+		
+		else if(clicked.equals(this.view.getRepriceButton())) {
+			
+		}
+		
+		else if(clicked.equals(this.view.getDepositButton())) {
+			
+		}
+		
+		else if(clicked.equals(this.view.getWithdrawButton())) {
+			
+		}
+		
+		else if(clicked.equals(this.view.getWithdrawAllButton())) {
+			
+		}
+		
+		else if(clicked.equals(this.view.getPrintTransacButton())) {
+			
+		}
+		
+		else if(clicked.equals(this.view.getPrintRestockButton())) {
+			
+		}
 	}
 	
 	/** 
