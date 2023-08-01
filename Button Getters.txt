@@ -1,4 +1,7 @@
-public JButton getCreateButton() {
+/**
+     * Gets and returns specific java swing elements (JButton, JRadioButton, JTextArea, JTextField, ArrayLists)
+     */
+   public JButton getCreateButton() {
 		return this.ConfirmVMButton;
 	}
 	
@@ -79,7 +82,7 @@ public JButton getCreateButton() {
 	}
 	
 	public ArrayList<JButton> getMoneyButtons() {
-		return null;
+		return this.moneyInputList;
 	}
 	
 	public ArrayList<JRadioButton> getRestockButtons() {
@@ -94,22 +97,65 @@ public JButton getCreateButton() {
 		return this.jINewPriceTextField;
 	}
 	
+	/**
+      * Prints text onto the display text area console
+	  * @param text The text to be displayed
+      */
 	public void displayText(String text) {
     this.jTextAreaConsole.append(text + "\n");
     }
 
+	/**
+      * Prints text onto the print text area console
+	  * @param text The text to be displayed
+      */
     public void displayPrint(String text) {
         this.jTextAreaReceipt.append(text + "\n");
 	}
 	
+	/**
+      * Updates item stock displays according to stored data in model
+	  * @param itemStock The 2D ArrayList of items and their stocks
+      */
 	public void updateItemStock(ArrayList<ArrayList<Object>> itemStock) {
-		//update item menu labels ata
+        //@megan @renzo idk what im doing
+
+        int i = 0;
+        int array;
+        for (ArrayList<Object> innerList : itemStock) {
+            
+            for (Object item : innerList) {
+                for (JLabel label : labelList) {
+                    label.setText("");
+                }
+            }
+        }
+	}
+
+	/**
+      * Updates item cash displays according to stored data in model
+	  * @param cashStock The 2D int array of bills and their stocks
+      */
+    public void updateCashStock(int[][] cashStock) {
+		for (int i = 0; i < cashStock.length; i++) {
+            int value = cashStock[i][1];
+            mhSpinnerList.get(i).setValue(value);
+        }
 	}
 	
-	public void updateCashStock(int[][] cashStock) {
-		//update all labels? spinners? I'm not sure :")
-	}
-	
-	public void updatePrices(ArrayList<ArrayList<Object>> itemPrices) {
-		//update item menu
+	/**
+      * Updates item price displays according to stored data in model
+	  * @param itemPrices The 2D ArrayList of items and their prices
+      */
+    public void updatePrices(ArrayList<ArrayList<Object>> itemPrices) {
+        for (JLabel priceLabel : priceList){
+            for (ArrayList<Object> innerList : itemPrices) {
+                for (Object item : innerList) {
+                    // Access the individual object 'item' here
+                    // Do whatever you want to do with the object
+                    System.out.println(item);
+                }
+            }
+            priceLabel.setText("");
+        }
 	}

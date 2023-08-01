@@ -36,6 +36,7 @@ public class VMController implements ActionListener {
 		this.vm.ir.newItemRack();
 		this.vm.ir.loadPresetItems();
 		
+		//Add actionlisteners to specific gui buttons
 		this.view = new VM_GUI();
 		this.view.getCreateButton().addActionListener(this);
 		this.view.getItemButton().addActionListener(this);
@@ -75,7 +76,8 @@ public class VMController implements ActionListener {
 	}
 	
 	/** 
-	  * TEXT 
+	  * Triggers whenever one of the anticipated elements in view are pressed or interacted with 
+	  * @param e The event that occurred
 	  */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -94,8 +96,88 @@ public class VMController implements ActionListener {
 		
 		else if(clicked.equals(this.view.getItemButton())) {
 			//take item spinners and run buyItem + error msgs
+			int count = 0;
+			int i = 0;
 			
+			//Check if only one item was picked
+			for(JSpinner sp : this.view.getItemSpinners()) {
+				count += (int) sp.getValue();
+			}
 			
+			if(!isSpecial) {
+				if(count > 1)
+					this.displayText("Oops! Regular Vending Machines only support single item purchases.\nPlease try again.");
+				
+				else if(count == 0)
+					this.displayText("Please add +1 to the item you wish to purchase.");
+				
+				else if(count == 1) {
+					//Identify what item was selected
+					for(JSpinner sp : this.view.getItemSpinners()) {
+						if(((int) sp.getValue()) == 1)
+							i = this.view.getItemSpinners().indexOf(sp);
+					}
+					
+					//Get the item object
+					String name = this.vm.ir.getPresetItemName(i);
+					if(this.vm.ir.getItemCalled(name) != null)
+						this.buyItem(this.vm.ir.getItemCalled(name));
+					
+					else 
+						this.displayText("Oops! The item is out of stock. Please try again.");
+				}
+			}
+			
+			else {
+				if(count > 1) {
+					this.displayText("Preparing your burger...\nPlease input cash.");
+					
+					int qty = 0;
+					int index = 0;
+					String name = null;
+					Ingredient ingredient = null;
+					Recipe custom = new Recipe("custom");
+					
+					//Get the ingredients per user selection
+					for(JSpinner sp : this.view.getItemSpinners()) {
+						qty = (int) sp.getValue();
+						
+						if(qty > 0) {
+							//Get index then name
+							index = this.view.getItemSpinners().indexOf(sp);
+							name = this.svm.spir.getPresetItemName(index);
+							ingredient = this.svm.spir.getIngredientCalled(name);
+							
+							while(qty > 0) {
+								custom.addIngredient(ingredient);
+								qty--;
+							}
+						}
+					}
+					
+					//Order
+					this.buyRecipe(custom);
+				}
+				
+				else if(count == 0)
+					this.displayText("Please add +1 to the item you wish to purchase.");
+				
+				else if(count == 1) {
+					//Identify what item was selected
+					for(JSpinner sp : this.view.getItemSpinners()) {
+						if(((int) sp.getValue()) == 1)
+							i = this.view.getItemSpinners().indexOf(sp);
+					}
+					
+					//Get the item object
+					String name = this.svm.spir.getPresetItemName(i);
+					if(this.svm.spir.getItemCalled(name) != null)
+						this.buyItem(this.svm.spir.getItemCalled(name));
+					
+					else 
+						this.displayText("Oops! The item is out of stock. Please try again.");
+				}
+			}
 		}
 		
 		else if(clicked.equals(this.view.getItemCancelButton())) {
@@ -110,8 +192,20 @@ public class VMController implements ActionListener {
 		
 		else if(clicked.equals(this.view.getRecipeButton())) {
 			//identify what recipe button was pushed and get name
+			String unformatted = clicked.getText();
+			String recipe = this.convert(unformatted);
 			
+			if(!isSpecial)
+				this.displayText("Sorry! Regular Vending Machines can't support recipe purchases.");
 			
+			else {
+				//Get recipe from list
+				int index = this.svm.getRecipeIndex(recipe);
+				Recipe selectedRecipe = this.svm.getRecipeAt(index);
+				
+				//Buy the recipe
+				this.buyRecipe(selectedRecipe);
+			}
 		}
 		
 		else if(clicked.equals(this.view.getRecipeCancelButton())) {
@@ -125,11 +219,13 @@ public class VMController implements ActionListener {
 		}
 		
 		else if(this.view.getMoneyButtons().contains(clicked)) {
+			int amount = Integer.parseInt(clicked.getText());
+			
 			if(!isSpecial)
-				this.vm.mh.inputDenominations(clicked.getText());
+				this.vm.mh.inputDenominations(amount);
 			
 			else
-				this.svm.mh.inputDenominations(clicked.getText());
+				this.svm.mh.inputDenominations(amount);
 		}
 		
 		else if(clicked.equals(this.view.getRestockButton())) {
@@ -245,6 +341,11 @@ public class VMController implements ActionListener {
 		}
 	}
 	
+	/** 
+      * Converts a string from label form to item or recipe name form
+	  * @param original The string to be trimmed
+	  * @return The trimmed string text
+      */
 	public String convert(String original) {
 		int count = 0;
 		boolean found = false;
@@ -269,12 +370,11 @@ public class VMController implements ActionListener {
 	}
 	
 	/** 
-	  * Gets and returns the stock of every item on sale
-	  * @return A 2D ArrayList of items on sale and their respective stock counts
+	  * Gets the stock of every item on sale and passes it to the view
 	  */
 	public void updateItemStock() {
 		//First column is for item names, second is for stock
-		ArrayList<ArrayList<Object>> itemStock = new ArrayList<Objects>();
+		ArrayList<ArrayList<Object>> itemStock = new ArrayList<>();
 		int i = 0;
 		String name = null;
 		
@@ -303,8 +403,7 @@ public class VMController implements ActionListener {
 	}
 	
 	/** 
-	  * Gets and returns the stock of every bill in storage
-	  * @return A 2D int array of bills and their respective stock counts
+	  * Gets the stock of bill and passes it to the view
 	  */
 	public void updateCashStock() {
 		int[][] cashStock = new int[8][2];
@@ -318,6 +417,9 @@ public class VMController implements ActionListener {
 		this.view.updateCashStock(cashStock);
 	}
 
+	/** 
+	  * Gets the price  of every item on sale and passes it to the view
+	  */
 	public void updatePrices() {
 		//First column is for stock, second is for item names, third is for item indices
 		ArrayList<ArrayList<Object>> itemPrices = new ArrayList<>();
@@ -399,7 +501,17 @@ public class VMController implements ActionListener {
 		int cashIn = 0;
 		boolean success = false;
 		
-		if(!isSpecial) {
+		if(!item.getStandalone()) {
+			this.displayText("Oops! You cannot buy that item alone. Please select a different item.");
+			
+			if(!isSpecial)
+				this.vm.mh.releaseAll();
+			
+			else
+				this.svm.mh.releaseAll();
+		}
+		
+		else if(!isSpecial) {
 			cashIn = this.vm.mh.getCashIn();
 			success = this.vm.mh.payment(item);
 			
@@ -416,7 +528,8 @@ public class VMController implements ActionListener {
 							 "\nTotal Calories: " + item.getCalories() +
 							 "\nItem Price: " + item.getPrice() +
 							 "\nAmount Paid: " + cashIn +
-							 "\nIssued Change: " + (cashIn - item.getPrice()) + "\n\n");
+							 "\nIssued Change: " + (cashIn - item.getPrice()) + 
+							 "===============================\n");
 			}
 		}
 		
@@ -437,7 +550,8 @@ public class VMController implements ActionListener {
 							 "\nTotal Calories: " + item.getCalories() +
 							 "\nItem Price: " + item.getPrice() +
 							 "\nAmount Paid: " + cashIn +
-							 "\nIssued Change: " + (cashIn - item.getPrice()) + "\n\n");
+							 "\nIssued Change: " + (cashIn - item.getPrice()) +
+							 "===============================\n");
 			}
 		}
 		
@@ -453,8 +567,11 @@ public class VMController implements ActionListener {
 		int cashIn = 0;
 		boolean success = this.svm.buyRecipe(selectedRecipe);
 		
+		if(selectedRecipe == null)
+			this.displayText("Oops! Something went wrong on my end. Please try that again.");
+		
 		//Assumes that this VM is special
-		if(success) {
+		else if(success) {
 			success = false;
 			cashIn = this.svm.mh.getCashIn();
 			success = this.svm.mh.payment(selectedRecipe);
@@ -470,7 +587,8 @@ public class VMController implements ActionListener {
 						 "\nTotal Calories: " + selectedRecipe.getCalories() +
 						 "\nItem Price: " + selectedRecipe.getPrice() +
 						 "\nAmount Paid: " + cashIn +
-						 "\nIssued Change: " + (cashIn - selectedRecipe.getPrice()) + "\n\n");
+						 "\nIssued Change: " + (cashIn - selectedRecipe.getPrice()) + 
+						 "===============================\n");
 			}
 		}
 		
@@ -664,19 +782,38 @@ public class VMController implements ActionListener {
 	  * Displays this Vending Machine's restock history
 	  */
 	public void printRestockHistory() {
-		String name = "";
 		int qty = 0;
+		ArrayList<String> newItemNames = new ArrayList<String>();
+		ArrayList<String> oldItemNames = new ArrayList<String>();
+		ArrayList<Item> itemsOnSale = new ArrayList<Item>();
 		
-		if(this.oldInventory == null) {
+		if(this.oldInventory.size() == 0) {
 			this.displayPrint("No restock history found.");
+		}
+		
+		//Set up itemsOnSale
+		if(!isSpecial)
+			itemsOnSale.addAll(this.vm.ir.getItemsOnSale());
+		
+		else
+			itemsOnSale.addAll(this.svm.spir.getItemsOnSale());
+		
+		//Set up oldItemNames
+		for(Item i : oldInventory) {
+			if(!oldItemNames.contains(i.getName()))
+				oldItemNames.add(i.getName());
+		}
+		
+		//Set up newItemNames
+		for(Item i : itemsOnSale) {
+			if(!newItemNames.contains(i.getName()))
+				newItemNames.add(i.getName());
 		}
 		
 		this.displayPrint("==============STARTING INVENTORY===============" +
 					"\nItem Name\t\tQuantity");
 		
-		for(Item i : oldInventory) {
-			name = i.getName();
-		
+		for(String name : oldItemNames) {
 			for(Item item : oldInventory) {
 				if(item.getName().equals(name))
 					qty++;
@@ -689,20 +826,14 @@ public class VMController implements ActionListener {
 		this.displayPrint("===============ENDING INVENTORY================" +
 					"\nItem Name\t\tQuantity");
 		
-		if(!isSpecial) {
-			for(Item i : this.vm.ir.getItemsOnSale()) {
-				name = i.getName();
-				qty = this.vm.ir.countStock(name);
-				this.displayPrint(name + "\t\t" + qty + "\n");
+		for(String name : newItemNames) {
+			for(Item item : itemsOnSale) {
+				if(item.getName().equals(name))
+					qty++;
 			}
-		}
-		
-		else {
-			for(Item i : this.svm.spir.getItemsOnSale()) {
-				name = i.getName();
-				qty = this.svm.spir.countStock(name);
-				this.displayPrint(name + "\t\t" + qty + "\n");
-			}
+			
+			this.displayPrint(name + "\t\t" + qty + "\n");
+			qty = 0;
 		}
 	}
 }

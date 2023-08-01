@@ -147,25 +147,6 @@ public class SpecialVM extends VendingMachine {
 	}
 	
 	/** 
-      * Gets and returns the recipe at the given index
-	  * @param index The index of the recipe in Recipe List
-	  * @return The recipe at the given index
-      */
-	public Recipe getRecipeAt(int index) {
-		Recipe recipe = null;
-		if(this.indexList[index] != null) {
-			String name = this.indexList[index];
-			
-			for(Recipe r : recipeList) {
-				if(r.getName().equals(name))
-					recipe = r;
-			}
-		}
-		
-		return recipe;
-	}
-	
-	/** 
       * Subtracts the needed ingredients for this recipe from the special Item Rack
 	  * @param selectedRecipe The recipe the user wants to purchase
 	  * @return Whether there was enough stock for the purchase
@@ -191,6 +172,41 @@ public class SpecialVM extends VendingMachine {
 			this.spir.getItemsOnSale().addAll(temp);
 		
 		return success;
+	}
+	
+	/** 
+      * Gets and returns the index of a preset recipe given its name
+	  * @param name The name of the item
+	  * @return The index of the index
+      */
+	public int getRecipeIndex(String name) {
+		int index = 0;
+		
+		for(int i = 0; i < this.indexList.length; i++) {
+			if(this.indexList[i].equals(name))
+				index = i;
+		}
+		
+		return index;
+	}
+	
+	/** 
+      * Gets and returns the recipe at the given index
+	  * @param index The index of the recipe in Recipe List
+	  * @return The recipe at the given index
+      */
+	public Recipe getRecipeAt(int index) {
+		Recipe recipe = null;
+		if(this.indexList[index] != null) {
+			String name = this.indexList[index];
+			
+			for(Recipe r : recipeList) {
+				if(r.getName().equals(name))
+					recipe = r;
+			}
+		}
+		
+		return recipe;
 	}
 	
 	/** 

@@ -250,8 +250,11 @@ public class MoneyHandler {
 		return success;
 	}
 	
+	/** 
+	  * Releases all cash in the holder
+	  */
 	public void releaseAll() {
-		for(i = 0; i < this.holder.length; i++) {
+		for(int i = 0; i < this.holder.length; i++) {
 			this.holder[i][1] = 0;
 		}
 	}
@@ -355,6 +358,7 @@ public class MoneyHandler {
 	
 	/** 
 	  * Gets and returns the CashBox of this Money Handler
+	  * @return The 2D array of the CashBox contents
 	  */
 	public int[][] getCashBox() {
 		return this.cashBox;

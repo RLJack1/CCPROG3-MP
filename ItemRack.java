@@ -68,6 +68,9 @@ public class ItemRack {
 		this.loadPresetItems();
 	}
 	
+	/** 
+      * Saves all the preset items into a list
+      */
 	public void loadPresetItems() {
 		this.presetItemList.add(new Item("BriocheBread", 346.0, true, 34));
         this.presetItemList.add(new Item("SesameBread", 140.0, true, 20));
@@ -193,13 +196,39 @@ public class ItemRack {
 		
 		return item;
 	}
+	
+	/** 
+      * Gets and returns the item with a matching name to the key
+	  * @param name The name of the item
+	  * @return The item with that name
+      */
+	public Item getItemCalled(String name) {
+		Item item = null;
+		
+		for(Item i : this.itemList) {
+			if(i.getName().equals(name))
+				item = i;
+		}
+		
+		return item;
+	}
 
+	/** 
+      * Gets and returns the name of a preset item given its index
+	  * @param index The index of the item
+	  * @return The name of the item
+      */
 	public String getPresetItemName(int index) {
 		return this.presetItemList.get(index).getName();
 	}
 
+	/** 
+      * Gets and returns the index of an item given its name
+	  * @param name The name of the item
+	  * @return The index of the item
+      */
 	public int getIndex(String name) {
-		int index = -99;
+		int index = 0;
 		
 		for(int i = 0; i < this.indexList.length; i++) {
 			if(this.indexList[i].equals(name))
@@ -209,6 +238,11 @@ public class ItemRack {
 		return index;
 	}
 
+	/** 
+      * Gets and returns the preset item given its name
+	  * @param name The name of the item
+	  * @return The preset item with the matching name
+      */
 	public Item getItemFrom(String name) {
 		Item item = null;
 		
@@ -220,8 +254,13 @@ public class ItemRack {
 		return item;
 	}
 
+	/** 
+      * Gets and returns the price of an item given its name
+	  * @param name The name of the item
+	  * @return The price of the item
+      */
 	public int getSaleItemPrice(String name) {
-		int price = -99;
+		int price = 0;
 		
 		for(Item i : itemList) {
 			if(i.getName().equals(name))
@@ -231,6 +270,10 @@ public class ItemRack {
 		return price;
 	}
 
+	/** 
+      * Gets and returns the list of preset items
+	  * @return The list of preset items
+      */
 	public ArrayList<Item> getPresetItems() {
 		return this.presetItemList;
 	}
