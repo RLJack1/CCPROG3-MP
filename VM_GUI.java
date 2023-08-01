@@ -6,6 +6,7 @@
 //import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
@@ -14,12 +15,12 @@ import javax.swing.JSpinner;
  * @author Renzo
  */
 public class VM_GUI extends javax.swing.JFrame {
-    public ArrayList<JLabel> labelList = new ArrayList<>();
-    public ArrayList<JSpinner> mhSpinnerList = new ArrayList<>();
-    public ArrayList<JSpinner> itemSpinnerList = new ArrayList<>();
-    public ArrayList<JRadioButton> restockRadioList = new ArrayList<>();
-    public ArrayList<JRadioButton> repriceRadioList = new ArrayList<>();
-    public ArrayList<JButton> itemButtonList = new ArrayList<>();
+    public ArrayList<JLabel> labelList = new ArrayList<JLabel>();
+    public ArrayList<JSpinner> mhSpinnerList = new ArrayList<JSpinner>();
+    public ArrayList<JSpinner> itemSpinnerList = new ArrayList<JSpinner>();
+    public ArrayList<JRadioButton> restockRadioList = new ArrayList<JRadioButton>();
+    public ArrayList<JRadioButton> repriceRadioList = new ArrayList<JRadioButton>();
+    public ArrayList<JButton> itemButtonList = new ArrayList<JButton>();
     /**
      * Creates new form VM_GUI
      */
@@ -3846,7 +3847,7 @@ public class VM_GUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void secondInit() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -3878,6 +3879,54 @@ public class VM_GUI extends javax.swing.JFrame {
             }
         });
     }
+	
+	public JButton getCreateButton() {
+		return this.ConfirmVMButton;
+	}
+	
+	public JButton getItemButton() {
+		return this.jButtonConfirmItem;
+	}
+	
+	public JButton getRecipeButton() {
+		return this.jButtonConfirmBurger;
+	}
+	
+	public JButton getRestockButton() {
+		return this.jButtonConfirmRestock;
+	}
+	
+	public JButton getRepriceButton() {
+		return this.jButtonConfirmReprice;
+	}
+	
+	public JButton getDepositButton() {
+		return this.jButtonDeposit;
+	}
+	
+	public JButton getWithdrawButton() {
+		return this.jButtonWithdraw;
+	}
+	
+	public JButton getWithdrawAllButton() {
+		return this.jButtonWithdrawAll;
+	}
+	
+	public JButton getPrintTransacButton() {
+		return this.jButtonPrintTransaction;
+	}
+	
+	public JButton getPrintRestockButton() {
+		return this.jButtonPrintRestock;
+	}
+	
+	public JRadioButton getSpeRadioButton() {
+		return this.SpeRadioButton;
+	}
+	
+	public JTextField getVMNameText() {
+		return this.VMNameText;
+	}
 
     // Variables declaration - do not modify                     
     private javax.swing.JSpinner AmericanSpinner;

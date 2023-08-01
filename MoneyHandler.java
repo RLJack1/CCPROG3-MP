@@ -307,10 +307,20 @@ public class MoneyHandler {
 		return total;
 	}
 	
+	/** 
+	  * Reduces a bill's stock 
+	  * @param index	The index of the bill
+	  * @param amount	The amount to reduce
+	  */
 	public void cashOut(int index, int amount) {
 		this.cashBox[index][1] -= amount;
 	}
 	
+	/** 
+	  * Increases a bill's stock 
+	  * @param index	The index of the bill
+	  * @param amount	The amount to added
+	  */
 	public void cashIn(int index, int amount) {
 		this.cashBox[index][1] += amount;
 	}
@@ -329,6 +339,9 @@ public class MoneyHandler {
 		return toDisplay;
 	}
 	
+	/** 
+	  * Gets and returns the CashBox of this Money Handler
+	  */
 	public int[][] getCashBox() {
 		return this.cashBox;
 	}
