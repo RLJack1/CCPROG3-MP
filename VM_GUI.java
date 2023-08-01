@@ -6,7 +6,6 @@
 //import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
@@ -15,12 +14,13 @@ import javax.swing.JSpinner;
  * @author Renzo
  */
 public class VM_GUI extends javax.swing.JFrame {
-    public ArrayList<JLabel> labelList = new ArrayList<JLabel>();
-    public ArrayList<JSpinner> mhSpinnerList = new ArrayList<JSpinner>();
-    public ArrayList<JSpinner> itemSpinnerList = new ArrayList<JSpinner>();
-    public ArrayList<JRadioButton> restockRadioList = new ArrayList<JRadioButton>();
-    public ArrayList<JRadioButton> repriceRadioList = new ArrayList<JRadioButton>();
-    public ArrayList<JButton> itemButtonList = new ArrayList<JButton>();
+    public ArrayList<JLabel> labelList = new ArrayList<>();
+    public ArrayList<JSpinner> mhSpinnerList = new ArrayList<>();
+    public ArrayList<JSpinner> itemSpinnerList = new ArrayList<>();
+    public ArrayList<JRadioButton> restockRadioList = new ArrayList<>();
+    public ArrayList<JRadioButton> repriceRadioList = new ArrayList<>();
+    public ArrayList<JButton> itemButtonList = new ArrayList<>();
+    public ArrayList<JButton> recipeButtonList = new ArrayList<>();
     /**
      * Creates new form VM_GUI
      */
@@ -30,6 +30,7 @@ public class VM_GUI extends javax.swing.JFrame {
         initMHSpinnerList();
         initRadioList();
         initItemList();
+        initRecipeButtonList();
     }
 
     /**
@@ -200,7 +201,7 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton4Gourmet = new javax.swing.JButton();
         jButton5Jack = new javax.swing.JButton();
         jButton6Meat = new javax.swing.JButton();
-        jButton6Spicy = new javax.swing.JButton();
+        jButton7Spicy = new javax.swing.JButton();
         jButton8Salmon = new javax.swing.JButton();
         jButton9Turkey = new javax.swing.JButton();
         jCustomButton10 = new javax.swing.JButton();
@@ -1537,9 +1538,9 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton6Meat.setText("6-Meat Overload Burger");
         jButton6Meat.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton6Spicy.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jButton6Spicy.setText("7-Spicy Tapa Burger");
-        jButton6Spicy.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton7Spicy.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jButton7Spicy.setText("7-Spicy Tapa Burger");
+        jButton7Spicy.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton8Salmon.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton8Salmon.setText("8-Salmon Burger");
@@ -1586,7 +1587,7 @@ public class VM_GUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18))
                             .addComponent(jButton2Cheesy, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRecipeLayout.createSequentialGroup()
-                                .addComponent(jButton6Spicy)
+                                .addComponent(jButton7Spicy)
                                 .addGap(8, 8, 8)))
                         .addGap(31, 31, 31))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRecipeLayout.createSequentialGroup()
@@ -1656,7 +1657,7 @@ public class VM_GUI extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addGroup(jPanelRecipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jButton6Meat)
-                            .addComponent(jButton6Spicy)
+                            .addComponent(jButton7Spicy)
                             .addComponent(jButton8Salmon)
                             .addComponent(jButton9Turkey)
                             .addComponent(jCustomButton10))))
@@ -3844,10 +3845,22 @@ public class VM_GUI extends javax.swing.JFrame {
         repriceRadioList.add(jRadioJackS1);
     }
     
+    private void initRecipeButtonList(){
+        recipeButtonList.add(jButton1Classic);
+        recipeButtonList.add(jButton2Cheesy);
+        recipeButtonList.add(jButton3Beyond);
+        recipeButtonList.add(jButton4Gourmet);
+        recipeButtonList.add(jButton5Jack);
+        recipeButtonList.add(jButton6Meat);
+        recipeButtonList.add(jButton7Spicy);
+        recipeButtonList.add(jButton8Salmon);
+        recipeButtonList.add(jButton9Turkey);
+        recipeButtonList.add(jCustomButton10);
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -4057,9 +4070,9 @@ public class VM_GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton6Jack;
     private javax.swing.JButton jButton6Meat;
-    private javax.swing.JButton jButton6Spicy;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton7Angus;
+    private javax.swing.JButton jButton7Spicy;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton8Salmon;
     private javax.swing.JButton jButton8Wagyu;
