@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -51,7 +53,6 @@ public class VMController implements ActionListener {
       */
 	public static void main(String[] args) {
 			VMController c = new VMController();
-			//c.view.secondInit();
 			c.view.setVisible(true);
 			c.displayText("Loading Vending Machine...\n");
 			c.displayText("Done!\n");
@@ -84,19 +85,95 @@ public class VMController implements ActionListener {
 		}
 		
 		else if(clicked.equals(this.view.getRestockButton())) {
+			ArrayList<String> userSelection = new ArrayList<String>();
+			
+			//Consolidate the selected items
+			for(JRadioButton r : this.view.getRestockButtons()) {
+				if(r.isSelected()) {
+					userSelection.add(r.getText());
+				}
+			}
+			
+			//Reformat strings
+			
+			
+			//Call function
 			
 		}
 		
 		else if(clicked.equals(this.view.getRepriceButton())) {
+			String selected = null;
+			String temp = null;
+			int newPrice = Integer.parseInt(this.view.getNewPrice().getText());
 			
+			//Find the button
+			for(JRadioButton r : this.view.getRepriceButtons()) {
+				if(r.isSelected()) {
+					temp = r.getText();
+				}
+			}
+			
+			//Reformat string
+			selected = this.convert(temp);
+			
+			//Call function
+			if(selected != null)
+				this.reprice(selected, newPrice);
+			
+			else
+				this.displayText("Oops! An error occurred. Please try again.");
 		}
 		
 		else if(clicked.equals(this.view.getDepositButton())) {
+			int[] temp = new int[this.view.getMHSpinners().size()];
+			int[][] converted = {
+			  {1000, 0},
+			  {500, 0},
+			  {100, 0},
+			  {50, 0},
+			  {20, 0},
+			  {10, 0},
+			  {5, 0},
+			  {1, 0}
+			};
 			
+			ArrayList<Integer> userSelection = new ArrayList<Integer>();
+			int i = 0;
+			
+			//Extract the user selection
+			for(JSpinner sp : this.view.getMHSpinners()) {
+				temp[i] = (int) sp.getValue();
+				i++;
+			}
+			
+			//Reverse the amounts
+			for(i = 0; i < userSelection.size(); i++) {
+				converted[i][1] = temp[userSelection.size() - i];
+			}
+			
+			//Call the function
+			this.deposit(converted);
 		}
 		
 		else if(clicked.equals(this.view.getWithdrawButton())) {
+			ArrayList<Integer> userSelection = new ArrayList<Integer>();
+			int[] converted = new int[userSelection.size()];
+			int[] temp = new int[userSelection.size()];
+			int i = 0;
 			
+			//Extract the user selection
+			for(JSpinner sp : this.view.getMHSpinners()) {
+				temp[i] = (int) sp.getValue();
+				i++;
+			}
+			
+			//Reverse order
+			for(i = 0; i < userSelection.size(); i++) {
+				converted[i] = temp[userSelection.size() - i];
+			}
+			
+			//Call the function
+			this.withdraw(converted);
 		}
 		
 		else if(clicked.equals(this.view.getWithdrawAllButton())) {
@@ -114,6 +191,29 @@ public class VMController implements ActionListener {
 		else if(clicked.equals(this.view.getPrintRestockButton())) {
 			this.printRestockHistory();
 		}
+	}
+	
+	public String convert(String original) {
+		int count = 0;
+		boolean found = false;
+		String temp = null;
+		
+		//Reformat string
+		for(char ch : original.toCharArray()) {
+			if(!found) {
+				if(ch == '-') {
+					found = true;
+				}
+				
+				else 
+					count++;
+			}
+		}
+		
+		temp = original.substring(count);
+		original = temp.replace(" ", "");
+		
+		return original;
 	}
 	
 	/** 
@@ -175,26 +275,17 @@ public class VMController implements ActionListener {
 	  * Display a string of text in the text area of the view
 	  * @param text The text to be displayed
 	  */
-	/*public void displayText(String text) {
-		this.view.jTextAreaConsole.append("AAAAAAAA" + "\n");
-    }*/
+	public void displayText(String text) {
+		this.view.displayText(text);
+	}
 	
 	/** 
 	  * Display a string of text in the print text area of the view
 	  * @param text The text to be displayed
 	  */
-	/*public void displayPrint(String text) {
-		this.view.getTextAreaReceipt().append("AAAAAAAAAAAAAAAAAAA" + "\n");
-	}*/
-	
-	public void displayText(String text) {
-    this.view.displayText("AAAAAAAA");
-}
-
-public void displayPrint(String text) {
-    this.view.displayPrint("AAAAAAAAAAAAAAAAAAA");
-}
-
+	public void displayPrint(String text) {
+		this.view.displayPrint(text);
+	}
 
 	/** 
 	  * Creates a new Vending Machine
@@ -395,21 +486,21 @@ public void displayPrint(String text) {
 	  * Facilitates the cash-out process
 	  * @param userSelection The 2D int array of bills and corresponding amounts for cash-out
 	  */
-	public void withdraw(int[][] userSelection) {
+	public void withdraw(int[] userSelection) {
 		int[][] cashStock = this.getCashStock();
 		int i = 0;
 		
 		for(i = userSelection.length; i > 0; i--) {
-			if(!isSpecial && cashStock[i][1] > userSelection[i][1]) {
-				this.vm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
+			if(!isSpecial && cashStock[i][1] >= userSelection[i]) {
+				this.vm.mh.cashOut(cashStock[i][0], userSelection[i]);
 			}
 			
-			else if(isSpecial && cashStock[i][1] > userSelection[i][1]) {
-				this.svm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
+			else if(isSpecial && cashStock[i][1] >= userSelection[i]) {
+				this.svm.mh.cashOut(cashStock[i][0], userSelection[i]);
 			}
 			
 			else 
-				this.displayText("Oops! Withdraw amount of " + userSelection[i][1] + " exceeds the current stock of " + cashStock[i][1] + " for the " + userSelection[i][0] + " peso bill. Canceled withdrawal for this bill.");
+				this.displayText("Oops! Withdraw amount of " + userSelection[i] + " exceeds the current stock of " + cashStock[i][1] + " for the " + cashStock[i][0] + " peso bill. Canceled withdrawal for this bill.");
 		}
 	}
 	

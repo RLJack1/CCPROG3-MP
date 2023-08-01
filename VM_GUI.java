@@ -16,13 +16,13 @@ import javax.swing.JSpinner;
  * @author Renzo
  */
 public class VM_GUI extends javax.swing.JFrame {
-    public ArrayList<JLabel> labelList = new ArrayList<>();
-    public ArrayList<JSpinner> mhSpinnerList = new ArrayList<>();
-    public ArrayList<JSpinner> itemSpinnerList = new ArrayList<>();
-    public ArrayList<JRadioButton> restockRadioList = new ArrayList<>();
-    public ArrayList<JRadioButton> repriceRadioList = new ArrayList<>();
-    public ArrayList<JButton> itemButtonList = new ArrayList<>();
-    public ArrayList<JButton> recipeButtonList = new ArrayList<>();
+    private ArrayList<JLabel> labelList = new ArrayList<>();
+    private ArrayList<JSpinner> mhSpinnerList = new ArrayList<>();
+    private ArrayList<JSpinner> itemSpinnerList = new ArrayList<>();
+    private ArrayList<JRadioButton> restockRadioList = new ArrayList<>();
+    private ArrayList<JRadioButton> repriceRadioList = new ArrayList<>();
+    private ArrayList<JButton> itemButtonList = new ArrayList<>();
+    private ArrayList<JButton> recipeButtonList = new ArrayList<>();
     /**
      * Creates new form VM_GUI
      */
@@ -3961,13 +3961,45 @@ public class VM_GUI extends javax.swing.JFrame {
 		return this.jTextAreaReceipt;
 	}
 	
+	public ArrayList<JLabel> getLabels() {
+		return this.labelList;
+	}
+	
+	public ArrayList<JSpinner> getItemSpinners() {
+		return this.itemSpinnerList;
+	}
+	
+	public ArrayList<JSpinner> getMHSpinners() {
+		return this.mhSpinnerList;
+	}
+	
+	public ArrayList<JButton> getItemButtons() {
+		return this.itemButtonList;
+	} 
+	
+	public ArrayList<JButton> getRecipeButtons() {
+		return this.recipeButtonList;
+	}
+	
+	public ArrayList<JRadioButton> getRestockButtons() {
+		return this.restockRadioList;
+	}
+	
+	public ArrayList<JRadioButton> getRepriceButtons() {
+		return this.repriceRadioList;
+	}
+	
+	public JTextField getNewPrice() {
+		return this.jINewPriceTextField;
+	}
+	
 	public void displayText(String text) {
     this.jTextAreaConsole.append(text + "\n");
     }
 
     public void displayPrint(String text) {
         this.jTextAreaReceipt.append(text + "\n");
-    }
+	}
 
 
     // Variables declaration - do not modify                     
@@ -4084,7 +4116,7 @@ public class VM_GUI extends javax.swing.JFrame {
     private javax.swing.JSpinner ThousandPesoSpinner;
     private javax.swing.JSpinner TrappistSpinner;
     private javax.swing.JSpinner TwentyPesoSpinner;
-    public javax.swing.JTextField VMNameText;
+    private javax.swing.JTextField VMNameText;
     private javax.swing.JSpinner WagyuSpinner;
     private javax.swing.JSpinner WeinerSpinner;
     private javax.swing.JSpinner WhiteSpinner;
@@ -4178,7 +4210,7 @@ public class VM_GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonWithdrawAll;
     private javax.swing.JButton jCustomButton10;
     private javax.swing.JPanel jDisplayCashBox;
-    public javax.swing.JTextField jINewPriceTextField;
+    private javax.swing.JTextField jINewPriceTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -7,7 +7,7 @@ public JButton getCreateButton() {
 	}
 	
 	public JButton getRecipeButton() {
-		return this.jButtonConfirmBurger;
+		return this.jButtonConfirmBurger1;
 	}
 	
 	public JButton getRestockButton() {
@@ -44,4 +44,48 @@ public JButton getCreateButton() {
 	
 	public JTextField getVMNameText() {
 		return this.VMNameText;
+	}
+	
+	public JTextArea getTextAreaReceipt() {
+		return this.jTextAreaReceipt;
+	}
+	
+	public ArrayList<JLabel> getLabels() {
+		return this.labelList;
+	}
+	
+	public ArrayList<JSpinner> getItemSpinners() {
+		return this.itemSpinnerList;
+	}
+	
+	public ArrayList<JSpinner> getMHSpinners() {
+		return this.mhSpinnerList;
+	}
+	
+	public ArrayList<JButton> getItemButtons() {
+		return this.itemButtonList;
+	} 
+	
+	public ArrayList<JButton> getRecipeButtons() {
+		return this.recipeButtonList;
+	}
+	
+	public ArrayList<JRadioButton> getRestockButtons() {
+		return this.restockRadioList;
+	}
+	
+	public ArrayList<JRadioButton> getRepriceButtons() {
+		return this.repriceRadioList;
+	}
+	
+	public JTextField getNewPrice() {
+		return this.jINewPriceTextField;
+	}
+	
+	public void displayText(String text) {
+    this.jTextAreaConsole.append(text + "\n");
+    }
+
+    public void displayPrint(String text) {
+        this.jTextAreaReceipt.append(text + "\n");
 	}
