@@ -39,7 +39,9 @@ public class VMController implements ActionListener {
 		this.view = new VM_GUI();
 		this.view.getCreateButton().addActionListener(this);
 		this.view.getItemButton().addActionListener(this);
+		this.view.getItemCancelButton().addActionListener(this);
 		this.view.getRecipeButton().addActionListener(this);
+		this.view.getRecipeCancelButton().addActionListener(this);
 		this.view.getRestockButton().addActionListener(this);
 		this.view.getRepriceButton().addActionListener(this);
 		this.view.getDepositButton().addActionListener(this);
@@ -47,6 +49,14 @@ public class VMController implements ActionListener {
 		this.view.getWithdrawAllButton().addActionListener(this);
 		this.view.getPrintTransacButton().addActionListener(this);
 		this.view.getPrintRestockButton().addActionListener(this);
+		
+		for(JButton b : this.view.getRecipeButtons()) {
+			b.addActionListener(this);
+		}
+		
+		for(JButton b : this.view.getMoneyButtons()) {
+			b.addActionListener(this);
+		}
 		
 		this.updateItemStock();
 		this.updatePrices();
@@ -83,11 +93,43 @@ public class VMController implements ActionListener {
 		}
 		
 		else if(clicked.equals(this.view.getItemButton())) {
+			//take item spinners and run buyItem + error msgs
+			
 			
 		}
 		
-		else if(clicked.equals(this.view.getRecipeButton())) {
+		else if(clicked.equals(this.view.getItemCancelButton())) {
+			if(!isSpecial)
+				this.vm.mh.releaseAll();
 			
+			else
+				this.svm.mh.releaseAll();
+			
+			this.displayText("Cancelling transaction...\nReleasing full change...");
+		}
+		
+		else if(clicked.equals(this.view.getRecipeButton())) {
+			//identify what recipe button was pushed and get name
+			
+			
+		}
+		
+		else if(clicked.equals(this.view.getRecipeCancelButton())) {
+			if(!isSpecial)
+				this.vm.mh.releaseAll();
+			
+			else
+				this.svm.mh.releaseAll();
+			
+			this.displayText("Cancelling transaction...\nReleasing full change...");
+		}
+		
+		else if(this.view.getMoneyButtons().contains(clicked)) {
+			if(!isSpecial)
+				this.vm.mh.inputDenominations(clicked.getText());
+			
+			else
+				this.svm.mh.inputDenominations(clicked.getText());
 		}
 		
 		else if(clicked.equals(this.view.getRestockButton())) {
@@ -231,8 +273,8 @@ public class VMController implements ActionListener {
 	  * @return A 2D ArrayList of items on sale and their respective stock counts
 	  */
 	public void updateItemStock() {
-		//First column is for stock, second is for item names, third is for item indices
-		ArrayList<ArrayList<Object>> itemStock = new ArrayList<>();
+		//First column is for item names, second is for stock
+		ArrayList<ArrayList<Object>> itemStock = new ArrayList<Objects>();
 		int i = 0;
 		String name = null;
 		
@@ -243,7 +285,7 @@ public class VMController implements ActionListener {
 				name = this.vm.ir.getPresetItemName(i);
 				row.add(name);
 				row.add(this.vm.ir.countStock(name));
-				itemStock.add(row);
+				itemStock.add(row);		
 			}
 		}
 		

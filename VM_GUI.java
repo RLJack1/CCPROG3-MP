@@ -4464,6 +4464,14 @@ public class VM_GUI extends javax.swing.JFrame {
 		return this.jButtonConfirmItem;
 	}
 	
+	public JButton getItemCancelButton() {
+		return this.jButtonCancelItem;
+	}
+	
+	public JButton getRecipeCancelButton() {
+		return this.jButtonCancelBurger;
+	}
+	
 	public JButton getRecipeButton() {
 		return this.jButtonConfirmBurger1;
 	}
@@ -4526,6 +4534,10 @@ public class VM_GUI extends javax.swing.JFrame {
 	
 	public ArrayList<JButton> getRecipeButtons() {
 		return this.recipeButtonList;
+	}
+	
+	public ArrayList<JButton> getMoneyButtons() {
+		return null;
 	}
 	
 	public ArrayList<JRadioButton> getRestockButtons() {

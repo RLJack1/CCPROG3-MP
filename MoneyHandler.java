@@ -63,7 +63,7 @@ public class MoneyHandler {
 	  * Gets money input from the user and stores it into the holder (basically temp) array
 	  * @param amount The bill or amount that was added by the user
 	  */
-	public String inputDenominations(int amount) {	
+	public void inputDenominations(int amount) {	
 		String toDisplay = "";
 		
 		try { 
@@ -85,7 +85,7 @@ public class MoneyHandler {
 			e.printStackTrace();
 		}
 		
-		return toDisplay;
+		c.displayText(toDisplay);
 	}
 	
 	/** 
@@ -248,6 +248,12 @@ public class MoneyHandler {
 		}
 
 		return success;
+	}
+	
+	public void releaseAll() {
+		for(i = 0; i < this.holder.length; i++) {
+			this.holder[i][1] = 0;
+		}
 	}
 	
 	/** 
