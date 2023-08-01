@@ -32,6 +32,17 @@ public class VMController implements ActionListener {
 		this.vm.mh.newCashBox();
 		this.vm.ir.newItemRack();
 		this.view = new VM_GUI();
+		
+		this.view.getCreateButton().addActionListener(this);
+		this.view.getItemButton().addActionListener(this);
+		this.view.getRecipeButton().addActionListener(this);
+		this.view.getRestockButton().addActionListener(this);
+		this.view.getRepriceButton().addActionListener(this);
+		this.view.getDepositButton().addActionListener(this);
+		this.view.getWithdrawButton().addActionListener(this);
+		this.view.getWithdrawAllButton().addActionListener(this);
+		this.view.getPrintTransacButton().addActionListener(this);
+		this.view.getPrintRestockButton().addActionListener(this);
 	}
 
 	/** 
@@ -51,6 +62,21 @@ public class VMController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		/*attach Als to every relevant button?
 		  per event, make a method that error checks and calls the function*/
+		
+		JButton clicked = (JButton) e.getSource();
+		
+		if(clicked.equals(this.view.getCreateButton())) {
+			boolean isSpecial = false;
+			
+			if(this.view.getSpeRadioButton.isSelected())
+				isSpecial = true;
+			
+			String name = this.view.getVMNameText().getText();
+			
+			this.create(name, isSpecial);
+		}
+		
+		
 	}
 	
 	/** 

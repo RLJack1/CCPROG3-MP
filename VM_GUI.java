@@ -328,6 +328,55 @@ public class VM_GUI extends javax.swing.JFrame {
         jTextAreaConsole1 = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+		
+		
+		public JButton getCreateButton() {
+			return this.ConfirmVMButton;
+		}
+		
+		public JButton getItemButton() {
+			return this.jButtonConfirmItem;
+		}
+		
+		public JButton getRecipeButton() {
+			return this.jButtonConfirmBurger;
+		}
+		
+		public JButton getRestockButton() {
+			return this.jButtonConfirmRestock;
+		}
+		
+		public JButton getRepriceButton() {
+			return this.jButtonConfirmReprice;
+		}
+		
+		public JButton getDepositButton() {
+			return this.jButtonDeposit;
+		}
+		
+		public JButton getWithdrawButton() {
+			return this.jButtonWithdraw;
+		}
+		
+		public JButton getWithdrawAllButton() {
+			return this.jButtonWithdrawAll;
+		}
+		
+		public JButton getPrintTransacButton() {
+			return this.jButtonPrintTransaction;
+		}
+		
+		public JButton getPrintRestockButton() {
+			return this.jButtonPrintRestock;
+		}
+		
+		public JButton getSpeRadioButton() {
+			return this.SpeRadioButton;
+		}
+		
+		public TextField getVMNameText() {
+			return this.VMNameText;
+		}
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
