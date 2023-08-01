@@ -51,7 +51,8 @@ public class VMController implements ActionListener {
       */
 	public static void main(String[] args) {
 			VMController c = new VMController();
-			c.view.secondInit();
+			//c.view.secondInit();
+			c.view.setVisible(true);
 			c.displayText("Loading Vending Machine...\n");
 			c.displayText("Done!\n");
 	}

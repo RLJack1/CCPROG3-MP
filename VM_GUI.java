@@ -27,12 +27,29 @@ public class VM_GUI extends javax.swing.JFrame {
      * Creates new form VM_GUI
      */
     public VM_GUI() {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         initComponents();
         initStockLabels();
         initMHSpinnerList();
         initRadioList();
         initItemList();
         initRecipeButtonList();
+        this.setVisible(true);
     }
 
     /**
@@ -339,7 +356,7 @@ public class VM_GUI extends javax.swing.JFrame {
         jButtonPrintTransaction = new javax.swing.JButton();
         jButtonPrintRestock = new javax.swing.JButton();
         jTextAreaPane1 = new javax.swing.JScrollPane();
-        jTextAreaReciept = new javax.swing.JTextArea();
+        jTextAreaReceipt = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
@@ -3181,14 +3198,14 @@ public class VM_GUI extends javax.swing.JFrame {
             }
         });
 
-        jTextAreaReciept.setBackground(new java.awt.Color(0, 0, 0));
-        jTextAreaReciept.setColumns(20);
-        jTextAreaReciept.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jTextAreaReciept.setForeground(new java.awt.Color(255, 255, 255));
-        jTextAreaReciept.setLineWrap(true);
-        jTextAreaReciept.setRows(5);
-        jTextAreaReciept.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)));
-        jTextAreaPane1.setViewportView(jTextAreaReciept);
+        jTextAreaReceipt.setBackground(new java.awt.Color(0, 0, 0));
+        jTextAreaReceipt.setColumns(20);
+        jTextAreaReceipt.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jTextAreaReceipt.setForeground(new java.awt.Color(255, 255, 255));
+        jTextAreaReceipt.setLineWrap(true);
+        jTextAreaReceipt.setRows(5);
+        jTextAreaReceipt.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)));
+        jTextAreaPane1.setViewportView(jTextAreaReceipt);
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -3686,13 +3703,15 @@ public class VM_GUI extends javax.swing.JFrame {
     }                                                 
 
     private void jButtonWithdrawAllActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        for (JSpinner spinner : itemSpinnerList) {
+        for (JSpinner spinner : mhSpinnerList) {
             spinner.setValue(0);
         }
     }                                                  
 
     private void jButtonConfirmItemActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        // TODO add your handling code here:
+        for (JSpinner spinner : itemSpinnerList) {
+            spinner.setValue(0);
+        }
     }                                                  
 
     private void jButtonActionPerformed(java.awt.event.ActionEvent evt, String number) {
@@ -3974,16 +3993,16 @@ public class VM_GUI extends javax.swing.JFrame {
 	}
 	
 	public JTextArea getTextAreaReceipt() {
-		return this.jTextAreaReciept;
+		return this.jTextAreaReceipt;
 	}
 	
 	public void displayText(String text) {
     this.jTextAreaConsole.append(text + "\n");
-}
+    }
 
-public void displayPrint(String text) {
-    this.jTextAreaReceipt.append(text + "\n");
-}
+    public void displayPrint(String text) {
+        this.jTextAreaReceipt.append(text + "\n");
+    }
 
 
     // Variables declaration - do not modify                     
@@ -4283,7 +4302,7 @@ public void displayPrint(String text) {
     private javax.swing.JTextArea jTextAreaConsole;
     private javax.swing.JScrollPane jTextAreaPane;
     private javax.swing.JScrollPane jTextAreaPane1;
-    private javax.swing.JTextArea jTextAreaReciept;
+    private javax.swing.JTextArea jTextAreaReceipt;
     private javax.swing.JLabel jVMName;
     // End of variables declaration                   
 }
