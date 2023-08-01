@@ -102,15 +102,19 @@ public class VMController implements ActionListener {
 		}
 		
 		else if(clicked.equals(this.view.getWithdrawAllButton())) {
+			if(!isSpecial)
+				this.vm.mh.setCashBox();
 			
+			else
+				this.svm.mh.setCashBox();
 		}
 		
 		else if(clicked.equals(this.view.getPrintTransacButton())) {
-			
+			this.printTransacHistory();
 		}
 		
 		else if(clicked.equals(this.view.getPrintRestockButton())) {
-			
+			this.printRestockHistory();
 		}
 	}
 	
@@ -176,6 +180,14 @@ public class VMController implements ActionListener {
 	public void displayText(String text) {
 		//this.view.jTextAreaConsole.append(text + "\n");
     }
+	
+	/** 
+	  * Display a string of text in the print text area of the view
+	  * @param text The text to be displayed
+	  */
+	public void displayPrint(String text) {
+		//gettheprintscreen.append(text + "\n");
+	}
 
 	/** 
 	  * Creates a new Vending Machine
@@ -403,11 +415,11 @@ public class VMController implements ActionListener {
 		ArrayList<Ingredient> temp = new ArrayList<Ingredient>();
 		
 		for(Transaction t : this.transacHistory) {
-			this.displayText("================TRANSACTION#" + count + "=================" +
+			this.displayPrint("================TRANSACTION#" + count + "=================" +
 						   "\nPurchased Item:\t\t\t" + t.getName());
 			
 			if(t.getIngredientList() != null) {
-				this.displayText("\nIngredient Breakdown: ");
+				this.displayPrint("\nIngredient Breakdown: ");
 				temp.clear();
 				
 				//Fill the temp arraylist with only unique ingredients
@@ -425,11 +437,11 @@ public class VMController implements ActionListener {
 							qty++;
 					}
 					
-					this.displayText(key.getName() + "\t\t\t" + qty);
+					this.displayPrint(key.getName() + "\t\t\t" + qty);
 				}
 			}
 			
-			this.displayText("\nTotal Sales At Last Restock:\t" + t.getLastTotalSales() +
+			this.displayPrint("\nTotal Sales At Last Restock:\t" + t.getLastTotalSales() +
 							"\nCurrent Total Sales:\t\t" + t.getTotalSales() + "\n"); 
 						   
 			count++;
@@ -443,7 +455,7 @@ public class VMController implements ActionListener {
 		String name = "";
 		int qty = 0;
 		
-		this.displayText("==============STARTING INVENTORY===============" +
+		this.displayPrint("==============STARTING INVENTORY===============" +
 					"\nItem Name\t\tQuantity");
 		
 		for(Item i : oldInventory) {
@@ -454,18 +466,18 @@ public class VMController implements ActionListener {
 					qty++;
 			}
 			
-			this.displayText(name + "\t\t" + qty + "\n");
+			this.displayPrint(name + "\t\t" + qty + "\n");
 			qty = 0;
 		}
 
-		this.displayText("===============ENDING INVENTORY================" +
+		this.displayPrint("===============ENDING INVENTORY================" +
 					"\nItem Name\t\tQuantity");
 		
 		if(!isSpecial) {
 			for(Item i : this.vm.ir.getItemsOnSale()) {
 				name = i.getName();
 				qty = this.vm.ir.countStock(name);
-				this.displayText(name + "\t\t" + qty + "\n");
+				this.displayPrint(name + "\t\t" + qty + "\n");
 			}
 		}
 		
@@ -473,7 +485,7 @@ public class VMController implements ActionListener {
 			for(Item i : this.svm.spir.getItemsOnSale()) {
 				name = i.getName();
 				qty = this.svm.spir.countStock(name);
-				this.displayText(name + "\t\t" + qty + "\n");
+				this.displayPrint(name + "\t\t" + qty + "\n");
 			}
 		}
 	}
