@@ -308,6 +308,14 @@ public class MoneyHandler {
 	}
 	
 	/** 
+	  * Completely empties the CashBox
+	  */
+	public void setCashBox() {
+		for(int i = 0; i < this.cashBox.length; i++)
+			this.cashBox[i][1] = 0;
+	}
+	
+	/** 
 	  * Reduces a bill's stock 
 	  * @param index	The index of the bill
 	  * @param amount	The amount to reduce
