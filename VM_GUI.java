@@ -1031,7 +1031,7 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton27Hot.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton28Barbecue.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jButton28Barbecue.setText("28-Barbecuee Sauce");
+        jButton28Barbecue.setText("28-Barbecue Sauce");
         jButton28Barbecue.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton29Caviar.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -3908,42 +3908,7 @@ public class VM_GUI extends javax.swing.JFrame {
         recipeButtonList.add(jButton9Turkey);
         recipeButtonList.add(jCustomButton10);
     }
-    /**
-     * @param args the command line arguments
-     */
-    public void secondInit() {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VM_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VM_GUI().setVisible(true);
-            }
-        });
-    }
-	
 	public JButton getCreateButton() {
 		return this.ConfirmVMButton;
 	}
