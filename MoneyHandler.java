@@ -331,14 +331,14 @@ public class MoneyHandler {
 		
 		try { 
 			switch(bill){
-				case 1000 -> {index = 7;}
-				case 500 -> {index = 6;}
-				case 100 -> {index = 5;}
-				case 50 -> {index = 4;}
-				case 20 -> {index = 3;}
-				case 10 -> {index = 2;}
-				case 5 -> {index = 1;}
-				case 1 -> {index = 0;}
+				case 1000 -> {index = 0;}
+				case 500 -> {index = 1;}
+				case 100 -> {index = 2;}
+				case 50 -> {index = 3;}
+				case 20 -> {index = 4;}
+				case 10 -> {index = 5;}
+				case 5 -> {index = 6;}
+				case 1 -> {index = 7;}
 			}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -357,14 +357,14 @@ public class MoneyHandler {
 		
 		try { 
 			switch(bill){
-				case 1000 -> {index = 7;}
-				case 500 -> {index = 6;}
-				case 100 -> {index = 5;}
-				case 50 -> {index = 4;}
-				case 20 -> {index = 3;}
-				case 10 -> {index = 2;}
-				case 5 -> {index = 1;}
-				case 1 -> {index = 0;}
+				case 1000 -> {index = 0;}
+				case 500 -> {index = 1;}
+				case 100 -> {index = 2;}
+				case 50 -> {index = 3;}
+				case 20 -> {index = 4;}
+				case 10 -> {index = 5;}
+				case 5 -> {index = 6;}
+				case 1 -> {index = 7;}
 			}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();

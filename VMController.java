@@ -322,8 +322,6 @@ public class VMController implements ActionListener {
 			
 			//Call the function
 			this.withdraw(selection);
-			
-			this.displayText("Withdrawn successfully!");
 			this.updateCashStock();
 		}
 		
@@ -418,10 +416,6 @@ public class VMController implements ActionListener {
 		
 		else 
 			cashStock = this.svm.mh.getCashBox();
-		
-		for(int i = 0; i <= 7; i++) {
-			this.displayText("cashbox at " + i + " contains " + cashStock[i][0] + " at " + cashStock[i][1]);
-		}
 		
 		this.view.updateCashStock(cashStock);
 	}
@@ -700,10 +694,6 @@ public class VMController implements ActionListener {
 	public void deposit(int[][] userSelection) {
 		int i = 0;
 		
-		for(i = 0; i <= 7; i++) {
-			this.displayText("userSelection at " + i + " userSelection " + userSelection[i][0] + " at " + userSelection[i][1]);
-		}
-		
 		for(i = 7; i >= 0; i--) {
 			if(!isSpecial && userSelection[i][1] > 0) {
 				this.vm.mh.cashIn(userSelection[i][0], userSelection[i][1]);
@@ -730,21 +720,19 @@ public class VMController implements ActionListener {
 		
 		int i = 0;
 		
-		for(i = 0; i <= 7; i++) {
-			this.displayText("userSelection at " + i + " userSelection " + userSelection[i][0] + " at " + userSelection[i][1]);
-		}
-		
 		for(i = 7; i >= 0; i--) {
-			if(!isSpecial && userSelection[i][1] <= cashStock[i][1]) {
+			if(!isSpecial && userSelection[i][1] <= cashStock[7 - i][1]) {
 				this.vm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
+				this.displayText("Withdrawn successfully!");
 			}
 			
-			else if(isSpecial && userSelection[i][1] <= cashStock[i][1]) {
+			else if(isSpecial && userSelection[i][1] <= cashStock[7 - i][1]) {
 				this.svm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
+				this.displayText("Withdrawn successfully!");
 			}
 			
 			else 
-				this.displayText("Oops! Withdraw amount of " + userSelection[i] + " exceeds the current stock of " + cashStock[i][1] + " for the " + cashStock[i][0] + " peso bill. Canceled withdrawal for this bill.");
+				this.displayText("Oops! Withdraw amount of " + userSelection[i][1] + " exceeds the current stock of " + cashStock[i][1] + " for the " + cashStock[7 - i][0] + " peso bill.\nCanceled withdrawal for this bill.");
 		}
 	}
 	
