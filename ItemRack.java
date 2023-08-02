@@ -119,8 +119,6 @@ public class ItemRack {
 		
 		int neededStock = 10 - count;
 		
-		System.out.println("neededStock = " + neededStock);
-		
 		for(int j = 0; j < neededStock; j++)
 			this.itemList.add(new Item(item.getName(), item.getCalories(), item.getStandalone(), item.getPrice()));
 	}
