@@ -204,7 +204,7 @@ public class MoneyHandler {
 				}
 				
 				//empty change array
-				this.c.displayText("Ka-ching! Change has been dispensed.\n");
+				this.c.displayText("Ka-ching! Change has been dispensed.");
 				for(i = 0; i < this.changeArray.length; i++) {
 					this.changeArray[i][1] = 0;
 				}
@@ -261,7 +261,7 @@ public class MoneyHandler {
 	  * @param change The total amount of change to be issued
 	  */
 	public void breakdownChange(int change) {
-		this.c.displayText("Breaking down change...");
+		this.c.displayText("\nBreaking down change...");
 		int numBills = 0;
 		
 		for(int i = 0; i < this.changeArray.length; i++) {

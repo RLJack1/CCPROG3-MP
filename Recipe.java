@@ -67,6 +67,8 @@ public class Recipe {
 	 public String getNarration() {
 		StringBuilder toDisplay = new StringBuilder();
 		
+		toDisplay.append("\n");
+		
 		for (Ingredient i : this.ingredientList) {
             if (i instanceof Bread) {
                 Bread x = (Bread) i;
@@ -94,6 +96,8 @@ public class Recipe {
                 toDisplay.append(x.narrate()).append("\n");
             } 
 		}
+		
+		toDisplay.append("Putting it all together...");
 		
 		return toDisplay.toString();
 	 }

@@ -95,6 +95,7 @@ public class VMController implements ActionListener {
 			String name = this.view.getVMNameText().getText();
 			
 			this.create(name, isSpecial);
+			this.displayText(name + " successfully created!");
 			
 			this.updateItemStock();
 			this.updatePrices();
@@ -190,14 +191,14 @@ public class VMController implements ActionListener {
 			this.updateCashStock();
 		}
 		
-		else if(clicked.equals(this.view.getItemCancelButton())) {
+		else if(clicked.equals(this.view.getItemCancelButton()) || clicked.equals(this.view.getRecipeCancelButton())) {
 			if(!isSpecial)
 				this.vm.mh.releaseAll();
 			
 			else
 				this.svm.mh.releaseAll();
 			
-			this.displayText("Cancelling transaction...\nReleasing full change...");
+			this.displayText("\nCancelling transaction...\nReleasing full change...\n");
 		}
 		
 		else if(this.view.getRecipeButtons().contains(clicked)) {
@@ -211,29 +212,19 @@ public class VMController implements ActionListener {
 			else {
 				int index = this.svm.getRecipeIndex(recipe);
 				this.selectedRecipe = this.svm.getRecipeAt(index);
-				this.displayText("Selected: " + recipe);
+				this.displayText("\nSelected: " + recipe);
 				this.displayText("Cost of Selected: " + this.selectedRecipe.getPrice());
 			}
 		}
 		
 		else if(clicked.equals(this.view.getRecipeButton())) {
 			if(!isSpecial)
-				this.displayText("Sorry! Regular Vending Machines can't support recipe purchases.");
+				this.displayText("\nSorry! Regular Vending Machines can't support recipe purchases.");
 			
 			else {
 				//Buy the recipe
 				this.buyRecipe(this. selectedRecipe);
 			}
-		}
-		
-		else if(clicked.equals(this.view.getRecipeCancelButton())) {
-			if(!isSpecial)
-				this.vm.mh.releaseAll();
-			
-			else
-				this.svm.mh.releaseAll();
-			
-			this.displayText("Cancelling transaction...\nReleasing full change...");
 		}
 		
 		else if(this.view.getMoneyButtons().contains(clicked)) {
@@ -288,9 +279,8 @@ public class VMController implements ActionListener {
 			if(selected != null) {
 				this.reprice(selected, newPrice);
 				this.updatePrices();
-				this.displayPrint("Repriced successfully!");
+				this.displayText("Repriced successfully!");
 			}
-				
 			
 			else
 				this.displayText("Oops! An error occurred. Please try again.");
@@ -319,7 +309,6 @@ public class VMController implements ActionListener {
 			//Call the function
 			this.deposit(selection);
 			
-			this.displayText("Deposited successfully!");
 			this.updateCashStock();
 		}
 		
@@ -356,6 +345,7 @@ public class VMController implements ActionListener {
 				this.svm.mh.setCashBox();
 			
 			this.updateCashStock();
+			this.displayText("Withdrawn all successfully!");
 		}
 		
 		else if(clicked.equals(this.view.getPrintTransacButton())) {
@@ -528,7 +518,7 @@ public class VMController implements ActionListener {
 		boolean success = false;
 		
 		if(!item.getStandalone()) {
-			this.displayText("Oops! You cannot buy that item alone. Please select a different item.");
+			this.displayText("\nOops! You cannot buy that item alone. Please select a different item.");
 			
 			if(!isSpecial)
 				this.vm.mh.releaseAll();
@@ -543,7 +533,7 @@ public class VMController implements ActionListener {
 			
 			if(success) {
 				//Dispense item, print receipt, record transaction
-				this.displayText("\nDispensing " + item.getName() + "...");
+				this.displayText("Dispensing " + item.getName() + "...");
 				this.vm.ir.removeItem(item);
 				this.vm.setLastTotalSales(this.vm.getTotalSales());
 				this.vm.addTotalSales(item.getPrice());
@@ -555,7 +545,7 @@ public class VMController implements ActionListener {
 							 "\nItem Price: " + item.getPrice() +
 							 "\nAmount Paid: " + cashIn +
 							 "\nIssued Change: " + (cashIn - item.getPrice()) + 
-							 "\n===============================\n");
+							 "\n===============================");
 			}
 		}
 		
@@ -565,7 +555,7 @@ public class VMController implements ActionListener {
 			
 			if(success) {
 				//Dispense item, print receipt, record transaction
-				this.displayText("\nDispensing " + item.getName() + "...");
+				this.displayText("Dispensing " + item.getName() + "...");
 				this.svm.ir.removeItem(item);
 				this.svm.setLastTotalSales(this.svm.getTotalSales());
 				this.svm.addTotalSales(item.getPrice());
@@ -577,7 +567,7 @@ public class VMController implements ActionListener {
 							 "\nItem Price: " + item.getPrice() +
 							 "\nAmount Paid: " + cashIn +
 							 "\nIssued Change: " + (cashIn - item.getPrice()) +
-							 "\n===============================\n");
+							 "\n===============================");
 			}
 		}
 		
@@ -595,7 +585,7 @@ public class VMController implements ActionListener {
 		success = this.svm.buyRecipe(selectedRecipe);
 		
 		if(selectedRecipe == null)
-			this.displayText("Oops! Something went wrong on my end. Please try that again.");
+			this.displayText("\nOops! Something went wrong on my end. Please try that again.");
 		
 		//Assumes that this VM is special
 		else if(success) {
@@ -615,7 +605,7 @@ public class VMController implements ActionListener {
 						 "\nItem Price: " + selectedRecipe.getPrice() +
 						 "\nAmount Paid: " + cashIn +
 						 "\nIssued Change: " + (cashIn - selectedRecipe.getPrice()) + 
-						 "\n===============================\n");
+						 "\n===============================");
 			}
 		}
 		
@@ -712,6 +702,7 @@ public class VMController implements ActionListener {
 		for(i = 7; i >= 0; i--) {
 			if(!isSpecial && userSelection[i][1] > 0) {
 				this.vm.mh.cashIn(userSelection[i][0], userSelection[i][1]);
+				this.displayText("Successfully deposited " + userSelection[i][1] + " units of " + userSelection[i][0] + " peso bills!");
 			}
 			
 			else if(isSpecial && userSelection[i][1] > 0) {
@@ -726,7 +717,6 @@ public class VMController implements ActionListener {
 	  */
 	public void withdraw(int[][] userSelection) {
 		int[][] cashStock = new int[8][2];
-		boolean okay = false;
 		
 		if(!isSpecial)
 			cashStock = this.vm.mh.getCashBox();
@@ -739,20 +729,21 @@ public class VMController implements ActionListener {
 		for(i = 7; i >= 0; i--) {
 			if(!isSpecial && userSelection[i][1] <= cashStock[7 - i][1]) {
 				this.vm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
-				okay = true;
+				
+				if(userSelection[i][1] > 0)
+					this.displayText("Successfully withdrawn " + userSelection[i][1] + " units of " + userSelection[i][0] + " peso bills!");
 			}
 			
 			else if(isSpecial && userSelection[i][1] <= cashStock[7 - i][1]) {
 				this.svm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
-				okay = true;
+				
+				if(userSelection[i][1] > 0)
+					this.displayText("Successfully withdrawn " + userSelection[i][1] + " units of " + userSelection[i][0] + " peso bills!");
 			}
 			
 			else 
 				this.displayText("Oops! Withdraw amount of " + userSelection[i][1] + " exceeds the current stock of " + cashStock[i][1] + " for the " + cashStock[7 - i][0] + " peso bill.\nCanceled withdrawal for this bill.");
 		}
-		
-		if(okay)
-			this.displayText("Withdrawn successfully!");
 	}
 	
 	/** 
@@ -765,7 +756,7 @@ public class VMController implements ActionListener {
 		
 		this.view.clearPrint();
 		
-		if(this.transacHistory == null) {
+		if(this.transacHistory.size() == 0) {
 			this.displayPrint("No transaction history found.");
 		}
 		
@@ -796,7 +787,7 @@ public class VMController implements ActionListener {
 				}
 			}
 			
-			this.displayPrint("Total Sales At Last Restock:\t" + t.getLastTotalSales() +
+			this.displayPrint("Last Total Sales:\t\t" + t.getLastTotalSales() +
 							"\nCurrent Total Sales:\t\t" + t.getTotalSales() + "\n"); 
 						   
 			count++;
@@ -808,9 +799,10 @@ public class VMController implements ActionListener {
 	  */
 	public void printRestockHistory() {
 		int qty = 0;
-		ArrayList<String> newItemNames = new ArrayList<String>();
-		ArrayList<String> oldItemNames = new ArrayList<String>();
+		int i = 0;
 		ArrayList<Item> itemsOnSale = new ArrayList<Item>();
+		ArrayList<Item> presetItemList = this.vm.ir.getPresetItems();
+		String[] itemNames = new String[30];
 		
 		this.view.clearPrint();
 		
@@ -819,6 +811,11 @@ public class VMController implements ActionListener {
 		}
 		
 		else {
+			//Set up itemNames
+			for(i = 0; i < 30; i++) {
+				itemNames[i] = presetItemList.get(i).getName();
+			}
+			
 			//Set up itemsOnSale
 			if(!isSpecial)
 				itemsOnSale.addAll(this.vm.ir.getItemsOnSale());
@@ -826,22 +823,10 @@ public class VMController implements ActionListener {
 			else
 				itemsOnSale.addAll(this.svm.spir.getItemsOnSale());
 			
-			//Set up oldItemNames
-			for(Item i : oldInventory) {
-				if(!oldItemNames.contains(i.getName()))
-					oldItemNames.add(i.getName());
-			}
-			
-			//Set up newItemNames
-			for(Item i : itemsOnSale) {
-				if(!newItemNames.contains(i.getName()))
-					newItemNames.add(i.getName());
-			}
-			
 			this.displayPrint("==============STARTING INVENTORY===============" +
 						"\nItem Name\t\tQuantity");
 			
-			for(String name : oldItemNames) {
+			for(String name : itemNames) {
 				for(Item item : oldInventory) {
 					if(item.getName().equals(name))
 						qty++;
@@ -854,7 +839,7 @@ public class VMController implements ActionListener {
 			this.displayPrint("===============ENDING INVENTORY================" +
 						"\nItem Name\t\tQuantity");
 			
-			for(String name : newItemNames) {
+			for(String name : itemNames) {
 				for(Item item : itemsOnSale) {
 					if(item.getName().equals(name))
 						qty++;

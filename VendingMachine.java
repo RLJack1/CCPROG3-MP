@@ -7,7 +7,6 @@ public class VendingMachine {
 	private int lastTotalSales;
 	protected MoneyHandler mh;
 	protected ItemRack ir;
-	protected VMController c;
 	
 	/** 
 	  * A constructor that creates an instance of the VendingMachine object.
@@ -22,7 +21,6 @@ public class VendingMachine {
 		this.lastTotalSales = lastTotalSales;
 		mh = new MoneyHandler(c);
 		ir = new ItemRack();
-		this.c = c;
 	}
 	
 	/** 
