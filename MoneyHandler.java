@@ -67,20 +67,17 @@ public class MoneyHandler {
 		String toDisplay = "";
 		
 		try { 
-			for(int i = 0; i < holder.length; i++) {
-				switch(amount){
-					case 1000 -> {this.holder[0][1]++; toDisplay = "1000 inserted...";}
-					case 500 -> {this.holder[1][1]++; toDisplay = "500 inserted...";}
-					case 100 -> {this.holder[2][1]++; toDisplay = "100 inserted...";}
-					case 50 -> {this.holder[3][1]++; toDisplay = "50 inserted...";}
-					case 20 -> {this.holder[4][1]++; toDisplay = "20 inserted...";}
-					case 10 -> {this.holder[5][1]++; toDisplay = "10 inserted...";}
-					case 5 -> {this.holder[6][1]++; toDisplay = "5 inserted...";}
-					case 1 -> {this.holder[7][1]++; toDisplay = "1 inserted...";}
-					default -> toDisplay = "Denomination " + amount + " not recognized, skipping input...";
-				}
+			switch(amount){
+				case 1000 -> {this.holder[0][1]++; toDisplay = "1000 inserted...";}
+				case 500 -> {this.holder[1][1]++; toDisplay = "500 inserted...";}
+				case 100 -> {this.holder[2][1]++; toDisplay = "100 inserted...";}
+				case 50 -> {this.holder[3][1]++; toDisplay = "50 inserted...";}
+				case 20 -> {this.holder[4][1]++; toDisplay = "20 inserted...";}
+				case 10 -> {this.holder[5][1]++; toDisplay = "10 inserted...";}
+				case 5 -> {this.holder[6][1]++; toDisplay = "5 inserted...";}
+				case 1 -> {this.holder[7][1]++; toDisplay = "1 inserted...";}
+				default -> toDisplay = "Denomination " + amount + " not recognized, skipping input...";
 			}
-
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
@@ -329,7 +326,24 @@ public class MoneyHandler {
 	  * @param index	The index of the bill
 	  * @param amount	The amount to reduce
 	  */
-	public void cashOut(int index, int amount) {
+	public void cashOut(int bill, int amount) {
+		int index = 0;
+		
+		try { 
+			switch(bill){
+				case 1000 -> {index = 7;}
+				case 500 -> {index = 6;}
+				case 100 -> {index = 5;}
+				case 50 -> {index = 4;}
+				case 20 -> {index = 3;}
+				case 10 -> {index = 2;}
+				case 5 -> {index = 1;}
+				case 1 -> {index = 0;}
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
 		this.cashBox[index][1] -= amount;
 	}
 	
@@ -338,7 +352,24 @@ public class MoneyHandler {
 	  * @param index	The index of the bill
 	  * @param amount	The amount to added
 	  */
-	public void cashIn(int index, int amount) {
+	public void cashIn(int bill, int amount) {
+		int index = 0;
+		
+		try { 
+			switch(bill){
+				case 1000 -> {index = 7;}
+				case 500 -> {index = 6;}
+				case 100 -> {index = 5;}
+				case 50 -> {index = 4;}
+				case 20 -> {index = 3;}
+				case 10 -> {index = 2;}
+				case 5 -> {index = 1;}
+				case 1 -> {index = 0;}
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
 		this.cashBox[index][1] += amount;
 	}
 	

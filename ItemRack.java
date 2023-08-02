@@ -19,6 +19,7 @@ public class ItemRack {
 	public ItemRack() {
 		this.itemList = new ArrayList<Item>();
 		this.presetItemList = new ArrayList<Item>();
+		this.loadPresetItems();
 	}
 	
 	/** 
@@ -65,7 +66,6 @@ public class ItemRack {
 		}
 		
 		this.itemList.addAll(addedItemList);
-		this.loadPresetItems();
 	}
 	
 	/** 
@@ -119,7 +119,9 @@ public class ItemRack {
 		
 		int neededStock = 10 - count;
 		
-		for(int j = 0; j <= neededStock; j++)
+		System.out.println("neededStock = " + neededStock);
+		
+		for(int j = 0; j < neededStock; j++)
 			this.itemList.add(new Item(item.getName(), item.getCalories(), item.getStandalone(), item.getPrice()));
 	}
 

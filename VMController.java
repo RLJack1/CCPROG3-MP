@@ -34,7 +34,8 @@ public class VMController implements ActionListener {
 		this.svm = new SpecialVM(this, "The Classic Vending Machine", 0, 0);
 		this.vm.mh.newCashBox();
 		this.vm.ir.newItemRack();
-		this.vm.ir.loadPresetItems();
+		this.svm.mh.newCashBox();
+		this.svm.spir.newItemRack();
 		
 		//Add actionlisteners to specific gui buttons
 		this.view = new VM_GUI();
@@ -273,55 +274,57 @@ public class VMController implements ActionListener {
 		}
 		
 		else if(clicked.equals(this.view.getDepositButton())) {
-			int[] temp = new int[this.view.getMHSpinners().size()];
-			int[][] converted = {
-			  {1000, 0},
-			  {500, 0},
-			  {100, 0},
-			  {50, 0},
-			  {20, 0},
-			  {10, 0},
+			int[][] selection = {
+			  {1, 0},
 			  {5, 0},
-			  {1, 0}
+			  {10, 0},  
+			  {20, 0},
+			  {50, 0},
+			  {100, 0},
+			  {500, 0},
+			  {1000, 0}
 			};
-			
-			ArrayList<Integer> userSelection = new ArrayList<Integer>();
+
 			int i = 0;
 			
 			//Extract the user selection
 			for(JSpinner sp : this.view.getMHSpinners()) {
-				temp[i] = (int) sp.getValue();
+				selection[i][1] = (int) sp.getValue();
 				i++;
 			}
 			
-			//Reverse the amounts
-			for(i = 0; i < userSelection.size(); i++) {
-				converted[i][1] = temp[userSelection.size() - i];
-			}
-			
 			//Call the function
-			this.deposit(converted);
+			this.deposit(selection);
+			
+			this.displayText("Deposited successfully!");
+			this.updateCashStock();
 		}
 		
 		else if(clicked.equals(this.view.getWithdrawButton())) {
-			ArrayList<Integer> userSelection = new ArrayList<Integer>();
-			int[] converted = new int[userSelection.size()];
-			int[] temp = new int[userSelection.size()];
+			int[][] selection = {
+			  {1, 0},
+			  {5, 0},
+			  {10, 0},  
+			  {20, 0},
+			  {50, 0},
+			  {100, 0},
+			  {500, 0},
+			  {1000, 0}
+			};
+			
 			int i = 0;
 			
 			//Extract the user selection
 			for(JSpinner sp : this.view.getMHSpinners()) {
-				temp[i] = (int) sp.getValue();
+				selection[i][1] = (int) sp.getValue();
 				i++;
 			}
 			
-			//Reverse order
-			for(i = 0; i < userSelection.size(); i++) {
-				converted[i] = temp[userSelection.size() - i];
-			}
-			
 			//Call the function
-			this.withdraw(converted);
+			this.withdraw(selection);
+			
+			this.displayText("Withdrawn successfully!");
+			this.updateCashStock();
 		}
 		
 		else if(clicked.equals(this.view.getWithdrawAllButton())) {
@@ -330,6 +333,8 @@ public class VMController implements ActionListener {
 			
 			else
 				this.svm.mh.setCashBox();
+			
+			this.updateCashStock();
 		}
 		
 		else if(clicked.equals(this.view.getPrintTransacButton())) {
@@ -413,6 +418,10 @@ public class VMController implements ActionListener {
 		
 		else 
 			cashStock = this.svm.mh.getCashBox();
+		
+		for(int i = 0; i <= 7; i++) {
+			this.displayText("cashbox at " + i + " contains " + cashStock[i][0] + " at " + cashStock[i][1]);
+		}
 		
 		this.view.updateCashStock(cashStock);
 	}
@@ -523,7 +532,7 @@ public class VMController implements ActionListener {
 				this.vm.addTotalSales(item.getPrice());
 				this.transacHistory.add(new Transaction(item.getName(), this.vm.getLastTotalSales(), this.vm.getTotalSales()));
 	
-				this.displayText("============RECEIPT===========" +
+				this.displayText("\n============RECEIPT===========" +
 							 "\nPurchased Item: " + item.getName() +
 							 "\nTotal Calories: " + item.getCalories() +
 							 "\nItem Price: " + item.getPrice() +
@@ -545,7 +554,7 @@ public class VMController implements ActionListener {
 				this.svm.addTotalSales(item.getPrice());
 				this.transacHistory.add(new Transaction(item.getName(), this.svm.getLastTotalSales(), this.svm.getTotalSales()));
 	
-				this.displayText("============RECEIPT===========" +
+				this.displayText("\n============RECEIPT===========" +
 							 "\nPurchased Item: " + item.getName() +
 							 "\nTotal Calories: " + item.getCalories() +
 							 "\nItem Price: " + item.getPrice() +
@@ -582,7 +591,7 @@ public class VMController implements ActionListener {
 				this.svm.addTotalSales(selectedRecipe.getPrice());
 				this.transacHistory.add(new Transaction(selectedRecipe, this.svm.getLastTotalSales(), this.svm.getTotalSales()));
 				
-				this.displayText("============RECEIPT===========" +
+				this.displayText("\n============RECEIPT===========" +
 						 "\nPurchased Item: " + selectedRecipe.getName() +
 						 "\nTotal Calories: " + selectedRecipe.getCalories() +
 						 "\nItem Price: " + selectedRecipe.getPrice() +
@@ -606,6 +615,7 @@ public class VMController implements ActionListener {
 	public void restock(ArrayList<String> userSelection) {
 		ArrayList<Item> temp = new ArrayList<Item>();
 		ArrayList<Item> toAdd = new ArrayList<Item>();
+		toAdd.clear();
 		
 		//Temporary old inventory holder
 		temp.clear();
@@ -630,6 +640,8 @@ public class VMController implements ActionListener {
 		
 		//Fully restock all items in userSelection
 		for(Item i : toAdd) {
+			System.out.println("item to add name = " + i.getName());
+			
 			if(!isSpecial) {
 				this.vm.ir.addFullStock(i);
 			}
@@ -688,7 +700,11 @@ public class VMController implements ActionListener {
 	public void deposit(int[][] userSelection) {
 		int i = 0;
 		
-		for(i = userSelection.length; i > 0; i--) {
+		for(i = 0; i <= 7; i++) {
+			this.displayText("userSelection at " + i + " userSelection " + userSelection[i][0] + " at " + userSelection[i][1]);
+		}
+		
+		for(i = 7; i >= 0; i--) {
 			if(!isSpecial && userSelection[i][1] > 0) {
 				this.vm.mh.cashIn(userSelection[i][0], userSelection[i][1]);
 			}
@@ -697,15 +713,13 @@ public class VMController implements ActionListener {
 				this.svm.mh.cashIn(userSelection[i][0], userSelection[i][1]);
 			}
 		}
-		
-		this.updateCashStock();
 	}
 	
 	/** 
 	  * Facilitates the cash-out process
 	  * @param userSelection The 2D int array of bills and corresponding amounts for cash-out
 	  */
-	public void withdraw(int[] userSelection) {
+	public void withdraw(int[][] userSelection) {
 		int[][] cashStock = new int[8][2];
 		
 		if(!isSpecial)
@@ -716,20 +730,22 @@ public class VMController implements ActionListener {
 		
 		int i = 0;
 		
-		for(i = userSelection.length; i > 0; i--) {
-			if(!isSpecial && cashStock[i][1] >= userSelection[i]) {
-				this.vm.mh.cashOut(cashStock[i][0], userSelection[i]);
+		for(i = 0; i <= 7; i++) {
+			this.displayText("userSelection at " + i + " userSelection " + userSelection[i][0] + " at " + userSelection[i][1]);
+		}
+		
+		for(i = 7; i >= 0; i--) {
+			if(!isSpecial && userSelection[i][1] <= cashStock[i][1]) {
+				this.vm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
 			}
 			
-			else if(isSpecial && cashStock[i][1] >= userSelection[i]) {
-				this.svm.mh.cashOut(cashStock[i][0], userSelection[i]);
+			else if(isSpecial && userSelection[i][1] <= cashStock[i][1]) {
+				this.svm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
 			}
 			
 			else 
 				this.displayText("Oops! Withdraw amount of " + userSelection[i] + " exceeds the current stock of " + cashStock[i][1] + " for the " + cashStock[i][0] + " peso bill. Canceled withdrawal for this bill.");
 		}
-
-		this.updateCashStock();
 	}
 	
 	/** 
@@ -748,7 +764,7 @@ public class VMController implements ActionListener {
 		
 		for(Transaction t : this.transacHistory) {
 			this.displayPrint("================TRANSACTION#" + count + "=================" +
-						   "\nPurchased Item:\t\t\t" + t.getName());
+						   "\nPurchased Item:\t\t" + t.getName());
 			
 			if(t.getIngredientList() != null) {
 				this.displayPrint("\nIngredient Breakdown: ");
@@ -774,7 +790,7 @@ public class VMController implements ActionListener {
 			}
 			
 			this.displayPrint("Total Sales At Last Restock:\t" + t.getLastTotalSales() +
-							"Current Total Sales:\t\t" + t.getTotalSales() + "\n"); 
+							"\nCurrent Total Sales:\t\t" + t.getTotalSales() + "\n"); 
 						   
 			count++;
 		}

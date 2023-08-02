@@ -4618,11 +4618,11 @@ public class VM_GUI extends javax.swing.JFrame {
         moneyInputList.add(jButtonBill1);
         moneyInputList.add(jButtonBill5);
         moneyInputList.add(jButtonBill10);
-        moneyInputList.add(jButtonBill1);
-        moneyInputList.add(jButtonBill1);
-        moneyInputList.add(jButtonBill1);
-        moneyInputList.add(jButtonBill1);
-        moneyInputList.add(jButtonBill1);
+        moneyInputList.add(jButtonBill20);
+        moneyInputList.add(jButtonBill50);
+        moneyInputList.add(jButtonBill100);
+        moneyInputList.add(jButtonBill500);
+        moneyInputList.add(jButtonBill1000);
     }
     
 	/**
@@ -4768,20 +4768,18 @@ public class VM_GUI extends javax.swing.JFrame {
 	  * @param itemStock The 2D ArrayList of items and their stocks
       */
 	public void updateItemStock(ArrayList<ArrayList<Object>> itemStock) {
-        //@megan @renzo idk what im doing
-        int index = 0;
-        for (JLabel stockLabel : labelList) {
-            if (index < itemStock.size()) {
-                ArrayList<Object> row = itemStock.get(index);
-
-                int stocks = (int) row.get(1);
-
-                stockLabel.setText(String.valueOf(stocks));
-
-                index++;
-            } else {
-                stockLabel.setText("error");
-            }
+		int stock = 0;
+		int i = 0;
+		
+        for (JLabel l : this.labelList) {
+            if (i < itemStock.size()) {
+                stock = (int) itemStock.get(i).get(1);
+                l.setText(String.valueOf(stock));
+                i++;
+            } 
+			
+			else 
+                l.setText("...");
         }
 	}
 
@@ -4790,10 +4788,11 @@ public class VM_GUI extends javax.swing.JFrame {
 	  * @param cashStock The 2D int array of bills and their stocks
       */
     public void updateCashStock(int[][] cashStock) {
+		int value = 0;
+		
 		for (int i = 0; i < cashStock.length; i++) {
-            int value = cashStock[i][1];
-            //mhSpinnerList.get(i).setValue(value);
-            moneyList.get(i).setText(""+value);
+            value = cashStock[i][1];
+            this.moneyList.get(7 - i).setText("" + value);
         }
 	}
 	
@@ -4802,39 +4801,18 @@ public class VM_GUI extends javax.swing.JFrame {
 	  * @param itemPrices The 2D ArrayList of items and their prices
       */
     public void updatePrices(ArrayList<ArrayList<Object>> itemPrices) {
-        // for (JLabel priceLabel : priceList){
-        //     for (ArrayList<Object> innerList : itemPrices) {
-        //         for (Object item : innerList) {
-        //             // Access the individual object 'item' here
-        //             // Do whatever you want to do with the object
-        //             System.out.println(item.row);
-        //         }
-        //     }
-        //     priceLabel.setText(item.get(0));
-        // }
-        // int i = 0;
-        // int j = 0;
-        // int k = 0;
-
-        // for(int i = 0; i < priceList.length; i++){
-        //     for(int j = 0; j < itemPrices.length; i++){
-        //         for (int k = 0; j )
-        //     }
-        // }
-        int index = 0; // Initialize the index to keep track of the current item in itemPrices list
-
-        for (JLabel priceLabel : priceList) {
-            if (index < itemPrices.size()) {
-                ArrayList<Object> row = itemPrices.get(index);
-
-                int price = (int) row.get(1);
-
-                priceLabel.setText(String.valueOf(price));
-
-                index++;
-            } else {
-                priceLabel.setText("error");
-            }
+        int price = 0;
+		int i = 0;
+		
+        for (JLabel l : this.priceList) {
+            if (i < itemPrices.size()) {
+                price = (int) itemPrices.get(i).get(1);
+                l.setText(String.valueOf(price));
+                i++;
+            } 
+			
+			else 
+                l.setText("...");
         }
 	}
 
