@@ -266,8 +266,12 @@ public class VMController implements ActionListener {
 			selected = this.convert(temp);
 			
 			//Call function
-			if(selected != null)
+			if(selected != null) {
 				this.reprice(selected, newPrice);
+				this.updatePrices();
+				this.displayPrint("Repriced successfully!");
+			}
+				
 			
 			else
 				this.displayText("Oops! An error occurred. Please try again.");
@@ -366,7 +370,7 @@ public class VMController implements ActionListener {
 			}
 		}
 		
-		temp = original.substring(count);
+		temp = original.substring(count + 1);
 		original = temp.replace(" ", "");
 		
 		return original;
@@ -448,6 +452,10 @@ public class VMController implements ActionListener {
 				row.add(this.svm.spir.getSaleItemPrice(name));
 				itemPrices.add(row);
 			}
+		}
+		
+		for(i = 0; i < 30; i++) {
+			this.displayText("itemPrice for " + itemPrices.get(i).get(0) + " at " + itemPrices.get(i).get(1));
 		}
 		
 		this.view.updatePrices(itemPrices);
@@ -683,8 +691,6 @@ public class VMController implements ActionListener {
 				}
 			}
 		}
-		
-		this.updatePrices();
 	}
 	
 	/** 
