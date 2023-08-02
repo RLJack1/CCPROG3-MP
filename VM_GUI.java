@@ -4744,9 +4744,16 @@ public class VM_GUI extends javax.swing.JFrame {
       * Prints text onto the print text area console
 	  * @param text The text to be displayed
       */
-    public void displayPrint(String text) {
-        this.jTextAreaReceipt.append(text + "\n");
+    public void displayPrint(String text) {  
+	    this.jTextAreaReceipt.append(text + "\n");
 	}
+	
+	/**
+      * Clears the print text area console
+      */
+    public void clearPrint() {  
+	    this.jTextAreaReceipt.setText(""); 
+	}		 
 	
 	/**
       * Updates item stock displays according to stored data in model

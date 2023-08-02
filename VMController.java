@@ -71,7 +71,7 @@ public class VMController implements ActionListener {
 	public static void main(String[] args) {
 			VMController c = new VMController();
 			c.view.setVisible(true);
-			c.displayText("Loading Vending Machine...\n");
+			c.displayText("Loading Vending Machine...");
 			c.displayText("Done!\n");
 	}
 	
@@ -529,7 +529,7 @@ public class VMController implements ActionListener {
 							 "\nItem Price: " + item.getPrice() +
 							 "\nAmount Paid: " + cashIn +
 							 "\nIssued Change: " + (cashIn - item.getPrice()) + 
-							 "===============================\n");
+							 "\n===============================\n");
 			}
 		}
 		
@@ -551,7 +551,7 @@ public class VMController implements ActionListener {
 							 "\nItem Price: " + item.getPrice() +
 							 "\nAmount Paid: " + cashIn +
 							 "\nIssued Change: " + (cashIn - item.getPrice()) +
-							 "===============================\n");
+							 "\n===============================\n");
 			}
 		}
 		
@@ -588,7 +588,7 @@ public class VMController implements ActionListener {
 						 "\nItem Price: " + selectedRecipe.getPrice() +
 						 "\nAmount Paid: " + cashIn +
 						 "\nIssued Change: " + (cashIn - selectedRecipe.getPrice()) + 
-						 "===============================\n");
+						 "\n===============================\n");
 			}
 		}
 		
@@ -740,6 +740,8 @@ public class VMController implements ActionListener {
 		int qty = 0;
 		ArrayList<Ingredient> temp = new ArrayList<Ingredient>();
 		
+		this.view.clearPrint();
+		
 		if(this.transacHistory == null) {
 			this.displayPrint("No transaction history found.");
 		}
@@ -771,8 +773,8 @@ public class VMController implements ActionListener {
 				}
 			}
 			
-			this.displayPrint("\nTotal Sales At Last Restock:\t" + t.getLastTotalSales() +
-							"\nCurrent Total Sales:\t\t" + t.getTotalSales() + "\n"); 
+			this.displayPrint("Total Sales At Last Restock:\t" + t.getLastTotalSales() +
+							"Current Total Sales:\t\t" + t.getTotalSales() + "\n"); 
 						   
 			count++;
 		}
@@ -786,6 +788,8 @@ public class VMController implements ActionListener {
 		ArrayList<String> newItemNames = new ArrayList<String>();
 		ArrayList<String> oldItemNames = new ArrayList<String>();
 		ArrayList<Item> itemsOnSale = new ArrayList<Item>();
+		
+		this.view.clearPrint();
 		
 		if(this.oldInventory.size() == 0) {
 			this.displayPrint("No restock history found.");
@@ -819,7 +823,7 @@ public class VMController implements ActionListener {
 					qty++;
 			}
 			
-			this.displayPrint(name + "\t\t" + qty + "\n");
+			this.displayPrint(name + "\t\t" + qty);
 			qty = 0;
 		}
 
@@ -832,7 +836,7 @@ public class VMController implements ActionListener {
 					qty++;
 			}
 			
-			this.displayPrint(name + "\t\t" + qty + "\n");
+			this.displayPrint(name + "\t\t" + qty);
 			qty = 0;
 		}
 	}
