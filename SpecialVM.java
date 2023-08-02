@@ -153,20 +153,28 @@ public class SpecialVM extends VendingMachine {
       */
 	public boolean buyRecipe(Recipe selectedRecipe) {
 		boolean success = true;
+		Item found = null;
 		ArrayList<Item> temp = new ArrayList<Item>();
 		
 		//Checks if there exist enough stock of every item for every ingredient in the recipe
 		//If yes, subtract all
-		for(Item i : selectedRecipe.getIngredientList()) {
-			if(this.spir.getItemsOnSale().contains(i)) {
-				temp.add(i);
-				this.spir.removeItem(i);
+		for(Item item : selectedRecipe.getIngredientList()) {
+			for(Item i : this.spir.getItemsOnSale()) {
+				if(i.getName().equals(item.getName()))
+					found = i;
 			}
-				
+			
+			if(found != null) {
+				temp.add(found);
+				this.spir.removeItem(found);
+			}
+			
 			else
 				success = false;
+			
+			found = null;
 		}
-		
+	
 		//If stock is insufficient, return all items back
 		if(!success)
 			this.spir.getItemsOnSale().addAll(temp);

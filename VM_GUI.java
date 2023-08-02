@@ -4635,7 +4635,6 @@ public class VM_GUI extends javax.swing.JFrame {
         recipeButtonList.add(jButton7Spicy);
         recipeButtonList.add(jButton8Salmon);
         recipeButtonList.add(jButton9Turkey);
-        recipeButtonList.add(jCustomButton10);
     }
    
    /**

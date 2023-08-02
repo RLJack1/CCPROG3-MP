@@ -17,6 +17,7 @@ import javax.swing.text.StyledDocument;
   */
 public class VMController implements ActionListener {
 	private boolean isSpecial;
+	private Recipe selectedRecipe;
 	private ArrayList<Item> oldInventory;
 	private ArrayList<Transaction> transacHistory;
 	private VendingMachine vm;
@@ -28,6 +29,7 @@ public class VMController implements ActionListener {
       */
 	public VMController() {
 		this.isSpecial = false;
+		this.selectedRecipe = null;
 		this.oldInventory = new ArrayList<Item>();
 		this.transacHistory = new ArrayList<Transaction>();
 		this.vm = new VendingMachine(this, "The Classic Vending Machine", 0, 0);
@@ -131,13 +133,13 @@ public class VMController implements ActionListener {
 			
 			else {
 				if(count > 1) {
-					this.displayText("Preparing your burger...\nPlease input cash.");
+					this.displayText("Preparing your burger...\nHang in there!");
 					
 					int qty = 0;
 					int index = 0;
 					String name = null;
 					Ingredient ingredient = null;
-					Recipe custom = new Recipe("custom");
+					Recipe custom = new Recipe("Custom Burger");
 					
 					//Get the ingredients per user selection
 					for(JSpinner sp : this.view.getItemSpinners()) {
@@ -191,8 +193,8 @@ public class VMController implements ActionListener {
 			this.displayText("Cancelling transaction...\nReleasing full change...");
 		}
 		
-		else if(clicked.equals(this.view.getRecipeButton())) {
-			//identify what recipe button was pushed and get name
+		else if(this.view.getRecipeButtons().contains(clicked)) {
+			//Identify the selected recipe name
 			String unformatted = clicked.getText();
 			String recipe = this.convert(unformatted);
 			
@@ -200,12 +202,20 @@ public class VMController implements ActionListener {
 				this.displayText("Sorry! Regular Vending Machines can't support recipe purchases.");
 			
 			else {
-				//Get recipe from list
 				int index = this.svm.getRecipeIndex(recipe);
-				Recipe selectedRecipe = this.svm.getRecipeAt(index);
-				
+				this.selectedRecipe = this.svm.getRecipeAt(index);
+				this.displayText("Selected: " + recipe);
+				this.displayText("Cost of Selected: " + this.selectedRecipe.getPrice());
+			}
+		}
+		
+		else if(clicked.equals(this.view.getRecipeButton())) {
+			if(!isSpecial)
+				this.displayText("Sorry! Regular Vending Machines can't support recipe purchases.");
+			
+			else {
 				//Buy the recipe
-				this.buyRecipe(selectedRecipe);
+				this.buyRecipe(this. selectedRecipe);
 			}
 		}
 		
@@ -574,7 +584,8 @@ public class VMController implements ActionListener {
 	  */
 	public void buyRecipe(Recipe selectedRecipe) {
 		int cashIn = 0;
-		boolean success = this.svm.buyRecipe(selectedRecipe);
+		boolean success = false;
+		success = this.svm.buyRecipe(selectedRecipe);
 		
 		if(selectedRecipe == null)
 			this.displayText("Oops! Something went wrong on my end. Please try that again.");
@@ -803,49 +814,52 @@ public class VMController implements ActionListener {
 			this.displayPrint("No restock history found.");
 		}
 		
-		//Set up itemsOnSale
-		if(!isSpecial)
-			itemsOnSale.addAll(this.vm.ir.getItemsOnSale());
-		
-		else
-			itemsOnSale.addAll(this.svm.spir.getItemsOnSale());
-		
-		//Set up oldItemNames
-		for(Item i : oldInventory) {
-			if(!oldItemNames.contains(i.getName()))
-				oldItemNames.add(i.getName());
-		}
-		
-		//Set up newItemNames
-		for(Item i : itemsOnSale) {
-			if(!newItemNames.contains(i.getName()))
-				newItemNames.add(i.getName());
-		}
-		
-		this.displayPrint("==============STARTING INVENTORY===============" +
-					"\nItem Name\t\tQuantity");
-		
-		for(String name : oldItemNames) {
-			for(Item item : oldInventory) {
-				if(item.getName().equals(name))
-					qty++;
+		else {
+			//Set up itemsOnSale
+			if(!isSpecial)
+				itemsOnSale.addAll(this.vm.ir.getItemsOnSale());
+			
+			else
+				itemsOnSale.addAll(this.svm.spir.getItemsOnSale());
+			
+			//Set up oldItemNames
+			for(Item i : oldInventory) {
+				if(!oldItemNames.contains(i.getName()))
+					oldItemNames.add(i.getName());
 			}
 			
-			this.displayPrint(name + "\t\t" + qty);
-			qty = 0;
-		}
+			//Set up newItemNames
+			for(Item i : itemsOnSale) {
+				if(!newItemNames.contains(i.getName()))
+					newItemNames.add(i.getName());
+			}
+			
+			this.displayPrint("==============STARTING INVENTORY===============" +
+						"\nItem Name\t\tQuantity");
+			
+			for(String name : oldItemNames) {
+				for(Item item : oldInventory) {
+					if(item.getName().equals(name))
+						qty++;
+				}
+				
+				this.displayPrint(name + "\t\t" + qty);
+				qty = 0;
+			}
 
-		this.displayPrint("===============ENDING INVENTORY================" +
-					"\nItem Name\t\tQuantity");
-		
-		for(String name : newItemNames) {
-			for(Item item : itemsOnSale) {
-				if(item.getName().equals(name))
-					qty++;
-			}
+			this.displayPrint("===============ENDING INVENTORY================" +
+						"\nItem Name\t\tQuantity");
 			
-			this.displayPrint(name + "\t\t" + qty);
-			qty = 0;
+			for(String name : newItemNames) {
+				for(Item item : itemsOnSale) {
+					if(item.getName().equals(name))
+						qty++;
+				}
+				
+				this.displayPrint(name + "\t\t" + qty);
+				qty = 0;
+			}
+
 		}
 	}
 }
