@@ -57,7 +57,7 @@ public class VM_GUI extends javax.swing.JFrame {
     /**
       * This method is called from within the constructor to initialize the form.
       */
-    @SuppressWarnings("unchecked")                         
+    //@SuppressWarnings("unchecked")                         
     private void initComponents() {
 
         buttonGroup = new javax.swing.ButtonGroup();
@@ -534,6 +534,357 @@ public class VM_GUI extends javax.swing.JFrame {
 
         BriocheSpinner.setOpaque(true);
 
+        ItemPic1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon1 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/1 Brioche Bread.png"));       
+        Image scaledImage1 = originalIcon1.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon1 = new javax.swing.ImageIcon(scaledImage1);
+        ItemPic1.setIcon(scaledIcon1);
+        ItemPic1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic1.setFocusable(false);
+	ItemPic1.setOpaque(true);
+
+	ItemPic2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon2 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/2 Sesame Bread.png"));       
+        Image scaledImage2 = originalIcon2.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon2 = new javax.swing.ImageIcon(scaledImage2);
+        ItemPic2.setIcon(scaledIcon2);
+        ItemPic2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic2.setFocusable(false);
+	ItemPic2.setOpaque(true);
+
+	ItemPic3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon3 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/3 Rye Bread.png"));
+        Image scaledImage3 = originalIcon3.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon3 = new javax.swing.ImageIcon(scaledImage3);
+        ItemPic3.setIcon(scaledIcon3);
+        ItemPic3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic3.setFocusable(false);
+	ItemPic3.setOpaque(true);
+
+	ItemPic4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon4 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/4 Wholewheat Bread.png"));
+        Image scaledImage4 = originalIcon4.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon4 = new javax.swing.ImageIcon(scaledImage4);
+        ItemPic4.setIcon(scaledIcon4);
+        ItemPic4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic4.setFocusable(false);
+	ItemPic4.setOpaque(true);
+
+	ItemPic5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon5 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/5 Potato Bread.png"));
+        Image scaledImage5 = originalIcon5.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon5 = new javax.swing.ImageIcon(scaledImage5);
+        ItemPic5.setIcon(scaledIcon5);
+        ItemPic5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic5.setFocusable(false);
+	ItemPic5.setOpaque(true);
+
+	ItemPic6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon6 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/6 Jack Bread.png"));
+        Image scaledImage6 = originalIcon6.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon6 = new javax.swing.ImageIcon(scaledImage6);
+        ItemPic6.setIcon(scaledIcon6);
+        ItemPic6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic6.setFocusable(false);
+	ItemPic6.setOpaque(true);
+
+	ItemPic7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon7 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/7 Angus Beef.png"));
+        Image scaledImage7 = originalIcon7.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon7 = new javax.swing.ImageIcon(scaledImage7);
+        ItemPic7.setIcon(scaledIcon7);
+        ItemPic7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic7.setFocusable(false);
+	ItemPic7.setOpaque(true);
+
+	ItemPic8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon8 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/8 Wagyu Beef.png"));
+        Image scaledImage8 = originalIcon8.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon8 = new javax.swing.ImageIcon(scaledImage8);
+        ItemPic8.setIcon(scaledIcon8);
+        ItemPic8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic8.setFocusable(false);
+	ItemPic8.setOpaque(true);
+
+	ItemPic9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon9 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/9 Tapa Beef.png"));
+        Image scaledImage9 = originalIcon9.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon9 = new javax.swing.ImageIcon(scaledImage9);
+        ItemPic9.setIcon(scaledIcon9);
+        ItemPic9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic9.setFocusable(false);
+	ItemPic9.setOpaque(true);
+
+	ItemPic10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon10 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/10 Cheesed Beef.png"));
+        Image scaledImage10 = originalIcon10.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon10 = new javax.swing.ImageIcon(scaledImage10);
+        ItemPic10.setIcon(scaledIcon10);
+        ItemPic10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic10.setFocusable(false);
+	ItemPic10.setOpaque(true);
+
+	ItemPic11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon11 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/11 Canadian Bacon.png"));
+        Image scaledImage11 = originalIcon11.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon11 = new javax.swing.ImageIcon(scaledImage11);
+        ItemPic11.setIcon(scaledIcon11);
+        ItemPic11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic11.setFocusable(false);
+	ItemPic11.setOpaque(true);
+
+	ItemPic12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon12 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/12 Weiner Schnitzel.png"));
+        Image scaledImage12 = originalIcon12.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon12 = new javax.swing.ImageIcon(scaledImage12);
+        ItemPic12.setIcon(scaledIcon12);
+        ItemPic12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic12.setFocusable(false);
+	ItemPic12.setOpaque(true);
+
+	ItemPic13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon13 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/13 Grilled Salmon_.png"));
+        Image scaledImage13 = originalIcon13.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon13 = new javax.swing.ImageIcon(scaledImage13);
+        ItemPic13.setIcon(scaledIcon13);
+        ItemPic13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic13.setFocusable(false);
+	ItemPic13.setOpaque(true);
+
+	ItemPic14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon14 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/14 Bronze Turkey.png"));
+        Image scaledImage14 = originalIcon14.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon14 = new javax.swing.ImageIcon(scaledImage14);
+        ItemPic14.setIcon(scaledIcon14);
+        ItemPic14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic14.setFocusable(false);
+	ItemPic14.setOpaque(true);
+
+	ItemPic15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon15 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/15 Beyond Beef.png"));
+        Image scaledImage15 = originalIcon15.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon15 = new javax.swing.ImageIcon(scaledImage15);
+        ItemPic15.setIcon(scaledIcon15);
+        ItemPic15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic15.setFocusable(false);
+	ItemPic15.setOpaque(true);
+
+	ItemPic16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon16 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/16 Jack Beef.png"));
+        Image scaledImage16 = originalIcon16.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon16 = new javax.swing.ImageIcon(scaledImage16);
+        ItemPic16.setIcon(scaledIcon16);
+        ItemPic16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic16.setFocusable(false);
+	ItemPic16.setOpaque(true);
+
+	ItemPic17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon17 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/17 White Onions.png"));
+        Image scaledImage17 = originalIcon17.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon17 = new javax.swing.ImageIcon(scaledImage17);
+        ItemPic17.setIcon(scaledIcon17);
+        ItemPic17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic17.setFocusable(false);
+	ItemPic17.setOpaque(true);
+
+	ItemPic18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon18 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/18 Onion Rings.png"));
+        Image scaledImage18 = originalIcon18.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon18 = new javax.swing.ImageIcon(scaledImage18);
+        ItemPic18.setIcon(scaledIcon18);
+        ItemPic18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic18.setFocusable(false);
+	ItemPic18.setOpaque(true);
+
+	ItemPic19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon19 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/19 Trappist Cheese.png"));
+        Image scaledImage19 = originalIcon19.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon19 = new javax.swing.ImageIcon(scaledImage19);
+        ItemPic19.setIcon(scaledIcon19);
+        ItemPic19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic19.setFocusable(false);
+	ItemPic19.setOpaque(true);
+
+	ItemPic20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon20 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/20 Mozzarella Cheese.png"));
+        Image scaledImage20 = originalIcon20.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon20 = new javax.swing.ImageIcon(scaledImage20);
+        ItemPic20.setIcon(scaledIcon20);
+        ItemPic20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic20.setFocusable(false);
+	ItemPic20.setOpaque(true);
+
+	ItemPic21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon21 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/21 Blue Cheese.png"));
+        Image scaledImage21 = originalIcon21.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon21 = new javax.swing.ImageIcon(scaledImage21);
+        ItemPic21.setIcon(scaledIcon21);
+        ItemPic21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic21.setFocusable(false);
+	ItemPic21.setOpaque(true);
+
+	ItemPic22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon22 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/22 American Cheese.png"));
+        Image scaledImage22 = originalIcon22.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon22 = new javax.swing.ImageIcon(scaledImage22);
+        ItemPic22.setIcon(scaledIcon22);
+        ItemPic22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic22.setFocusable(false);
+	ItemPic22.setOpaque(true);
+
+	ItemPic23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon23 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/23 Melted Butter.png"));
+        Image scaledImage23 = originalIcon23.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon23 = new javax.swing.ImageIcon(scaledImage23);
+        ItemPic23.setIcon(scaledIcon23);
+        ItemPic23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic23.setFocusable(false);
+	ItemPic23.setOpaque(true);
+
+	ItemPic24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon24 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/24 Beefsteak Tomato.png"));
+        Image scaledImage24 = originalIcon24.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon24 = new javax.swing.ImageIcon(scaledImage24);
+        ItemPic24.setIcon(scaledIcon24);
+        ItemPic24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic24.setFocusable(false);
+	ItemPic24.setOpaque(true);
+
+	ItemPic25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon25 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/25 Iceberg Lettuce.png"));
+        Image scaledImage25 = originalIcon25.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon25 = new javax.swing.ImageIcon(scaledImage25);
+        ItemPic25.setIcon(scaledIcon25);
+        ItemPic25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic25.setFocusable(false);
+	ItemPic25.setOpaque(true);
+
+	ItemPic26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon26 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/26 Dill Pickles.png"));
+        Image scaledImage26 = originalIcon26.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon26 = new javax.swing.ImageIcon(scaledImage26);
+        ItemPic26.setIcon(scaledIcon26);
+        ItemPic26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic26.setFocusable(false);
+	ItemPic26.setOpaque(true);
+
+	ItemPic27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon27 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/27 Hot Sauce.png"));
+        Image scaledImage27 = originalIcon27.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon27 = new javax.swing.ImageIcon(scaledImage27);
+        ItemPic27.setIcon(scaledIcon27);
+        ItemPic27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic27.setFocusable(false);
+	ItemPic27.setOpaque(true);
+
+	ItemPic28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon28 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/28 Barbecue Sauce.png"));
+        Image scaledImage28 = originalIcon28.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon28 = new javax.swing.ImageIcon(scaledImage28);
+        ItemPic28.setIcon(scaledIcon28);
+        ItemPic28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic28.setFocusable(false);
+	ItemPic28.setOpaque(true);
+
+	ItemPic29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon29 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/29 Caviar Sauce.png"));
+        Image scaledImage29 = originalIcon29.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon29 = new javax.swing.ImageIcon(scaledImage29);
+        ItemPic29.setIcon(scaledIcon29);
+        ItemPic29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic29.setFocusable(false);
+	    ItemPic29.setOpaque(true);
+
+	    ItemPic30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon30 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/30 Jack Sauce.png"));
+        Image scaledImage30 = originalIcon30.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon30 = new javax.swing.ImageIcon(scaledImage30);
+        ItemPic30.setIcon(scaledIcon30);
+        ItemPic30.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPic30.setFocusable(false);
+	    ItemPic30.setOpaque(true);
+
+	    RecipePic1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon31 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/burger/1 Classic Burger.png"));
+        Image scaledImage31 = originalIcon31.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledIcon31 = new javax.swing.ImageIcon(scaledImage31);
+        RecipePic1.setIcon(scaledIcon31);
+        RecipePic1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        RecipePic1.setFocusable(false);
+	    RecipePic1.setOpaque(true);
+
+	    RecipePic2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        javax.swing.ImageIcon originalIcon32 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/burger/2 Cheesy Cheeseburger.png"));
+        Image scaledImage32 = originalIcon32.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        javax.swing.ImageIcon scaledImage32i = new javax.swing.ImageIcon(scaledImage32);
+        RecipePic2.setIcon(scaledImage32i);
+        RecipePic2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        RecipePic2.setFocusable(false);
+	    RecipePic2.setOpaque(true);
+
+	RecipePic3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+	javax.swing.ImageIcon originalIcon33 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/burger/3 Beyond Burger.png"));
+	Image scaledImage33 = originalIcon33.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+	javax.swing.ImageIcon scaledIcon33 = new javax.swing.ImageIcon(scaledImage33);
+	RecipePic3.setIcon(scaledIcon33);
+	RecipePic3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+	RecipePic3.setFocusable(false);
+	RecipePic3.setOpaque(true);
+
+	RecipePic4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+	javax.swing.ImageIcon originalIcon34 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/burger/4 Gourmet Burger.png"));
+	Image scaledImage34 = originalIcon34.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+	javax.swing.ImageIcon scaledIcon34 = new javax.swing.ImageIcon(scaledImage34);
+	RecipePic4.setIcon(scaledIcon34);
+	RecipePic4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+	RecipePic4.setFocusable(false);
+	RecipePic4.setOpaque(true);
+
+	RecipePic5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+	javax.swing.ImageIcon originalIcon35 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/burger/5 Jack Burger.png"));
+	Image scaledImage35 = originalIcon35.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+	javax.swing.ImageIcon scaledIcon35 = new javax.swing.ImageIcon(scaledImage35);
+	RecipePic5.setIcon(scaledIcon35);
+	RecipePic5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+	RecipePic5.setFocusable(false);
+	RecipePic5.setOpaque(true);
+
+    RecipePic6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    javax.swing.ImageIcon originalIcon36 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/burger/6 Meat Overload Burger.png"));
+    Image scaledImage36 = originalIcon36.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+    javax.swing.ImageIcon scaledIcon36 = new javax.swing.ImageIcon(scaledImage36);
+    RecipePic6.setIcon(scaledIcon36);
+    RecipePic6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    RecipePic6.setFocusable(false);
+    RecipePic6.setOpaque(true);
+
+    RecipePic7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    javax.swing.ImageIcon originalIcon37 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/burger/7 Spicy Tapa Burger.png"));
+    Image scaledImage37 = originalIcon37.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+    javax.swing.ImageIcon scaledIcon37 = new javax.swing.ImageIcon(scaledImage37);
+    RecipePic7.setIcon(scaledIcon37);
+    RecipePic7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    RecipePic7.setFocusable(false);
+    RecipePic7.setOpaque(true);
+
+    RecipePic8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    javax.swing.ImageIcon originalIcon38 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/burger/8 Salmon Burger.png"));
+    Image scaledImage38 = originalIcon38.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+    javax.swing.ImageIcon scaledIcon38 = new javax.swing.ImageIcon(scaledImage38);
+    RecipePic8.setIcon(scaledIcon38);
+    RecipePic8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    RecipePic8.setFocusable(false);
+    RecipePic8.setOpaque(true);
+
+    RecipePic9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    javax.swing.ImageIcon originalIcon39 = new javax.swing.ImageIcon(getClass().getResource("/imagepackage/burger/9 Turkey Burger.png"));
+    Image scaledImage39 = originalIcon39.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+    javax.swing.ImageIcon scaledIcon39 = new javax.swing.ImageIcon(scaledImage39);
+    RecipePic9.setIcon(scaledIcon39);
+    RecipePic9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    RecipePic9.setFocusable(false);
+    RecipePic9.setOpaque(true);
+
         ItemStock21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemStock21.setText("0");
         ItemStock21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -574,12 +925,6 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton15Beyond.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton15Beyond.setOpaque(true);
 
-        ItemPic18.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic18.setFocusable(false);
-        ItemPic18.setOpaque(true);
-
         ItemStock11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemStock11.setText("0");
         ItemStock11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -601,12 +946,6 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton24Beefsteak.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton24Beefsteak.setOpaque(true);
 
-        ItemPic3.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic3.setFocusable(false);
-        ItemPic3.setOpaque(true);
-
         ItemStock25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemStock25.setText("0");
         ItemStock25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -622,12 +961,6 @@ public class VM_GUI extends javax.swing.JFrame {
         ItemStock9.setMinimumSize(new java.awt.Dimension(30, 30));
         ItemStock9.setOpaque(true);
         ItemStock9.setPreferredSize(new java.awt.Dimension(30, 20));
-
-        ItemPic30.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic30.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic30.setFocusable(false);
-        ItemPic30.setOpaque(true);
 
         ItemStock23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemStock23.setText("0");
@@ -654,19 +987,7 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton29Caviar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton29Caviar.setOpaque(true);
 
-        ItemPic20.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic20.setFocusable(false);
-        ItemPic20.setOpaque(true);
-
         TrappistSpinner.setOpaque(true);
-
-        ItemPic19.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic19.setFocusable(false);
-        ItemPic19.setOpaque(true);
 
         ItemPrice2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemPrice2.setText("0");
@@ -704,20 +1025,6 @@ public class VM_GUI extends javax.swing.JFrame {
         ItemStock13.setOpaque(true);
         ItemStock13.setPreferredSize(new java.awt.Dimension(30, 20));
 
-        ItemPic11.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic11.setFocusable(false);
-        ItemPic11.setOpaque(true);
-
-        ItemPrice4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPrice4.setText("0");
-        ItemPrice4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPrice4.setMaximumSize(new java.awt.Dimension(30, 30));
-        ItemPrice4.setMinimumSize(new java.awt.Dimension(30, 30));
-        ItemPrice4.setOpaque(true);
-        ItemPrice4.setPreferredSize(new java.awt.Dimension(30, 20));
-
         ItemStock2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemStock2.setText("0");
         ItemStock2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -750,22 +1057,10 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton27Hot.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton27Hot.setOpaque(true);
 
-        ItemPic1.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic1.setFocusable(false);
-        ItemPic1.setOpaque(true);
-
         jButton20Mozzarella.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton20Mozzarella.setText("20-Mozzarella Cheese");
         jButton20Mozzarella.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton20Mozzarella.setOpaque(true);
-
-        ItemPic25.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic25.setFocusable(false);
-        ItemPic25.setOpaque(true);
 
         ItemStock18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemStock18.setText("0");
@@ -774,12 +1069,6 @@ public class VM_GUI extends javax.swing.JFrame {
         ItemStock18.setMinimumSize(new java.awt.Dimension(30, 30));
         ItemStock18.setOpaque(true);
         ItemStock18.setPreferredSize(new java.awt.Dimension(30, 20));
-
-        ItemPic23.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic23.setFocusable(false);
-        ItemPic23.setOpaque(true);
 
         jButton5Potato.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton5Potato.setText("5-Potato Bread");
@@ -812,12 +1101,6 @@ public class VM_GUI extends javax.swing.JFrame {
 
         TapaSpinner.setOpaque(true);
 
-        ItemPic21.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic21.setFocusable(false);
-        ItemPic21.setOpaque(true);
-
         ItemStock12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemStock12.setText("0");
         ItemStock12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -830,15 +1113,6 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton14Bronze.setText("14-Bronze Turkey");
         jButton14Bronze.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton14Bronze.setOpaque(true);
-
-        ItemPic22.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic22.setFocusable(false);
-        ItemPic22.setMaximumSize(new java.awt.Dimension(75, 75));
-        ItemPic22.setMinimumSize(new java.awt.Dimension(75, 75));
-        ItemPic22.setOpaque(true);
-        ItemPic22.setPreferredSize(new java.awt.Dimension(75, 75));
 
         CanadianSpinner.setOpaque(true);
 
@@ -866,12 +1140,6 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton19Trappist.setText("19-Trappist Cheese");
         jButton19Trappist.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton19Trappist.setOpaque(true);
-
-        ItemPic16.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic16.setFocusable(false);
-        ItemPic16.setOpaque(true);
 
         ItemStock7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemStock7.setText("0");
@@ -913,12 +1181,6 @@ public class VM_GUI extends javax.swing.JFrame {
         ItemStock19.setOpaque(true);
         ItemStock19.setPreferredSize(new java.awt.Dimension(30, 20));
 
-        ItemPic28.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic28.setFocusable(false);
-        ItemPic28.setOpaque(true);
-
         AngusSpinner.setOpaque(true);
 
         jButton13Grilled.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -926,28 +1188,10 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton13Grilled.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton13Grilled.setOpaque(true);
 
-        ItemPic24.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic24.setFocusable(false);
-        ItemPic24.setOpaque(true);
-
-        ItemPic4.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic4.setFocusable(false);
-        ItemPic4.setOpaque(true);
-
         jButton11Canadian.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton11Canadian.setText("11-Canadian Bacon");
         jButton11Canadian.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton11Canadian.setOpaque(true);
-
-        ItemPic13.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic13.setFocusable(false);
-        ItemPic13.setOpaque(true);
 
         MeltedSpinner.setOpaque(true);
 
@@ -1009,24 +1253,10 @@ public class VM_GUI extends javax.swing.JFrame {
         ItemStock5.setOpaque(true);
         ItemStock5.setPreferredSize(new java.awt.Dimension(30, 20));
 
-        ItemPic17.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic17.setFocusable(false);
-        ItemPic17.setMaximumSize(new java.awt.Dimension(75, 75));
-        ItemPic17.setMinimumSize(new java.awt.Dimension(75, 75));
-        ItemPic17.setOpaque(true);
-
         jButton12Weiner.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton12Weiner.setText("12-Weiner Schnitzel");
         jButton12Weiner.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton12Weiner.setOpaque(true);
-
-        ItemPic8.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic8.setFocusable(false);
-        ItemPic8.setOpaque(true);
 
         jButton25Iceberg.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton25Iceberg.setText("25-Iceberg Lettuce");
@@ -1035,13 +1265,6 @@ public class VM_GUI extends javax.swing.JFrame {
 
         BronzeSpinner.setOpaque(true);
 
-        ItemPic7.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic7.setFocusable(false);
-        ItemPic7.setMaximumSize(new java.awt.Dimension(75, 75));
-        ItemPic7.setMinimumSize(new java.awt.Dimension(75, 75));
-        ItemPic7.setOpaque(true);
 
         PotatoSpinner.setOpaque(true);
 
@@ -1049,12 +1272,6 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton18Onion.setText("18-Onion Rings");
         jButton18Onion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton18Onion.setOpaque(true);
-
-        ItemPic26.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic26.setFocusable(false);
-        ItemPic26.setOpaque(true);
 
         ItemStock3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemStock3.setText("0");
@@ -1074,14 +1291,6 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton21Blue.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton21Blue.setOpaque(true);
 
-        ItemPic12.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic12.setFocusable(false);
-        ItemPic12.setMaximumSize(new java.awt.Dimension(75, 75));
-        ItemPic12.setMinimumSize(new java.awt.Dimension(75, 75));
-        ItemPic12.setOpaque(true);
-
         WhiteSpinner.setOpaque(true);
 
         BarbecueSpinner.setOpaque(true);
@@ -1098,18 +1307,6 @@ public class VM_GUI extends javax.swing.JFrame {
         jButton26Dill.setText("26-Dill Pickles");
         jButton26Dill.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton26Dill.setOpaque(true);
-
-        ItemPic10.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic10.setFocusable(false);
-        ItemPic10.setOpaque(true);
-
-        ItemPic14.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic14.setFocusable(false);
-        ItemPic14.setOpaque(true);
 
         ItemStock16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemStock16.setText("0");
@@ -1146,18 +1343,6 @@ public class VM_GUI extends javax.swing.JFrame {
 
         HotSpinner.setOpaque(true);
 
-        ItemPic15.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic15.setFocusable(false);
-        ItemPic15.setOpaque(true);
-
-        ItemPic5.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic5.setFocusable(false);
-        ItemPic5.setOpaque(true);
-
         MozzarellaSpinner.setOpaque(true);
 
         GrilledSpinner.setOpaque(true);
@@ -1178,36 +1363,7 @@ public class VM_GUI extends javax.swing.JFrame {
         ItemStock26.setOpaque(true);
         ItemStock26.setPreferredSize(new java.awt.Dimension(30, 20));
 
-        ItemPic6.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic6.setFocusable(false);
-        ItemPic6.setOpaque(true);
-
         SesameSpinner.setOpaque(true);
-
-        ItemPic27.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic27.setFocusable(false);
-        ItemPic27.setMaximumSize(new java.awt.Dimension(75, 75));
-        ItemPic27.setMinimumSize(new java.awt.Dimension(75, 75));
-        ItemPic27.setOpaque(true);
-
-        ItemPic29.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic29.setFocusable(false);
-        ItemPic29.setOpaque(true);
-
-        ItemPic2.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic2.setFocusable(false);
-        ItemPic2.setMaximumSize(new java.awt.Dimension(75, 75));
-        ItemPic2.setMinimumSize(new java.awt.Dimension(75, 75));
-        ItemPic2.setOpaque(true);
-
         ItemStock20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemStock20.setText("0");
         ItemStock20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1233,12 +1389,6 @@ public class VM_GUI extends javax.swing.JFrame {
         ItemStock8.setPreferredSize(new java.awt.Dimension(30, 20));
 
         BlueSpinner.setOpaque(true);
-
-        ItemPic9.setBackground(new java.awt.Color(204, 204, 204));
-        ItemPic9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ItemPic9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ItemPic9.setFocusable(false);
-        ItemPic9.setOpaque(true);
 
         ItemPrice1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemPrice1.setText("0");
@@ -4587,7 +4737,7 @@ public class VM_GUI extends javax.swing.JFrame {
 	  * @param text The text to be displayed
       */
 	public void displayText(String text) {
-    this.jTextAreaConsole.append(text + "\n");
+        this.jTextAreaConsole.append(text + "\n");
     }
 
 	/**
@@ -4604,15 +4754,18 @@ public class VM_GUI extends javax.swing.JFrame {
       */
 	public void updateItemStock(ArrayList<ArrayList<Object>> itemStock) {
         //@megan @renzo idk what im doing
+        int index = 0;
+        for (JLabel stockLabel : labelList) {
+            if (index < itemStock.size()) {
+                ArrayList<Object> row = itemStock.get(index);
 
-        int i = 0;
-        int array;
-        for (ArrayList<Object> innerList : itemStock) {
-            
-            for (Object item : innerList) {
-                for (JLabel label : labelList) {
-                    label.setText("");
-                }
+                int stocks = (int) row.get(1);
+
+                stockLabel.setText(String.valueOf(stocks));
+
+                index++;
+            } else {
+                stockLabel.setText("error");
             }
         }
 	}
@@ -4624,7 +4777,8 @@ public class VM_GUI extends javax.swing.JFrame {
     public void updateCashStock(int[][] cashStock) {
 		for (int i = 0; i < cashStock.length; i++) {
             int value = cashStock[i][1];
-            mhSpinnerList.get(i).setValue(value);
+            //mhSpinnerList.get(i).setValue(value);
+            moneyList.get(i).setText(""+value);
         }
 	}
 	
@@ -4633,15 +4787,39 @@ public class VM_GUI extends javax.swing.JFrame {
 	  * @param itemPrices The 2D ArrayList of items and their prices
       */
     public void updatePrices(ArrayList<ArrayList<Object>> itemPrices) {
-        for (JLabel priceLabel : priceList){
-            for (ArrayList<Object> innerList : itemPrices) {
-                for (Object item : innerList) {
-                    // Access the individual object 'item' here
-                    // Do whatever you want to do with the object
-                    System.out.println(item);
-                }
+        // for (JLabel priceLabel : priceList){
+        //     for (ArrayList<Object> innerList : itemPrices) {
+        //         for (Object item : innerList) {
+        //             // Access the individual object 'item' here
+        //             // Do whatever you want to do with the object
+        //             System.out.println(item.row);
+        //         }
+        //     }
+        //     priceLabel.setText(item.get(0));
+        // }
+        // int i = 0;
+        // int j = 0;
+        // int k = 0;
+
+        // for(int i = 0; i < priceList.length; i++){
+        //     for(int j = 0; j < itemPrices.length; i++){
+        //         for (int k = 0; j )
+        //     }
+        // }
+        int index = 0; // Initialize the index to keep track of the current item in itemPrices list
+
+        for (JLabel priceLabel : priceList) {
+            if (index < itemPrices.size()) {
+                ArrayList<Object> row = itemPrices.get(index);
+
+                int price = (int) row.get(1);
+
+                priceLabel.setText(String.valueOf(price));
+
+                index++;
+            } else {
+                priceLabel.setText("error");
             }
-            priceLabel.setText("");
         }
 	}
 
