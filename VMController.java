@@ -95,6 +95,10 @@ public class VMController implements ActionListener {
 			String name = this.view.getVMNameText().getText();
 			
 			this.create(name, isSpecial);
+			
+			this.updateItemStock();
+			this.updatePrices();
+			this.updateCashStock();
 		}
 		
 		else if(clicked.equals(this.view.getItemButton())) {
@@ -181,6 +185,9 @@ public class VMController implements ActionListener {
 						this.displayText("Oops! The item is out of stock. Please try again.");
 				}
 			}
+			
+			this.updateItemStock();
+			this.updateCashStock();
 		}
 		
 		else if(clicked.equals(this.view.getItemCancelButton())) {
@@ -409,12 +416,12 @@ public class VMController implements ActionListener {
 		}
 		
 		else {
-			for(Item item : this.svm.spir.getItemsOnSale()) {
+			for(i = 0; i < 30; i++) {
 				ArrayList<Object> row = new ArrayList<Object>();
 				name = this.svm.spir.getPresetItemName(i);
 				row.add(name);
 				row.add(this.svm.spir.countStock(name));
-				itemStock.add(row);
+				itemStock.add(row);		
 			}
 		}
 		
@@ -457,7 +464,7 @@ public class VMController implements ActionListener {
 		}
 		
 		else {
-			for(Item item : this.svm.spir.getItemsOnSale()) {
+			for(i = 0; i < 30; i++) {
 				ArrayList<Object> row = new ArrayList<Object>();
 				name = this.svm.spir.getPresetItemName(i);
 				row.add(name);
@@ -614,9 +621,6 @@ public class VMController implements ActionListener {
 		
 		else
 			this.displayText("\nOops! Not enough ingredients for the selected recipe.");
-		
-		this.updateItemStock();
-		this.updateCashStock();
 	}
 
 	/** 
