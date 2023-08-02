@@ -1124,6 +1124,14 @@ public class VM_GUI extends javax.swing.JFrame {
         ItemStock24.setOpaque(true);
         ItemStock24.setPreferredSize(new java.awt.Dimension(30, 20));
 
+        ItemPrice4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ItemPrice4.setText("0");
+        ItemPrice4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ItemPrice4.setMaximumSize(new java.awt.Dimension(30, 30));
+        ItemPrice4.setMinimumSize(new java.awt.Dimension(30, 30));
+        ItemPrice4.setOpaque(true);
+        ItemPrice4.setPreferredSize(new java.awt.Dimension(30, 20));
+
         ItemPrice5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemPrice5.setText("0");
         ItemPrice5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
