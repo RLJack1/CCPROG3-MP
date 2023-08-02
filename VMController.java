@@ -248,6 +248,8 @@ public class VMController implements ActionListener {
 			
 			//Call function
 			this.restock(userSelection);
+			this.updateItemStock();
+			this.displayText("Restocked successfully!");
 		}
 		
 		else if(clicked.equals(this.view.getRepriceButton())) {
@@ -454,10 +456,6 @@ public class VMController implements ActionListener {
 			}
 		}
 		
-		for(i = 0; i < 30; i++) {
-			this.displayText("itemPrice for " + itemPrices.get(i).get(0) + " at " + itemPrices.get(i).get(1));
-		}
-		
 		this.view.updatePrices(itemPrices);
 	}
 
@@ -642,8 +640,6 @@ public class VMController implements ActionListener {
 		
 		//Fully restock all items in userSelection
 		for(Item i : toAdd) {
-			System.out.println("item to add name = " + i.getName());
-			
 			if(!isSpecial) {
 				this.vm.ir.addFullStock(i);
 			}
@@ -666,8 +662,6 @@ public class VMController implements ActionListener {
 			this.svm.setLastTotalSales(0);
 			this.svm.setTotalSales(0);
 		}
-		
-		this.updateItemStock();
 	}
 	
 	/** 
@@ -717,6 +711,7 @@ public class VMController implements ActionListener {
 	  */
 	public void withdraw(int[][] userSelection) {
 		int[][] cashStock = new int[8][2];
+		boolean okay = false;
 		
 		if(!isSpecial)
 			cashStock = this.vm.mh.getCashBox();
@@ -729,17 +724,20 @@ public class VMController implements ActionListener {
 		for(i = 7; i >= 0; i--) {
 			if(!isSpecial && userSelection[i][1] <= cashStock[7 - i][1]) {
 				this.vm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
-				this.displayText("Withdrawn successfully!");
+				okay = true;
 			}
 			
 			else if(isSpecial && userSelection[i][1] <= cashStock[7 - i][1]) {
 				this.svm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
-				this.displayText("Withdrawn successfully!");
+				okay = true;
 			}
 			
 			else 
 				this.displayText("Oops! Withdraw amount of " + userSelection[i][1] + " exceeds the current stock of " + cashStock[i][1] + " for the " + cashStock[7 - i][0] + " peso bill.\nCanceled withdrawal for this bill.");
 		}
+		
+		if(okay)
+			this.displayText("Withdrawn successfully!");
 	}
 	
 	/** 
