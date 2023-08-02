@@ -123,7 +123,7 @@ public class MoneyHandler {
 				}
 				
 				//empty change array
-				this.c.displayText("Ka-ching! Change has been dispensed.");
+				this.c.displayText("Ka-ching! Change has been dispensed.\n");
 				for(i = 0; i < this.changeArray.length; i++) {
 					this.changeArray[i][1] = 0;
 				}
@@ -204,7 +204,7 @@ public class MoneyHandler {
 				}
 				
 				//empty change array
-				this.c.displayText("Ka-ching! Change has been dispensed.");
+				this.c.displayText("Ka-ching! Change has been dispensed.\n");
 				for(i = 0; i < this.changeArray.length; i++) {
 					this.changeArray[i][1] = 0;
 				}

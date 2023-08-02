@@ -65,37 +65,37 @@ public class Recipe {
 	  * @return The plain text of the narration
       */
 	 public String getNarration() {
-		String toDisplay = "";
+		StringBuilder toDisplay = new StringBuilder();
 		
 		for (Ingredient i : this.ingredientList) {
             if (i instanceof Bread) {
                 Bread x = (Bread) i;
-                toDisplay.concat(x.narrate());
+                toDisplay.append(x.narrate()).append("\n");
             } 
 		}
 		
 		for (Ingredient i : this.ingredientList) {
             if (i instanceof Meat) {
                 Meat x = (Meat) i;
-                toDisplay.concat(x.narrate());
+                toDisplay.append(x.narrate()).append("\n");
             } 
 		}
 		
 		for (Ingredient i : this.ingredientList) {
             if (i instanceof Condiment) {
                 Condiment x = (Condiment) i;
-                toDisplay.concat(x.narrate());
+                toDisplay.append(x.narrate()).append("\n");
             } 
 		}
 		
 		for (Ingredient i : this.ingredientList) {
             if (i instanceof Topping) {
                 Topping x = (Topping) i;
-                toDisplay.concat(x.narrate());
+                toDisplay.append(x.narrate()).append("\n");
             } 
 		}
 		
-		return toDisplay;
+		return toDisplay.toString();
 	 }
 	 
 	 /** 
