@@ -13,7 +13,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
 /** 
-  * Connects the events happening in the view to the respective logic in the model.
+  * Connects the events happening in the view to the respective logic in the model
   */
 public class VMController implements ActionListener {
 	private boolean isSpecial;
@@ -225,6 +225,9 @@ public class VMController implements ActionListener {
 				//Buy the recipe
 				this.buyRecipe(this. selectedRecipe);
 			}
+			
+			this.updateItemStock();
+			this.updateCashStock();
 		}
 		
 		else if(this.view.getMoneyButtons().contains(clicked)) {
@@ -556,7 +559,7 @@ public class VMController implements ActionListener {
 			if(success) {
 				//Dispense item, print receipt, record transaction
 				this.displayText("Dispensing " + item.getName() + "...");
-				this.svm.ir.removeItem(item);
+				this.svm.spir.removeItem(item);
 				this.svm.setLastTotalSales(this.svm.getTotalSales());
 				this.svm.addTotalSales(item.getPrice());
 				this.transacHistory.add(new Transaction(item.getName(), this.svm.getLastTotalSales(), this.svm.getTotalSales()));
@@ -577,7 +580,7 @@ public class VMController implements ActionListener {
 
 	/** 
 	  * Facilitates the recipe purchasing process (get cash, dispense change, dispense burger)
-	  * @param item The user's selected recipe for purchase
+	  * @param selectedRecipe The user's selected recipe for purchase
 	  */
 	public void buyRecipe(Recipe selectedRecipe) {
 		int cashIn = 0;
@@ -726,6 +729,7 @@ public class VMController implements ActionListener {
 		
 		int i = 0;
 		
+		//Withdraw amount and display feedback
 		for(i = 7; i >= 0; i--) {
 			if(!isSpecial && userSelection[i][1] <= cashStock[7 - i][1]) {
 				this.vm.mh.cashOut(userSelection[i][0], userSelection[i][1]);
@@ -823,6 +827,7 @@ public class VMController implements ActionListener {
 			else
 				itemsOnSale.addAll(this.svm.spir.getItemsOnSale());
 			
+			//Print restock history
 			this.displayPrint("==============STARTING INVENTORY===============" +
 						"\nItem Name\t\tQuantity");
 			
@@ -848,7 +853,6 @@ public class VMController implements ActionListener {
 				this.displayPrint(name + "\t\t" + qty);
 				qty = 0;
 			}
-
 		}
 	}
 }

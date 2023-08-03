@@ -47,8 +47,7 @@ public class MoneyHandler {
 	}
 	
 	/** 
-	  * Called to initialize the cashBox to default values.
-	  * Only used when a new Vending Machine is created.
+	  * Called to initialize the cashBox to default values. Only used when a new Vending Machine is created.
 	  */
 	public void newCashBox() {
 		int amount = 100;
@@ -129,9 +128,6 @@ public class MoneyHandler {
 				}
 
 				for(i = 0; i < this.holder.length; i++) {
-					if(this.holder[i][1] > 0) {
-						this.cashBox[i][1] -= this.holder[i][1];
-					}
 					this.holder[i][1] = 0;
 				}
 				
@@ -210,9 +206,6 @@ public class MoneyHandler {
 				}
 
 				for(i = 0; i < this.holder.length; i++) {
-					if(this.holder[i][1] > 0) {
-						this.cashBox[i][1] -= this.holder[i][1];
-					}
 					this.holder[i][1] = 0;
 				}
 				
@@ -323,7 +316,7 @@ public class MoneyHandler {
 	
 	/** 
 	  * Reduces a bill's stock 
-	  * @param index	The index of the bill
+	  * @param bill		The index of the bill
 	  * @param amount	The amount to reduce
 	  */
 	public void cashOut(int bill, int amount) {
@@ -349,7 +342,7 @@ public class MoneyHandler {
 	
 	/** 
 	  * Increases a bill's stock 
-	  * @param index	The index of the bill
+	  * @param bill		The index of the bill
 	  * @param amount	The amount to added
 	  */
 	public void cashIn(int bill, int amount) {

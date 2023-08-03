@@ -3997,12 +3997,11 @@ public class VM_GUI extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }                       
 
 	 /**
        * Initialize basic actions performed for each visual interactive element
        */
-
     private void jINewPriceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
     }                                                   
@@ -4636,10 +4635,7 @@ public class VM_GUI extends javax.swing.JFrame {
         recipeButtonList.add(jButton8Salmon);
         recipeButtonList.add(jButton9Turkey);
     }
-   
-   /**
-     * Gets and returns specific java swing elements (JButton, JRadioButton, JTextArea, JTextField, ArrayLists)
-     */
+
    public JButton getCreateButton() {
 		return this.ConfirmVMButton;
 	}
