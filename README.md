@@ -3,10 +3,10 @@
 - everything's done except what's left in todo
 
 ### RENZO STATUS CHECK
-- 
+- adding gifs to make the gui more energetic
 
 ### RENZO TODO
-- Continue working on the GUI, especially creation of vending machine
+- adding to user experience
 
 ### MEGAN TODO
 - actionlisteners and cross-debugging
